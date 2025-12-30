@@ -443,6 +443,44 @@ final class AuthManager: NSObject, ObservableObject {
 
     // MARK: - ==================== 其他方法 ====================
 
+    /// 删除账户
+    /// 调用 Supabase Edge Function 删除用户账户
+    /// - Note: 此操作不可逆，会永久删除用户数据
+    func deleteAccount() async throws {
+        print("🗑️ [删除账户] 开始删除账户流程")
+        isLoading = true
+        errorMessage = nil
+
+        do {
+            // 获取当前会话的 access token
+            print("🗑️ [删除账户] 正在获取当前会话...")
+            let session = try await supabase.auth.session
+            print("🗑️ [删除账户] 会话获取成功，用户ID: \(session.user.id)")
+
+            // 调用 delete-account Edge Function
+            print("🗑️ [删除账户] 正在调用 delete-account 边缘函数...")
+            try await supabase.functions.invoke(
+                "delete-account",
+                options: FunctionInvokeOptions(
+                    headers: ["Authorization": "Bearer \(session.accessToken)"]
+                )
+            )
+
+            print("🗑️ [删除账户] 边缘函数调用成功，正在清除本地状态...")
+            // 删除成功，清除本地状态
+            handleSessionExpired()
+            isLoading = false
+            print("✅ [删除账户] 账户删除完成，用户已登出")
+        } catch {
+            isLoading = false
+            let errorMsg = mapAuthError(error)
+            errorMessage = errorMsg
+            print("❌ [删除账户] 删除失败: \(error.localizedDescription)")
+            print("❌ [删除账户] 错误详情: \(error)")
+            throw error
+        }
+    }
+
     /// 退出登录
     /// 调用 Supabase 登出接口，清空本地状态
     /// 登出后 isAuthenticated 会变为 false，RootView 会自动切换到登录页

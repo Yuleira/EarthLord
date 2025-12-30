@@ -11,7 +11,14 @@ import Supabase
 // 初始化 Supabase 客户端（使用 AppConfig 配置）
 let supabase = SupabaseClient(
     supabaseURL: URL(string: AppConfig.Supabase.projectURL)!,
-    supabaseKey: AppConfig.Supabase.publishableKey
+    supabaseKey: AppConfig.Supabase.publishableKey,
+    options: SupabaseClientOptions(
+        auth: SupabaseClientOptions.AuthOptions(
+            // 启用新行为：始终发送本地存储的会话，无论其有效性或过期状态
+            // 参考: https://github.com/supabase/supabase-swift/pull/822
+            emitLocalSessionAsInitialSession: true
+        )
+    )
 )
 
 struct SupabaseTestView: View {
