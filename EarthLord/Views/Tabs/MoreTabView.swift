@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MoreTabView: View {
     @StateObject private var authManager = AuthManager.shared
+    @StateObject private var languageManager = LanguageManager.shared
     @State private var showDeleteAccountSheet = false
     @State private var showDeleteError = false
     @State private var deleteErrorMessage = ""
@@ -16,22 +17,36 @@ struct MoreTabView: View {
     var body: some View {
         NavigationStack {
             List {
-                Section("开发者工具") {
+                // 设置
+                Section("设置".localized) {
                     NavigationLink {
-                        SupabaseTestView()
+                        LanguageSettingsView()
                     } label: {
-                        Label("Supabase 连接测试", systemImage: "network")
+                        HStack {
+                            Label("语言".localized, systemImage: "globe")
+                            Spacer()
+                            Text(languageManager.currentLanguage.displayName)
+                                .foregroundColor(.secondary)
+                        }
                     }
                 }
 
-                Section("账户") {
+                Section("开发者工具".localized) {
+                    NavigationLink {
+                        SupabaseTestView()
+                    } label: {
+                        Label("Supabase 连接测试".localized, systemImage: "network")
+                    }
+                }
+
+                Section("账户".localized) {
                     // 退出登录
                     Button {
                         Task {
                             await authManager.signOut()
                         }
                     } label: {
-                        Label("退出登录", systemImage: "rectangle.portrait.and.arrow.right")
+                        Label("退出登录".localized, systemImage: "rectangle.portrait.and.arrow.right")
                     }
                 }
 
@@ -43,16 +58,17 @@ struct MoreTabView: View {
                     } label: {
                         HStack {
                             Spacer()
-                            Text("删除账户")
+                            Text("删除账户".localized)
                             Spacer()
                         }
                     }
                 } footer: {
-                    Text("删除账户后，您的所有数据将被永久删除且无法恢复。")
+                    Text("删除账户后，您的所有数据将被永久删除且无法恢复。".localized)
                         .foregroundColor(.secondary)
                 }
             }
-            .navigationTitle("更多")
+            .navigationTitle("更多".localized)
+            .id(languageManager.refreshID)
             .sheet(isPresented: $showDeleteAccountSheet) {
                 DeleteAccountConfirmView(
                     isPresented: $showDeleteAccountSheet,
@@ -204,6 +220,41 @@ struct DeleteAccountConfirmView: View {
     }
 }
 
+// MARK: - 语言设置视图
+struct LanguageSettingsView: View {
+    @StateObject private var languageManager = LanguageManager.shared
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        List {
+            Section {
+                ForEach(AppLanguage.allCases) { language in
+                    Button {
+                        print("🌐 [语言设置] 用户选择: \(language.rawValue)")
+                        languageManager.setLanguage(language)
+                    } label: {
+                        HStack {
+                            Text(language.displayName)
+                                .foregroundColor(.primary)
+                            Spacer()
+                            if languageManager.currentLanguage == language {
+                                Image(systemName: "checkmark")
+                                    .foregroundColor(.blue)
+                            }
+                        }
+                    }
+                }
+            } footer: {
+                Text("切换语言后界面将立即更新".localized)
+                    .foregroundColor(.secondary)
+            }
+        }
+        .navigationTitle("语言设置".localized)
+        .navigationBarTitleDisplayMode(.inline)
+        .id(languageManager.refreshID)
+    }
+}
+
 #Preview {
     MoreTabView()
 }
@@ -213,4 +264,10 @@ struct DeleteAccountConfirmView: View {
         isPresented: .constant(true),
         onError: { _ in }
     )
+}
+
+#Preview("Language Settings") {
+    NavigationStack {
+        LanguageSettingsView()
+    }
 }

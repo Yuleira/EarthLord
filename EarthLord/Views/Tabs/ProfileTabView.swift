@@ -37,23 +37,23 @@ struct ProfileTabView: View {
                 // }
 
                 // MARK: - 设置选项
-                Section("设置") {
+                Section("设置".localized) {
                     NavigationLink {
-                        Text("账号安全（待开发）")
+                        Text("账号安全（待开发）".localized)
                     } label: {
-                        Label("账号安全", systemImage: "shield.fill")
+                        Label("账号安全".localized, systemImage: "shield.fill")
                     }
 
                     NavigationLink {
-                        Text("通知设置（待开发）")
+                        Text("通知设置（待开发）".localized)
                     } label: {
-                        Label("通知设置", systemImage: "bell.fill")
+                        Label("通知设置".localized, systemImage: "bell.fill")
                     }
 
                     NavigationLink {
-                        Text("关于我们（待开发）")
+                        Text("关于我们（待开发）".localized)
                     } label: {
-                        Label("关于我们", systemImage: "info.circle.fill")
+                        Label("关于我们".localized, systemImage: "info.circle.fill")
                     }
                 }
 
@@ -63,7 +63,7 @@ struct ProfileTabView: View {
                         showLogoutAlert = true
                     } label: {
                         HStack {
-                            Label("退出登录", systemImage: "rectangle.portrait.and.arrow.right")
+                            Label("退出登录".localized, systemImage: "rectangle.portrait.and.arrow.right")
                             Spacer()
                             if isLoggingOut {
                                 ProgressView()
@@ -74,14 +74,14 @@ struct ProfileTabView: View {
                     .disabled(isLoggingOut)
                 }
             }
-            .navigationTitle("个人")
-            .alert("确认退出", isPresented: $showLogoutAlert) {
-                Button("取消", role: .cancel) { }
-                Button("退出", role: .destructive) {
+            .navigationTitle("个人".localized)
+            .alert("确认退出".localized, isPresented: $showLogoutAlert) {
+                Button("取消".localized, role: .cancel) { }
+                Button("退出".localized, role: .destructive) {
                     performLogout()
                 }
             } message: {
-                Text("确定要退出登录吗？退出后需要重新登录。")
+                Text("确定要退出登录吗？退出后需要重新登录。".localized)
             }
         }
     }

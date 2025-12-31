@@ -114,11 +114,12 @@
 				};
 			};
 			buildConfigurationList = E62B8A612EFABFFF00FFC7A0 /* Build configuration list for PBXProject "EarthLord" */;
-			developmentRegion = en;
+			developmentRegion = "zh-Hans";
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = E62B8A5D2EFABFFF00FFC7A0;
 			minimizedProjectReferenceProxies = 1;

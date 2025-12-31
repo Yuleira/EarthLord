@@ -18,6 +18,8 @@ import SwiftUI
 struct RootView: View {
     /// 认证管理器（使用 @StateObject 确保状态响应）
     @StateObject private var authManager = AuthManager.shared
+    /// 语言管理器
+    @StateObject private var languageManager = LanguageManager.shared
 
     /// 启动页是否完成
     @State private var splashFinished = false
@@ -60,10 +62,26 @@ struct RootView: View {
                     .progressViewStyle(CircularProgressViewStyle(tint: ApocalypseTheme.primary))
                     .scaleEffect(1.5)
 
-                Text("加载中...")
+                Text("加载中...".localized)
                     .foregroundColor(ApocalypseTheme.textSecondary)
             }
         }
+    }
+}
+
+// MARK: - 环境对象包装器
+/// 在 App 入口处使用，确保语言变化时整个视图树刷新
+struct LocalizationWrapper<Content: View>: View {
+    @StateObject private var languageManager = LanguageManager.shared
+    let content: () -> Content
+
+    init(@ViewBuilder content: @escaping () -> Content) {
+        self.content = content
+    }
+
+    var body: some View {
+        content()
+            .id(languageManager.refreshID)
     }
 }
 
