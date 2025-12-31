@@ -10,10 +10,12 @@
 		E605D1002F030AA3003D9861 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = E605D0FF2F030AA3003D9861 /* GoogleSignIn */; };
 		E605D1022F030AA3003D9861 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E605D1012F030AA3003D9861 /* GoogleSignInSwift */; };
 		E60C1BC52EFEABE3005E0B24 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = E60C1BC42EFEABE3005E0B24 /* Supabase */; };
+		E6A6DE5A2F054AB6008FDEE8 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E6A6DE592F054AB6008FDEE8 /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E62B8A662EFABFFF00FFC7A0 /* EarthLord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EarthLord.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6A6DE592F054AB6008FDEE8 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -54,6 +56,7 @@
 		E62B8A5D2EFABFFF00FFC7A0 = {
 			isa = PBXGroup;
 			children = (
+				E6A6DE592F054AB6008FDEE8 /* Localizable.xcstrings */,
 				E62B8A682EFABFFF00FFC7A0 /* EarthLord */,
 				E62B8A672EFABFFF00FFC7A0 /* Products */,
 			);
@@ -138,6 +141,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6A6DE5A2F054AB6008FDEE8 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,6 +218,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -271,6 +276,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
