@@ -267,6 +267,12 @@ final class LanguageManager: ObservableObject {
             "重新发送验证码": ["en": "Resend Code"],
             "返回上一步": ["en": "Go Back"],
 
+            // 地图定位
+            "正在定位...": ["en": "Locating..."],
+            "无法获取位置": ["en": "Cannot Get Location"],
+            "《地球新主》需要获取您的位置才能显示您在末日世界中的坐标。请在设置中开启定位权限。": ["en": "Earth Lord needs your location to show your coordinates in the post-apocalyptic world. Please enable location access in Settings."],
+            "前往设置": ["en": "Go to Settings"],
+
             // 其他
             "地球新主": ["en": "Earth Lord"],
             "用脚步丈量世界，用领地征服地球": ["en": "Measure the world with your steps, conquer the Earth with your territories"],

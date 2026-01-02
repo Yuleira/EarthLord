@@ -2,7 +2,7 @@
   "sourceLanguage" : "zh-Hans",
   "strings" : {
     "" : {
-      "extractionState" : "manual"
+
     },
     "%lld秒后可重新发送" : {
       "extractionState" : "manual",
