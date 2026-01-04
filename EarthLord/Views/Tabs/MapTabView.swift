@@ -54,6 +54,9 @@ struct MapTabView: View {
             MapViewRepresentable(
                 userLocation: $userLocation,
                 hasLocatedUser: $hasLocatedUser,
+                trackingPath: $locationManager.pathCoordinates,
+                pathUpdateVersion: locationManager.pathUpdateVersion,
+                isTracking: locationManager.isTracking,
                 showsUserLocation: true
             )
             .ignoresSafeArea()
@@ -65,10 +68,15 @@ struct MapTabView: View {
                 HStack {
                     Spacer()
 
-                    // 定位按钮
-                    locateButton
-                        .padding(.trailing, 16)
-                        .padding(.bottom, 100)  // 避开 TabBar
+                    VStack(spacing: 12) {
+                        // 定位按钮
+                        locateButton
+
+                        // 圈地按钮
+                        trackingButton
+                    }
+                    .padding(.trailing, 16)
+                    .padding(.bottom, 100)  // 避开 TabBar
                 }
             }
 
@@ -77,6 +85,43 @@ struct MapTabView: View {
                 loadingOverlay
             }
         }
+    }
+
+    /// 圈地按钮
+    private var trackingButton: some View {
+        Button {
+            toggleTracking()
+        } label: {
+            HStack(spacing: 8) {
+                // 图标
+                Image(systemName: locationManager.isTracking ? "stop.fill" : "flag.fill")
+                    .font(.system(size: 16, weight: .semibold))
+
+                // 文字
+                if locationManager.isTracking {
+                    Text("停止圈地".localized)
+                        .font(.system(size: 14, weight: .semibold))
+
+                    // 显示当前点数
+                    Text("(\(locationManager.pathCoordinates.count))")
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundColor(.white.opacity(0.8))
+                } else {
+                    Text("开始圈地".localized)
+                        .font(.system(size: 14, weight: .semibold))
+                }
+            }
+            .foregroundColor(.white)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
+            .background(
+                Capsule()
+                    .fill(locationManager.isTracking ? Color.red : ApocalypseTheme.primary)
+                    .shadow(color: .black.opacity(0.3), radius: 4, x: 0, y: 2)
+            )
+        }
+        .disabled(!locationManager.isAuthorized)
+        .opacity(locationManager.isAuthorized ? 1.0 : 0.5)
     }
 
     /// 定位按钮
@@ -170,6 +215,19 @@ struct MapTabView: View {
         // 确保正在定位
         if !locationManager.isUpdatingLocation {
             locationManager.startUpdatingLocation()
+        }
+    }
+
+    /// 切换圈地状态
+    private func toggleTracking() {
+        if locationManager.isTracking {
+            // 停止圈地
+            print("🗺️ [地图页面] 用户停止圈地")
+            locationManager.stopPathTracking()
+        } else {
+            // 开始圈地
+            print("🗺️ [地图页面] 用户开始圈地")
+            locationManager.startPathTracking()
         }
     }
 }

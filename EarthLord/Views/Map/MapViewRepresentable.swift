@@ -23,6 +23,15 @@ struct MapViewRepresentable: UIViewRepresentable {
     /// 是否已完成首次定位（防止重复居中）
     @Binding var hasLocatedUser: Bool
 
+    /// 追踪路径坐标数组（WGS-84 原始坐标）
+    @Binding var trackingPath: [CLLocationCoordinate2D]
+
+    /// 路径更新版本号（触发轨迹更新）
+    var pathUpdateVersion: Int
+
+    /// 是否正在追踪
+    var isTracking: Bool
+
     /// 是否显示用户位置
     var showsUserLocation: Bool = true
 
@@ -69,7 +78,29 @@ struct MapViewRepresentable: UIViewRepresentable {
 
     /// 更新 MKMapView（SwiftUI 状态变化时调用）
     func updateUIView(_ mapView: MKMapView, context: Context) {
-        // 空实现：地图更新由 Coordinator 通过 delegate 方法处理
+        // 更新轨迹显示
+        updateTrackingPath(on: mapView, context: context)
+    }
+
+    /// 更新轨迹路径
+    private func updateTrackingPath(on mapView: MKMapView, context: Context) {
+        // 移除旧的轨迹覆盖层
+        let existingOverlays = mapView.overlays.filter { $0 is MKPolyline }
+        mapView.removeOverlays(existingOverlays)
+
+        // 如果没有路径点，不绘制
+        guard trackingPath.count >= 2 else { return }
+
+        // 坐标转换：WGS-84 → GCJ-02（解决中国地区偏移问题）
+        let convertedCoordinates = CoordinateConverter.wgs84ToGcj02(trackingPath)
+
+        // 创建轨迹线
+        let polyline = MKPolyline(coordinates: convertedCoordinates, count: convertedCoordinates.count)
+
+        // 添加到地图
+        mapView.addOverlay(polyline)
+
+        print("🗺️ [地图视图] 轨迹已更新，共 \(trackingPath.count) 个点")
     }
 
     /// 创建 Coordinator
@@ -192,6 +223,19 @@ struct MapViewRepresentable: UIViewRepresentable {
         func mapView(_ mapView: MKMapView, didFailToLocateUserWithError error: Error) {
             print("🗺️ [地图代理] ❌ 定位失败: \(error.localizedDescription)")
         }
+
+        /// 轨迹渲染器（关键！没有这个方法轨迹不会显示）
+        func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+            if let polyline = overlay as? MKPolyline {
+                let renderer = MKPolylineRenderer(polyline: polyline)
+                renderer.strokeColor = UIColor.cyan  // 青色轨迹
+                renderer.lineWidth = 5               // 线宽 5pt
+                renderer.lineCap = .round            // 圆头
+                renderer.lineJoin = .round           // 圆角连接
+                return renderer
+            }
+            return MKOverlayRenderer(overlay: overlay)
+        }
     }
 }
 
@@ -200,6 +244,9 @@ struct MapViewRepresentable: UIViewRepresentable {
 #Preview {
     MapViewRepresentable(
         userLocation: .constant(nil),
-        hasLocatedUser: .constant(false)
+        hasLocatedUser: .constant(false),
+        trackingPath: .constant([]),
+        pathUpdateVersion: 0,
+        isTracking: false
     )
 }

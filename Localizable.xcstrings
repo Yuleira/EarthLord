@@ -4,6 +4,9 @@
     "" : {
 
     },
+    "(%lld)" : {
+
+    },
     "%lld秒后可重新发送" : {
       "extractionState" : "manual",
       "localizations" : {

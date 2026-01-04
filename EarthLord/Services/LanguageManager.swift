@@ -273,6 +273,10 @@ final class LanguageManager: ObservableObject {
             "《地球新主》需要获取您的位置才能显示您在末日世界中的坐标。请在设置中开启定位权限。": ["en": "Earth Lord needs your location to show your coordinates in the post-apocalyptic world. Please enable location access in Settings."],
             "前往设置": ["en": "Go to Settings"],
 
+            // 圈地功能
+            "开始圈地": ["en": "Start Claiming"],
+            "停止圈地": ["en": "Stop Claiming"],
+
             // 其他
             "地球新主": ["en": "Earth Lord"],
             "用脚步丈量世界，用领地征服地球": ["en": "Measure the world with your steps, conquer the Earth with your territories"],
