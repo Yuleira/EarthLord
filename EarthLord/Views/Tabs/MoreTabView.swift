@@ -33,9 +33,9 @@ struct MoreTabView: View {
 
                 Section("开发者工具".localized) {
                     NavigationLink {
-                        SupabaseTestView()
+                        TestMenuView()
                     } label: {
-                        Label("Supabase 连接测试".localized, systemImage: "network")
+                        Label("开发测试".localized, systemImage: "hammer.fill")
                     }
                 }
 

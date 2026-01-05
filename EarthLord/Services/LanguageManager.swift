@@ -276,6 +276,21 @@ final class LanguageManager: ObservableObject {
             // 圈地功能
             "开始圈地": ["en": "Start Claiming"],
             "停止圈地": ["en": "Stop Claiming"],
+            "圈地成功！领地已标记": ["en": "Claim successful! Territory marked"],
+
+            // 测试模块
+            "开发测试": ["en": "Developer Tests"],
+            "测试模块": ["en": "Test Modules"],
+            "这些工具仅供开发调试使用": ["en": "These tools are for development debugging only"],
+            "圈地功能测试": ["en": "Territory Claiming Test"],
+            "圈地测试": ["en": "Territory Test"],
+            "追踪中": ["en": "Tracking"],
+            "未追踪": ["en": "Not Tracking"],
+            "条日志": ["en": " logs"],
+            "暂无日志": ["en": "No Logs"],
+            "开始圈地追踪后，日志将在此显示": ["en": "Logs will appear here after starting territory tracking"],
+            "清空日志": ["en": "Clear Logs"],
+            "导出日志": ["en": "Export Logs"],
 
             // 其他
             "地球新主": ["en": "Earth Lord"],

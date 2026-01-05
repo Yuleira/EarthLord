@@ -57,9 +57,29 @@ struct MapTabView: View {
                 trackingPath: $locationManager.pathCoordinates,
                 pathUpdateVersion: locationManager.pathUpdateVersion,
                 isTracking: locationManager.isTracking,
+                isPathClosed: locationManager.isPathClosed,
                 showsUserLocation: true
             )
             .ignoresSafeArea()
+
+            // 顶部警告横幅
+            VStack {
+                // 速度警告
+                if let warning = locationManager.speedWarning {
+                    speedWarningBanner(warning)
+                        .transition(.move(edge: .top).combined(with: .opacity))
+                }
+
+                // 闭环成功提示
+                if locationManager.isPathClosed {
+                    closureSuccessBanner
+                        .transition(.move(edge: .top).combined(with: .opacity))
+                }
+
+                Spacer()
+            }
+            .animation(.easeInOut(duration: 0.3), value: locationManager.speedWarning)
+            .animation(.easeInOut(duration: 0.3), value: locationManager.isPathClosed)
 
             // 右下角控制按钮
             VStack {
@@ -85,6 +105,56 @@ struct MapTabView: View {
                 loadingOverlay
             }
         }
+        .onChange(of: locationManager.speedWarning) { oldValue, newValue in
+            // 速度警告 3 秒后自动消失
+            if newValue != nil {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    if locationManager.speedWarning == newValue {
+                        locationManager.clearSpeedWarning()
+                    }
+                }
+            }
+        }
+    }
+
+    /// 速度警告横幅
+    private func speedWarningBanner(_ warning: String) -> some View {
+        HStack(spacing: 8) {
+            Image(systemName: "exclamationmark.triangle.fill")
+                .font(.system(size: 16))
+
+            Text(warning)
+                .font(.system(size: 14, weight: .medium))
+        }
+        .foregroundColor(.white)
+        .padding(.horizontal, 16)
+        .padding(.vertical, 12)
+        .background(
+            Capsule()
+                .fill(locationManager.isTracking ? ApocalypseTheme.warning : Color.red)
+                .shadow(color: .black.opacity(0.3), radius: 4, x: 0, y: 2)
+        )
+        .padding(.top, 60)  // 避开状态栏
+    }
+
+    /// 闭环成功横幅
+    private var closureSuccessBanner: some View {
+        HStack(spacing: 8) {
+            Image(systemName: "checkmark.circle.fill")
+                .font(.system(size: 16))
+
+            Text("圈地成功！领地已标记".localized)
+                .font(.system(size: 14, weight: .medium))
+        }
+        .foregroundColor(.white)
+        .padding(.horizontal, 16)
+        .padding(.vertical, 12)
+        .background(
+            Capsule()
+                .fill(Color.green)
+                .shadow(color: .black.opacity(0.3), radius: 4, x: 0, y: 2)
+        )
+        .padding(.top, 60)  // 避开状态栏
     }
 
     /// 圈地按钮
