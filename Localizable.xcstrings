@@ -172,6 +172,9 @@
         }
       }
     },
+    "圈地成功！领地面积: %@m²" : {
+
+    },
     "地图" : {
       "extractionState" : "manual",
       "localizations" : {
