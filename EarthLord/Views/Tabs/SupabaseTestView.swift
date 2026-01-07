@@ -204,7 +204,7 @@ struct SupabaseTestView: View {
                             .execute()
                             .value
                     case "territories":
-                        let _: [Territory] = try await supabase
+                        let _: [TestTerritory] = try await supabase
                             .from(table)
                             .select()
                             .limit(1)
@@ -273,11 +273,11 @@ private struct Profile: Decodable {
     let created_at: String?
 }
 
-// Territory 结构体
-private struct Territory: Decodable {
+// 测试用 Territory 结构体（简化版本）
+private struct TestTerritory: Decodable {
     let id: UUID
     let user_id: UUID
-    let name: String
+    let name: String?
     let area: Double
     let created_at: String?
 }
