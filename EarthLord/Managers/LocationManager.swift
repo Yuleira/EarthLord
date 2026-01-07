@@ -244,6 +244,20 @@ final class LocationManager: NSObject, ObservableObject {
 
         // 标记停止追踪
         isTracking = false
+
+        // 重置所有状态（防止重复上传）
+        pathCoordinates.removeAll()
+        pathUpdateVersion += 1
+        isPathClosed = false
+        territoryValidationPassed = false
+        territoryValidationError = nil
+        calculatedArea = 0
+
+        // 重置速度检测状态
+        speedWarning = nil
+        isOverSpeed = false
+        lastLocationTimestamp = nil
+        lastLocationForSpeed = nil
     }
 
     /// 清除路径
