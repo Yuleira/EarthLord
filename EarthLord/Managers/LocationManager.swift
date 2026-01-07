@@ -358,13 +358,24 @@ final class LocationManager: NSObject, ObservableObject {
             print("📍 [闭环检测] ✅ 闭环成功！共 \(pathCoordinates.count) 个点")
             TerritoryLogger.shared.log("闭环成功！距起点 \(String(format: "%.1f", distanceToStart))m", type: .success)
 
-            // 自动停止追踪
-            stopPathTracking()
+            // 停止追踪（但保留路径数据供验证和上传使用）
+            pathUpdateTimer?.invalidate()
+            pathUpdateTimer = nil
+            isTracking = false
 
-            // 闭环后自动进行领地验证
+            // 重置速度检测状态
+            speedWarning = nil
+            isOverSpeed = false
+            lastLocationTimestamp = nil
+            lastLocationForSpeed = nil
+
+            // 闭环后自动进行领地验证（此时数据还在）
             let result = validateTerritory()
             territoryValidationPassed = result.isValid
             territoryValidationError = result.errorMessage
+
+            // 注意：不清空 pathCoordinates，保留数据供确认登记时上传
+            // 数据将在用户确认登记后由 stopPathTracking() 清空
         }
     }
 
