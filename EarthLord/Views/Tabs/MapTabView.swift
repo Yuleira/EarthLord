@@ -92,8 +92,14 @@ struct MapTabView: View {
 
             // 顶部警告横幅
             VStack {
+                // 碰撞预警横幅（优先显示）
+                if let collisionWarning = locationManager.collisionWarning {
+                    collisionWarningBanner(collisionWarning, level: locationManager.collisionResult.warningLevel)
+                        .transition(.move(edge: .top).combined(with: .opacity))
+                }
+
                 // 速度警告
-                if let warning = locationManager.speedWarning {
+                if let warning = locationManager.speedWarning, locationManager.collisionWarning == nil {
                     speedWarningBanner(warning)
                         .transition(.move(edge: .top).combined(with: .opacity))
                 }
@@ -106,6 +112,7 @@ struct MapTabView: View {
 
                 Spacer()
             }
+            .animation(.easeInOut(duration: 0.3), value: locationManager.collisionWarning)
             .animation(.easeInOut(duration: 0.3), value: locationManager.speedWarning)
             .animation(.easeInOut(duration: 0.3), value: showValidationBanner)
 
@@ -160,6 +167,21 @@ struct MapTabView: View {
                 }
             }
         }
+        .onChange(of: locationManager.collisionWarning) { oldValue, newValue in
+            // 碰撞警告处理
+            if newValue != nil {
+                let level = locationManager.collisionResult.warningLevel
+                // violation 级别不自动消失，其他级别 5 秒后消失（如果仍在圈地中）
+                if level != .violation {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                        // 只有当警告内容没变时才清除
+                        if locationManager.collisionWarning == newValue && locationManager.isTracking {
+                            locationManager.clearCollisionWarning()
+                        }
+                    }
+                }
+            }
+        }
         .onReceive(locationManager.$isPathClosed) { isClosed in
             // 监听闭环状态，闭环后根据验证结果显示横幅
             if isClosed {
@@ -200,6 +222,53 @@ struct MapTabView: View {
                 .shadow(color: .black.opacity(0.3), radius: 4, x: 0, y: 2)
         )
         .padding(.top, 60)  // 避开状态栏
+    }
+
+    /// 碰撞预警横幅
+    private func collisionWarningBanner(_ message: String, level: WarningLevel) -> some View {
+        HStack(spacing: 8) {
+            Image(systemName: warningIconForLevel(level))
+                .font(.system(size: 16))
+
+            Text(message)
+                .font(.system(size: 14, weight: .medium))
+        }
+        .foregroundColor(.white)
+        .padding(.horizontal, 16)
+        .padding(.vertical, 12)
+        .frame(maxWidth: .infinity)
+        .background(warningColorForLevel(level))
+        .padding(.top, 50)  // 避开状态栏
+    }
+
+    /// 根据预警级别返回图标
+    private func warningIconForLevel(_ level: WarningLevel) -> String {
+        switch level {
+        case .safe:
+            return "checkmark.circle.fill"
+        case .caution:
+            return "exclamationmark.circle.fill"
+        case .warning:
+            return "exclamationmark.triangle.fill"
+        case .danger:
+            return "exclamationmark.octagon.fill"
+        case .violation:
+            return "xmark.octagon.fill"
+        }
+    }
+
+    /// 根据预警级别返回颜色
+    private func warningColorForLevel(_ level: WarningLevel) -> Color {
+        switch level {
+        case .safe:
+            return .green
+        case .caution:
+            return .yellow.opacity(0.9)
+        case .warning:
+            return .orange
+        case .danger, .violation:
+            return .red
+        }
     }
 
     /// 验证结果横幅（根据验证结果显示成功或失败）
@@ -455,10 +524,17 @@ struct MapTabView: View {
             locationManager.stopPathTracking()
             trackingStartTime = nil
         } else {
-            // 开始圈地
+            // 开始圈地（传入当前用户ID用于碰撞检测）
             print("🗺️ [地图页面] 用户开始圈地")
             trackingStartTime = Date()
-            locationManager.startPathTracking()
+            let userId = authManager.currentUser?.id.uuidString
+            locationManager.startPathTracking(currentUserId: userId)
+
+            // 如果起点碰撞检测失败，显示提示
+            if locationManager.isCollisionStopped {
+                print("🗺️ [地图页面] 起点碰撞检测失败，无法开始圈地")
+                trackingStartTime = nil
+            }
         }
     }
 
