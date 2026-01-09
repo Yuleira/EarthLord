@@ -26,6 +26,9 @@ struct POIDetailView: View {
     /// POI 状态（可变）
     @State private var poiStatus: POIStatus
 
+    /// 是否显示探索结果弹窗
+    @State private var showExplorationResult = false
+
     /// 环境变量：dismiss
     @Environment(\.dismiss) private var dismiss
 
@@ -120,6 +123,12 @@ struct POIDetailView: View {
                         .foregroundColor(ApocalypseTheme.textPrimary)
                 }
             }
+        }
+        .sheet(isPresented: $showExplorationResult) {
+            ExplorationResultView(
+                result: MockExplorationData.sampleExplorationResult,
+                stats: MockExplorationData.sampleExplorationStats
+            )
         }
     }
 
@@ -433,8 +442,9 @@ struct POIDetailView: View {
         // 模拟搜寻过程
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             isSearching = false
-            // TODO: 跳转到搜寻结果页面
             print("搜寻完成: \(poi.name)")
+            // 显示探索结果弹窗
+            showExplorationResult = true
         }
     }
 
