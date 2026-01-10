@@ -10,31 +10,80 @@
 		E605D1002F030AA3003D9861 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = E605D0FF2F030AA3003D9861 /* GoogleSignIn */; };
 		E605D1022F030AA3003D9861 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E605D1012F030AA3003D9861 /* GoogleSignInSwift */; };
 		E60C1BC52EFEABE3005E0B24 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = E60C1BC42EFEABE3005E0B24 /* Supabase */; };
-		E6A6DE5A2F054AB6008FDEE8 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E6A6DE592F054AB6008FDEE8 /* Localizable.xcstrings */; };
+		E6A8F0522F12C378002EE1DC /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E6A8F0512F12C378002EE1DC /* Localizable.xcstrings */; };
+		E6C38A9F2F12E046001005E9 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C38A9E2F12E046001005E9 /* EmptyStateView.swift */; };
+		E6E50DB52F12898D0096D2BB /* ProfileTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50DAB2F12898D0096D2BB /* ProfileTabView.swift */; };
+		E6E50DB62F12898D0096D2BB /* TerritoryLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50D9C2F12898D0096D2BB /* TerritoryLogger.swift */; };
+		E6E50DB72F12898D0096D2BB /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50DA82F12898D0096D2BB /* PlaceholderView.swift */; };
+		E6E50DB82F12898D0096D2BB /* Territory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50D9A2F12898D0096D2BB /* Territory.swift */; };
+		E6E50DB92F12898D0096D2BB /* MoreTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50DA72F12898D0096D2BB /* MoreTabView.swift */; };
+		E6E50DBA2F12898D0096D2BB /* TestMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50DA12F12898D0096D2BB /* TestMenuView.swift */; };
+		E6E50DBB2F12898D0096D2BB /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50D8D2F12898D0096D2BB /* AuthManager.swift */; };
+		E6E50DBD2F12898D0096D2BB /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50DA22F12898D0096D2BB /* TestView.swift */; };
+		E6E50DBE2F12898D0096D2BB /* ApocalypseTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50DA42F12898D0096D2BB /* ApocalypseTheme.swift */; };
+		E6E50DC02F12898D0096D2BB /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50D8E2F12898D0096D2BB /* LanguageManager.swift */; };
+		E6E50DC12F12898D0096D2BB /* TerritoryTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50D9E2F12898D0096D2BB /* TerritoryTestView.swift */; };
+		E6E50DC22F12898D0096D2BB /* TerritoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50D9B2F12898D0096D2BB /* TerritoryDetailView.swift */; };
+		E6E50DC32F12898D0096D2BB /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50D892F12898D0096D2BB /* AppConfig.swift */; };
+		E6E50DC42F12898D0096D2BB /* CoordinateConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50D922F12898D0096D2BB /* CoordinateConverter.swift */; };
+		E6E50DC62F12898D0096D2BB /* ResourcesTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50DAC2F12898D0096D2BB /* ResourcesTabView.swift */; };
+		E6E50DC72F12898D0096D2BB /* CollisionModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50DAF2F12898D0096D2BB /* CollisionModels.swift */; };
+		E6E50DC82F12898D0096D2BB /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50D982F12898D0096D2BB /* MainTabView.swift */; };
+		E6E50DC92F12898D0096D2BB /* EarthLordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50DB12F12898D0096D2BB /* EarthLordApp.swift */; };
+		E6E50DCA2F12898D0096D2BB /* MapTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50D932F12898D0096D2BB /* MapTabView.swift */; };
+		E6E50DCB2F12898D0096D2BB /* SupabaseTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50DA02F12898D0096D2BB /* SupabaseTestView.swift */; };
+		E6E50DCC2F12898D0096D2BB /* TerritoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50D902F12898D0096D2BB /* TerritoryManager.swift */; };
+		E6E50DCE2F12898D0096D2BB /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50D8F2F12898D0096D2BB /* LocationManager.swift */; };
+		E6E50DCF2F12898D0096D2BB /* TerritoryTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50D9D2F12898D0096D2BB /* TerritoryTabView.swift */; };
+		E6E50DD02F12898D0096D2BB /* MapViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50D942F12898D0096D2BB /* MapViewRepresentable.swift */; };
+		E6E50DD12F12898D0096D2BB /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50D862F12898D0096D2BB /* AuthView.swift */; };
+		E6E50DD32F12898D0096D2BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6E50DAE2F12898D0096D2BB /* Assets.xcassets */; };
+		E6E50DD82F1298930096D2BB /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50DD72F1298930096D2BB /* Item.swift */; };
+		E6E50DDA2F1298D60096D2BB /* ExplorationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50DD92F1298D60096D2BB /* ExplorationModels.swift */; };
+		E6E50DDC2F1299070096D2BB /* MockExplorationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50DDB2F1299070096D2BB /* MockExplorationData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E62B8A662EFABFFF00FFC7A0 /* EarthLord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EarthLord.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E6A6DE592F054AB6008FDEE8 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		E632AFC02F12BECD0098D5EC /* EarthLord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EarthLord.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6A8F0512F12C378002EE1DC /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		E6C38A9E2F12E046001005E9 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		E6E50D862F12898D0096D2BB /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		E6E50D892F12898D0096D2BB /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		E6E50D8D2F12898D0096D2BB /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		E6E50D8E2F12898D0096D2BB /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
+		E6E50D8F2F12898D0096D2BB /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		E6E50D902F12898D0096D2BB /* TerritoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerritoryManager.swift; sourceTree = "<group>"; };
+		E6E50D922F12898D0096D2BB /* CoordinateConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateConverter.swift; sourceTree = "<group>"; };
+		E6E50D932F12898D0096D2BB /* MapTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTabView.swift; sourceTree = "<group>"; };
+		E6E50D942F12898D0096D2BB /* MapViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewRepresentable.swift; sourceTree = "<group>"; };
+		E6E50D982F12898D0096D2BB /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		E6E50D9A2F12898D0096D2BB /* Territory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Territory.swift; sourceTree = "<group>"; };
+		E6E50D9B2F12898D0096D2BB /* TerritoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerritoryDetailView.swift; sourceTree = "<group>"; };
+		E6E50D9C2F12898D0096D2BB /* TerritoryLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerritoryLogger.swift; sourceTree = "<group>"; };
+		E6E50D9D2F12898D0096D2BB /* TerritoryTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerritoryTabView.swift; sourceTree = "<group>"; };
+		E6E50D9E2F12898D0096D2BB /* TerritoryTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerritoryTestView.swift; sourceTree = "<group>"; };
+		E6E50DA02F12898D0096D2BB /* SupabaseTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseTestView.swift; sourceTree = "<group>"; };
+		E6E50DA12F12898D0096D2BB /* TestMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMenuView.swift; sourceTree = "<group>"; };
+		E6E50DA22F12898D0096D2BB /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		E6E50DA42F12898D0096D2BB /* ApocalypseTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApocalypseTheme.swift; sourceTree = "<group>"; };
+		E6E50DA72F12898D0096D2BB /* MoreTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreTabView.swift; sourceTree = "<group>"; };
+		E6E50DA82F12898D0096D2BB /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
+		E6E50DAB2F12898D0096D2BB /* ProfileTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabView.swift; sourceTree = "<group>"; };
+		E6E50DAC2F12898D0096D2BB /* ResourcesTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesTabView.swift; sourceTree = "<group>"; };
+		E6E50DAE2F12898D0096D2BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E6E50DAF2F12898D0096D2BB /* CollisionModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionModels.swift; sourceTree = "<group>"; };
+		E6E50DB02F12898D0096D2BB /* EarthLord.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EarthLord.entitlements; sourceTree = "<group>"; };
+		E6E50DB12F12898D0096D2BB /* EarthLordApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarthLordApp.swift; sourceTree = "<group>"; };
+		E6E50DB22F12898D0096D2BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E6E50DD72F1298930096D2BB /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		E6E50DD92F1298D60096D2BB /* ExplorationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorationModels.swift; sourceTree = "<group>"; };
+		E6E50DDB2F1299070096D2BB /* MockExplorationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockExplorationData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		E605D1042F031A35003D9861 /* Exceptions for "EarthLord" folder in "EarthLord" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = E62B8A652EFABFFF00FFC7A0 /* EarthLord */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		E62B8A682EFABFFF00FFC7A0 /* EarthLord */ = {
+		E6C38AA32F12E0A6001005E9 /* Exploration */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				E605D1042F031A35003D9861 /* Exceptions for "EarthLord" folder in "EarthLord" target */,
-			);
-			path = EarthLord;
+			path = Exploration;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -56,18 +105,138 @@
 		E62B8A5D2EFABFFF00FFC7A0 = {
 			isa = PBXGroup;
 			children = (
-				E6A6DE592F054AB6008FDEE8 /* Localizable.xcstrings */,
-				E62B8A682EFABFFF00FFC7A0 /* EarthLord */,
-				E62B8A672EFABFFF00FFC7A0 /* Products */,
+				E6A8F0512F12C378002EE1DC /* Localizable.xcstrings */,
+				E6E50DB42F12898D0096D2BB /* EarthLord */,
+				E632AFC02F12BECD0098D5EC /* EarthLord.app */,
 			);
 			sourceTree = "<group>";
 		};
-		E62B8A672EFABFFF00FFC7A0 /* Products */ = {
+		E6E50D872F12898D0096D2BB /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				E62B8A662EFABFFF00FFC7A0 /* EarthLord.app */,
+				E6E50D862F12898D0096D2BB /* AuthView.swift */,
 			);
-			name = Products;
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		E6E50D8A2F12898D0096D2BB /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				E6E50D892F12898D0096D2BB /* AppConfig.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		E6E50D8C2F12898D0096D2BB /* Exploration */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Exploration;
+			sourceTree = "<group>";
+		};
+		E6E50D912F12898D0096D2BB /* Managers  */ = {
+			isa = PBXGroup;
+			children = (
+				E6E50D8D2F12898D0096D2BB /* AuthManager.swift */,
+				E6E50D8E2F12898D0096D2BB /* LanguageManager.swift */,
+				E6E50D8F2F12898D0096D2BB /* LocationManager.swift */,
+				E6E50D902F12898D0096D2BB /* TerritoryManager.swift */,
+			);
+			path = "Managers ";
+			sourceTree = "<group>";
+		};
+		E6E50D952F12898D0096D2BB /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				E6E50D922F12898D0096D2BB /* CoordinateConverter.swift */,
+				E6E50D932F12898D0096D2BB /* MapTabView.swift */,
+				E6E50D942F12898D0096D2BB /* MapViewRepresentable.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		E6E50D992F12898D0096D2BB /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				E6E50D982F12898D0096D2BB /* MainTabView.swift */,
+			);
+			path = Tabs;
+			sourceTree = "<group>";
+		};
+		E6E50D9F2F12898D0096D2BB /* Territory */ = {
+			isa = PBXGroup;
+			children = (
+				E6E50D9A2F12898D0096D2BB /* Territory.swift */,
+				E6E50D9B2F12898D0096D2BB /* TerritoryDetailView.swift */,
+				E6E50D9C2F12898D0096D2BB /* TerritoryLogger.swift */,
+				E6E50D9D2F12898D0096D2BB /* TerritoryTabView.swift */,
+				E6E50D9E2F12898D0096D2BB /* TerritoryTestView.swift */,
+			);
+			path = Territory;
+			sourceTree = "<group>";
+		};
+		E6E50DA32F12898D0096D2BB /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				E6E50DA02F12898D0096D2BB /* SupabaseTestView.swift */,
+				E6E50DA12F12898D0096D2BB /* TestMenuView.swift */,
+				E6E50DA22F12898D0096D2BB /* TestView.swift */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+		E6E50DA52F12898D0096D2BB /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				E6E50DA42F12898D0096D2BB /* ApocalypseTheme.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		E6E50DAD2F12898D0096D2BB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E6C38AA32F12E0A6001005E9 /* Exploration */,
+				E6C38A9E2F12E046001005E9 /* EmptyStateView.swift */,
+				E6E50DA72F12898D0096D2BB /* MoreTabView.swift */,
+				E6E50DA82F12898D0096D2BB /* PlaceholderView.swift */,
+				E6E50DAB2F12898D0096D2BB /* ProfileTabView.swift */,
+				E6E50DAC2F12898D0096D2BB /* ResourcesTabView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E6E50DB42F12898D0096D2BB /* EarthLord */ = {
+			isa = PBXGroup;
+			children = (
+				E6E50DD62F1298520096D2BB /* Models */,
+				E6E50D872F12898D0096D2BB /* Auth */,
+				E6E50D8A2F12898D0096D2BB /* Config */,
+				E6E50D8C2F12898D0096D2BB /* Exploration */,
+				E6E50D912F12898D0096D2BB /* Managers  */,
+				E6E50D952F12898D0096D2BB /* Map */,
+				E6E50D992F12898D0096D2BB /* Tabs */,
+				E6E50D9F2F12898D0096D2BB /* Territory */,
+				E6E50DA32F12898D0096D2BB /* Test */,
+				E6E50DA52F12898D0096D2BB /* Theme */,
+				E6E50DAD2F12898D0096D2BB /* Views */,
+				E6E50DAE2F12898D0096D2BB /* Assets.xcassets */,
+				E6E50DAF2F12898D0096D2BB /* CollisionModels.swift */,
+				E6E50DB02F12898D0096D2BB /* EarthLord.entitlements */,
+				E6E50DB12F12898D0096D2BB /* EarthLordApp.swift */,
+				E6E50DB22F12898D0096D2BB /* Info.plist */,
+			);
+			path = EarthLord;
+			sourceTree = "<group>";
+		};
+		E6E50DD62F1298520096D2BB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E6E50DD72F1298930096D2BB /* Item.swift */,
+				E6E50DD92F1298D60096D2BB /* ExplorationModels.swift */,
+				E6E50DDB2F1299070096D2BB /* MockExplorationData.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -86,7 +255,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				E62B8A682EFABFFF00FFC7A0 /* EarthLord */,
+				E6C38AA32F12E0A6001005E9 /* Exploration */,
 			);
 			name = EarthLord;
 			packageProductDependencies = (
@@ -95,7 +264,7 @@
 				E605D1012F030AA3003D9861 /* GoogleSignInSwift */,
 			);
 			productName = EarthLord;
-			productReference = E62B8A662EFABFFF00FFC7A0 /* EarthLord.app */;
+			productReference = E632AFC02F12BECD0098D5EC /* EarthLord.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -128,7 +297,7 @@
 				E605D0FE2F030AA3003D9861 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			preferredProjectObjectVersion = 77;
-			productRefGroup = E62B8A672EFABFFF00FFC7A0 /* Products */;
+			productRefGroup = E62B8A5D2EFABFFF00FFC7A0;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -142,7 +311,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6A6DE5A2F054AB6008FDEE8 /* Localizable.xcstrings in Resources */,
+				E6A8F0522F12C378002EE1DC /* Localizable.xcstrings in Resources */,
+				E6E50DD32F12898D0096D2BB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,6 +323,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6E50DB52F12898D0096D2BB /* ProfileTabView.swift in Sources */,
+				E6E50DB62F12898D0096D2BB /* TerritoryLogger.swift in Sources */,
+				E6E50DB72F12898D0096D2BB /* PlaceholderView.swift in Sources */,
+				E6E50DB82F12898D0096D2BB /* Territory.swift in Sources */,
+				E6E50DB92F12898D0096D2BB /* MoreTabView.swift in Sources */,
+				E6E50DBA2F12898D0096D2BB /* TestMenuView.swift in Sources */,
+				E6E50DBB2F12898D0096D2BB /* AuthManager.swift in Sources */,
+				E6E50DBD2F12898D0096D2BB /* TestView.swift in Sources */,
+				E6E50DBE2F12898D0096D2BB /* ApocalypseTheme.swift in Sources */,
+				E6E50DD82F1298930096D2BB /* Item.swift in Sources */,
+				E6E50DC02F12898D0096D2BB /* LanguageManager.swift in Sources */,
+				E6E50DDC2F1299070096D2BB /* MockExplorationData.swift in Sources */,
+				E6E50DC12F12898D0096D2BB /* TerritoryTestView.swift in Sources */,
+				E6E50DC22F12898D0096D2BB /* TerritoryDetailView.swift in Sources */,
+				E6E50DC32F12898D0096D2BB /* AppConfig.swift in Sources */,
+				E6E50DC42F12898D0096D2BB /* CoordinateConverter.swift in Sources */,
+				E6E50DC62F12898D0096D2BB /* ResourcesTabView.swift in Sources */,
+				E6E50DC72F12898D0096D2BB /* CollisionModels.swift in Sources */,
+				E6E50DC82F12898D0096D2BB /* MainTabView.swift in Sources */,
+				E6E50DC92F12898D0096D2BB /* EarthLordApp.swift in Sources */,
+				E6E50DCA2F12898D0096D2BB /* MapTabView.swift in Sources */,
+				E6E50DCB2F12898D0096D2BB /* SupabaseTestView.swift in Sources */,
+				E6C38A9F2F12E046001005E9 /* EmptyStateView.swift in Sources */,
+				E6E50DCC2F12898D0096D2BB /* TerritoryManager.swift in Sources */,
+				E6E50DCE2F12898D0096D2BB /* LocationManager.swift in Sources */,
+				E6E50DCF2F12898D0096D2BB /* TerritoryTabView.swift in Sources */,
+				E6E50DD02F12898D0096D2BB /* MapViewRepresentable.swift in Sources */,
+				E6E50DD12F12898D0096D2BB /* AuthView.swift in Sources */,
+				E6E50DDA2F1298D60096D2BB /* ExplorationModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

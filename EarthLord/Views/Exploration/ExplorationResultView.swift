@@ -2,54 +2,19 @@
 //  ExplorationResultView.swift
 //  EarthLord
 //
-//  Created by Claude on 09/01/2026.
-//
-//  探索结果弹窗页面
-//  显示探索完成后的统计数据和获得的物品
+//  探索结果页面 - 显示探索成功或失败的结果
 //
 
 import SwiftUI
 
-/// 探索结果弹窗页面
+/// 探索结果视图
 struct ExplorationResultView: View {
 
-    // MARK: - 参数
+    // MARK: - 属性
 
-    /// 探索结果
     let result: ExplorationResult
-
-    /// 玩家累计统计（用于显示累计数据和排名）
-    let stats: ExplorationStats
-
-    // MARK: - 环境
-
-    @Environment(\.dismiss) private var dismiss
-
-    // MARK: - 状态
-
-    /// 动画状态
-    @State private var showContent = false
-    @State private var showItems = false
-
-    /// 数字动画进度 (0-1)
-    @State private var numberAnimationProgress: Double = 0
-
-    /// 对勾弹跳动画
-    @State private var checkmarkScale: [Bool] = []
-
-    // MARK: - 计算属性
-
-    /// 探索时长（秒）
-    private var duration: TimeInterval {
-        result.endTime.timeIntervalSince(result.startTime)
-    }
-
-    /// 格式化时长
-    private var formattedDuration: String {
-        let minutes = Int(duration) / 60
-        let seconds = Int(duration) % 60
-        return String(format: "%d分%02d秒", minutes, seconds)
-    }
+    let onDismiss: () -> Void
+    let onRetry: (() -> Void)?
 
     // MARK: - 视图
 
@@ -59,422 +24,188 @@ struct ExplorationResultView: View {
             ApocalypseTheme.background
                 .ignoresSafeArea()
 
-            ScrollView {
-                VStack(spacing: 24) {
-                    // 成就标题
-                    achievementHeader
-                        .padding(.top, 40)
-
-                    // 统计数据卡片
-                    statsCard
-                        .padding(.horizontal, 20)
-
-                    // 奖励物品卡片
-                    rewardsCard
-                        .padding(.horizontal, 20)
-
-                    // 确认按钮
-                    confirmButton
-                        .padding(.horizontal, 20)
-                        .padding(.bottom, 40)
-                }
-            }
-        }
-        .onAppear {
-            // 初始化对勾动画状态
-            checkmarkScale = Array(repeating: false, count: result.itemsCollected.count)
-
-            withAnimation(.easeOut(duration: 0.6)) {
-                showContent = true
-            }
-
-            // 数字跳动动画
-            withAnimation(.easeOut(duration: 1.0).delay(0.3)) {
-                numberAnimationProgress = 1.0
-            }
-
-            withAnimation(.easeOut(duration: 0.6).delay(0.5)) {
-                showItems = true
-            }
-
-            // 对勾弹跳动画（每个间隔0.2秒）
-            for index in 0..<result.itemsCollected.count {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8 + Double(index) * 0.2) {
-                    withAnimation(.spring(response: 0.4, dampingFraction: 0.5)) {
-                        if index < checkmarkScale.count {
-                            checkmarkScale[index] = true
-                        }
-                    }
-                }
+            if result.isSuccess {
+                successView
+            } else {
+                errorView
             }
         }
     }
 
-    // MARK: - 成就标题
+    // MARK: - 成功视图
 
-    /// 成就标题区域
-    private var achievementHeader: some View {
-        VStack(spacing: 16) {
-            // 大图标容器
-            ZStack {
-                // 光晕效果
-                Circle()
-                    .fill(
-                        RadialGradient(
-                            gradient: Gradient(colors: [
-                                ApocalypseTheme.primary.opacity(0.3),
-                                ApocalypseTheme.primary.opacity(0)
-                            ]),
-                            center: .center,
-                            startRadius: 40,
-                            endRadius: 80
-                        )
-                    )
-                    .frame(width: 160, height: 160)
-                    .scaleEffect(showContent ? 1 : 0.5)
+    private var successView: some View {
+        ScrollView {
+            VStack(spacing: 24) {
+                // 标题
+                VStack(spacing: 12) {
+                    Image(systemName: "checkmark.circle.fill")
+                        .font(.system(size: 80))
+                        .foregroundColor(.green)
 
-                // 图标背景
-                Circle()
-                    .fill(ApocalypseTheme.primary.opacity(0.15))
-                    .frame(width: 100, height: 100)
-
-                // 地图图标
-                Image(systemName: "map.fill")
-                    .font(.system(size: 48, weight: .semibold))
-                    .foregroundColor(ApocalypseTheme.primary)
-                    .scaleEffect(showContent ? 1 : 0.3)
-            }
-
-            // 标题文字
-            VStack(spacing: 8) {
-                Text("探索完成！")
-                    .font(.system(size: 28, weight: .bold))
-                    .foregroundColor(ApocalypseTheme.textPrimary)
-
-                Text("你的足迹又扩展了一点")
-                    .font(.system(size: 14))
-                    .foregroundColor(ApocalypseTheme.textSecondary)
-            }
-            .opacity(showContent ? 1 : 0)
-            .offset(y: showContent ? 0 : 20)
-        }
-    }
-
-    // MARK: - 统计数据卡片
-
-    /// 统计数据卡片
-    private var statsCard: some View {
-        VStack(spacing: 16) {
-            // 标题
-            HStack {
-                Image(systemName: "chart.bar.fill")
-                    .font(.system(size: 14))
-                    .foregroundColor(ApocalypseTheme.info)
-
-                Text("探索统计")
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(ApocalypseTheme.textSecondary)
-
-                Spacer()
-            }
-
-            // 统计数据行
-            VStack(spacing: 12) {
-                // 行走距离
-                statRow(
-                    icon: "figure.walk",
-                    title: "行走距离",
-                    thisTime: formatDistance(result.distanceWalked),
-                    total: formatDistance(stats.totalDistance),
-                    rank: stats.distanceRank,
-                    value: result.distanceWalked
-                )
-
-                Divider()
-                    .background(ApocalypseTheme.textMuted.opacity(0.3))
-
-                // 探索面积
-                statRow(
-                    icon: "square.dashed",
-                    title: "探索面积",
-                    thisTime: formatArea(result.areaExplored),
-                    total: formatArea(stats.totalArea),
-                    rank: stats.areaRank,
-                    value: result.areaExplored
-                )
-
-                Divider()
-                    .background(ApocalypseTheme.textMuted.opacity(0.3))
-
-                // 探索时长
-                HStack {
-                    Image(systemName: "clock.fill")
-                        .font(.system(size: 14))
-                        .foregroundColor(ApocalypseTheme.warning)
-                        .frame(width: 24)
-
-                    Text("探索时长")
-                        .font(.system(size: 14))
-                        .foregroundColor(ApocalypseTheme.textSecondary)
-
-                    Spacer()
-
-                    Text(formattedDuration)
-                        .font(.system(size: 16, weight: .semibold, design: .monospaced))
+                    Text(result.message)
+                        .font(.system(size: 24, weight: .bold))
                         .foregroundColor(ApocalypseTheme.textPrimary)
                 }
-            }
-        }
-        .padding(16)
-        .background(
-            RoundedRectangle(cornerRadius: 16)
-                .fill(ApocalypseTheme.cardBackground)
-        )
-        .opacity(showContent ? 1 : 0)
-        .offset(y: showContent ? 0 : 30)
-    }
+                .padding(.top, 40)
 
-    /// 单行统计数据
-    private func statRow(icon: String, title: String, thisTime: String, total: String, rank: Int, value: Double) -> some View {
-        VStack(spacing: 8) {
-            // 第一行：图标 + 标题 + 本次数据（带数字动画）
-            HStack {
-                Image(systemName: icon)
-                    .font(.system(size: 14))
-                    .foregroundColor(ApocalypseTheme.primary)
-                    .frame(width: 24)
+                // 统计信息
+                statsSection
 
-                Text(title)
-                    .font(.system(size: 14))
-                    .foregroundColor(ApocalypseTheme.textSecondary)
-
-                Spacer()
-
-                // 数字动画：从0增长到目标值
-                Text(formatAnimatedValue(value * numberAnimationProgress, isDistance: icon == "figure.walk"))
-                    .font(.system(size: 16, weight: .semibold, design: .monospaced))
-                    .foregroundColor(ApocalypseTheme.textPrimary)
-                    .contentTransition(.numericText())
-            }
-
-            // 第二行：累计 + 排名
-            HStack {
-                Spacer()
-                    .frame(width: 24)
-
-                Text("累计 \(total)")
-                    .font(.system(size: 12))
-                    .foregroundColor(ApocalypseTheme.textMuted)
-
-                Spacer()
-
-                // 排名（带缩放动画）
-                HStack(spacing: 2) {
-                    Text("#")
-                        .font(.system(size: 12, weight: .medium))
-                    Text("\(Int(Double(rank) * numberAnimationProgress))")
-                        .font(.system(size: 14, weight: .bold, design: .monospaced))
+                // 收集的物品
+                if !result.itemsCollected.isEmpty {
+                    collectedItemsSection
                 }
-                .foregroundColor(ApocalypseTheme.success)
-                .scaleEffect(numberAnimationProgress > 0.9 ? 1.0 : 0.8)
+
+                // 经验值
+                experienceSection
+
+                // 关闭按钮
+                Button(action: onDismiss) {
+                    Text("完成")
+                        .font(.system(size: 17, weight: .semibold))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 16)
+                        .background(ApocalypseTheme.primary)
+                        .cornerRadius(12)
+                }
+                .padding(.top, 16)
             }
+            .padding(20)
         }
     }
 
-    /// 格式化动画数值
-    private func formatAnimatedValue(_ value: Double, isDistance: Bool) -> String {
-        if isDistance {
-            return formatDistance(value)
-        } else {
-            return formatArea(value)
+    // MARK: - 错误视图
+
+    private var errorView: some View {
+        EmptyStateView(
+            icon: "exclamationmark.triangle.fill",
+            title: "探索失败",
+            subtitle: result.message,
+            buttonTitle: onRetry != nil ? "重试" : nil,
+            action: onRetry
+        )
+        .overlay(alignment: .topTrailing) {
+            // 关闭按钮
+            Button(action: onDismiss) {
+                Image(systemName: "xmark.circle.fill")
+                    .font(.system(size: 28))
+                    .foregroundColor(ApocalypseTheme.textMuted)
+            }
+            .padding(20)
         }
     }
 
-    // MARK: - 奖励物品卡片
+    // MARK: - 统计信息区域
 
-    /// 奖励物品卡片
-    private var rewardsCard: some View {
+    private var statsSection: some View {
         VStack(spacing: 16) {
-            // 标题
-            HStack {
-                Image(systemName: "gift.fill")
-                    .font(.system(size: 14))
-                    .foregroundColor(ApocalypseTheme.warning)
+            Text("探索统计")
+                .font(.system(size: 18, weight: .semibold))
+                .foregroundColor(ApocalypseTheme.textPrimary)
 
-                Text("获得物品")
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(ApocalypseTheme.textSecondary)
-
-                Spacer()
-
-                Text("\(result.itemsCollected.count) 件")
-                    .font(.system(size: 12))
-                    .foregroundColor(ApocalypseTheme.textMuted)
+            VStack(spacing: 12) {
+                statRow(icon: "figure.walk", label: "行走距离", value: String(format: "%.1f米", result.distanceWalked))
+                statRow(icon: "clock.fill", label: "探索时长", value: result.stats.durationString)
+                statRow(icon: "mappin.circle.fill", label: "验证地点", value: "\(result.stats.pointsVerified)个")
+                statRow(icon: "chart.bar.fill", label: "距离评级", value: result.stats.distanceRank)
             }
-
-            // 物品列表
-            VStack(spacing: 10) {
-                ForEach(Array(result.itemsCollected.enumerated()), id: \.element.id) { index, item in
-                    if let definition = MockExplorationData.getItemDefinition(by: item.itemId) {
-                        rewardItemRow(item: item, definition: definition, index: index)
-                    }
-                }
-            }
-
-            // 底部提示
-            HStack(spacing: 6) {
-                Image(systemName: "tray.and.arrow.down.fill")
-                    .font(.system(size: 11))
-
-                Text("已添加到背包")
-                    .font(.system(size: 12, weight: .medium))
-            }
-            .foregroundColor(ApocalypseTheme.success)
-            .padding(.top, 4)
+            .padding(16)
+            .background(ApocalypseTheme.cardBackground)
+            .cornerRadius(12)
         }
-        .padding(16)
-        .background(
-            RoundedRectangle(cornerRadius: 16)
-                .fill(ApocalypseTheme.cardBackground)
-        )
-        .opacity(showItems ? 1 : 0)
-        .offset(y: showItems ? 0 : 30)
     }
 
-    /// 单个奖励物品行
-    private func rewardItemRow(item: CollectedItem, definition: ItemDefinition, index: Int) -> some View {
-        HStack(spacing: 12) {
-            // 物品图标
-            ZStack {
-                Circle()
-                    .fill(categoryColor(for: definition.category).opacity(0.15))
-                    .frame(width: 40, height: 40)
+    private func statRow(icon: String, label: String, value: String) -> some View {
+        HStack {
+            Image(systemName: icon)
+                .font(.system(size: 16))
+                .foregroundColor(ApocalypseTheme.primary)
+                .frame(width: 24)
 
-                Image(systemName: definition.icon)
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundColor(categoryColor(for: definition.category))
-            }
-
-            // 物品信息
-            VStack(alignment: .leading, spacing: 2) {
-                Text(definition.name)
-                    .font(.system(size: 14, weight: .medium))
-                    .foregroundColor(ApocalypseTheme.textPrimary)
-
-                if let quality = item.quality {
-                    Text(quality.rawValue)
-                        .font(.system(size: 11))
-                        .foregroundColor(qualityColor(for: quality))
-                }
-            }
+            Text(label)
+                .font(.system(size: 15))
+                .foregroundColor(ApocalypseTheme.textSecondary)
 
             Spacer()
 
-            // 数量
-            Text("x\(item.quantity)")
-                .font(.system(size: 14, weight: .semibold, design: .monospaced))
-                .foregroundColor(ApocalypseTheme.primary)
-
-            // 对勾（带弹跳动画）
-            Image(systemName: "checkmark.circle.fill")
-                .font(.system(size: 18))
-                .foregroundColor(ApocalypseTheme.success)
-                .scaleEffect(index < checkmarkScale.count && checkmarkScale[index] ? 1.0 : 0.0)
-                .animation(.spring(response: 0.4, dampingFraction: 0.5), value: checkmarkScale)
+            Text(value)
+                .font(.system(size: 15, weight: .semibold))
+                .foregroundColor(ApocalypseTheme.textPrimary)
         }
-        .padding(.vertical, 4)
-        .opacity(showItems ? 1 : 0)
-        .offset(x: showItems ? 0 : 20)
-        .animation(.easeOut(duration: 0.3).delay(Double(index) * 0.2), value: showItems)
     }
 
-    // MARK: - 确认按钮
+    // MARK: - 收集物品区域
 
-    /// 确认按钮
-    private var confirmButton: some View {
-        Button {
-            dismiss()
-        } label: {
-            HStack(spacing: 8) {
-                Image(systemName: "checkmark")
-                    .font(.system(size: 16, weight: .semibold))
+    private var collectedItemsSection: some View {
+        VStack(spacing: 16) {
+            Text("收集物品")
+                .font(.system(size: 18, weight: .semibold))
+                .foregroundColor(ApocalypseTheme.textPrimary)
 
-                Text("确认")
-                    .font(.system(size: 17, weight: .semibold))
+            VStack(spacing: 12) {
+                ForEach(result.itemsCollected) { item in
+                    ItemRowView(item: item)
+                }
             }
-            .foregroundColor(.white)
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 16)
-            .background(
-                RoundedRectangle(cornerRadius: 14)
-                    .fill(ApocalypseTheme.primary)
-            )
-        }
-        .opacity(showItems ? 1 : 0)
-    }
-
-    // MARK: - 辅助方法
-
-    /// 格式化距离
-    private func formatDistance(_ meters: Double) -> String {
-        if meters >= 1000 {
-            return String(format: "%.2f km", meters / 1000)
-        } else {
-            return String(format: "%.0f m", meters)
         }
     }
 
-    /// 格式化面积
-    private func formatArea(_ squareMeters: Double) -> String {
-        if squareMeters >= 10000 {
-            return String(format: "%.2f 公顷", squareMeters / 10000)
-        } else {
-            return String(format: "%.0f m²", squareMeters)
-        }
-    }
+    // MARK: - 经验值区域
 
-    /// 分类颜色
-    private func categoryColor(for category: ItemCategory) -> Color {
-        switch category {
-        case .water:
-            return .blue
-        case .food:
-            return .green
-        case .medical:
-            return .red
-        case .material:
-            return .brown
-        case .tool:
-            return .orange
-        case .weapon:
-            return .purple
-        case .other:
-            return .gray
-        }
-    }
+    private var experienceSection: some View {
+        HStack(spacing: 12) {
+            Image(systemName: "star.fill")
+                .font(.system(size: 24))
+                .foregroundColor(.yellow)
 
-    /// 品质颜色
-    private func qualityColor(for quality: ItemQuality) -> Color {
-        switch quality {
-        case .pristine:
-            return .green
-        case .good:
-            return .blue
-        case .worn:
-            return .yellow
-        case .damaged:
-            return .orange
-        case .ruined:
-            return .red
+            Text("获得经验")
+                .font(.system(size: 16))
+                .foregroundColor(ApocalypseTheme.textSecondary)
+
+            Spacer()
+
+            Text("+\(result.experienceGained) EXP")
+                .font(.system(size: 20, weight: .bold))
+                .foregroundColor(ApocalypseTheme.primary)
         }
+        .padding(16)
+        .background(ApocalypseTheme.cardBackground)
+        .cornerRadius(12)
     }
 }
 
 // MARK: - 预览
 
-#Preview {
+#Preview("成功") {
     ExplorationResultView(
         result: MockExplorationData.sampleExplorationResult,
-        stats: MockExplorationData.sampleExplorationStats
+        onDismiss: {},
+        onRetry: nil
+    )
+}
+
+#Preview("失败") {
+    ExplorationResultView(
+        result: ExplorationResult(
+            isSuccess: false,
+            message: "探索失败，请检查GPS信号",
+            itemsCollected: [],
+            experienceGained: 0,
+            distanceWalked: 0,
+            stats: ExplorationStats(
+                totalDistance: 0,
+                duration: 0,
+                pointsVerified: 0,
+                distanceRank: "F"
+            ),
+            startTime: Date(),
+            endTime: Date()
+        ),
+        onDismiss: {},
+        onRetry: {
+            print("重试探索")
+        }
     )
 }

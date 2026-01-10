@@ -18,13 +18,11 @@ struct EarthLordApp: App {
 
     var body: some Scene {
         WindowGroup {
-            LocalizationWrapper {
-                RootView()
-            }
-            // Google Sign-In URL 回调处理
-            .onOpenURL { url in
-                GIDSignIn.sharedInstance.handle(url)
-            }
+            MainTabView()
+                // Google Sign-In URL 回调处理
+                .onOpenURL { url in
+                    GIDSignIn.sharedInstance.handle(url)
+                }
         }
     }
 }
