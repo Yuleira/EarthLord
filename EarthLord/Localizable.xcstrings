@@ -14,10 +14,24 @@
 
     },
     "%lld 件" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld items"
+          }
+        }
+      }
     },
     "%lld 点" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld points"
+          }
+        }
+      }
     },
     "%lld秒后可重新发送" : {
       "extractionState" : "manual",
@@ -89,13 +103,34 @@
       }
     },
     "举报错误" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Report Error"
+          }
+        }
+      }
     },
     "交易" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trade"
+          }
+        }
+      }
     },
     "你的足迹又扩展了一点" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your footprint has expanded"
+          }
+        }
+      }
     },
     "关于我们" : {
       "extractionState" : "manual",
@@ -120,10 +155,24 @@
       }
     },
     "关闭" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Close"
+          }
+        }
+      }
     },
     "分享位置" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share Location"
+          }
+        }
+      }
     },
     "切换语言后界面将立即更新" : {
       "extractionState" : "manual",
@@ -137,10 +186,24 @@
       }
     },
     "删除" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        }
+      }
     },
     "删除后无法恢复，确定要删除这块领地吗？" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cannot be recovered after deletion. Are you sure you want to delete this territory?"
+          }
+        }
+      }
     },
     "删除失败" : {
       "extractionState" : "manual",
@@ -187,13 +250,34 @@
       }
     },
     "删除领地" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Territory"
+          }
+        }
+      }
     },
     "前往地图页面开始圈地吧！" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go to the map to start claiming territories!"
+          }
+        }
+      }
     },
     "功能开发中" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feature in Development"
+          }
+        }
+      }
     },
     "加载中..." : {
       "extractionState" : "manual",
@@ -207,7 +291,14 @@
       }
     },
     "去探索收集物资吧" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go explore and collect resources"
+          }
+        }
+      }
     },
     "取消" : {
       "extractionState" : "manual",
@@ -221,7 +312,14 @@
       }
     },
     "圈地成功！领地面积: %@m²" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Territory claimed! Area: %@m²"
+          }
+        }
+      }
     },
     "地图" : {
       "extractionState" : "manual",
@@ -246,13 +344,34 @@
       }
     },
     "尝试其他关键词" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try other keywords"
+          }
+        }
+      }
     },
     "尝试选择其他分类" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try selecting other categories"
+          }
+        }
+      }
     },
     "已添加到背包" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Added to backpack"
+          }
+        }
+      }
     },
     "开发者工具" : {
       "extractionState" : "manual",
@@ -277,7 +396,14 @@
       }
     },
     "总面积" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total Area"
+          }
+        }
+      }
     },
     "您的个人资料信息" : {
       "extractionState" : "manual",
@@ -335,43 +461,134 @@
       }
     },
     "探索失败" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exploration Failed"
+          }
+        }
+      }
     },
     "探索完成！" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exploration Complete!"
+          }
+        }
+      }
     },
     "探索时长" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exploration Duration"
+          }
+        }
+      }
     },
     "探索统计" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exploration Stats"
+          }
+        }
+      }
     },
     "描述" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Description"
+          }
+        }
+      }
     },
     "搜寻中..." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Searching..."
+          }
+        }
+      }
     },
     "搜寻此POI" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search this POI"
+          }
+        }
+      }
     },
     "搜索中..." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Searching..."
+          }
+        }
+      }
     },
     "搜索物品..." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search items..."
+          }
+        }
+      }
     },
     "搜索附近POI" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search Nearby POI"
+          }
+        }
+      }
     },
     "敬请期待" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Coming Soon"
+          }
+        }
+      }
     },
     "无法显示地图" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to Display Map"
+          }
+        }
+      }
     },
     "暂无领地" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Territories"
+          }
+        }
+      }
     },
     "更多" : {
       "extractionState" : "manual",
@@ -385,10 +602,24 @@
       }
     },
     "更多功能" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "More Features"
+          }
+        }
+      }
     },
     "有物资" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Has Resources"
+          }
+        }
+      }
     },
     "此操作不可撤销！" : {
       "extractionState" : "manual",
@@ -402,16 +633,44 @@
       }
     },
     "没有找到物品" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No items found"
+          }
+        }
+      }
     },
     "没有找到相关物品" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No related items found"
+          }
+        }
+      }
     },
     "没有找到符合条件的地点" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No matching locations found"
+          }
+        }
+      }
     },
     "没有找到该类型的地点" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No locations of this type found"
+          }
+        }
+      }
     },
     "测试中..." : {
       "extractionState" : "manual",
@@ -436,7 +695,14 @@
       }
     },
     "点击搜索按钮发现周围的废墟" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap search button to discover ruins around you"
+          }
+        }
+      }
     },
     "用脚步丈量世界，用领地征服地球" : {
       "extractionState" : "manual",
@@ -461,7 +727,14 @@
       }
     },
     "登录后即可查看和管理你的领地" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign in to view and manage your territories"
+          }
+        }
+      }
     },
     "确定" : {
       "extractionState" : "manual",
@@ -486,7 +759,14 @@
       }
     },
     "确认" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm"
+          }
+        }
+      }
     },
     "确认删除" : {
       "extractionState" : "manual",
@@ -533,22 +813,64 @@
       }
     },
     "累计 %@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total %@"
+          }
+        }
+      }
     },
     "背包" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Backpack"
+          }
+        }
+      }
     },
     "背包容量" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Backpack Capacity"
+          }
+        }
+      }
     },
     "背包快满了！" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Backpack almost full!"
+          }
+        }
+      }
     },
     "背包空空如也" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Backpack is empty"
+          }
+        }
+      }
     },
     "获得物品" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Items Acquired"
+          }
+        }
+      }
     },
     "设置" : {
       "extractionState" : "manual",
@@ -584,7 +906,14 @@
       }
     },
     "该分类下没有物品" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No items in this category"
+          }
+        }
+      }
     },
     "语言" : {
       "extractionState" : "manual",
@@ -609,7 +938,14 @@
       }
     },
     "请先登录" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please sign in first"
+          }
+        }
+      }
     },
     "请设置一个安全的密码以完成注册" : {
       "extractionState" : "manual",
@@ -689,10 +1025,24 @@
       }
     },
     "资源" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resources"
+          }
+        }
+      }
     },
     "资源分段" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resource Categories"
+          }
+        }
+      }
     },
     "跟随系统" : {
       "extractionState" : "manual",
@@ -838,16 +1188,44 @@
       }
     },
     "重试" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retry"
+          }
+        }
+      }
     },
     "附近发现 %lld 个地点" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Found %lld locations nearby"
+          }
+        }
+      }
     },
     "附近地点" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nearby Locations"
+          }
+        }
+      }
     },
     "附近暂无兴趣点" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No POIs nearby"
+          }
+        }
+      }
     },
     "领地" : {
       "extractionState" : "manual",
@@ -861,10 +1239,24 @@
       }
     },
     "领地数量" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Number of Territories"
+          }
+        }
+      }
     },
     "领地登记成功！" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Territory registered successfully!"
+          }
+        }
+      }
     },
     "验证中..." : {
       "extractionState" : "manual",
