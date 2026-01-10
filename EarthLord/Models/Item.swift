@@ -1,7 +1,6 @@
 import Foundation
 import SwiftUI
 
-// 1. 物品品质
 enum ItemQuality: String, Codable, CaseIterable {
     case pristine = "完美"
     case good = "良好"
@@ -20,7 +19,6 @@ enum ItemQuality: String, Codable, CaseIterable {
     }
 }
 
-// 2. 物品类别 (这里的名字必须跟报错里的一模一样)
 enum ItemCategory: String, Codable, CaseIterable {
     case water = "水"
     case food = "食物"
@@ -31,26 +29,31 @@ enum ItemCategory: String, Codable, CaseIterable {
     case other = "其他"
 }
 
-// 3. 物品定义
 struct ItemDefinition: Identifiable, Codable {
     let id: String
     let name: String
     let description: String
     let category: ItemCategory
-    let icon: String // 之前叫 iconName，改回 icon
+    let icon: String
 }
 
-// 4. 收集到的物品
 struct CollectedItem: Identifiable, Codable {
     let id: UUID
     let definition: ItemDefinition
     let quality: ItemQuality
     let foundDate: Date
+    var quantity: Int = 1 // 补上 quantity
     
-    init(id: UUID = UUID(), definition: ItemDefinition, quality: ItemQuality, foundDate: Date = Date()) {
+    // 补上 itemId，让 View 能找到它
+    var itemId: String {
+        return definition.id
+    }
+    
+    init(id: UUID = UUID(), definition: ItemDefinition, quality: ItemQuality, foundDate: Date = Date(), quantity: Int = 1) {
         self.id = id
         self.definition = definition
         self.quality = quality
         self.foundDate = foundDate
+        self.quantity = quantity
     }
 }
