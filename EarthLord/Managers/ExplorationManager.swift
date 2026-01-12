@@ -309,8 +309,9 @@ final class ExplorationManager: ObservableObject {
     /// 启动时长计时器
     private func startDurationTimer() {
         durationTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
-            Task { @MainActor in
-                guard let self = self, let start = self.startTime else { return }
+            guard let self else { return }
+            Task { @MainActor [weak self] in
+                guard let self, let start = self.startTime else { return }
                 self.currentDuration = Date().timeIntervalSince(start)
             }
         }
@@ -319,7 +320,8 @@ final class ExplorationManager: ObservableObject {
     /// 启动采点定时器
     private func startSamplingTimer() {
         samplingTimer = Timer.scheduledTimer(withTimeInterval: sampleInterval, repeats: true) { [weak self] _ in
-            Task { @MainActor in
+            guard let self else { return }
+            Task { @MainActor [weak self] in
                 self?.sampleCurrentLocation()
             }
         }
@@ -329,7 +331,8 @@ final class ExplorationManager: ObservableObject {
     private func startSpeedCheckTimer() {
         // 每2秒检测一次速度
         speedCheckTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] _ in
-            Task { @MainActor in
+            guard let self else { return }
+            Task { @MainActor [weak self] in
                 self?.checkSpeed()
             }
         }
@@ -392,8 +395,8 @@ final class ExplorationManager: ObservableObject {
             if warningDuration >= speedWarningTimeout {
                 // 超过10秒仍然超速，停止探索
                 print("🔍 [速度检测] 🚫 超速超过\(Int(speedWarningTimeout))秒，停止探索")
-                Task {
-                    await stopExplorationDueToSpeeding()
+                Task { [weak self] in
+                    await self?.stopExplorationDueToSpeeding()
                 }
             } else {
                 // 更新警告消息，显示剩余时间

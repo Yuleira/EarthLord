@@ -11,7 +11,14 @@ import Supabase
 // 初始化 Supabase 客户端（使用 AppConfig 配置）
 let supabase = SupabaseClient(
     supabaseURL: URL(string: AppConfig.Supabase.projectURL)!,
-    supabaseKey: AppConfig.Supabase.publishableKey
+    supabaseKey: AppConfig.Supabase.publishableKey,
+    options: .init(
+        auth: .init(
+            flowType: .pkce,
+            autoRefreshToken: true,
+            emitLocalSessionAsInitialSession: true
+        )
+    )
 )
 
 struct SupabaseTestView: View {
