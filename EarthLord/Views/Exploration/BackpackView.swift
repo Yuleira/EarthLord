@@ -12,11 +12,16 @@ struct BackpackView: View {
 
     // MARK: - 状态
 
-    @State private var items: [CollectedItem] = []
+    @ObservedObject private var inventoryManager = InventoryManager.shared
     @State private var searchText = ""
     @State private var selectedCategory: ItemCategory? = nil
 
     // MARK: - 计算属性
+
+    /// 背包物品列表
+    private var items: [CollectedItem] {
+        inventoryManager.items
+    }
 
     /// 过滤后的物品列表
     private var filteredItems: [CollectedItem] {
@@ -185,10 +190,9 @@ struct BackpackView: View {
 
     /// 加载背包物品
     private func loadBackpackItems() {
-        // 加载模拟数据
-        items = []
-        // 可以在这里加载一些模拟数据进行测试
-        // items = MockItemData.samples
+        Task {
+            await inventoryManager.loadItems()
+        }
     }
 }
 
@@ -199,27 +203,45 @@ struct ItemRowView: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            // 物品图标
-            Image(systemName: item.definition.icon)
-                .font(.system(size: 24))
-                .foregroundColor(.white)
-                .frame(width: 48, height: 48)
-                .background(item.quality.color.opacity(0.3))
-                .cornerRadius(12)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 12)
-                        .stroke(item.quality.color, lineWidth: 2)
+            // 物品图标（带稀有度边框）
+            ZStack {
+                // 稀有度渐变背景
+                LinearGradient(
+                    colors: item.definition.rarity.gradientColors,
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
                 )
+                .frame(width: 48, height: 48)
+                .cornerRadius(12)
+
+                Image(systemName: item.definition.icon)
+                    .font(.system(size: 24))
+                    .foregroundColor(.white)
+            }
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(item.definition.rarity.color, lineWidth: 2)
+            )
 
             // 物品信息
             VStack(alignment: .leading, spacing: 4) {
-                HStack(spacing: 8) {
+                HStack(spacing: 6) {
                     Text(item.definition.name)
                         .font(.system(size: 16, weight: .semibold))
                         .foregroundColor(ApocalypseTheme.textPrimary)
 
+                    // 稀有度标签
+                    Text(item.definition.rarity.displayName)
+                        .font(.system(size: 10, weight: .medium))
+                        .foregroundColor(item.definition.rarity.color)
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 2)
+                        .background(item.definition.rarity.color.opacity(0.2))
+                        .cornerRadius(4)
+
+                    // 品质标签
                     Text(item.quality.rawValue)
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.system(size: 10, weight: .medium))
                         .foregroundColor(item.quality.color)
                         .padding(.horizontal, 6)
                         .padding(.vertical, 2)

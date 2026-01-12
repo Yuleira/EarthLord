@@ -10,6 +10,11 @@
 		E605D1002F030AA3003D9861 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = E605D0FF2F030AA3003D9861 /* GoogleSignIn */; };
 		E605D1022F030AA3003D9861 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E605D1012F030AA3003D9861 /* GoogleSignInSwift */; };
 		E60C1BC52EFEABE3005E0B24 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = E60C1BC42EFEABE3005E0B24 /* Supabase */; };
+		E62484F52F152D31001B6ABC /* ExplorationReward.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62484F42F152D31001B6ABC /* ExplorationReward.swift */; };
+		E62484F72F152D3B001B6ABC /* InventoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62484F62F152D3B001B6ABC /* InventoryItem.swift */; };
+		E62484F92F152D4D001B6ABC /* ExplorationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62484F82F152D4D001B6ABC /* ExplorationManager.swift */; };
+		E62484FB2F152D59001B6ABC /* InventoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62484FA2F152D59001B6ABC /* InventoryManager.swift */; };
+		E62484FD2F152D66001B6ABC /* RewardGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62484FC2F152D66001B6ABC /* RewardGenerator.swift */; };
 		E6A8F0522F12C378002EE1DC /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E6A8F0512F12C378002EE1DC /* Localizable.xcstrings */; };
 		E6C38A9F2F12E046001005E9 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C38A9E2F12E046001005E9 /* EmptyStateView.swift */; };
 		E6E50DB52F12898D0096D2BB /* ProfileTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50DAB2F12898D0096D2BB /* ProfileTabView.swift */; };
@@ -44,6 +49,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E62484F42F152D31001B6ABC /* ExplorationReward.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorationReward.swift; sourceTree = "<group>"; };
+		E62484F62F152D3B001B6ABC /* InventoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryItem.swift; sourceTree = "<group>"; };
+		E62484F82F152D4D001B6ABC /* ExplorationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorationManager.swift; sourceTree = "<group>"; };
+		E62484FA2F152D59001B6ABC /* InventoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryManager.swift; sourceTree = "<group>"; };
+		E62484FC2F152D66001B6ABC /* RewardGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardGenerator.swift; sourceTree = "<group>"; };
 		E632AFC02F12BECD0098D5EC /* EarthLord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EarthLord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6A8F0512F12C378002EE1DC /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		E6C38A9E2F12E046001005E9 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
@@ -137,6 +147,9 @@
 		E6E50D912F12898D0096D2BB /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				E62484FA2F152D59001B6ABC /* InventoryManager.swift */,
+				E62484FC2F152D66001B6ABC /* RewardGenerator.swift */,
+				E62484F82F152D4D001B6ABC /* ExplorationManager.swift */,
 				E6E50D8D2F12898D0096D2BB /* AuthManager.swift */,
 				E6E50D8E2F12898D0096D2BB /* LanguageManager.swift */,
 				E6E50D8F2F12898D0096D2BB /* LocationManager.swift */,
@@ -232,6 +245,8 @@
 		E6E50DD62F1298520096D2BB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E62484F62F152D3B001B6ABC /* InventoryItem.swift */,
+				E62484F42F152D31001B6ABC /* ExplorationReward.swift */,
 				E6E50DD72F1298930096D2BB /* Item.swift */,
 				E6E50DD92F1298D60096D2BB /* ExplorationModels.swift */,
 				E6E50DDB2F1299070096D2BB /* MockExplorationData.swift */,
@@ -332,10 +347,13 @@
 				E6E50DBB2F12898D0096D2BB /* AuthManager.swift in Sources */,
 				E6E50DBD2F12898D0096D2BB /* TestView.swift in Sources */,
 				E6E50DBE2F12898D0096D2BB /* ApocalypseTheme.swift in Sources */,
+				E62484F72F152D3B001B6ABC /* InventoryItem.swift in Sources */,
+				E62484FB2F152D59001B6ABC /* InventoryManager.swift in Sources */,
 				E6E50DD82F1298930096D2BB /* Item.swift in Sources */,
 				E6E50DC02F12898D0096D2BB /* LanguageManager.swift in Sources */,
 				E6E50DDC2F1299070096D2BB /* MockExplorationData.swift in Sources */,
 				E6E50DC12F12898D0096D2BB /* TerritoryTestView.swift in Sources */,
+				E62484F92F152D4D001B6ABC /* ExplorationManager.swift in Sources */,
 				E6E50DC22F12898D0096D2BB /* TerritoryDetailView.swift in Sources */,
 				E6E50DC32F12898D0096D2BB /* AppConfig.swift in Sources */,
 				E6E50DC42F12898D0096D2BB /* CoordinateConverter.swift in Sources */,
@@ -343,6 +361,7 @@
 				E6E50DC72F12898D0096D2BB /* CollisionModels.swift in Sources */,
 				E6E50DC82F12898D0096D2BB /* MainTabView.swift in Sources */,
 				E6E50DC92F12898D0096D2BB /* EarthLordApp.swift in Sources */,
+				E62484FD2F152D66001B6ABC /* RewardGenerator.swift in Sources */,
 				E6E50DCA2F12898D0096D2BB /* MapTabView.swift in Sources */,
 				E6E50DCB2F12898D0096D2BB /* SupabaseTestView.swift in Sources */,
 				E6C38A9F2F12E046001005E9 /* EmptyStateView.swift in Sources */,
@@ -352,6 +371,7 @@
 				E6E50DD02F12898D0096D2BB /* MapViewRepresentable.swift in Sources */,
 				E6E50DD12F12898D0096D2BB /* AuthView.swift in Sources */,
 				E6E50DDA2F1298D60096D2BB /* ExplorationModels.swift in Sources */,
+				E62484F52F152D31001B6ABC /* ExplorationReward.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

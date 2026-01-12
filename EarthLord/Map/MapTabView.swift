@@ -27,6 +27,9 @@ struct MapTabView: View {
     /// 认证管理器
     @ObservedObject private var authManager = AuthManager.shared
 
+    /// 探索管理器
+    @ObservedObject private var explorationManager = ExplorationManager.shared
+
     /// 已加载的领地列表
     @State private var territories: [Territory] = []
 
@@ -51,14 +54,14 @@ struct MapTabView: View {
     /// 上传错误信息
     @State private var uploadError: String?
 
-    /// 是否正在探索
-    @State private var isExploring = false
-
     /// 是否显示探索结果
     @State private var showExplorationResult = false
 
     /// 探索结果数据
     @State private var explorationResult: ExplorationResult?
+
+    /// 是否显示探索进行中的悬浮UI
+    @State private var showExplorationOverlay = true
 
     // MARK: - Day 19: 碰撞检测状态
 
@@ -148,6 +151,13 @@ struct MapTabView: View {
             VStack {
                 Spacer()
 
+                // 探索进行中悬浮UI
+                if explorationManager.isExploring && showExplorationOverlay {
+                    explorationProgressOverlay
+                        .transition(.move(edge: .bottom).combined(with: .opacity))
+                        .padding(.bottom, 12)
+                }
+
                 // 确认登记按钮（仅在验证通过时显示，独立显示在上方）
                 if locationManager.territoryValidationPassed {
                     HStack {
@@ -172,6 +182,7 @@ struct MapTabView: View {
                 .padding(.horizontal, 16)
                 .padding(.bottom, 100)  // 避开 TabBar
             }
+            .animation(.spring(response: 0.3), value: explorationManager.isExploring)
 
             // 上传成功提示
             if showUploadSuccess {
@@ -454,21 +465,21 @@ struct MapTabView: View {
     /// 探索按钮
     private var explorationButton: some View {
         Button {
-            startExploration()
+            handleExplorationButtonTap()
         } label: {
             VStack(spacing: 6) {
                 // 图标或加载指示器
-                if isExploring {
+                if explorationManager.state == .processing {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle(tint: .white))
                         .scaleEffect(0.9)
                         .frame(height: 20)
                 } else {
-                    Image(systemName: "binoculars.fill")
+                    Image(systemName: explorationManager.isExploring ? "stop.fill" : "binoculars.fill")
                         .font(.system(size: 20, weight: .semibold))
                 }
 
-                Text(isExploring ? "探索中...".localized : "探索".localized)
+                Text(explorationButtonTitle)
                     .font(.system(size: 12, weight: .semibold))
             }
             .foregroundColor(.white)
@@ -476,12 +487,12 @@ struct MapTabView: View {
             .padding(.vertical, 12)
             .background(
                 RoundedRectangle(cornerRadius: 12)
-                    .fill(isExploring ? Color.gray : ApocalypseTheme.primary)
+                    .fill(explorationManager.isExploring ? Color.red : ApocalypseTheme.primary)
                     .shadow(color: .black.opacity(0.3), radius: 4, x: 0, y: 2)
             )
         }
-        .disabled(!locationManager.isAuthorized || isExploring)
-        .opacity(locationManager.isAuthorized && !isExploring ? 1.0 : 0.5)
+        .disabled(!locationManager.isAuthorized || explorationManager.state == .processing)
+        .opacity(locationManager.isAuthorized && explorationManager.state != .processing ? 1.0 : 0.5)
         .sheet(isPresented: $showExplorationResult) {
             if let result = explorationResult {
                 ExplorationResultView(
@@ -493,6 +504,31 @@ struct MapTabView: View {
                     onRetry: nil as (() -> Void)?
                 )
             }
+        }
+    }
+
+    /// 探索按钮标题
+    private var explorationButtonTitle: String {
+        switch explorationManager.state {
+        case .exploring: return "结束探索".localized
+        case .processing: return "计算中...".localized
+        default: return "探索".localized
+        }
+    }
+
+    /// 处理探索按钮点击
+    private func handleExplorationButtonTap() {
+        if explorationManager.isExploring {
+            // 结束探索
+            Task {
+                explorationResult = await explorationManager.stopExploration()
+                if explorationResult != nil {
+                    showExplorationResult = true
+                }
+            }
+        } else {
+            // 开始探索
+            explorationManager.startExploration()
         }
     }
 
@@ -512,6 +548,64 @@ struct MapTabView: View {
             RoundedRectangle(cornerRadius: 16)
                 .fill(ApocalypseTheme.cardBackground.opacity(0.95))
         )
+    }
+
+    /// 探索进行中悬浮UI
+    private var explorationProgressOverlay: some View {
+        HStack(spacing: 20) {
+            // 距离显示
+            VStack(spacing: 4) {
+                Text(String(format: "%.0f", explorationManager.currentDistance))
+                    .font(.system(size: 28, weight: .bold, design: .rounded))
+                    .foregroundColor(.white)
+                Text("米")
+                    .font(.system(size: 12))
+                    .foregroundColor(.white.opacity(0.7))
+            }
+
+            Divider()
+                .frame(height: 40)
+                .background(Color.white.opacity(0.3))
+
+            // 时间显示
+            VStack(spacing: 4) {
+                Text(formatExplorationDuration(explorationManager.currentDuration))
+                    .font(.system(size: 28, weight: .bold, design: .rounded))
+                    .foregroundColor(.white)
+                Text("时长")
+                    .font(.system(size: 12))
+                    .foregroundColor(.white.opacity(0.7))
+            }
+
+            Divider()
+                .frame(height: 40)
+                .background(Color.white.opacity(0.3))
+
+            // 当前等级预览
+            VStack(spacing: 4) {
+                let tier = RewardTier.from(distance: explorationManager.currentDistance)
+                Image(systemName: tier.iconName)
+                    .font(.system(size: 24))
+                    .foregroundColor(tier.color)
+                Text(tier.displayName)
+                    .font(.system(size: 12))
+                    .foregroundColor(.white.opacity(0.7))
+            }
+        }
+        .padding(.horizontal, 24)
+        .padding(.vertical, 16)
+        .background(
+            Capsule()
+                .fill(ApocalypseTheme.cardBackground.opacity(0.95))
+                .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
+        )
+    }
+
+    /// 格式化探索时长
+    private func formatExplorationDuration(_ duration: TimeInterval) -> String {
+        let minutes = Int(duration) / 60
+        let seconds = Int(duration) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
     }
 
     // MARK: - 计算属性
@@ -588,21 +682,6 @@ struct MapTabView: View {
         }
     }
 
-    /// 开始探索
-    private func startExploration() {
-        print("🗺️ [地图页面] 用户点击探索按钮")
-
-        // 进入加载状态
-        isExploring = true
-
-        // 模拟探索过程（1.5秒）
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            // 探索完成，显示结果
-            self.explorationResult = MockExplorationData.sampleExplorationResult
-            self.isExploring = false
-            self.showExplorationResult = true
-        }
-    }
 
     // MARK: - Day 19: 碰撞检测方法
 

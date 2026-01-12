@@ -37,17 +37,9 @@ struct ExplorationResultView: View {
     private var successView: some View {
         ScrollView {
             VStack(spacing: 24) {
-                // 标题
-                VStack(spacing: 12) {
-                    Image(systemName: "checkmark.circle.fill")
-                        .font(.system(size: 80))
-                        .foregroundColor(.green)
-
-                    Text(result.message)
-                        .font(.system(size: 24, weight: .bold))
-                        .foregroundColor(ApocalypseTheme.textPrimary)
-                }
-                .padding(.top, 40)
+                // 奖励等级徽章
+                rewardTierBadge
+                    .padding(.top, 20)
 
                 // 统计信息
                 statsSection
@@ -73,6 +65,47 @@ struct ExplorationResultView: View {
                 .padding(.top, 16)
             }
             .padding(20)
+        }
+    }
+
+    // MARK: - 奖励等级徽章
+
+    private var rewardTierBadge: some View {
+        let tier = RewardTier.from(distance: result.distanceWalked)
+
+        return VStack(spacing: 16) {
+            // 等级徽章圆形
+            ZStack {
+                Circle()
+                    .fill(
+                        LinearGradient(
+                            colors: [tier.color, tier.color.opacity(0.5)],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )
+                    .frame(width: 100, height: 100)
+                    .shadow(color: tier.color.opacity(0.5), radius: 10)
+
+                Image(systemName: tier.iconName)
+                    .font(.system(size: 48))
+                    .foregroundColor(.white)
+            }
+
+            // 等级名称
+            Text(tier.displayName)
+                .font(.system(size: 28, weight: .bold))
+                .foregroundColor(tier.color)
+
+            // 成功消息
+            Text(result.message)
+                .font(.system(size: 16))
+                .foregroundColor(ApocalypseTheme.textSecondary)
+
+            // 行走距离
+            Text("行走 \(String(format: "%.0f", result.distanceWalked)) 米")
+                .font(.system(size: 14))
+                .foregroundColor(ApocalypseTheme.textMuted)
         }
     }
 
