@@ -189,25 +189,24 @@ final class POISearchManager {
             let pois = response.mapItems.prefix(maxResultsPerType).compactMap { item -> NearbyPOI? in
                 guard let name = item.name else { return nil }
 
+                let location = item.location
+                let coordinate = location.coordinate
+
                 // 计算距离，过滤超出范围的
-                let itemLocation = CLLocation(
-                    latitude: item.placemark.coordinate.latitude,
-                    longitude: item.placemark.coordinate.longitude
-                )
                 let centerLocation = CLLocation(latitude: center.latitude, longitude: center.longitude)
-                let distance = itemLocation.distance(from: centerLocation)
+                let distance = location.distance(from: centerLocation)
 
                 guard distance <= searchRadius else { return nil }
 
                 // 生成唯一ID
-                let id = "\(item.placemark.coordinate.latitude)_\(item.placemark.coordinate.longitude)_\(name)"
+                let id = "\(coordinate.latitude)_\(coordinate.longitude)_\(name)"
                     .replacingOccurrences(of: " ", with: "_")
 
                 return NearbyPOI(
                     id: id,
                     name: name,
                     type: type,
-                    coordinate: item.placemark.coordinate
+                    coordinate: coordinate
                 )
             }
 
