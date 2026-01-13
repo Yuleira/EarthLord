@@ -616,19 +616,35 @@ final class ExplorationManager: NSObject, ObservableObject {
 
     /// 搜索并设置附近POI
     private func searchAndSetupPOIs() async {
-        guard let userLocation = locationManager.userLocation else {
-            print("🏪 [POI] 无法获取用户位置，跳过POI搜索")
-            return
-        }
-
         isSearchingPOIs = true
         print("🏪 [POI] 开始搜索附近POI...")
 
+        // 等待用户位置准备好（最多等待5秒）
+        var userLocation = locationManager.userLocation
+        var waitCount = 0
+        while userLocation == nil && waitCount < 10 {
+            print("🏪 [POI] 等待用户位置... (\(waitCount + 1)/10)")
+            try? await Task.sleep(nanoseconds: 500_000_000) // 0.5秒
+            userLocation = locationManager.userLocation
+            waitCount += 1
+        }
+
+        guard let location = userLocation else {
+            print("🏪 [POI] ❌ 无法获取用户位置，跳过POI搜索")
+            isSearchingPOIs = false
+            return
+        }
+
+        print("🏪 [POI] 用户位置: (\(String(format: "%.6f", location.latitude)), \(String(format: "%.6f", location.longitude)))")
+
         // 搜索附近POI
-        let pois = await POISearchManager.shared.searchNearbyPOIs(center: userLocation)
+        let pois = await POISearchManager.shared.searchNearbyPOIs(center: location)
         nearbyPOIs = pois
 
-        print("🏪 [POI] 找到 \(pois.count) 个POI")
+        print("🏪 [POI] ✅ 找到 \(pois.count) 个POI")
+        for poi in pois.prefix(5) {
+            print("🏪 [POI]   - \(poi.name) (\(poi.type.rawValue))")
+        }
 
         // 启动POI接近检测定时器
         startPOIProximityTimer()

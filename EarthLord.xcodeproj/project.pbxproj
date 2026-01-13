@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3092E094A5E6F8B9D7A0348F /* POIProximityPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42A0E4E280EB6DC87CDCE04 /* POIProximityPopup.swift */; };
 		44ACA1E4B2F68AAF641B3C3E /* POISearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D07D29FC143CD40F1E2317 /* POISearchManager.swift */; };
 		E605D1002F030AA3003D9861 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = E605D0FF2F030AA3003D9861 /* GoogleSignIn */; };
 		E605D1022F030AA3003D9861 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E605D1012F030AA3003D9861 /* GoogleSignInSwift */; };
@@ -48,13 +47,10 @@
 		E6E50DD82F1298930096D2BB /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50DD72F1298930096D2BB /* Item.swift */; };
 		E6E50DDA2F1298D60096D2BB /* ExplorationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50DD92F1298D60096D2BB /* ExplorationModels.swift */; };
 		E6E50DDC2F1299070096D2BB /* MockExplorationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50DDB2F1299070096D2BB /* MockExplorationData.swift */; };
-		FA99693DB6A11AED4CE78DEC /* ScavengeResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C4C15132FF6CD03A3F9D9A /* ScavengeResultView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		00D07D29FC143CD40F1E2317 /* POISearchManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = POISearchManager.swift; path = EarthLord/Managers/POISearchManager.swift; sourceTree = "<group>"; };
-		39C4C15132FF6CD03A3F9D9A /* ScavengeResultView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ScavengeResultView.swift; path = EarthLord/Views/Exploration/ScavengeResultView.swift; sourceTree = "<group>"; };
-		B42A0E4E280EB6DC87CDCE04 /* POIProximityPopup.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = POIProximityPopup.swift; path = EarthLord/Views/Exploration/POIProximityPopup.swift; sourceTree = "<group>"; };
 		E62484F42F152D31001B6ABC /* ExplorationReward.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorationReward.swift; sourceTree = "<group>"; };
 		E62484F62F152D3B001B6ABC /* InventoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryItem.swift; sourceTree = "<group>"; };
 		E62484F82F152D4D001B6ABC /* ExplorationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorationManager.swift; sourceTree = "<group>"; };
@@ -140,8 +136,6 @@
 		D1DAC85E6E0ACCBA47B72491 /* Exploration */ = {
 			isa = PBXGroup;
 			children = (
-				B42A0E4E280EB6DC87CDCE04 /* POIProximityPopup.swift */,
-				39C4C15132FF6CD03A3F9D9A /* ScavengeResultView.swift */,
 			);
 			name = Exploration;
 			sourceTree = "<group>";
@@ -416,8 +410,6 @@
 				E6E50DDA2F1298D60096D2BB /* ExplorationModels.swift in Sources */,
 				E62484F52F152D31001B6ABC /* ExplorationReward.swift in Sources */,
 				44ACA1E4B2F68AAF641B3C3E /* POISearchManager.swift in Sources */,
-				3092E094A5E6F8B9D7A0348F /* POIProximityPopup.swift in Sources */,
-				FA99693DB6A11AED4CE78DEC /* ScavengeResultView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
