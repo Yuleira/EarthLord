@@ -34,6 +34,11 @@ enum POIType: String, CaseIterable {
     case supermarket = "超市"
     case convenience = "便利店"
 
+    /// 本地化显示名称（供 UI 使用）
+    var localizedName: String {
+        NSLocalizedString(rawValue, comment: "POI类型")
+    }
+
     /// SF Symbol 图标
     var icon: String {
         switch self {

@@ -113,18 +113,18 @@ final class RewardGenerator {
         // 本地硬编码的备用物品（当数据库不可用时）
         let fallbackItems: [DBItemDefinition] = [
             // Common
-            DBItemDefinition(id: "water_bottle", name: "纯净水", description: "一瓶还算干净的水", category: "water", icon: "drop.fill", rarity: "common", baseValue: nil, isActive: true),
-            DBItemDefinition(id: "canned_beans", name: "罐头豆子", description: "高蛋白食物", category: "food", icon: "takeoutbag.and.cup.and.straw.fill", rarity: "common", baseValue: nil, isActive: true),
-            DBItemDefinition(id: "bandage", name: "绷带", description: "简单的止血工具", category: "medical", icon: "bandage.fill", rarity: "common", baseValue: nil, isActive: true),
-            DBItemDefinition(id: "scrap_metal", name: "废金属", description: "可用于制造", category: "material", icon: "gearshape.fill", rarity: "common", baseValue: nil, isActive: true),
-            DBItemDefinition(id: "rope", name: "绳索", description: "多用途工具", category: "tool", icon: "line.diagonal", rarity: "common", baseValue: nil, isActive: true),
+            DBItemDefinition(id: "water_bottle", name: NSLocalizedString("纯净水", comment: "物品名称"), description: NSLocalizedString("一瓶还算干净的水", comment: "物品描述"), category: "water", icon: "drop.fill", rarity: "common", baseValue: nil, isActive: true),
+            DBItemDefinition(id: "canned_beans", name: NSLocalizedString("罐头豆子", comment: "物品名称"), description: NSLocalizedString("高蛋白食物", comment: "物品描述"), category: "food", icon: "takeoutbag.and.cup.and.straw.fill", rarity: "common", baseValue: nil, isActive: true),
+            DBItemDefinition(id: "bandage", name: NSLocalizedString("绷带", comment: "物品名称"), description: NSLocalizedString("简单的止血工具", comment: "物品描述"), category: "medical", icon: "bandage.fill", rarity: "common", baseValue: nil, isActive: true),
+            DBItemDefinition(id: "scrap_metal", name: NSLocalizedString("废金属", comment: "物品名称"), description: NSLocalizedString("可用于制造", comment: "物品描述"), category: "material", icon: "gearshape.fill", rarity: "common", baseValue: nil, isActive: true),
+            DBItemDefinition(id: "rope", name: NSLocalizedString("绳索", comment: "物品名称"), description: NSLocalizedString("多用途工具", comment: "物品描述"), category: "tool", icon: "line.diagonal", rarity: "common", baseValue: nil, isActive: true),
             // Rare
-            DBItemDefinition(id: "first_aid_kit", name: "急救包", description: "包含多种医疗用品", category: "medical", icon: "cross.case.fill", rarity: "rare", baseValue: nil, isActive: true),
-            DBItemDefinition(id: "flashlight", name: "手电筒", description: "黑暗中的光明", category: "tool", icon: "flashlight.on.fill", rarity: "rare", baseValue: nil, isActive: true),
-            DBItemDefinition(id: "canned_meat", name: "肉罐头", description: "珍贵的蛋白质来源", category: "food", icon: "fork.knife", rarity: "rare", baseValue: nil, isActive: true),
+            DBItemDefinition(id: "first_aid_kit", name: NSLocalizedString("急救包", comment: "物品名称"), description: NSLocalizedString("包含多种医疗用品", comment: "物品描述"), category: "medical", icon: "cross.case.fill", rarity: "rare", baseValue: nil, isActive: true),
+            DBItemDefinition(id: "flashlight", name: NSLocalizedString("手电筒", comment: "物品名称"), description: NSLocalizedString("黑暗中的光明", comment: "物品描述"), category: "tool", icon: "flashlight.on.fill", rarity: "rare", baseValue: nil, isActive: true),
+            DBItemDefinition(id: "canned_meat", name: NSLocalizedString("肉罐头", comment: "物品名称"), description: NSLocalizedString("珍贵的蛋白质来源", comment: "物品描述"), category: "food", icon: "fork.knife", rarity: "rare", baseValue: nil, isActive: true),
             // Epic
-            DBItemDefinition(id: "antibiotics", name: "抗生素", description: "珍贵的药物", category: "medical", icon: "pills.fill", rarity: "epic", baseValue: nil, isActive: true),
-            DBItemDefinition(id: "radio", name: "对讲机", description: "远距离通讯设备", category: "tool", icon: "antenna.radiowaves.left.and.right", rarity: "epic", baseValue: nil, isActive: true)
+            DBItemDefinition(id: "antibiotics", name: NSLocalizedString("抗生素", comment: "物品名称"), description: NSLocalizedString("珍贵的药物", comment: "物品描述"), category: "medical", icon: "pills.fill", rarity: "epic", baseValue: nil, isActive: true),
+            DBItemDefinition(id: "radio", name: NSLocalizedString("对讲机", comment: "物品名称"), description: NSLocalizedString("远距离通讯设备", comment: "物品描述"), category: "tool", icon: "antenna.radiowaves.left.and.right", rarity: "epic", baseValue: nil, isActive: true)
         ]
 
         itemDefinitionsCache = [:]

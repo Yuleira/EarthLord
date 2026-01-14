@@ -56,9 +56,48 @@
     "×%lld" : {
 
     },
+    "⚠️ 立即搜刮" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scavenge Now"
+          }
+        }
+      }
+    },
+    "⚠️ 速度过快！%.0fkm/h > 30km/h，%d秒后停止" : {
+      "comment" : "速度警告",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⚠️ Speed too fast! %.0fkm/h > 30km/h, stopping in %d sec"
+          }
+        }
+      }
+    },
+    "⚠️ 速度过快！当前: %.0fkm/h，限制: 30km/h" : {
+      "comment" : "速度警告",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⚠️ Speed too fast! Current: %.0fkm/h, Limit: 30km/h"
+          }
+        }
+      }
+    },
     "density_alone" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lone Survivor"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "new",
@@ -70,6 +109,12 @@
     "density_alone_desc" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No other survivors nearby"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "new",
@@ -81,6 +126,12 @@
     "density_high" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "High Density"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "new",
@@ -92,6 +143,12 @@
     "density_high_desc" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Many survivors nearby"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "new",
@@ -103,6 +160,12 @@
     "density_low" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Low Density"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "new",
@@ -114,6 +177,12 @@
     "density_low_desc" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Few survivors nearby"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "new",
@@ -125,6 +194,12 @@
     "density_medium" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Medium Density"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "new",
@@ -136,10 +211,27 @@
     "density_medium_desc" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Some survivors nearby"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "附近有一些幸存者"
+          }
+        }
+      }
+    },
+    "Google 登录未配置，请先设置 Client ID" : {
+      "comment" : "错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Google Sign-In not configured, please set Client ID"
           }
         }
       }
@@ -163,6 +255,39 @@
     "x%lld" : {
 
     },
+    "一瓶还算干净的水" : {
+      "comment" : "物品描述",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A relatively clean bottle of water"
+          }
+        }
+      }
+    },
+    "上传失败: %@" : {
+      "comment" : "错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upload failed: %@"
+          }
+        }
+      }
+    },
+    "不能在他人领地内开始圈地！" : {
+      "comment" : "碰撞警告",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cannot start claiming inside others' territory!"
+          }
+        }
+      }
+    },
     "两次输入的密码不一致" : {
       "localizations" : {
         "en" : {
@@ -184,6 +309,17 @@
         }
       }
     },
+    "停止追踪，共 %d 个点" : {
+      "comment" : "日志",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stopped tracking, %d points recorded"
+          }
+        }
+      }
+    },
     "关闭" : {
       "localizations" : {
         "en" : {
@@ -201,6 +337,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Other"
+          }
+        }
+      }
+    },
+    "军用口粮" : {
+      "comment" : "物品名称",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Military Ration"
           }
         }
       }
@@ -286,6 +433,39 @@
         }
       }
     },
+    "加载失败: %@" : {
+      "comment" : "错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Load failed: %@"
+          }
+        }
+      }
+    },
+    "加载背包失败: %@" : {
+      "comment" : "错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to load inventory: %@"
+          }
+        }
+      }
+    },
+    "包含多种医疗用品" : {
+      "comment" : "物品描述",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contains various medical supplies"
+          }
+        }
+      }
+    },
     "医院" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -293,6 +473,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hospital"
+          }
+        }
+      }
+    },
+    "危险：即将进入他人领地！（%dm）" : {
+      "comment" : "距离警告",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Danger: About to enter others' territory! (%dm)"
           }
         }
       }
@@ -307,6 +498,17 @@
         }
       }
     },
+    "发送邮件过于频繁，请稍后再试" : {
+      "comment" : "认证错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Too many email requests, please try again later"
+          }
+        }
+      }
+    },
     "取消" : {
       "localizations" : {
         "en" : {
@@ -317,12 +519,45 @@
         }
       }
     },
+    "可以缝补衣物" : {
+      "comment" : "物品描述",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Can be used for mending clothes"
+          }
+        }
+      }
+    },
+    "可再生能源" : {
+      "comment" : "物品描述",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renewable energy source"
+          }
+        }
+      }
+    },
     "可搜刮物资" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Scavengeable Supplies"
+          }
+        }
+      }
+    },
+    "可用于制造" : {
+      "comment" : "物品描述",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Can be used for crafting"
           }
         }
       }
@@ -370,12 +605,67 @@
         }
       }
     },
+    "圈地追踪" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start territory tracking"
+          }
+        }
+      }
+    },
     "地球新主" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "EarthLord"
+          }
+        }
+      }
+    },
+    "坐标数据无效" : {
+      "comment" : "错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid coordinate data"
+          }
+        }
+      }
+    },
+    "多用途工具" : {
+      "comment" : "物品描述",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Multi-purpose tool"
+          }
+        }
+      }
+    },
+    "太阳能充电器" : {
+      "comment" : "物品名称",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solar Charger"
+          }
+        }
+      }
+    },
+    "失败" : {
+      "comment" : "探索等级",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed"
           }
         }
       }
@@ -397,6 +687,39 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pristine"
+          }
+        }
+      }
+    },
+    "定位失败: %@" : {
+      "comment" : "定位错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location failed: %@"
+          }
+        }
+      }
+    },
+    "定位权限被拒绝，请在设置中开启" : {
+      "comment" : "定位错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location permission denied, please enable in Settings"
+          }
+        }
+      }
+    },
+    "密码至少需要6个字符" : {
+      "comment" : "认证错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password must be at least 6 characters"
           }
         }
       }
@@ -423,6 +746,17 @@
         }
       }
     },
+    "布料" : {
+      "comment" : "物品名称",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cloth"
+          }
+        }
+      }
+    },
     "废金属" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -430,6 +764,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Scrap Metal"
+          }
+        }
+      }
+    },
+    "开始圈地追踪" : {
+      "comment" : "日志",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start territory tracking"
           }
         }
       }
@@ -538,6 +883,28 @@
         }
       }
     },
+    "探索失败：移动速度超过30km/h，可能使用了交通工具" : {
+      "comment" : "探索结果",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exploration failed: Speed exceeded 30km/h, possible vehicle use"
+          }
+        }
+      }
+    },
+    "探索成功！" : {
+      "comment" : "探索结果",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exploration successful!"
+          }
+        }
+      }
+    },
     "探索统计" : {
       "localizations" : {
         "en" : {
@@ -568,6 +935,28 @@
         }
       }
     },
+    "操作失败: %@" : {
+      "comment" : "认证错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Operation failed: %@"
+          }
+        }
+      }
+    },
+    "操作过于频繁，请稍后再试" : {
+      "comment" : "认证错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Too many requests, please try again later"
+          }
+        }
+      }
+    },
     "收集物品" : {
       "localizations" : {
         "en" : {
@@ -588,12 +977,60 @@
         }
       }
     },
-    "无法显示地图" : {
+    "无法display地图" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Unable to display map"
+          }
+        }
+      }
+    },
+    "无法显示地图" : {
+
+    },
+    "无法获取 Apple 登录凭证" : {
+      "comment" : "错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to get Apple Sign-In credentials"
+          }
+        }
+      }
+    },
+    "无法获取 Google ID Token" : {
+      "comment" : "错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to get Google ID Token"
+          }
+        }
+      }
+    },
+    "无法获取位置，请稍后重试" : {
+      "comment" : "定位错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to get location, please try again later"
+          }
+        }
+      }
+    },
+    "无法获取根视图控制器" : {
+      "comment" : "错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to get root view controller"
           }
         }
       }
@@ -639,6 +1076,17 @@
         }
       }
     },
+    "未登录，请先登录" : {
+      "comment" : "错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not logged in, please sign in first"
+          }
+        }
+      }
+    },
     "材料" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -646,6 +1094,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Material"
+          }
+        }
+      }
+    },
+    "止痛药" : {
+      "comment" : "物品名称",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Painkillers"
           }
         }
       }
@@ -692,6 +1151,17 @@
         }
       }
     },
+    "注意：距离他人领地 %dm" : {
+      "comment" : "距离警告",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notice: %dm from others' territory"
+          }
+        }
+      }
+    },
     "测试中..." : {
       "localizations" : {
         "en" : {
@@ -712,12 +1182,133 @@
         }
       }
     },
+    "火柴" : {
+      "comment" : "物品名称",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Matches"
+          }
+        }
+      }
+    },
+    "点数不足: %d个 (需≥%d个)" : {
+      "comment" : "验证错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not enough points: %d (needs ≥%d)"
+          }
+        }
+      }
+    },
+    "点数检查: %d个点 ✓" : {
+      "comment" : "日志",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Point check: %d points ✓"
+          }
+        }
+      }
+    },
+    "点数检查: %d个点 ✗" : {
+      "comment" : "日志",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Point check: %d points ✗"
+          }
+        }
+      }
+    },
+    "珍贵的药物" : {
+      "comment" : "物品描述",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Precious medicine"
+          }
+        }
+      }
+    },
+    "珍贵的蛋白质来源" : {
+      "comment" : "物品描述",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Precious source of protein"
+          }
+        }
+      }
+    },
+    "生火必备" : {
+      "comment" : "物品描述",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Essential for starting fire"
+          }
+        }
+      }
+    },
+    "用户取消了操作" : {
+      "comment" : "认证错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "User canceled the operation"
+          }
+        }
+      }
+    },
+    "用户取消了登录" : {
+      "comment" : "错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "User canceled sign-in"
+          }
+        }
+      }
+    },
     "用脚步丈量世界，用领地征服地球" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Explore the world on foot, conquer Earth with your territory"
+          }
+        }
+      }
+    },
+    "电子设备的能源" : {
+      "comment" : "物品描述",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Power source for devices"
+          }
+        }
+      }
+    },
+    "电池" : {
+      "comment" : "物品名称",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Batteries"
           }
         }
       }
@@ -793,6 +1384,28 @@
         }
       }
     },
+    "移动过快（%.0f km/h），请步行" : {
+      "comment" : "速度警告",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moving too fast (%.0f km/h), please walk"
+          }
+        }
+      }
+    },
+    "移除物品失败: %@" : {
+      "comment" : "错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to remove item: %@"
+          }
+        }
+      }
+    },
     "稀有" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -815,11 +1428,15 @@
       }
     },
     "立即搜刮" : {
+
+    },
+    "简单的止血工具" : {
+      "comment" : "物品描述",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scavenge Now"
+            "value" : "Simple tool for stopping bleeding"
           }
         }
       }
@@ -867,6 +1484,17 @@
         }
       }
     },
+    "缓解疼痛" : {
+      "comment" : "物品描述",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Relieves pain"
+          }
+        }
+      }
+    },
     "罐头豆子" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -874,6 +1502,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Canned Beans"
+          }
+        }
+      }
+    },
+    "网络连接失败，请检查网络" : {
+      "comment" : "认证错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Network connection failed, please check your network"
+          }
+        }
+      }
+    },
+    "网络错误，请检查网络连接" : {
+      "comment" : "定位错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Network error, please check connection"
           }
         }
       }
@@ -895,6 +1545,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Inventory"
+          }
+        }
+      }
+    },
+    "自交检测: 无交叉 ✓" : {
+      "comment" : "日志",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Self-intersection check: No crossing ✓"
+          }
+        }
+      }
+    },
+    "自交检测: 线段%d-%d 与 线段%d-%d 相交" : {
+      "comment" : "日志",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Self-intersection: segment %d-%d crosses %d-%d"
           }
         }
       }
@@ -962,6 +1634,39 @@
         }
       }
     },
+    "行走距离不足200米，未获得奖励" : {
+      "comment" : "探索结果",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Distance walked less than 200m, no reward"
+          }
+        }
+      }
+    },
+    "记录第 %d 个点，距上点 %.1fm" : {
+      "comment" : "日志",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recording point %d, %.1fm from last"
+          }
+        }
+      }
+    },
+    "记录第 1 个点（起点）" : {
+      "comment" : "日志",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recording point 1 (start)"
+          }
+        }
+      }
+    },
     "设置新密码" : {
       "localizations" : {
         "en" : {
@@ -982,12 +1687,34 @@
         }
       }
     },
+    "该邮箱已注册" : {
+      "comment" : "认证错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This email is already registered"
+          }
+        }
+      }
+    },
     "请先登录" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Please sign in first"
+          }
+        }
+      }
+    },
+    "请先验证邮箱" : {
+      "comment" : "认证错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please verify your email first"
           }
         }
       }
@@ -1032,6 +1759,28 @@
         }
       }
     },
+    "警告：正在靠近他人领地（%dm）" : {
+      "comment" : "距离警告",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warning: Approaching others' territory (%dm)"
+          }
+        }
+      }
+    },
+    "起点碰撞：位于他人领地内" : {
+      "comment" : "日志",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Collision: Starting point inside others' territory"
+          }
+        }
+      }
+    },
     "超市" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1039,6 +1788,127 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Supermarket"
+          }
+        }
+      }
+    },
+    "超速 %.1f km/h，已停止追踪" : {
+      "comment" : "日志",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speeding %.1f km/h, tracking stopped"
+          }
+        }
+      }
+    },
+    "距离不足: %.0fm (需≥%dm)" : {
+      "comment" : "验证错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Distance not enough: %.0fm (needs ≥%dm)"
+          }
+        }
+      }
+    },
+    "距离检查: %.0fm ✓" : {
+      "comment" : "日志",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Distance check: %.0fm ✓"
+          }
+        }
+      }
+    },
+    "距离检查: %.0fm ✗" : {
+      "comment" : "日志",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Distance check: %.0fm ✗"
+          }
+        }
+      }
+    },
+    "距离预警：%@，距离 %dm" : {
+      "comment" : "日志",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Distance warning: %@, %dm away"
+          }
+        }
+      }
+    },
+    "距起点 %.1fm (需≤30m)" : {
+      "comment" : "日志",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%.1fm from start (needs ≤30m)"
+          }
+        }
+      }
+    },
+    "路径碰撞：轨迹点进入他人领地" : {
+      "comment" : "日志",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Collision: Point inside territory"
+          }
+        }
+      }
+    },
+    "路径碰撞：轨迹穿越他人领地边界" : {
+      "comment" : "日志",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Collision: Path crosses territory boundary"
+          }
+        }
+      }
+    },
+    "轨迹不能穿越他人领地！" : {
+      "comment" : "碰撞警告",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Path cannot cross other territories!"
+          }
+        }
+      }
+    },
+    "轨迹不能进入他人领地！" : {
+      "comment" : "碰撞警告",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Path cannot enter other territories!"
+          }
+        }
+      }
+    },
+    "轨迹自相交，请勿画8字形" : {
+      "comment" : "验证错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Path self-intersects, do not draw figure-8"
           }
         }
       }
@@ -1093,6 +1963,28 @@
         }
       }
     },
+    "远距离通讯设备" : {
+      "comment" : "物品描述",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Long-range communication device"
+          }
+        }
+      }
+    },
+    "退出登录失败，已清除本地会话" : {
+      "comment" : "错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign out failed, local session cleared"
+          }
+        }
+      }
+    },
     "通过 Apple 登录" : {
       "localizations" : {
         "en" : {
@@ -1113,12 +2005,78 @@
         }
       }
     },
+    "速度较快 %.1f km/h（继续记录）" : {
+      "comment" : "日志",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speed high %.1f km/h (continuing)"
+          }
+        }
+      }
+    },
+    "速度过快" : {
+      "comment" : "探索失败原因",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speed too fast"
+          }
+        }
+      }
+    },
+    "速度过快（%.0f km/h），追踪已暂停" : {
+      "comment" : "速度警告",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speed too fast (%.0f km/h), tracking paused"
+          }
+        }
+      }
+    },
+    "邮箱或密码错误" : {
+      "comment" : "认证错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Incorrect email or password"
+          }
+        }
+      }
+    },
+    "邮箱格式不正确" : {
+      "comment" : "认证错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid email format"
+          }
+        }
+      }
+    },
     "重新发送验证码" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Resend verification code"
+          }
+        }
+      }
+    },
+    "闭环成功！距起点 %.1fm" : {
+      "comment" : "日志",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loop closed! %.1fm from start"
           }
         }
       }
@@ -1144,6 +2102,50 @@
         }
       }
     },
+    "需要定位权限" : {
+      "comment" : "探索失败原因",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location permission required"
+          }
+        }
+      }
+    },
+    "面积不足: %.0fm² (需≥%dm²)" : {
+      "comment" : "验证错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Area not enough: %.0fm² (needs ≥%dm²)"
+          }
+        }
+      }
+    },
+    "面积检查: %.0fm² ✓" : {
+      "comment" : "日志",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Area check: %.0fm² ✓"
+          }
+        }
+      }
+    },
+    "面积检查: %.0fm² ✗" : {
+      "comment" : "日志",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Area check: %.0fm² ✗"
+          }
+        }
+      }
+    },
     "领地" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1151,6 +2153,50 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Territory"
+          }
+        }
+      }
+    },
+    "领地上传失败: %@" : {
+      "comment" : "上传失败提示",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upload failed: %@"
+          }
+        }
+      }
+    },
+    "领地上传成功，面积: %.0fm²" : {
+      "comment" : "上传成功提示",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Territory uploaded successfully. Area: %.0fm²"
+          }
+        }
+      }
+    },
+    "领地删除失败: %@" : {
+      "comment" : "日志",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to delete territory: %@"
+          }
+        }
+      }
+    },
+    "领地删除成功" : {
+      "comment" : "日志",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Territory deleted successfully"
           }
         }
       }
@@ -1171,6 +2217,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Territory registered successfully!"
+          }
+        }
+      }
+    },
+    "领地验证失败: %@" : {
+      "comment" : "日志",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Territory validation failed: %@"
+          }
+        }
+      }
+    },
+    "领地验证通过！面积: %.0fm²" : {
+      "comment" : "日志",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Territory validated! Area: %.0fm²"
           }
         }
       }
@@ -1223,6 +2291,61 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verification code sent to %@"
+          }
+        }
+      }
+    },
+    "验证码已过期，请重新获取" : {
+      "comment" : "认证错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verification code expired, please request a new one"
+          }
+        }
+      }
+    },
+    "验证码错误，请检查后重试" : {
+      "comment" : "认证错误",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Incorrect verification code, please check and retry"
+          }
+        }
+      }
+    },
+    "高热量应急食品" : {
+      "comment" : "物品描述",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "High-calorie emergency food"
+          }
+        }
+      }
+    },
+    "高蛋白食物" : {
+      "comment" : "物品描述",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "High-protein food"
+          }
+        }
+      }
+    },
+    "黑暗中的光明" : {
+      "comment" : "物品描述",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Light in the darkness"
           }
         }
       }

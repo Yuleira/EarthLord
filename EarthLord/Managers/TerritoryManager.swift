@@ -137,19 +137,37 @@ final class TerritoryManager: ObservableObject {
 
         do {
             try await supabase
-                .from("territories")
-                .insert(territoryData)
-                .execute()
+                          .from("territories")
+                          .insert(territoryData)
+                          .execute()
 
-            print("📤 [领地上传] ✅ 上传成功")
-            TerritoryLogger.shared.log("领地上传成功，面积: \(String(format: "%.0f", area))m²", type: .success)
-        } catch {
-            print("📤 [领地上传] ❌ 上传失败: \(error.localizedDescription)")
-            TerritoryLogger.shared.log("领地上传失败: \(error.localizedDescription)", type: .error)
-            throw TerritoryError.uploadFailed(error.localizedDescription)
-        }
+                      print("📤 [领地上传] ✅ 上传成功")
+                      
+                      // 🔥 修改重点 1：使用 String(format: NSLocalizedString(...)) 来支持动态翻译
+                      // 这里 %.0f 是占位符，代表面积的数字
+                      let successMessage = String(
+                          format: NSLocalizedString("领地上传成功，面积: %.0fm²", comment: "上传成功提示"),
+                          area
+                      )
+                      
+                      TerritoryLogger.shared.log(successMessage, type: .success)
+                      
+                  } catch {
+                      print("📤 [领地上传] ❌ 上传失败: \(error.localizedDescription)")
+                      
+                      // 🔥 修改重点 2：错误信息也要翻译
+                      // 这里 %@ 是占位符，代表具体的错误原因
+                      let errorMessage = String(
+                          format: NSLocalizedString("领地上传失败: %@", comment: "上传失败提示"),
+                          error.localizedDescription
+                      )
+                      
+                      TerritoryLogger.shared.log(errorMessage, type: .error)
+                      throw TerritoryError.uploadFailed(error.localizedDescription)
+              }
     }
 
+    
     // MARK: - 拉取方法
 
     /// 加载所有有效领地
@@ -223,11 +241,11 @@ final class TerritoryManager: ObservableObject {
                 .execute()
 
             print("🗑️ [领地删除] ✅ 删除成功")
-            TerritoryLogger.shared.log("领地删除成功", type: .success)
+            TerritoryLogger.shared.log(NSLocalizedString("领地删除成功", comment: "日志"), type: .success)
             return true
         } catch {
             print("🗑️ [领地删除] ❌ 删除失败: \(error.localizedDescription)")
-            TerritoryLogger.shared.log("领地删除失败: \(error.localizedDescription)", type: .error)
+            TerritoryLogger.shared.log(String(format: NSLocalizedString("领地删除失败: %@", comment: "日志"), error.localizedDescription), type: .error)
             return false
         }
     }
@@ -284,11 +302,11 @@ final class TerritoryManager: ObservableObject {
             guard polygon.count >= 3 else { continue }
 
             if isPointInPolygon(point: location, polygon: polygon) {
-                TerritoryLogger.shared.log("起点碰撞：位于他人领地内", type: .error)
+                TerritoryLogger.shared.log(NSLocalizedString("起点碰撞：位于他人领地内", comment: "日志"), type: .error)
                 return CollisionResult(
                     hasCollision: true,
                     collisionType: .pointInTerritory,
-                    message: "不能在他人领地内开始圈地！",
+                    message: NSLocalizedString("不能在他人领地内开始圈地！", comment: "碰撞警告"),
                     closestDistance: 0,
                     warningLevel: .violation
                 )
@@ -318,57 +336,66 @@ final class TerritoryManager: ObservableObject {
     }
 
     /// 检查路径是否穿越他人领地边界
-    /// - Parameters:
-    ///   - path: 路径坐标数组
-    ///   - currentUserId: 当前用户ID
-    /// - Returns: 碰撞检测结果
-    func checkPathCrossTerritory(path: [CLLocationCoordinate2D], currentUserId: String) -> CollisionResult {
-        guard path.count >= 2 else { return .safe }
+        /// - Parameters:
+        ///   - path: 路径坐标数组
+        ///   - currentUserId: 当前用户ID
+        /// - Returns: 碰撞检测结果
+        func checkPathCrossTerritory(path: [CLLocationCoordinate2D], currentUserId: String) -> CollisionResult {
+            guard path.count >= 2 else { return .safe }
 
-        let otherTerritories = territories.filter { territory in
-            territory.userId.lowercased() != currentUserId.lowercased()
-        }
+            let otherTerritories = territories.filter { territory in
+                // 确保不把自己算进去
+                territory.userId.lowercased() != currentUserId.lowercased()
+            }
 
-        guard !otherTerritories.isEmpty else { return .safe }
+            guard !otherTerritories.isEmpty else { return .safe }
 
-        for i in 0..<(path.count - 1) {
-            let pathStart = path[i]
-            let pathEnd = path[i + 1]
+            for i in 0..<(path.count - 1) {
+                let pathStart = path[i]
+                let pathEnd = path[i + 1]
 
-            for territory in otherTerritories {
-                let polygon = territory.toCoordinates()
-                guard polygon.count >= 3 else { continue }
+                for territory in otherTerritories {
+                    let polygon = territory.toCoordinates()
+                    guard polygon.count >= 3 else { continue }
 
-                // 检查与领地每条边的相交
-                for j in 0..<polygon.count {
-                    let boundaryStart = polygon[j]
-                    let boundaryEnd = polygon[(j + 1) % polygon.count]
+                    // 检查与领地每条边的相交
+                    for j in 0..<polygon.count {
+                        let boundaryStart = polygon[j]
+                        let boundaryEnd = polygon[(j + 1) % polygon.count]
 
-                    if segmentsIntersect(p1: pathStart, p2: pathEnd, p3: boundaryStart, p4: boundaryEnd) {
-                        TerritoryLogger.shared.log("路径碰撞：轨迹穿越他人领地边界", type: .error)
+                        if segmentsIntersect(p1: pathStart, p2: pathEnd, p3: boundaryStart, p4: boundaryEnd) {
+                            // 🔥 修复 1：日志也翻译一下（可选，但建议）
+                            let logMsg = NSLocalizedString("路径碰撞：轨迹穿越他人领地边界", comment: "日志")
+                            TerritoryLogger.shared.log(logMsg, type: .error)
+                            
+                            // 🔥🔥 修复 2：这是给用户看的警告，必须翻译！
+                            return CollisionResult(
+                                hasCollision: true,
+                                collisionType: .pathCrossTerritory,
+                                message: NSLocalizedString("轨迹不能穿越他人领地！", comment: "碰撞警告"),
+                                closestDistance: 0,
+                                warningLevel: .violation
+                            )
+                        }
+                    }
+
+                    // 检查路径点是否在领地内
+                    if isPointInPolygon(point: pathEnd, polygon: polygon) {
+                        // 🔥 修复 3
+                        let logMsg = NSLocalizedString("路径碰撞：轨迹点进入他人领地", comment: "日志")
+                        TerritoryLogger.shared.log(logMsg, type: .error)
+                        
+                        // 🔥🔥 修复 4
                         return CollisionResult(
                             hasCollision: true,
-                            collisionType: .pathCrossTerritory,
-                            message: "轨迹不能穿越他人领地！",
+                            collisionType: .pointInTerritory,
+                            message: NSLocalizedString("轨迹不能进入他人领地！", comment: "碰撞警告"),
                             closestDistance: 0,
                             warningLevel: .violation
                         )
                     }
                 }
-
-                // 检查路径点是否在领地内
-                if isPointInPolygon(point: pathEnd, polygon: polygon) {
-                    TerritoryLogger.shared.log("路径碰撞：轨迹点进入他人领地", type: .error)
-                    return CollisionResult(
-                        hasCollision: true,
-                        collisionType: .pointInTerritory,
-                        message: "轨迹不能进入他人领地！",
-                        closestDistance: 0,
-                        warningLevel: .violation
-                    )
-                }
             }
-        }
 
         return .safe
     }
@@ -428,17 +455,17 @@ final class TerritoryManager: ObservableObject {
             message = nil
         } else if minDistance > 50 {
             warningLevel = .caution
-            message = "注意：距离他人领地 \(Int(minDistance))m"
+            message = String(format: NSLocalizedString("注意：距离他人领地 %dm", comment: "距离警告"), Int(minDistance))
         } else if minDistance > 25 {
             warningLevel = .warning
-            message = "警告：正在靠近他人领地（\(Int(minDistance))m）"
+            message = String(format: NSLocalizedString("警告：正在靠近他人领地（%dm）", comment: "距离警告"), Int(minDistance))
         } else {
             warningLevel = .danger
-            message = "危险：即将进入他人领地！（\(Int(minDistance))m）"
+            message = String(format: NSLocalizedString("危险：即将进入他人领地！（%dm）", comment: "距离警告"), Int(minDistance))
         }
 
         if warningLevel != .safe {
-            TerritoryLogger.shared.log("距离预警：\(warningLevel.description)，距离 \(Int(minDistance))m", type: .warning)
+            TerritoryLogger.shared.log(String(format: NSLocalizedString("距离预警：%@，距离 %dm", comment: "日志"), warningLevel.description, Int(minDistance)), type: .warning)
         }
 
         return CollisionResult(
@@ -462,13 +489,13 @@ enum TerritoryError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .notAuthenticated:
-            return "未登录，请先登录"
+            return NSLocalizedString("未登录，请先登录", comment: "错误")
         case .invalidCoordinates:
-            return "坐标数据无效"
+            return NSLocalizedString("坐标数据无效", comment: "错误")
         case .uploadFailed(let message):
-            return "上传失败: \(message)"
+            return String(format: NSLocalizedString("上传失败: %@", comment: "错误"), message)
         case .loadFailed(let message):
-            return "加载失败: \(message)"
+            return String(format: NSLocalizedString("加载失败: %@", comment: "错误"), message)
         }
     }
 }
