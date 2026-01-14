@@ -56,6 +56,94 @@
     "×%lld" : {
 
     },
+    "density_alone" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "独行者"
+          }
+        }
+      }
+    },
+    "density_alone_desc" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "附近没有其他幸存者"
+          }
+        }
+      }
+    },
+    "density_high" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "高密度"
+          }
+        }
+      }
+    },
+    "density_high_desc" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "附近有很多幸存者"
+          }
+        }
+      }
+    },
+    "density_low" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "低密度"
+          }
+        }
+      }
+    },
+    "density_low_desc" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "附近有少量幸存者"
+          }
+        }
+      }
+    },
+    "density_medium" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "中密度"
+          }
+        }
+      }
+    },
+    "density_medium_desc" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "附近有一些幸存者"
+          }
+        }
+      }
+    },
     "ID: %@..." : {
 
     },
