@@ -22,6 +22,9 @@ final class AIItemGenerator {
 
     /// 请求超时时间（秒）
     private let requestTimeout: TimeInterval = 10.0
+    
+    /// Edge Function URL (已替换为你真实的 Project ID)
+    private let functionURL = "https://zkcjvhdhartrrekzjtjg.supabase.co/functions/v1/generate-ai-item"
 
     // MARK: - 初始化
 
@@ -40,10 +43,11 @@ final class AIItemGenerator {
         print("🤖 [AI物品生成器] 开始生成物品 - POI: \(poi.name), 类型: \(poi.type.rawValue), 危险等级: \(poi.dangerLevel)")
 
         // 构建请求数据
+        // 注意：这里 type 传英文或 RawValue 给 AI 比较好，AI 自己会处理
         let request = GenerateItemRequest(
             poi: POIInfo(
                 name: poi.name,
-                type: poi.type.localizedName,
+                type: poi.type.rawValue, // 传原始值给 AI，让 AI 知道具体类型
                 dangerLevel: poi.dangerLevel
             ),
             itemCount: count
@@ -137,43 +141,43 @@ final class AIItemGenerator {
 
         return AIGeneratedItem(
             name: name,
-            category: category,
+            category: category, // 这里现在是英文 Key，能匹配上图标了
             rarity: rarity,
             story: story
         )
     }
 
-    /// 根据 POI 类型获取物品分类
+    /// 根据 POI 类型获取物品分类 (返回英文 Key)
     private func getFallbackCategory(for poiType: POIType) -> String {
         switch poiType {
         case .hospital, .pharmacy:
-            return "医疗"
+            return "medical"
         case .supermarket, .convenience, .restaurant, .cafe:
-            return "食物"
+            return "food"
         case .gasStation:
-            return ["工具", "材料"].randomElement()!
+            return ["tool", "material"].randomElement()!
         case .store:
-            return ["工具", "材料", "其他"].randomElement()!
+            return ["tool", "material", "other"].randomElement()!
         }
     }
 
-    /// 获取降级物品名称和故事
+    /// 获取降级物品名称和故事 (匹配英文 Key)
     private func getFallbackNameAndStory(category: String, rarity: String) -> (String, String) {
         switch category {
-        case "医疗":
+        case "medical":
             return getMedicalFallback(rarity: rarity)
-        case "食物":
+        case "food":
             return getFoodFallback(rarity: rarity)
-        case "工具":
+        case "tool":
             return getToolFallback(rarity: rarity)
-        case "材料":
+        case "material":
             return getMaterialFallback(rarity: rarity)
         default:
             return getOtherFallback(rarity: rarity)
         }
     }
 
-    // MARK: - Fallback Item Pools
+    // MARK: - Fallback Item Pools (内容支持国际化)
 
     private func getMedicalFallback(rarity: String) -> (String, String) {
         let items: [(String, String)] = [
