@@ -80,7 +80,7 @@ struct ScavengeResultView: View {
             }
 
             // 标题
-            Text(NSLocalizedString("搜刮成功！", comment: "Scavenge success title"))
+            Text(NSLocalizedString("scavenge_success_title", comment: "Scavenge success title"))
                 .font(.system(size: 24, weight: .bold))
                 .foregroundColor(ApocalypseTheme.textPrimary)
 

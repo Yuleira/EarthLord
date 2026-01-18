@@ -651,6 +651,9 @@
         }
       }
     },
+    "scavenge_success_title" : {
+      "comment" : "Scavenge success title"
+    },
     "Supabase 连接测试" : {
       "localizations" : {
         "en" : {
@@ -2058,6 +2061,7 @@
     },
     "搜刮成功！" : {
       "comment" : "Scavenge success title",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
