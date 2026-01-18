@@ -93,21 +93,21 @@ struct TerritoryDetailView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("关闭") {
+                    Button(NSLocalizedString("common_close", comment: "Close")) {
                         dismiss()
                     }
                     .foregroundColor(ApocalypseTheme.primary)
                 }
             }
-            .alert("确认删除", isPresented: $showDeleteAlert) {
-                Button("取消", role: .cancel) {}
-                Button("删除", role: .destructive) {
+            .alert(NSLocalizedString("common_confirm_delete_title", comment: "Confirm Delete"), isPresented: $showDeleteAlert) {
+                Button(NSLocalizedString("common_cancel", comment: "Cancel"), role: .cancel) {}
+                Button(NSLocalizedString("common_delete", comment: "Delete"), role: .destructive) {
                     Task {
                         await deleteTerritory()
                     }
                 }
             } message: {
-                Text("删除后无法恢复，确定要删除这块领地吗？")
+                Text(NSLocalizedString("territory_delete_confirm_message", comment: "Territory delete confirmation message"))
             }
         }
     }
@@ -140,7 +140,7 @@ struct TerritoryDetailView: View {
                             Image(systemName: "map")
                                 .font(.system(size: 40))
                                 .foregroundColor(ApocalypseTheme.textMuted)
-                            Text("无法显示地图")
+                            Text(NSLocalizedString("territory_map_unavailable", comment: "Cannot display map"))
                                 .font(.caption)
                                 .foregroundColor(ApocalypseTheme.textSecondary)
                         }
@@ -153,7 +153,7 @@ struct TerritoryDetailView: View {
     private var infoCard: some View {
         VStack(spacing: 0) {
             // 面积
-            infoRow(icon: "square.dashed", title: "面积", value: territory.formattedArea)
+            infoRow(icon: "square.dashed", title: NSLocalizedString("territory_area", comment: "Area"), value: territory.formattedArea)
 
             Divider()
                 .background(ApocalypseTheme.textMuted.opacity(0.3))
@@ -161,8 +161,8 @@ struct TerritoryDetailView: View {
             // 点数
             infoRow(
                 icon: "mappin.circle",
-                title: "轨迹点数",
-                value: territory.pointCount != nil ? "\(territory.pointCount!) 个" : "-"
+                title: NSLocalizedString("territory_track_points", comment: "Track Points"),
+                value: territory.pointCount != nil ? String(format: NSLocalizedString("territory_points_count_format", comment: "%d points"), territory.pointCount!) : "-"
             )
 
             Divider()
@@ -171,7 +171,7 @@ struct TerritoryDetailView: View {
             // 完成时间
             infoRow(
                 icon: "clock",
-                title: "圈地时间",
+                title: NSLocalizedString("territory_completion_time", comment: "Completion Time"),
                 value: territory.formattedCompletedAt ?? "-"
             )
         }
@@ -208,7 +208,7 @@ struct TerritoryDetailView: View {
         VStack(spacing: 0) {
             // 标题
             HStack {
-                Text("更多功能")
+                Text(NSLocalizedString("common_more_features", comment: "More Features"))
                     .font(.headline)
                     .foregroundColor(ApocalypseTheme.textPrimary)
                 Spacer()
@@ -217,17 +217,17 @@ struct TerritoryDetailView: View {
 
             // 功能列表
             VStack(spacing: 0) {
-                futureFeatureRow(icon: "pencil", title: "重命名领地")
+                futureFeatureRow(icon: "pencil", title: NSLocalizedString("territory_rename", comment: "Rename Territory"))
 
                 Divider()
                     .background(ApocalypseTheme.textMuted.opacity(0.3))
 
-                futureFeatureRow(icon: "building.2", title: "建筑系统")
+                futureFeatureRow(icon: "building.2", title: NSLocalizedString("territory_building_system", comment: "Building System"))
 
                 Divider()
                     .background(ApocalypseTheme.textMuted.opacity(0.3))
 
-                futureFeatureRow(icon: "arrow.left.arrow.right", title: "领地交易")
+                futureFeatureRow(icon: "arrow.left.arrow.right", title: NSLocalizedString("territory_trading", comment: "Territory Trading"))
             }
             .background(
                 RoundedRectangle(cornerRadius: 12)
@@ -250,7 +250,7 @@ struct TerritoryDetailView: View {
 
             Spacer()
 
-            Text("敬请期待")
+            Text(NSLocalizedString("common_coming_soon", comment: "Coming Soon"))
                 .font(.caption)
                 .foregroundColor(ApocalypseTheme.textMuted)
                 .padding(.horizontal, 8)
@@ -276,7 +276,7 @@ struct TerritoryDetailView: View {
                 } else {
                     Image(systemName: "trash")
                 }
-                Text("删除领地")
+                Text(NSLocalizedString("territory_delete", comment: "Delete Territory"))
             }
             .font(.headline)
             .foregroundColor(.white)

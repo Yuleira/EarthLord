@@ -100,12 +100,12 @@ final class LanguageManager: ObservableObject {
     func localizedString(for key: String) -> String {
         let targetLanguage = effectiveLanguageCode
 
-        // 如果目标语言是源语言，直接返回 key
-        if targetLanguage == sourceLanguage {
+        // 如果目标语言是中文，直接返回 key（因为 key 就是中文）
+        if targetLanguage == "zh-Hans" {
             return key
         }
 
-        // 查找翻译
+        // 查找翻译（英文或其他语言）
         if let langTranslations = translations[key],
            let translation = langTranslations[targetLanguage] {
             return translation
