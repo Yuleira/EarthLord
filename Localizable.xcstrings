@@ -117,6 +117,227 @@
         }
       }
     },
+    "backpack_empty_subtitle" : {
+      "comment" : "Empty backpack subtitle",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go explore to collect resources"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "去探索收集物资吧"
+          }
+        }
+      }
+    },
+    "backpack_empty_title" : {
+      "comment" : "Empty backpack title",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Backpack is Empty"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "背包空空如也"
+          }
+        }
+      }
+    },
+    "backpack_no_results_subtitle" : {
+      "comment" : "No search results subtitle",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try other keywords or clear filters"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "试试其他关键词或清除筛选条件"
+          }
+        }
+      }
+    },
+    "backpack_no_results_title" : {
+      "comment" : "No search results title",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Items Found"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "没有找到相关物品"
+          }
+        }
+      }
+    },
+    "backpack_search_placeholder" : {
+      "comment" : "Search placeholder",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search items..."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "搜索物品..."
+          }
+        }
+      }
+    },
+    "backpack_title" : {
+      "comment" : "Backpack title",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Backpack"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "背包"
+          }
+        }
+      }
+    },
+    "category_food" : {
+      "comment" : "Item category",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Food"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "食物"
+          }
+        }
+      }
+    },
+    "category_material" : {
+      "comment" : "Item category",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Material"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "材料"
+          }
+        }
+      }
+    },
+    "category_medical" : {
+      "comment" : "Item category",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Medical"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "药品"
+          }
+        }
+      }
+    },
+    "category_other" : {
+      "comment" : "Item category",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Other"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "其他"
+          }
+        }
+      }
+    },
+    "category_tool" : {
+      "comment" : "Item category",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tool"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "工具"
+          }
+        }
+      }
+    },
+    "category_water" : {
+      "comment" : "Item category",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Water"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "水"
+          }
+        }
+      }
+    },
+    "category_weapon" : {
+      "comment" : "Item category",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weapon"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "武器"
+          }
+        }
+      }
+    },
     "common_cancel" : {
       "comment" : "Cancel",
       "localizations" : {
@@ -405,6 +626,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "请求超时"
+          }
+        }
+      }
+    },
+    "error_load_backpack" : {
+      "comment" : "Error loading backpack",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to load backpack: %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "加载背包失败: %@"
+          }
+        }
+      }
+    },
+    "error_remove_item" : {
+      "comment" : "Error removing item",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to remove item: %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "移除物品失败: %@"
           }
         }
       }
@@ -1290,6 +1545,244 @@
         }
       }
     },
+    "item_water_bottle" : {
+      "comment" : "Item name",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bottled Water"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "纯净水"
+          }
+        }
+      }
+    },
+    "item_water_bottle_desc" : {
+      "comment" : "Item description",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A bottle of relatively clean water"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "一瓶还算干净的水"
+          }
+        }
+      }
+    },
+    "item_canned_beans" : {
+      "comment" : "Item name",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Canned Beans"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "罐头豆子"
+          }
+        }
+      }
+    },
+    "item_canned_beans_desc" : {
+      "comment" : "Item description",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "High protein food"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "高蛋白食物"
+          }
+        }
+      }
+    },
+    "item_bandage" : {
+      "comment" : "Item name",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bandage"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "绷带"
+          }
+        }
+      }
+    },
+    "item_bandage_desc" : {
+      "comment" : "Item description",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Simple wound dressing"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "简单的止血工具"
+          }
+        }
+      }
+    },
+    "item_first_aid_kit" : {
+      "comment" : "Item name",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "First Aid Kit"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "急救包"
+          }
+        }
+      }
+    },
+    "item_first_aid_kit_desc" : {
+      "comment" : "Item description",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contains various medical supplies"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "包含多种医疗用品"
+          }
+        }
+      }
+    },
+    "item_antibiotics" : {
+      "comment" : "Item name",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Antibiotics"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "抗生素"
+          }
+        }
+      }
+    },
+    "item_antibiotics_desc" : {
+      "comment" : "Item description",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Precious medicine"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "珍贵的药物"
+          }
+        }
+      }
+    },
+    "item_scrap_metal" : {
+      "comment" : "Item name",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scrap Metal"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "废金属"
+          }
+        }
+      }
+    },
+    "item_scrap_metal_desc" : {
+      "comment" : "Item description",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Useful for crafting and repairs"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "可用于制作和修理"
+          }
+        }
+      }
+    },
+    "item_rope" : {
+      "comment" : "Item name",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rope"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "绳索"
+          }
+        }
+      }
+    },
+    "item_rope_desc" : {
+      "comment" : "Item description",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versatile survival tool"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "多用途生存工具"
+          }
+        }
+      }
+    },
     "Key" : {
       "extractionState" : "manual"
     },
@@ -1595,6 +2088,176 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "超市"
+          }
+        }
+      }
+    },
+    "quality_damaged" : {
+      "comment" : "Item quality",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Damaged"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "破损"
+          }
+        }
+      }
+    },
+    "quality_good" : {
+      "comment" : "Item quality",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Good"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "良好"
+          }
+        }
+      }
+    },
+    "quality_pristine" : {
+      "comment" : "Item quality",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pristine"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "完美"
+          }
+        }
+      }
+    },
+    "quality_ruined" : {
+      "comment" : "Item quality",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ruined"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "报废"
+          }
+        }
+      }
+    },
+    "quality_worn" : {
+      "comment" : "Item quality",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Worn"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "陈旧"
+          }
+        }
+      }
+    },
+    "rarity_common" : {
+      "comment" : "Item rarity",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Common"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "普通"
+          }
+        }
+      }
+    },
+    "rarity_epic" : {
+      "comment" : "Item rarity",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Epic"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "史诗"
+          }
+        }
+      }
+    },
+    "rarity_legendary" : {
+      "comment" : "Item rarity",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Legendary"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "传奇"
+          }
+        }
+      }
+    },
+    "rarity_rare" : {
+      "comment" : "Item rarity",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rare"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "稀有"
+          }
+        }
+      }
+    },
+    "rarity_uncommon" : {
+      "comment" : "Item rarity",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uncommon"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "优秀"
           }
         }
       }

@@ -76,7 +76,7 @@ struct BackpackView: View {
                 contentView
             }
         }
-        .navigationTitle(NSLocalizedString("背包", comment: "Backpack navigation title"))
+        .navigationTitle("backpack_title".localized)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             loadBackpackItems()
@@ -90,7 +90,7 @@ struct BackpackView: View {
             Image(systemName: "magnifyingglass")
                 .foregroundColor(ApocalypseTheme.textMuted)
 
-            TextField(NSLocalizedString("搜索物品...", comment: "Search items placeholder"), text: $searchText)
+            TextField("backpack_search_placeholder".localized, text: $searchText)
                 .foregroundColor(ApocalypseTheme.textPrimary)
 
             if !searchText.isEmpty {
@@ -111,7 +111,7 @@ struct BackpackView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 12) {
                 // 全部按钮
-                categoryButton(category: nil, title: NSLocalizedString("全部", comment: "All categories"))
+                categoryButton(category: nil, title: "filter_all".localized)
 
                 // 各分类按钮
                 ForEach(ItemCategory.allCases, id: \.self) { category in
@@ -156,8 +156,8 @@ struct BackpackView: View {
     private var emptyStateView: some View {
         EmptyStateView(
             icon: "bag.fill",
-            title: NSLocalizedString("背包空空如也", comment: "Empty backpack title"),
-            subtitle: NSLocalizedString("去探索收集物资吧", comment: "Empty backpack subtitle"),
+            title: "backpack_empty_title".localized,
+            subtitle: "backpack_empty_subtitle".localized,
             buttonTitle: nil,
             action: nil
         )
@@ -167,8 +167,8 @@ struct BackpackView: View {
     private var noSearchResultsView: some View {
         EmptyStateView(
             icon: "magnifyingglass",
-            title: NSLocalizedString("没有找到相关物品", comment: "No search results title"),
-            subtitle: NSLocalizedString("试试其他关键词或清除筛选条件", comment: "No search results subtitle"),
+            title: "backpack_no_results_title".localized,
+            subtitle: "backpack_no_results_subtitle".localized,
             buttonTitle: nil,
             action: nil
         )

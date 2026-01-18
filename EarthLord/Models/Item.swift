@@ -13,11 +13,11 @@ enum ItemQuality: String, Codable, CaseIterable {
     /// 本地化显示名称
     var displayName: String {
         switch self {
-        case .pristine: return NSLocalizedString("完美", comment: "Quality: Pristine")
-        case .good: return NSLocalizedString("良好", comment: "Quality: Good")
-        case .worn: return NSLocalizedString("陈旧", comment: "Quality: Worn")
-        case .damaged: return NSLocalizedString("破损", comment: "Quality: Damaged")
-        case .ruined: return NSLocalizedString("报废", comment: "Quality: Ruined")
+        case .pristine: return "quality_pristine".localized
+        case .good: return "quality_good".localized
+        case .worn: return "quality_worn".localized
+        case .damaged: return "quality_damaged".localized
+        case .ruined: return "quality_ruined".localized
         }
     }
 
@@ -50,11 +50,11 @@ enum ItemRarity: String, Codable, CaseIterable {
     /// 本地化显示名称
     var displayName: String {
         switch self {
-        case .common: return NSLocalizedString("普通", comment: "Rarity: Common")
-        case .uncommon: return NSLocalizedString("优秀", comment: "Rarity: Uncommon")
-        case .rare: return NSLocalizedString("稀有", comment: "Rarity: Rare")
-        case .epic: return NSLocalizedString("史诗", comment: "Rarity: Epic")
-        case .legendary: return NSLocalizedString("传奇", comment: "Rarity: Legendary")
+        case .common: return "rarity_common".localized
+        case .uncommon: return "rarity_uncommon".localized
+        case .rare: return "rarity_rare".localized
+        case .epic: return "rarity_epic".localized
+        case .legendary: return "rarity_legendary".localized
         }
     }
 
@@ -95,13 +95,13 @@ enum ItemCategory: String, Codable, CaseIterable {
     /// 本地化显示名称
     var displayName: String {
         switch self {
-        case .water: return NSLocalizedString("水", comment: "Category: Water")
-        case .food: return NSLocalizedString("食物", comment: "Category: Food")
-        case .medical: return NSLocalizedString("药品", comment: "Category: Medical")
-        case .material: return NSLocalizedString("材料", comment: "Category: Material")
-        case .tool: return NSLocalizedString("工具", comment: "Category: Tool")
-        case .weapon: return NSLocalizedString("武器", comment: "Category: Weapon")
-        case .other: return NSLocalizedString("其他", comment: "Category: Other")
+        case .water: return "category_water".localized
+        case .food: return "category_food".localized
+        case .medical: return "category_medical".localized
+        case .material: return "category_material".localized
+        case .tool: return "category_tool".localized
+        case .weapon: return "category_weapon".localized
+        case .other: return "category_other".localized
         }
     }
 }

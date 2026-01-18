@@ -86,7 +86,7 @@ final class InventoryManager: ObservableObject {
 
             print("📦 [背包] 加载了 \(items.count) 种物品")
         } catch {
-            errorMessage = String(format: NSLocalizedString("加载背包失败: %@", comment: "错误"), error.localizedDescription)
+            errorMessage = String(format: "error_load_backpack".localized, error.localizedDescription)
             print("📦 [背包] 加载失败: \(error.localizedDescription)")
         }
     }
@@ -148,7 +148,7 @@ final class InventoryManager: ObservableObject {
             await loadItems()
             return true
         } catch {
-            errorMessage = String(format: NSLocalizedString("移除物品失败: %@", comment: "错误"), error.localizedDescription)
+            errorMessage = String(format: "error_remove_item".localized, error.localizedDescription)
             print("📦 [背包] 移除物品失败: \(error.localizedDescription)")
             return false
         }
@@ -196,11 +196,13 @@ final class InventoryManager: ObservableObject {
     /// 加载备用物品定义
     private func loadFallbackDefinitions() {
         let fallbackItems: [(String, String, String, ItemCategory, String, ItemRarity)] = [
-            ("water_bottle", NSLocalizedString("纯净水", comment: "物品名称"), NSLocalizedString("一瓶还算干净的水", comment: "物品描述"), .water, "drop.fill", .common),
-            ("canned_beans", NSLocalizedString("罐头豆子", comment: "物品名称"), NSLocalizedString("高蛋白食物", comment: "物品描述"), .food, "takeoutbag.and.cup.and.straw.fill", .common),
-            ("bandage", NSLocalizedString("绷带", comment: "物品名称"), NSLocalizedString("简单的止血工具", comment: "物品描述"), .medical, "bandage.fill", .common),
-            ("first_aid_kit", NSLocalizedString("急救包", comment: "物品名称"), NSLocalizedString("包含多种医疗用品", comment: "物品描述"), .medical, "cross.case.fill", .rare),
-            ("antibiotics", NSLocalizedString("抗生素", comment: "物品名称"), NSLocalizedString("珍贵的药物", comment: "物品描述"), .medical, "pills.fill", .epic)
+            ("water_bottle", "item_water_bottle".localized, "item_water_bottle_desc".localized, .water, "drop.fill", .common),
+            ("canned_beans", "item_canned_beans".localized, "item_canned_beans_desc".localized, .food, "takeoutbag.and.cup.and.straw.fill", .common),
+            ("bandage", "item_bandage".localized, "item_bandage_desc".localized, .medical, "bandage.fill", .common),
+            ("first_aid_kit", "item_first_aid_kit".localized, "item_first_aid_kit_desc".localized, .medical, "cross.case.fill", .rare),
+            ("antibiotics", "item_antibiotics".localized, "item_antibiotics_desc".localized, .medical, "pills.fill", .epic),
+            ("scrap_metal", "item_scrap_metal".localized, "item_scrap_metal_desc".localized, .material, "gearshape.fill", .common),
+            ("rope", "item_rope".localized, "item_rope_desc".localized, .tool, "lasso", .common)
         ]
 
         for item in fallbackItems {

@@ -70,7 +70,7 @@ struct TerritoryTabView: View {
                     territoryListView
                 }
             }
-            .navigationTitle(NSLocalizedString("territory_my_title", comment: "My Territories"))
+            .navigationTitle("territory_my_title".localized)
             .navigationBarTitleDisplayMode(.large)
             .refreshable {
                 await loadTerritories()
@@ -104,12 +104,12 @@ struct TerritoryTabView: View {
                 .foregroundColor(ApocalypseTheme.textMuted)
 
             VStack(spacing: 12) {
-                Text(NSLocalizedString("auth_login_required", comment: "Please log in first"))
+                Text("auth_login_required".localized)
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(ApocalypseTheme.textPrimary)
 
-                Text(NSLocalizedString("territory_login_prompt", comment: "Log in to view and manage your territories"))
+                Text("territory_login_prompt".localized)
                     .font(.subheadline)
                     .foregroundColor(ApocalypseTheme.textSecondary)
                     .multilineTextAlignment(.center)
@@ -129,7 +129,7 @@ struct TerritoryTabView: View {
                 HStack(spacing: 8) {
                     Image(systemName: "person.badge.plus")
                         .font(.system(size: 16, weight: .semibold))
-                    Text(NSLocalizedString("auth_go_to_login", comment: "Go to Login"))
+                    Text("auth_go_to_login".localized)
                         .font(.system(size: 16, weight: .semibold))
                 }
                 .foregroundColor(.white)
@@ -152,7 +152,7 @@ struct TerritoryTabView: View {
                 .progressViewStyle(CircularProgressViewStyle(tint: ApocalypseTheme.primary))
                 .scaleEffect(1.5)
 
-            Text(NSLocalizedString("common_loading", comment: "Loading..."))
+            Text("common_loading".localized)
                 .font(.subheadline)
                 .foregroundColor(ApocalypseTheme.textSecondary)
         }
@@ -165,12 +165,12 @@ struct TerritoryTabView: View {
                 .font(.system(size: 60))
                 .foregroundColor(ApocalypseTheme.textMuted)
 
-            Text(NSLocalizedString("territory_empty_title", comment: "No territories"))
+            Text("territory_empty_title".localized)
                 .font(.title2)
                 .fontWeight(.bold)
                 .foregroundColor(ApocalypseTheme.textPrimary)
 
-            Text(NSLocalizedString("territory_empty_description", comment: "Go to map to start claiming"))
+            Text("territory_empty_description".localized)
                 .font(.subheadline)
                 .foregroundColor(ApocalypseTheme.textSecondary)
                 .multilineTextAlignment(.center)
@@ -212,7 +212,7 @@ struct TerritoryTabView: View {
                     .font(.system(size: 28, weight: .bold, design: .rounded))
                     .foregroundColor(ApocalypseTheme.primary)
 
-                Text(NSLocalizedString("territory_count_label", comment: "Territory count"))
+                Text("territory_count_label".localized)
                     .font(.caption)
                     .foregroundColor(ApocalypseTheme.textSecondary)
             }
@@ -229,7 +229,7 @@ struct TerritoryTabView: View {
                     .font(.system(size: 28, weight: .bold, design: .rounded))
                     .foregroundColor(ApocalypseTheme.success)
 
-                Text(NSLocalizedString("territory_total_area_label", comment: "Total area"))
+                Text("territory_total_area_label".localized)
                     .font(.caption)
                     .foregroundColor(ApocalypseTheme.textSecondary)
             }
@@ -294,7 +294,7 @@ struct TerritoryCard: View {
 
                     // 点数
                     if let pointCount = territory.pointCount {
-                        Label(String(format: NSLocalizedString("territory_points_format", comment: "%lld points"), pointCount), systemImage: "mappin.circle")
+                        Label("territory_points_format".localized(pointCount), systemImage: "mappin.circle")
                             .font(.caption)
                             .foregroundColor(ApocalypseTheme.textSecondary)
                     }
