@@ -17,28 +17,28 @@ struct MainTabView: View {
             MapTabView()
                 .tabItem {
                     Image(systemName: "map.fill")
-                    Text("tab_map".localized)
+                    Text("tab_map")
                 }
                 .tag(0)
 
             TerritoryTabView()
                 .tabItem {
                     Image(systemName: "flag.fill")
-                    Text("tab_territory".localized)
+                    Text("tab_territory")
                 }
                 .tag(1)
 
             ResourcesTabView()
                 .tabItem {
                     Image(systemName: "cube.box.fill")
-                    Text("tab_resources".localized)
+                    Text("tab_resources")
                 }
                 .tag(2)
 
             ProfileTabView()
                 .tabItem {
                     Image(systemName: "person.fill")
-                    Text("tab_profile".localized)
+                    Text("tab_profile")
                 }
                 .tag(3)
 

@@ -18,18 +18,18 @@ enum ResourceSegment: Int, CaseIterable {
     case territory
     case trade
 
-    var title: String {
+    var title: LocalizedStringKey {
         switch self {
         case .poi:
             return "POI"
         case .backpack:
-            return "segment_backpack".localized
+            return "segment_backpack"
         case .purchased:
-            return "segment_purchased".localized
+            return "segment_purchased"
         case .territory:
-            return "segment_territory".localized
+            return "segment_territory"
         case .trade:
-            return "segment_trade".localized
+            return "segment_trade"
         }
     }
 }
@@ -64,7 +64,7 @@ struct ResourcesTabView: View {
                     contentView
                 }
             }
-            .navigationTitle("tab_resources".localized)
+            .navigationTitle("tab_resources")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -78,7 +78,7 @@ struct ResourcesTabView: View {
 
     /// 分段选择器
     private var segmentPicker: some View {
-        Picker("resource_segment_picker".localized, selection: $selectedSegment) {
+        Picker("resource_segment_picker", selection: $selectedSegment) {
             ForEach(ResourceSegment.allCases, id: \.self) { segment in
                 Text(segment.title)
                     .tag(segment)
@@ -92,7 +92,7 @@ struct ResourcesTabView: View {
     /// 交易开关
     private var tradeToggle: some View {
         HStack(spacing: 6) {
-            Text("segment_trade".localized)
+            Text("segment_trade")
                 .font(.system(size: 13))
                 .foregroundColor(ApocalypseTheme.textSecondary)
 
@@ -110,24 +110,24 @@ struct ResourcesTabView: View {
     private var contentView: some View {
         switch selectedSegment {
         case .poi:
-            placeholderView(title: "segment_poi_list".localized, icon: "mappin.circle.fill")
+            placeholderView(title: "segment_poi_list", icon: "mappin.circle.fill")
 
         case .backpack:
             BackpackView()
 
         case .purchased:
-            placeholderView(title: "segment_purchased".localized, icon: "cart.fill")
+            placeholderView(title: "segment_purchased", icon: "cart.fill")
 
         case .territory:
-            placeholderView(title: "segment_territory_resources".localized, icon: "flag.fill")
+            placeholderView(title: "segment_territory_resources", icon: "flag.fill")
 
         case .trade:
-            placeholderView(title: "segment_trade_market".localized, icon: "arrow.left.arrow.right")
+            placeholderView(title: "segment_trade_market", icon: "arrow.left.arrow.right")
         }
     }
 
     /// 占位视图
-    private func placeholderView(title: String, icon: String) -> some View {
+    private func placeholderView(title: LocalizedStringKey, icon: String) -> some View {
         VStack(spacing: 16) {
             Spacer()
 
@@ -139,7 +139,7 @@ struct ResourcesTabView: View {
                 .font(.system(size: 18, weight: .semibold))
                 .foregroundColor(ApocalypseTheme.textSecondary)
 
-            Text("feature_in_development".localized)
+            Text("feature_in_development")
                 .font(.system(size: 14))
                 .foregroundColor(ApocalypseTheme.textMuted)
 

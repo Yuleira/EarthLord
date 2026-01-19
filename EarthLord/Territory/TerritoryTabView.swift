@@ -70,7 +70,7 @@ struct TerritoryTabView: View {
                     territoryListView
                 }
             }
-            .navigationTitle("territory_my_title".localized)
+            .navigationTitle("territory_my_title")
             .navigationBarTitleDisplayMode(.large)
             .refreshable {
                 await loadTerritories()
@@ -104,12 +104,12 @@ struct TerritoryTabView: View {
                 .foregroundColor(ApocalypseTheme.textMuted)
 
             VStack(spacing: 12) {
-                Text("auth_login_required".localized)
+                Text("auth_login_required")
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(ApocalypseTheme.textPrimary)
 
-                Text("territory_login_prompt".localized)
+                Text("territory_login_prompt")
                     .font(.subheadline)
                     .foregroundColor(ApocalypseTheme.textSecondary)
                     .multilineTextAlignment(.center)
@@ -129,7 +129,7 @@ struct TerritoryTabView: View {
                 HStack(spacing: 8) {
                     Image(systemName: "person.badge.plus")
                         .font(.system(size: 16, weight: .semibold))
-                    Text("auth_go_to_login".localized)
+                    Text("auth_go_to_login")
                         .font(.system(size: 16, weight: .semibold))
                 }
                 .foregroundColor(.white)
@@ -152,7 +152,7 @@ struct TerritoryTabView: View {
                 .progressViewStyle(CircularProgressViewStyle(tint: ApocalypseTheme.primary))
                 .scaleEffect(1.5)
 
-            Text("common_loading".localized)
+            Text("common_loading")
                 .font(.subheadline)
                 .foregroundColor(ApocalypseTheme.textSecondary)
         }
@@ -165,12 +165,12 @@ struct TerritoryTabView: View {
                 .font(.system(size: 60))
                 .foregroundColor(ApocalypseTheme.textMuted)
 
-            Text("territory_empty_title".localized)
+            Text("territory_empty_title")
                 .font(.title2)
                 .fontWeight(.bold)
                 .foregroundColor(ApocalypseTheme.textPrimary)
 
-            Text("territory_empty_description".localized)
+            Text("territory_empty_description")
                 .font(.subheadline)
                 .foregroundColor(ApocalypseTheme.textSecondary)
                 .multilineTextAlignment(.center)
@@ -212,7 +212,7 @@ struct TerritoryTabView: View {
                     .font(.system(size: 28, weight: .bold, design: .rounded))
                     .foregroundColor(ApocalypseTheme.primary)
 
-                Text("territory_count_label".localized)
+                Text("territory_count_label")
                     .font(.caption)
                     .foregroundColor(ApocalypseTheme.textSecondary)
             }
@@ -229,7 +229,7 @@ struct TerritoryTabView: View {
                     .font(.system(size: 28, weight: .bold, design: .rounded))
                     .foregroundColor(ApocalypseTheme.success)
 
-                Text("territory_total_area_label".localized)
+                Text("territory_total_area_label")
                     .font(.caption)
                     .foregroundColor(ApocalypseTheme.textSecondary)
             }
@@ -294,7 +294,7 @@ struct TerritoryCard: View {
 
                     // 点数
                     if let pointCount = territory.pointCount {
-                        Label("territory_points_format".localized(pointCount), systemImage: "mappin.circle")
+                        Label("territory_points_format \(pointCount)", systemImage: "mappin.circle")
                             .font(.caption)
                             .foregroundColor(ApocalypseTheme.textSecondary)
                     }
