@@ -14,11 +14,18 @@
 
     },
     "%lld秒后可重新发送" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Resend in %lld seconds"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld秒后可重新发送"
           }
         }
       }
@@ -37,6 +44,12 @@
             "state" : "translated",
             "value" : "⚠️ Speed too fast! %.0fkm/h > 30km/h, stopping in %d sec"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⚠️ 速度过快！%.0fkm/h > 30km/h，%d秒后停止"
+          }
         }
       }
     },
@@ -48,6 +61,12 @@
             "state" : "translated",
             "value" : "⚠️ Speed too fast! Current: %.0fkm/h, Limit: 30km/h"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⚠️ 速度过快！当前: %.0fkm/h，限制: 30km/h"
+          }
         }
       }
     },
@@ -57,6 +76,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "AI Item Generation Test"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI 物品生成测试"
           }
         }
       }
@@ -70,6 +95,12 @@
             "state" : "translated",
             "value" : "AI Generation"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI 生成"
+          }
         }
       }
     },
@@ -79,6 +110,210 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "AI Generator Debug"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI 生成器调试"
+          }
+        }
+      }
+    },
+    "auth_app_slogan" : {
+      "comment" : "App slogan",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Measure the world with your steps, conquer the Earth with your territories"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "用脚步丈量世界，用领地征服地球"
+          }
+        }
+      }
+    },
+    "auth_app_title" : {
+      "comment" : "App title",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Earth Lord"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "地球新主"
+          }
+        }
+      }
+    },
+    "auth_back" : {
+      "comment" : "Back button",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go Back"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "返回上一步"
+          }
+        }
+      }
+    },
+    "auth_code_placeholder" : {
+      "comment" : "6-digit code placeholder",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter 6-digit code"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请输入6位验证码"
+          }
+        }
+      }
+    },
+    "auth_code_sent_to" : {
+      "comment" : "Code sent to email message",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verification code sent to %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "验证码已发送至 %@"
+          }
+        }
+      }
+    },
+    "auth_complete_registration" : {
+      "comment" : "Complete registration button",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Complete Registration"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "完成注册"
+          }
+        }
+      }
+    },
+    "auth_confirm_password" : {
+      "comment" : "Confirm password placeholder",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm Password"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "确认密码"
+          }
+        }
+      }
+    },
+    "auth_email_placeholder" : {
+      "comment" : "Email placeholder",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email Address"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "邮箱地址"
+          }
+        }
+      }
+    },
+    "auth_enter_code" : {
+      "comment" : "Enter code title",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter Code"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "输入验证码"
+          }
+        }
+      }
+    },
+    "auth_enter_email_for_code" : {
+      "comment" : "Enter email for verification code",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter email to get verification code"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "输入邮箱获取验证码"
+          }
+        }
+      }
+    },
+    "auth_forgot_password" : {
+      "comment" : "Forgot password link",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forgot Password?"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "忘记密码？"
           }
         }
       }
@@ -101,6 +336,24 @@
         }
       }
     },
+    "auth_login" : {
+      "comment" : "Login tab",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "登录"
+          }
+        }
+      }
+    },
     "auth_login_required" : {
       "comment" : "Please log in first",
       "extractionState" : "stale",
@@ -115,6 +368,222 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "请先登录"
+          }
+        }
+      }
+    },
+    "auth_or_sign_in_with" : {
+      "comment" : "Or sign in with divider text",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Or sign in with"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "或者使用以下方式登录"
+          }
+        }
+      }
+    },
+    "auth_password_mismatch" : {
+      "comment" : "Password mismatch error",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Passwords do not match"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "两次输入的密码不一致"
+          }
+        }
+      }
+    },
+    "auth_password_placeholder" : {
+      "comment" : "Password placeholder",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "密码"
+          }
+        }
+      }
+    },
+    "auth_register" : {
+      "comment" : "Register tab",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Register"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "注册"
+          }
+        }
+      }
+    },
+    "auth_resend_code" : {
+      "comment" : "Resend code button",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resend Code"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重新发送"
+          }
+        }
+      }
+    },
+    "auth_resend_countdown" : {
+      "comment" : "Resend code countdown",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resend in %lld seconds"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld秒后重新发送"
+          }
+        }
+      }
+    },
+    "auth_send_code" : {
+      "comment" : "Send verification code button",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send Code"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "发送验证码"
+          }
+        }
+      }
+    },
+    "auth_set_password" : {
+      "comment" : "Set password title",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Set Password"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设置登录密码"
+          }
+        }
+      }
+    },
+    "auth_set_password_hint" : {
+      "comment" : "Set password hint",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please set a secure password to complete registration"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请设置一个安全的密码以完成注册"
+          }
+        }
+      }
+    },
+    "auth_sign_in_apple" : {
+      "comment" : "Sign in with Apple button",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign in with Apple"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通过 Apple 登录"
+          }
+        }
+      }
+    },
+    "auth_sign_in_google" : {
+      "comment" : "Sign in with Google button",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign in with Google"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通过 Google 登录"
+          }
+        }
+      }
+    },
+    "auth_verify" : {
+      "comment" : "Verify button",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verify"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "验证"
           }
         }
       }
@@ -474,6 +943,24 @@
         }
       }
     },
+    "common_done" : {
+      "comment" : "Done button",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "完成"
+          }
+        }
+      }
+    },
     "common_later" : {
       "comment" : "Later button",
       "extractionState" : "stale",
@@ -527,12 +1014,54 @@
         }
       }
     },
+    "common_ok" : {
+      "comment" : "OK button",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "确定"
+          }
+        }
+      }
+    },
+    "common_retry" : {
+      "comment" : "Retry button",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retry"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重试"
+          }
+        }
+      }
+    },
     "density_alone" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lone Survivor"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "独行者"
           }
         }
       }
@@ -544,6 +1073,12 @@
             "state" : "translated",
             "value" : "No other survivors nearby"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "附近没有其他幸存者"
+          }
         }
       }
     },
@@ -553,6 +1088,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "High Density"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "高密度"
           }
         }
       }
@@ -564,6 +1105,12 @@
             "state" : "translated",
             "value" : "Many survivors nearby"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "附近有很多幸存者"
+          }
         }
       }
     },
@@ -573,6 +1120,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Low Density"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "低密度"
           }
         }
       }
@@ -584,6 +1137,12 @@
             "state" : "translated",
             "value" : "Few survivors nearby"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "附近幸存者较少"
+          }
         }
       }
     },
@@ -594,6 +1153,12 @@
             "state" : "translated",
             "value" : "Medium Density"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "中密度"
+          }
         }
       }
     },
@@ -603,6 +1168,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Some survivors nearby"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "附近有一些幸存者"
           }
         }
       }
@@ -678,6 +1249,204 @@
         }
       }
     },
+    "exploration_collected_items" : {
+      "comment" : "Collected items section title",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Collected Items"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "收集的物品"
+          }
+        }
+      }
+    },
+    "exploration_distance" : {
+      "comment" : "Distance walked label",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Distance Walked"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "行走距离"
+          }
+        }
+      }
+    },
+    "exploration_distance_rank" : {
+      "comment" : "Distance rank label",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Distance Rank"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "距离评级"
+          }
+        }
+      }
+    },
+    "exploration_distance_value" : {
+      "comment" : "Distance value format",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ m"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 米"
+          }
+        }
+      }
+    },
+    "exploration_duration" : {
+      "comment" : "Duration label",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duration"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "探索时长"
+          }
+        }
+      }
+    },
+    "exploration_experience_gained" : {
+      "comment" : "Experience gained label",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Experience Gained"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "获得经验"
+          }
+        }
+      }
+    },
+    "exploration_failed" : {
+      "comment" : "Exploration failed title",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exploration Failed"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "探索失败"
+          }
+        }
+      }
+    },
+    "exploration_points_count" : {
+      "comment" : "Points count format",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld points"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld 个"
+          }
+        }
+      }
+    },
+    "exploration_points_verified" : {
+      "comment" : "Points verified label",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Points Verified"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "验证点数"
+          }
+        }
+      }
+    },
+    "exploration_stats" : {
+      "comment" : "Exploration statistics section title",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exploration Stats"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "探索统计"
+          }
+        }
+      }
+    },
+    "exploration_walked_format" : {
+      "comment" : "Distance walked format",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Walked %@ meters"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已行走 %@ 米"
+          }
+        }
+      }
+    },
     "filter_all" : {
       "comment" : "All",
       "localizations" : {
@@ -702,6 +1471,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Google Sign-In not configured, please set Client ID"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Google 登录未配置，请先设置 Client ID"
           }
         }
       }
@@ -1739,24 +2514,6 @@
         }
       }
     },
-    "item_water_bottle" : {
-      "comment" : "Item name",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bottled Water"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "纯净水"
-          }
-        }
-      }
-    },
     "item_water_bottle_desc" : {
       "comment" : "Item description",
       "extractionState" : "stale",
@@ -1777,6 +2534,204 @@
     },
     "Key" : {
       "extractionState" : "manual"
+    },
+    "language_follow_system" : {
+      "comment" : "Follow system language option",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Follow System"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "跟随系统"
+          }
+        }
+      }
+    },
+    "map_confirm_register" : {
+      "comment" : "Confirm register territory button",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm Register"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "确认登记"
+          }
+        }
+      }
+    },
+    "map_duration" : {
+      "comment" : "Duration label",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duration"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "时长"
+          }
+        }
+      }
+    },
+    "map_go_to_settings" : {
+      "comment" : "Go to settings button",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go to Settings"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "前往设置"
+          }
+        }
+      }
+    },
+    "map_locate" : {
+      "comment" : "Locate button",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locate"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "定位"
+          }
+        }
+      }
+    },
+    "map_locating" : {
+      "comment" : "Locating status",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locating..."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "正在定位..."
+          }
+        }
+      }
+    },
+    "map_location_permission_message" : {
+      "comment" : "Location permission request message",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Earth Lord needs your location to show your coordinates in the post-apocalyptic world. Please enable location access in Settings."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "《地球新主》需要获取您的位置才能显示您在末日世界中的坐标。请在设置中开启定位权限。"
+          }
+        }
+      }
+    },
+    "map_location_unavailable" : {
+      "comment" : "Location unavailable title",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cannot Get Location"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法获取位置"
+          }
+        }
+      }
+    },
+    "map_start_claiming" : {
+      "comment" : "Start territory claiming button",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start Claiming"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "开始圈地"
+          }
+        }
+      }
+    },
+    "map_stop_claiming" : {
+      "comment" : "Stop territory claiming button",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stop Claiming"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "停止圈地"
+          }
+        }
+      }
+    },
+    "map_territory_registered" : {
+      "comment" : "Territory registered success message",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Territory Registered!"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "领地已登记"
+          }
+        }
+      }
     },
     "poi_discovery_title" : {
       "comment" : "POI discovery popup title",
@@ -2091,6 +3046,546 @@
         }
       }
     },
+    "profile_about" : {
+      "comment" : "About us menu item",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About Us"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "关于我们"
+          }
+        }
+      }
+    },
+    "profile_about_dev" : {
+      "comment" : "About us coming soon",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About Us (Coming Soon)"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "关于我们（待开发）"
+          }
+        }
+      }
+    },
+    "profile_account_security" : {
+      "comment" : "Account security menu item",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account Security"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "账号安全"
+          }
+        }
+      }
+    },
+    "profile_account_security_dev" : {
+      "comment" : "Account security coming soon",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account Security (Coming Soon)"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "账号安全（待开发）"
+          }
+        }
+      }
+    },
+    "profile_app_settings" : {
+      "comment" : "App settings section title",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App Settings"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App 设置"
+          }
+        }
+      }
+    },
+    "profile_confirm_delete" : {
+      "comment" : "Confirm delete button",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm Delete"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "确认删除"
+          }
+        }
+      }
+    },
+    "profile_confirm_delete_account" : {
+      "comment" : "Confirm delete account title",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm Account Deletion"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "确认删除账户"
+          }
+        }
+      }
+    },
+    "profile_default_username" : {
+      "comment" : "Default username for users without name",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guest"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "游客"
+          }
+        }
+      }
+    },
+    "profile_delete_account" : {
+      "comment" : "Delete account button",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Account"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "删除账户"
+          }
+        }
+      }
+    },
+    "profile_delete_account_warning" : {
+      "comment" : "Delete account warning footer",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After deleting your account, all your data will be permanently deleted and cannot be recovered."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "删除账户后，您的所有数据将被永久删除且无法恢复。"
+          }
+        }
+      }
+    },
+    "profile_delete_confirm_placeholder" : {
+      "comment" : "Delete confirm text field placeholder",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "输入 %@"
+          }
+        }
+      }
+    },
+    "profile_delete_confirm_prompt" : {
+      "comment" : "Delete confirm prompt with placeholder",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Type \"%@\" to confirm deletion"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请输入 \"%@\" 确认删除"
+          }
+        }
+      }
+    },
+    "profile_delete_data_warning" : {
+      "comment" : "Delete data warning",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The following data will be permanently deleted:"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "删除账户后，以下数据将被永久删除："
+          }
+        }
+      }
+    },
+    "profile_delete_error" : {
+      "comment" : "Delete account error message",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to delete account"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "删除账户失败"
+          }
+        }
+      }
+    },
+    "profile_delete_failed" : {
+      "comment" : "Delete account failed title",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Failed"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "删除失败"
+          }
+        }
+      }
+    },
+    "profile_delete_irreversible" : {
+      "comment" : "Delete irreversible warning",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This action cannot be undone!"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此操作不可撤销！"
+          }
+        }
+      }
+    },
+    "profile_delete_item_auth" : {
+      "comment" : "Delete item - auth info",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login credentials and authentication info"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "登录凭证和认证信息"
+          }
+        }
+      }
+    },
+    "profile_delete_item_profile" : {
+      "comment" : "Delete item - profile info",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your profile information"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "您的个人资料信息"
+          }
+        }
+      }
+    },
+    "profile_delete_item_progress" : {
+      "comment" : "Delete item - game progress",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All game progress and data"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "所有游戏进度和数据"
+          }
+        }
+      }
+    },
+    "profile_language" : {
+      "comment" : "Language menu item",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Language"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "语言"
+          }
+        }
+      }
+    },
+    "profile_language_settings" : {
+      "comment" : "Language settings title",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Language Settings"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "语言设置"
+          }
+        }
+      }
+    },
+    "profile_language_update_note" : {
+      "comment" : "Language update note footer",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Interface will update immediately after switching"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "切换语言后界面将立即更新"
+          }
+        }
+      }
+    },
+    "profile_logout" : {
+      "comment" : "Logout button",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign Out"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "退出登录"
+          }
+        }
+      }
+    },
+    "profile_logout_action" : {
+      "comment" : "Logout action button",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign Out"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "退出"
+          }
+        }
+      }
+    },
+    "profile_logout_confirm_message" : {
+      "comment" : "Logout confirmation message",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Are you sure you want to sign out? You will need to sign in again."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "确定要退出登录吗？退出后需要重新登录。"
+          }
+        }
+      }
+    },
+    "profile_logout_confirm_title" : {
+      "comment" : "Logout confirmation title",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm Sign Out"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "确认退出"
+          }
+        }
+      }
+    },
+    "profile_no_email" : {
+      "comment" : "No email set placeholder",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No email set"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未设置邮箱"
+          }
+        }
+      }
+    },
+    "profile_notifications" : {
+      "comment" : "Notifications menu item",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通知设置"
+          }
+        }
+      }
+    },
+    "profile_notifications_dev" : {
+      "comment" : "Notifications coming soon",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications (Coming Soon)"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通知设置（待开发）"
+          }
+        }
+      }
+    },
+    "profile_settings" : {
+      "comment" : "Settings section title",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设置"
+          }
+        }
+      }
+    },
     "quality_damaged" : {
       "comment" : "Item quality",
       "extractionState" : "stale",
@@ -2379,12 +3874,126 @@
         }
       }
     },
+    "segment_backpack" : {
+      "comment" : "Backpack segment title",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Backpack"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "背包"
+          }
+        }
+      }
+    },
+    "segment_purchased" : {
+      "comment" : "Purchased segment title",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Purchased"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已购"
+          }
+        }
+      }
+    },
     "Supabase 连接测试" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Supabase Connection Test"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supabase 连接测试"
+          }
+        }
+      }
+    },
+    "tab_map" : {
+      "comment" : "Map tab label",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Map"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "地图"
+          }
+        }
+      }
+    },
+    "tab_profile" : {
+      "comment" : "Profile tab label",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profile"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "个人"
+          }
+        }
+      }
+    },
+    "tab_resources" : {
+      "comment" : "Resources tab label",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resources"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "资源"
+          }
+        }
+      }
+    },
+    "tab_territory" : {
+      "comment" : "Territory tab label",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Territory"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "领地"
           }
         }
       }
@@ -2685,6 +4294,24 @@
         }
       }
     },
+    "unit_meter" : {
+      "comment" : "Unit meter",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "m"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "米"
+          }
+        }
+      }
+    },
     "x%lld" : {
 
     },
@@ -2695,6 +4322,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "A relatively clean bottle of water"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "一瓶还算干净的水"
           }
         }
       }
@@ -2707,6 +4340,12 @@
             "state" : "translated",
             "value" : "Duct Tape"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "万能胶带"
+          }
         }
       }
     },
@@ -2717,6 +4356,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Upload failed: %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "上传失败: %@"
           }
         }
       }
@@ -2729,6 +4374,12 @@
             "state" : "translated",
             "value" : "Cannot start claiming inside others' territory!"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "不能在他人领地内开始圈地！"
+          }
         }
       }
     },
@@ -2740,15 +4391,11 @@
             "state" : "translated",
             "value" : "Professional medical equipment"
           }
-        }
-      }
-    },
-    "两次输入的密码不一致" : {
-      "localizations" : {
-        "en" : {
+        },
+        "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Passwords do not match"
+            "value" : "专业医疗设备"
           }
         }
       }
@@ -2762,17 +4409,11 @@
             "state" : "translated",
             "value" : "Uncommon"
           }
-        }
-      }
-    },
-    "传奇" : {
-      "comment" : "Rarity: Legendary",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
+        },
+        "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Legendary"
+            "value" : "优秀"
           }
         }
       }
@@ -2785,6 +4426,12 @@
             "state" : "translated",
             "value" : "Convenience Store"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "便利店"
+          }
         }
       }
     },
@@ -2795,6 +4442,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "The ultimate repair tool"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "修复一切的神器"
           }
         }
       }
@@ -2807,6 +4460,12 @@
             "state" : "translated",
             "value" : "Stopped tracking, %d points recorded"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "停止追踪，共 %d 个点"
+          }
         }
       }
     },
@@ -2818,17 +4477,11 @@
             "state" : "translated",
             "value" : "Full body protection equipment"
           }
-        }
-      }
-    },
-    "全部" : {
-      "comment" : "All categories",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
+        },
+        "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "All"
+            "value" : "全身防护装备"
           }
         }
       }
@@ -2852,6 +4505,12 @@
             "state" : "translated",
             "value" : "Military Ration"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "军用口粮"
+          }
         }
       }
     },
@@ -2874,6 +4533,12 @@
             "state" : "translated",
             "value" : "Gas Station"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "加油站"
+          }
         }
       }
     },
@@ -2885,17 +4550,11 @@
             "state" : "translated",
             "value" : "Load failed: %@"
           }
-        }
-      }
-    },
-    "加载背包失败: %@" : {
-      "comment" : "错误",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
+        },
+        "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Failed to load inventory: %@"
+            "value" : "加载失败: %@"
           }
         }
       }
@@ -2908,16 +4567,11 @@
             "state" : "translated",
             "value" : "Contains various medical supplies"
           }
-        }
-      }
-    },
-    "医院" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
+        },
+        "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hospital"
+            "value" : "包含多种医疗用品"
           }
         }
       }
@@ -2930,17 +4584,11 @@
             "state" : "translated",
             "value" : "Danger: About to enter others' territory! (%dm)"
           }
-        }
-      }
-    },
-    "去探索收集物资吧" : {
-      "comment" : "Empty backpack subtitle",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
+        },
+        "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Go explore and collect supplies"
+            "value" : "危险：即将进入他人领地！（%dm）"
           }
         }
       }
@@ -2956,16 +4604,6 @@
         }
       }
     },
-    "取消" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancel"
-          }
-        }
-      }
-    },
     "可以缝补衣物" : {
       "comment" : "物品描述",
       "localizations" : {
@@ -2973,6 +4611,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Can be used for mending clothes"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "可以缝补衣物"
           }
         }
       }
@@ -2996,6 +4640,12 @@
             "state" : "translated",
             "value" : "Can be used for crafting"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "可用于制造"
+          }
         }
       }
     },
@@ -3007,6 +4657,12 @@
             "state" : "translated",
             "value" : "Epic"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "史诗"
+          }
         }
       }
     },
@@ -3017,6 +4673,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cafe"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "咖啡店"
           }
         }
       }
@@ -3033,6 +4695,7 @@
       }
     },
     "圈地成功！领地面积: %@m²" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3065,11 +4728,18 @@
       }
     },
     "地球新主" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "EarthLord"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "地球新主"
           }
         }
       }
@@ -3082,6 +4752,12 @@
             "state" : "translated",
             "value" : "Invalid coordinate data"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "坐标数据无效"
+          }
         }
       }
     },
@@ -3092,6 +4768,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Basic medical supplies"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "基本的医疗用品"
           }
         }
       }
@@ -3104,6 +4786,12 @@
             "state" : "translated",
             "value" : "Multi-tool"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "多功能工具"
+          }
         }
       }
     },
@@ -3115,6 +4803,12 @@
             "state" : "translated",
             "value" : "Multi-purpose tool"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "多用途工具"
+          }
         }
       }
     },
@@ -3125,6 +4819,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Night Vision Goggles"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "夜视仪"
           }
         }
       }
@@ -3151,16 +4851,6 @@
         }
       }
     },
-    "完成" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Done"
-          }
-        }
-      }
-    },
     "完美" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3180,6 +4870,12 @@
             "state" : "translated",
             "value" : "Location failed: %@"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "定位失败: %@"
+          }
         }
       }
     },
@@ -3191,6 +4887,12 @@
             "state" : "translated",
             "value" : "Location permission denied, please enable in Settings"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "定位权限被拒绝，请在设置中开启"
+          }
         }
       }
     },
@@ -3201,6 +4903,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Password must be at least 6 characters"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "密码至少需要6个字符"
           }
         }
       }
@@ -3257,6 +4965,12 @@
             "state" : "translated",
             "value" : "Cloth"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "布料"
+          }
         }
       }
     },
@@ -3282,16 +4996,6 @@
         }
       }
     },
-    "忘记密码？" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Forgot password?"
-          }
-        }
-      }
-    },
     "急救包" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3300,15 +5004,11 @@
             "state" : "translated",
             "value" : "First Aid Kit"
           }
-        }
-      }
-    },
-    "或者使用以下方式登录" : {
-      "localizations" : {
-        "en" : {
+        },
+        "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Or sign in with"
+            "value" : "急救包"
           }
         }
       }
@@ -3332,10 +5032,17 @@
             "state" : "translated",
             "value" : "Flashlight"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "手电筒"
+          }
         }
       }
     },
     "找回密码" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3352,6 +5059,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Antibiotics"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "抗生素"
           }
         }
       }
@@ -3375,6 +5088,12 @@
             "state" : "translated",
             "value" : "Exploration failed: Speed exceeded 30km/h, possible vehicle use"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "探索失败：移动速度超过30km/h，可能使用了交通工具"
+          }
         }
       }
     },
@@ -3386,15 +5105,11 @@
             "state" : "translated",
             "value" : "Exploration successful!"
           }
-        }
-      }
-    },
-    "探索统计" : {
-      "localizations" : {
-        "en" : {
+        },
+        "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Exploration Stats"
+            "value" : "探索成功！"
           }
         }
       }
@@ -3430,6 +5145,12 @@
             "state" : "translated",
             "value" : "Operation failed: %@"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "操作失败: %@"
+          }
         }
       }
     },
@@ -3445,11 +5166,18 @@
       }
     },
     "收集物品" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Collected Items"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "收集物品"
           }
         }
       }
@@ -3499,11 +5227,18 @@
       }
     },
     "时长" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Duration"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "时长"
           }
         }
       }
@@ -3515,6 +5250,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Common"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "普通"
           }
         }
       }
@@ -3538,6 +5279,12 @@
             "state" : "translated",
             "value" : "Not logged in, please sign in first"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未登录，请先登录"
+          }
         }
       }
     },
@@ -3549,6 +5296,12 @@
             "state" : "translated",
             "value" : "Material"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "材料"
+          }
         }
       }
     },
@@ -3559,6 +5312,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Painkillers"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "止痛药"
           }
         }
       }
@@ -3593,17 +5352,11 @@
             "state" : "translated",
             "value" : "Canned Fruit"
           }
-        }
-      }
-    },
-    "没有找到相关物品" : {
-      "comment" : "No search results title",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
+        },
+        "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No Items Found"
+            "value" : "水果罐头"
           }
         }
       }
@@ -3615,6 +5368,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notice: %dm from others' territory"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "注意：距离他人领地 %dm"
           }
         }
       }
@@ -3667,6 +5426,12 @@
             "state" : "translated",
             "value" : "Matches"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "火柴"
+          }
         }
       }
     },
@@ -3677,6 +5442,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Not enough points: %d (needs ≥%d)"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "点数不足: %d个 (需≥%d个)"
           }
         }
       }
@@ -3743,6 +5514,12 @@
             "state" : "translated",
             "value" : "Essential for starting fire"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "生火必备"
+          }
         }
       }
     },
@@ -3769,11 +5546,18 @@
       }
     },
     "用脚步丈量世界，用领地征服地球" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Explore the world on foot, conquer Earth with your territory"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "用脚步丈量世界，用领地征服地球"
           }
         }
       }
@@ -3797,6 +5581,12 @@
             "state" : "translated",
             "value" : "Battery"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "电池"
+          }
         }
       }
     },
@@ -3807,6 +5597,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Damaged"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "破损"
           }
         }
       }
@@ -3819,17 +5615,11 @@
             "state" : "translated",
             "value" : "Moving too fast (%.0f km/h), please walk"
           }
-        }
-      }
-    },
-    "移除物品失败: %@" : {
-      "comment" : "错误",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
+        },
+        "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Failed to remove item: %@"
+            "value" : "移动过快（%.0f km/h），请步行"
           }
         }
       }
@@ -3852,16 +5642,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Simple tool for stopping bleeding"
-          }
-        }
-      }
-    },
-    "米" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "m"
           }
         }
       }
@@ -3896,6 +5676,12 @@
             "state" : "translated",
             "value" : "Bandage"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "绷带"
+          }
         }
       }
     },
@@ -3918,6 +5704,12 @@
             "state" : "translated",
             "value" : "Canned Beans"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "罐头豆子"
+          }
         }
       }
     },
@@ -3928,6 +5720,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Network connection failed, please check your network"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "网络连接失败，请检查网络"
           }
         }
       }
@@ -3940,6 +5738,12 @@
             "state" : "translated",
             "value" : "Network error, please check connection"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "网络错误，请检查网络连接"
+          }
         }
       }
     },
@@ -3950,6 +5754,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Canned Meat"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "肉罐头"
           }
         }
       }
@@ -3963,6 +5773,12 @@
             "state" : "translated",
             "value" : "Inventory"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "背包"
+          }
         }
       }
     },
@@ -3975,6 +5791,12 @@
             "state" : "translated",
             "value" : "Backpack is Empty"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "背包空空如也"
+          }
         }
       }
     },
@@ -3985,6 +5807,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Energy Drink"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "能量饮料"
           }
         }
       }
@@ -4019,6 +5847,12 @@
             "state" : "translated",
             "value" : "Good"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "良好"
+          }
         }
       }
     },
@@ -4029,6 +5863,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Medicine"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "药品"
           }
         }
       }
@@ -4045,16 +5885,24 @@
       }
     },
     "获得经验" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Experience Gained"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "获得经验"
+          }
         }
       }
     },
     "行走 %@ 米" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4071,6 +5919,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Distance walked less than 200m, no reward"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "行走距离不足200米，未获得奖励"
           }
         }
       }
@@ -4109,6 +5963,7 @@
       }
     },
     "设置新密码" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4119,6 +5974,7 @@
       }
     },
     "设置登录密码" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4162,26 +6018,6 @@
         }
       }
     },
-    "请设置一个安全的密码以完成注册" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please set a secure password to complete registration"
-          }
-        }
-      }
-    },
-    "请输入6位验证码" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enter 6-digit verification code"
-          }
-        }
-      }
-    },
     "警告：正在靠近他人领地（%dm）" : {
       "comment" : "距离警告",
       "localizations" : {
@@ -4200,6 +6036,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Collision: Starting point inside others' territory"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "起点碰撞：位于他人领地内"
           }
         }
       }
@@ -4234,6 +6076,12 @@
             "state" : "translated",
             "value" : "Distance not enough: %.0fm (needs ≥%dm)"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "距离不足: %.0fm (需≥%dm)"
+          }
         }
       }
     },
@@ -4244,6 +6092,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Distance check: %.0fm ✓"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "距离检查: %.0fm ✓"
           }
         }
       }
@@ -4256,6 +6110,12 @@
             "state" : "translated",
             "value" : "Distance check: %.0fm ✗"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "距离检查: %.0fm ✗"
+          }
         }
       }
     },
@@ -4266,6 +6126,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Distance warning: %@, %dm away"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "距离预警：%@，距离 %dm"
           }
         }
       }
@@ -4289,6 +6155,12 @@
             "state" : "translated",
             "value" : "Collision: Point inside territory"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "路径碰撞：轨迹点进入他人领地"
+          }
         }
       }
     },
@@ -4299,6 +6171,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Collision: Path crosses territory boundary"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "路径碰撞：轨迹穿越他人领地边界"
           }
         }
       }
@@ -4337,41 +6215,35 @@
       }
     },
     "输入注册邮箱" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enter your email"
           }
-        }
-      }
-    },
-    "输入邮箱获取验证码" : {
-      "localizations" : {
-        "en" : {
+        },
+        "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enter email to get verification code"
+            "value" : "输入注册邮箱"
           }
         }
       }
     },
     "输入验证码" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enter verification code"
           }
-        }
-      }
-    },
-    "返回上一步" : {
-      "localizations" : {
-        "en" : {
+        },
+        "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Go Back"
+            "value" : "输入验证码"
           }
         }
       }
@@ -4394,6 +6266,12 @@
             "state" : "translated",
             "value" : "Long-range communication device"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "远距离通讯设备"
+          }
         }
       }
     },
@@ -4404,26 +6282,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sign out failed, local session cleared"
-          }
-        }
-      }
-    },
-    "通过 Apple 登录" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sign in with Apple"
-          }
-        }
-      }
-    },
-    "通过 Google 登录" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sign in with Google"
           }
         }
       }
@@ -4469,6 +6327,12 @@
             "state" : "translated",
             "value" : "Incorrect email or password"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "邮箱或密码错误"
+          }
         }
       }
     },
@@ -4480,10 +6344,17 @@
             "state" : "translated",
             "value" : "Invalid email format"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "邮箱格式不正确"
+          }
         }
       }
     },
     "重新发送验证码" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4501,6 +6372,12 @@
             "state" : "translated",
             "value" : "Loop closed! %.1fm from start"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "闭环成功！距起点 %.1fm"
+          }
         }
       }
     },
@@ -4511,6 +6388,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hazmat Suit"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "防护服"
           }
         }
       }
@@ -4532,6 +6415,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fallback Strategy"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "降级方案"
           }
         }
       }
@@ -4555,6 +6444,12 @@
             "state" : "translated",
             "value" : "Location permission required"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "需要定位权限"
+          }
         }
       }
     },
@@ -4565,6 +6460,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Area not enough: %.0fm² (needs ≥%dm²)"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "面积不足: %.0fm² (需≥%dm²)"
           }
         }
       }
@@ -4577,6 +6478,12 @@
             "state" : "translated",
             "value" : "Area check: %.0fm² ✓"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "面积检查: %.0fm² ✓"
+          }
         }
       }
     },
@@ -4587,6 +6494,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Area check: %.0fm² ✗"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "面积检查: %.0fm² ✗"
           }
         }
       }
@@ -4647,6 +6560,7 @@
       }
     },
     "领地登记成功！" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4686,6 +6600,12 @@
             "state" : "translated",
             "value" : "Food"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "食物"
+          }
         }
       }
     },
@@ -4721,6 +6641,7 @@
       }
     },
     "验证码已发送至 %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4749,6 +6670,12 @@
             "state" : "translated",
             "value" : "Incorrect verification code, please check and retry"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "验证码错误，请检查后重试"
+          }
         }
       }
     },
@@ -4759,6 +6686,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "High-calorie emergency food"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "高热量应急食品"
           }
         }
       }
@@ -4771,6 +6704,12 @@
             "state" : "translated",
             "value" : "High-protein food"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "高蛋白食物"
+          }
         }
       }
     },
@@ -4781,6 +6720,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Light in the darkness"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "黑暗中的光明"
           }
         }
       }

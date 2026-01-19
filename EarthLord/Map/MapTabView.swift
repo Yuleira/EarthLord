@@ -337,11 +337,11 @@ struct MapTabView: View {
                 .font(.body)
 
             if locationManager.territoryValidationPassed {
-                Text("圈地成功！领地面积: \(String(format: "%.0f", locationManager.calculatedArea))m²")
+                Text("map_claim_success_format".localized(String(format: "%.0f", locationManager.calculatedArea)))
                     .font(.subheadline)
                     .fontWeight(.medium)
             } else {
-                Text(locationManager.territoryValidationError ?? "验证失败")
+                Text(locationManager.territoryValidationError ?? "map_validation_failed".localized)
                     .font(.subheadline)
                     .fontWeight(.medium)
             }
@@ -366,10 +366,10 @@ struct MapTabView: View {
 
                 // 文字
                 if locationManager.isTracking {
-                    Text("停止圈地".localized)
+                    Text("map_stop_claiming".localized)
                         .font(.system(size: 12, weight: .semibold))
                 } else {
-                    Text("开始圈地".localized)
+                    Text("map_start_claiming".localized)
                         .font(.system(size: 12, weight: .semibold))
                 }
             }
@@ -403,7 +403,7 @@ struct MapTabView: View {
                         .font(.system(size: 16, weight: .semibold))
                 }
 
-                Text("确认登记领地".localized)
+                Text("map_confirm_register".localized)
                     .font(.system(size: 14, weight: .semibold))
             }
             .foregroundColor(.white)
@@ -428,7 +428,7 @@ struct MapTabView: View {
                 Image(systemName: "checkmark.circle.fill")
                     .font(.body)
 
-                Text("领地登记成功！")
+                Text("map_territory_registered".localized)
                     .font(.subheadline)
                     .fontWeight(.medium)
             }
@@ -480,7 +480,7 @@ struct MapTabView: View {
                     .font(.system(size: 20, weight: .semibold))
                     .foregroundColor(.white)
 
-                Text("定位".localized)
+                Text("map_locate".localized)
                     .font(.system(size: 12, weight: .semibold))
                     .foregroundColor(.white)
             }
@@ -544,9 +544,9 @@ struct MapTabView: View {
     /// 探索按钮标题
     private var explorationButtonTitle: String {
         switch explorationManager.state {
-        case .exploring: return "结束探索".localized
-        case .processing: return "计算中...".localized
-        default: return "探索".localized
+        case .exploring: return "map_stop_explore".localized
+        case .processing: return "map_calculating".localized
+        default: return "map_explore".localized
         }
     }
 
@@ -575,7 +575,7 @@ struct MapTabView: View {
                 .progressViewStyle(CircularProgressViewStyle(tint: ApocalypseTheme.primary))
                 .scaleEffect(1.5)
 
-            Text("正在定位...".localized)
+            Text("map_locating".localized)
                 .font(.subheadline)
                 .foregroundColor(ApocalypseTheme.textSecondary)
         }
@@ -594,7 +594,7 @@ struct MapTabView: View {
                 Text(String(format: "%.0f", explorationManager.currentDistance))
                     .font(.system(size: 28, weight: .bold, design: .rounded))
                     .foregroundColor(.white)
-                Text("米")
+                Text("unit_meter".localized)
                     .font(.system(size: 12))
                     .foregroundColor(.white.opacity(0.7))
             }
@@ -608,7 +608,7 @@ struct MapTabView: View {
                 Text(formatExplorationDuration(explorationManager.currentDuration))
                     .font(.system(size: 28, weight: .bold, design: .rounded))
                     .foregroundColor(.white)
-                Text("时长")
+                Text("map_duration".localized)
                     .font(.system(size: 12))
                     .foregroundColor(.white.opacity(0.7))
             }
@@ -910,7 +910,7 @@ struct MapTabView: View {
         // 再次检查验证状态
         guard locationManager.territoryValidationPassed else {
             withAnimation {
-                uploadError = "领地验证未通过，无法上传"
+                uploadError = "map_validation_failed_upload".localized
             }
             // 3 秒后清除错误
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
@@ -965,7 +965,7 @@ struct MapTabView: View {
 
             // 显示错误提示
             withAnimation {
-                uploadError = "上传失败: \(error.localizedDescription)"
+                uploadError = "map_upload_failed_format".localized(error.localizedDescription)
             }
 
             // 3 秒后清除错误
@@ -1005,13 +1005,13 @@ struct LocationDeniedView: View {
                 .foregroundColor(ApocalypseTheme.warning)
 
             // 标题
-            Text("无法获取位置".localized)
+            Text("map_location_unavailable".localized)
                 .font(.title2)
                 .fontWeight(.bold)
                 .foregroundColor(ApocalypseTheme.textPrimary)
 
             // 说明文字
-            Text("《地球新主》需要获取您的位置才能显示您在末日世界中的坐标。请在设置中开启定位权限。".localized)
+            Text("map_location_permission_desc".localized)
                 .font(.subheadline)
                 .foregroundColor(ApocalypseTheme.textSecondary)
                 .multilineTextAlignment(.center)
@@ -1023,7 +1023,7 @@ struct LocationDeniedView: View {
             } label: {
                 HStack {
                     Image(systemName: "gear")
-                    Text("前往设置".localized)
+                    Text("map_go_to_settings".localized)
                 }
                 .font(.headline)
                 .foregroundColor(.white)

@@ -54,7 +54,7 @@ struct ExplorationResultView: View {
 
                 // 关闭按钮
                 Button(action: onDismiss) {
-                    Text("完成")
+                    Text("common_done".localized)
                         .font(.system(size: 17, weight: .semibold))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
@@ -103,7 +103,7 @@ struct ExplorationResultView: View {
                 .foregroundColor(ApocalypseTheme.textSecondary)
 
             // 行走距离
-            Text("行走 \(String(format: "%.0f", result.distanceWalked)) 米")
+            Text("exploration_walked_format".localized(String(format: "%.0f", result.distanceWalked)))
                 .font(.system(size: 14))
                 .foregroundColor(ApocalypseTheme.textMuted)
         }
@@ -114,9 +114,9 @@ struct ExplorationResultView: View {
     private var errorView: some View {
         EmptyStateView(
             icon: "exclamationmark.triangle.fill",
-            title: "探索失败",
+            title: "exploration_failed".localized,
             subtitle: result.message,
-            buttonTitle: onRetry != nil ? "重试" : nil,
+            buttonTitle: onRetry != nil ? "common_retry".localized : nil,
             action: onRetry
         )
         .overlay(alignment: .topTrailing) {
@@ -134,15 +134,15 @@ struct ExplorationResultView: View {
 
     private var statsSection: some View {
         VStack(spacing: 16) {
-            Text("探索统计")
+            Text("exploration_stats".localized)
                 .font(.system(size: 18, weight: .semibold))
                 .foregroundColor(ApocalypseTheme.textPrimary)
 
             VStack(spacing: 12) {
-                statRow(icon: "figure.walk", label: "行走距离", value: String(format: "%.1f米", result.distanceWalked))
-                statRow(icon: "clock.fill", label: "探索时长", value: result.stats.durationString)
-                statRow(icon: "mappin.circle.fill", label: "验证地点", value: "\(result.stats.pointsVerified)个")
-                statRow(icon: "chart.bar.fill", label: "距离评级", value: result.stats.distanceRank)
+                statRow(icon: "figure.walk", label: "exploration_distance".localized, value: "exploration_distance_value".localized(String(format: "%.1f", result.distanceWalked)))
+                statRow(icon: "clock.fill", label: "exploration_duration".localized, value: result.stats.durationString)
+                statRow(icon: "mappin.circle.fill", label: "exploration_points_verified".localized, value: "exploration_points_count".localized(result.stats.pointsVerified))
+                statRow(icon: "chart.bar.fill", label: "exploration_distance_rank".localized, value: result.stats.distanceRank)
             }
             .padding(16)
             .background(ApocalypseTheme.cardBackground)
@@ -173,7 +173,7 @@ struct ExplorationResultView: View {
 
     private var collectedItemsSection: some View {
         VStack(spacing: 16) {
-            Text("收集物品")
+            Text("exploration_collected_items".localized)
                 .font(.system(size: 18, weight: .semibold))
                 .foregroundColor(ApocalypseTheme.textPrimary)
 
@@ -193,7 +193,7 @@ struct ExplorationResultView: View {
                 .font(.system(size: 24))
                 .foregroundColor(.yellow)
 
-            Text("获得经验")
+            Text("exploration_experience_gained".localized)
                 .font(.system(size: 16))
                 .foregroundColor(ApocalypseTheme.textSecondary)
 

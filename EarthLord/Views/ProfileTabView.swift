@@ -45,33 +45,33 @@ struct ProfileTabView: View {
                 // }
 
                 // MARK: - 设置选项
-                Section("设置".localized) {
+                Section("profile_settings") {
                     NavigationLink {
-                        Text("账号安全（待开发）".localized)
+                        Text("profile_account_security_dev")
                     } label: {
-                        Label("账号安全".localized, systemImage: "shield.fill")
+                        Label("profile_account_security", systemImage: "shield.fill")
                     }
 
                     NavigationLink {
-                        Text("通知设置（待开发）".localized)
+                        Text("profile_notifications_dev")
                     } label: {
-                        Label("通知设置".localized, systemImage: "bell.fill")
+                        Label("profile_notifications", systemImage: "bell.fill")
                     }
 
                     NavigationLink {
-                        Text("关于我们（待开发）".localized)
+                        Text("profile_about_dev")
                     } label: {
-                        Label("关于我们".localized, systemImage: "info.circle.fill")
+                        Label("profile_about", systemImage: "info.circle.fill")
                     }
                 }
 
                 // MARK: - App 设置
-                Section("应用设置".localized) {
+                Section("profile_app_settings") {
                     NavigationLink {
                         LanguageSettingsView()
                     } label: {
                         HStack {
-                            Label("语言".localized, systemImage: "globe")
+                            Label("profile_language", systemImage: "globe")
                             Spacer()
                             Text(languageManager.currentLanguage.displayName)
                                 .foregroundColor(.secondary)
@@ -85,7 +85,7 @@ struct ProfileTabView: View {
                         showLogoutAlert = true
                     } label: {
                         HStack {
-                            Label("退出登录".localized, systemImage: "rectangle.portrait.and.arrow.right")
+                            Label("profile_logout", systemImage: "rectangle.portrait.and.arrow.right")
                             Spacer()
                             if isLoggingOut {
                                 ProgressView()
@@ -102,24 +102,24 @@ struct ProfileTabView: View {
                     } label: {
                         HStack {
                             Spacer()
-                            Text("删除账户".localized)
+                            Text("profile_delete_account")
                             Spacer()
                         }
                     }
                 } footer: {
-                    Text("删除账户后，您的所有数据将被永久删除且无法恢复。".localized)
+                    Text("profile_delete_account_warning")
                         .foregroundColor(.secondary)
                 }
             }
-            .navigationTitle("个人".localized)
+            .navigationTitle("tab_profile")
             .id(languageManager.refreshID)
-            .alert("确认退出".localized, isPresented: $showLogoutAlert) {
-                Button("取消".localized, role: .cancel) { }
-                Button("退出".localized, role: .destructive) {
+            .alert("profile_logout_confirm_title", isPresented: $showLogoutAlert) {
+                Button("common_cancel", role: .cancel) { }
+                Button("profile_logout_action", role: .destructive) {
                     performLogout()
                 }
             } message: {
-                Text("确定要退出登录吗？退出后需要重新登录。".localized)
+                Text("profile_logout_confirm_message")
             }
             .sheet(isPresented: $showDeleteAccountSheet) {
                 DeleteAccountConfirmView(
@@ -130,8 +130,8 @@ struct ProfileTabView: View {
                     }
                 )
             }
-            .alert("删除失败".localized, isPresented: $showDeleteError) {
-                Button("确定".localized, role: .cancel) { }
+            .alert("profile_delete_failed", isPresented: $showDeleteError) {
+                Button("common_ok", role: .cancel) { }
             } message: {
                 Text(deleteErrorMessage)
             }
@@ -208,15 +208,16 @@ struct ProfileTabView: View {
             return name
         }
         // 其次使用邮箱前缀
-        if let email = authManager.currentUser?.email {
-            return String(email.split(separator: "@").first ?? "幸存者")
+        if let email = authManager.currentUser?.email,
+           let prefix = email.split(separator: "@").first {
+            return String(prefix)
         }
-        return "幸存者"
+        return String(localized: "profile_default_username")
     }
 
     /// 邮箱
     private var email: String {
-        authManager.currentUser?.email ?? "未设置邮箱"
+        authManager.currentUser?.email ?? String(localized: "profile_no_email")
     }
 
     /// 头像URL
@@ -263,22 +264,22 @@ struct DeleteAccountConfirmView: View {
                     .foregroundColor(.red)
                     .padding(.top, 40)
 
-                Text("确认删除账户".localized)
+                Text("profile_confirm_delete_account")
                     .font(.title2)
                     .fontWeight(.bold)
 
                 VStack(spacing: 12) {
-                    Text("此操作不可撤销！".localized)
+                    Text("profile_delete_irreversible")
                         .fontWeight(.semibold)
                         .foregroundColor(.red)
 
-                    Text("删除账户后，以下数据将被永久删除：".localized)
+                    Text("profile_delete_data_warning")
                         .foregroundColor(.secondary)
 
                     VStack(alignment: .leading, spacing: 8) {
-                        Label("您的个人资料信息".localized, systemImage: "person.crop.circle")
-                        Label("所有游戏进度和数据".localized, systemImage: "gamecontroller")
-                        Label("登录凭证和认证信息".localized, systemImage: "key")
+                        Label("profile_delete_item_profile", systemImage: "person.crop.circle")
+                        Label("profile_delete_item_progress", systemImage: "gamecontroller")
+                        Label("profile_delete_item_auth", systemImage: "key")
                     }
                     .font(.subheadline)
                     .foregroundColor(.secondary)
@@ -286,11 +287,11 @@ struct DeleteAccountConfirmView: View {
                 .padding(.horizontal)
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("请输入「\(requiredText)」以确认操作：".localized)
+                    Text("profile_delete_confirm_prompt \(requiredText)")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
 
-                    TextField("请输入\(requiredText)".localized, text: $confirmText)
+                    TextField(String(localized: "profile_delete_confirm_placeholder \(requiredText)"), text: $confirmText)
                         .textFieldStyle(.roundedBorder)
                         .focused($isTextFieldFocused)
                         .autocorrectionDisabled()
@@ -307,7 +308,7 @@ struct DeleteAccountConfirmView: View {
                                 try await authManager.deleteAccount()
                                 isPresented = false
                             } catch {
-                                onError(authManager.errorMessage ?? "删除账户失败，请稍后重试".localized)
+                                onError(authManager.errorMessage ?? String(localized: "profile_delete_error"))
                                 isPresented = false
                             }
                         }
@@ -318,7 +319,7 @@ struct DeleteAccountConfirmView: View {
                                     .progressViewStyle(CircularProgressViewStyle(tint: .white))
                                     .padding(.trailing, 8)
                             }
-                            Text("确认删除".localized)
+                            Text("profile_confirm_delete")
                         }
                         .frame(maxWidth: .infinity)
                         .padding()
@@ -331,7 +332,7 @@ struct DeleteAccountConfirmView: View {
                     Button {
                         isPresented = false
                     } label: {
-                        Text("取消".localized)
+                        Text("common_cancel")
                             .frame(maxWidth: .infinity)
                             .padding()
                             .background(Color(.systemGray6))
@@ -386,11 +387,11 @@ struct LanguageSettingsView: View {
                     }
                 }
             } footer: {
-                Text("切换语言后界面将立即更新".localized)
+                Text("profile_language_update_note")
                     .foregroundColor(.secondary)
             }
         }
-        .navigationTitle("语言设置".localized)
+        .navigationTitle("profile_language_settings")
         .navigationBarTitleDisplayMode(.inline)
         .id(languageManager.refreshID)
     }

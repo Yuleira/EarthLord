@@ -23,13 +23,13 @@ enum ResourceSegment: Int, CaseIterable {
         case .poi:
             return "POI"
         case .backpack:
-            return "背包".localized
+            return "segment_backpack".localized
         case .purchased:
-            return "已购".localized
+            return "segment_purchased".localized
         case .territory:
-            return "领地".localized
+            return "segment_territory".localized
         case .trade:
-            return "交易".localized
+            return "segment_trade".localized
         }
     }
 }
@@ -64,7 +64,7 @@ struct ResourcesTabView: View {
                     contentView
                 }
             }
-            .navigationTitle("资源".localized)
+            .navigationTitle("tab_resources".localized)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -78,7 +78,7 @@ struct ResourcesTabView: View {
 
     /// 分段选择器
     private var segmentPicker: some View {
-        Picker("资源分段".localized, selection: $selectedSegment) {
+        Picker("resource_segment_picker".localized, selection: $selectedSegment) {
             ForEach(ResourceSegment.allCases, id: \.self) { segment in
                 Text(segment.title)
                     .tag(segment)
@@ -92,7 +92,7 @@ struct ResourcesTabView: View {
     /// 交易开关
     private var tradeToggle: some View {
         HStack(spacing: 6) {
-            Text("交易".localized)
+            Text("segment_trade".localized)
                 .font(.system(size: 13))
                 .foregroundColor(ApocalypseTheme.textSecondary)
 
@@ -110,19 +110,19 @@ struct ResourcesTabView: View {
     private var contentView: some View {
         switch selectedSegment {
         case .poi:
-            placeholderView(title: "POI列表".localized, icon: "mappin.circle.fill")
+            placeholderView(title: "segment_poi_list".localized, icon: "mappin.circle.fill")
 
         case .backpack:
             BackpackView()
 
         case .purchased:
-            placeholderView(title: "已购".localized, icon: "cart.fill")
+            placeholderView(title: "segment_purchased".localized, icon: "cart.fill")
 
         case .territory:
-            placeholderView(title: "领地资源".localized, icon: "flag.fill")
+            placeholderView(title: "segment_territory_resources".localized, icon: "flag.fill")
 
         case .trade:
-            placeholderView(title: "交易市场".localized, icon: "arrow.left.arrow.right")
+            placeholderView(title: "segment_trade_market".localized, icon: "arrow.left.arrow.right")
         }
     }
 
@@ -139,7 +139,7 @@ struct ResourcesTabView: View {
                 .font(.system(size: 18, weight: .semibold))
                 .foregroundColor(ApocalypseTheme.textSecondary)
 
-            Text("功能开发中".localized)
+            Text("feature_in_development".localized)
                 .font(.system(size: 14))
                 .foregroundColor(ApocalypseTheme.textMuted)
 

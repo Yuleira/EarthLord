@@ -125,12 +125,12 @@ struct AuthView: View {
                 )
                 .shadow(color: ApocalypseTheme.primary.opacity(0.5), radius: 20)
 
-            Text("地球新主")
+            Text("auth_app_title")
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .foregroundColor(ApocalypseTheme.textPrimary)
 
-            Text("用脚步丈量世界，用领地征服地球")
+            Text("auth_app_slogan")
                 .font(.subheadline)
                 .foregroundColor(ApocalypseTheme.textSecondary)
         }
@@ -139,15 +139,15 @@ struct AuthView: View {
     // MARK: - Tab 选择器
     private var tabSelector: some View {
         HStack(spacing: 0) {
-            tabButton(title: "登录", index: 0)
-            tabButton(title: "注册", index: 1)
+            tabButton(title: "auth_login", index: 0)
+            tabButton(title: "auth_register", index: 1)
         }
         .background(ApocalypseTheme.cardBackground)
         .cornerRadius(12)
         .padding(.horizontal, 40)
     }
 
-    private func tabButton(title: String, index: Int) -> some View {
+    private func tabButton(title: LocalizedStringKey, index: Int) -> some View {
         Button {
             withAnimation(.easeInOut(duration: 0.2)) {
                 selectedTab = index
@@ -178,7 +178,7 @@ struct AuthView: View {
             // 邮箱输入
             inputField(
                 icon: "envelope.fill",
-                placeholder: "请输入邮箱",
+                placeholder: String(localized: "auth_email_placeholder"),
                 text: $loginEmail,
                 keyboardType: .emailAddress
             )
@@ -186,7 +186,7 @@ struct AuthView: View {
             // 密码输入
             secureInputField(
                 icon: "lock.fill",
-                placeholder: "请输入密码",
+                placeholder: String(localized: "auth_password_placeholder"),
                 text: $loginPassword
             )
 
@@ -195,7 +195,7 @@ struct AuthView: View {
 
             // 登录按钮
             primaryButton(
-                title: authManager.isLoading ? "登录中..." : "登录",
+                title: authManager.isLoading ? String(localized: "common_loading") : String(localized: "auth_login"),
                 isEnabled: !loginEmail.isEmpty && !loginPassword.isEmpty && !authManager.isLoading
             ) {
                 Task {
@@ -213,7 +213,7 @@ struct AuthView: View {
                 resetOtpSent = false
                 showForgotPassword = true
             } label: {
-                Text("忘记密码？")
+                Text("auth_forgot_password")
                     .font(.subheadline)
                     .foregroundColor(ApocalypseTheme.primary)
             }
@@ -243,14 +243,14 @@ struct AuthView: View {
             // 步骤指示
             stepIndicator(current: 1, total: 3)
 
-            Text("输入邮箱获取验证码")
+            Text("auth_enter_email_for_code")
                 .font(.headline)
                 .foregroundColor(ApocalypseTheme.textPrimary)
 
             // 邮箱输入
             inputField(
                 icon: "envelope.fill",
-                placeholder: "请输入邮箱",
+                placeholder: String(localized: "auth_email_placeholder"),
                 text: $registerEmail,
                 keyboardType: .emailAddress
             )
@@ -260,7 +260,7 @@ struct AuthView: View {
 
             // 发送验证码按钮
             primaryButton(
-                title: authManager.isLoading ? "发送中..." : "发送验证码",
+                title: authManager.isLoading ? String(localized: "common_loading") : String(localized: "auth_send_code"),
                 isEnabled: isValidEmail(registerEmail) && !authManager.isLoading
             ) {
                 Task {
@@ -279,11 +279,11 @@ struct AuthView: View {
             // 步骤指示
             stepIndicator(current: 2, total: 3)
 
-            Text("输入验证码")
+            Text("auth_enter_code")
                 .font(.headline)
                 .foregroundColor(ApocalypseTheme.textPrimary)
 
-            Text("验证码已发送至 \(registerEmail)")
+            Text("auth_code_sent_to \(registerEmail)")
                 .font(.caption)
                 .foregroundColor(ApocalypseTheme.textSecondary)
 
@@ -295,7 +295,7 @@ struct AuthView: View {
 
             // 验证按钮
             primaryButton(
-                title: authManager.isLoading ? "验证中..." : "验证",
+                title: authManager.isLoading ? String(localized: "common_loading") : String(localized: "auth_verify"),
                 isEnabled: registerCode.count == 6 && !authManager.isLoading
             ) {
                 Task {
@@ -327,25 +327,25 @@ struct AuthView: View {
             // 步骤指示
             stepIndicator(current: 3, total: 3)
 
-            Text("设置登录密码")
+            Text("auth_set_password")
                 .font(.headline)
                 .foregroundColor(ApocalypseTheme.textPrimary)
 
-            Text("请设置一个安全的密码以完成注册")
+            Text("auth_set_password_hint")
                 .font(.caption)
                 .foregroundColor(ApocalypseTheme.textSecondary)
 
             // 密码输入
             secureInputField(
                 icon: "lock.fill",
-                placeholder: "请输入密码（至少6位）",
+                placeholder: String(localized: "auth_password_placeholder"),
                 text: $registerPassword
             )
 
             // 确认密码
             secureInputField(
                 icon: "lock.fill",
-                placeholder: "请确认密码",
+                placeholder: String(localized: "auth_confirm_password"),
                 text: $registerConfirmPassword
             )
 
@@ -353,7 +353,7 @@ struct AuthView: View {
             if !registerConfirmPassword.isEmpty && registerPassword != registerConfirmPassword {
                 HStack {
                     Image(systemName: "exclamationmark.circle.fill")
-                    Text("两次输入的密码不一致")
+                    Text("auth_password_mismatch")
                 }
                 .font(.caption)
                 .foregroundColor(ApocalypseTheme.danger)
@@ -365,7 +365,7 @@ struct AuthView: View {
 
             // 完成注册按钮
             primaryButton(
-                title: authManager.isLoading ? "提交中..." : "完成注册",
+                title: authManager.isLoading ? String(localized: "common_loading") : String(localized: "auth_complete_registration"),
                 isEnabled: isPasswordValid && !authManager.isLoading
             ) {
                 Task {
@@ -406,13 +406,15 @@ struct AuthView: View {
                     .padding(.horizontal, 24)
                 }
             }
-            .navigationTitle("找回密码")
+            .navigationTitle(Text("auth_forgot_password"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("取消") {
+                    Button {
                         showForgotPassword = false
                         authManager.resetFlowState()
+                    } label: {
+                        Text("common_cancel")
                     }
                     .foregroundColor(ApocalypseTheme.primary)
                 }
@@ -428,13 +430,13 @@ struct AuthView: View {
         VStack(spacing: 20) {
             stepIndicator(current: 1, total: 3)
 
-            Text("输入注册邮箱")
+            Text("auth_enter_email_for_code")
                 .font(.headline)
                 .foregroundColor(ApocalypseTheme.textPrimary)
 
             inputField(
                 icon: "envelope.fill",
-                placeholder: "请输入邮箱",
+                placeholder: String(localized: "auth_email_placeholder"),
                 text: $resetEmail,
                 keyboardType: .emailAddress
             )
@@ -450,7 +452,7 @@ struct AuthView: View {
             }
 
             primaryButton(
-                title: authManager.isLoading ? "发送中..." : "发送验证码",
+                title: authManager.isLoading ? String(localized: "common_loading") : String(localized: "auth_send_code"),
                 isEnabled: isValidEmail(resetEmail) && !authManager.isLoading
             ) {
                 Task {
@@ -470,11 +472,11 @@ struct AuthView: View {
         VStack(spacing: 20) {
             stepIndicator(current: 2, total: 3)
 
-            Text("输入验证码")
+            Text("auth_enter_code")
                 .font(.headline)
                 .foregroundColor(ApocalypseTheme.textPrimary)
 
-            Text("验证码已发送至 \(resetEmail)")
+            Text("auth_code_sent_to \(resetEmail)")
                 .font(.caption)
                 .foregroundColor(ApocalypseTheme.textSecondary)
 
@@ -491,7 +493,7 @@ struct AuthView: View {
             }
 
             primaryButton(
-                title: authManager.isLoading ? "验证中..." : "验证",
+                title: authManager.isLoading ? String(localized: "common_loading") : String(localized: "auth_verify"),
                 isEnabled: resetCode.count == 6 && !authManager.isLoading
             ) {
                 Task {
@@ -524,26 +526,26 @@ struct AuthView: View {
         VStack(spacing: 20) {
             stepIndicator(current: 3, total: 3)
 
-            Text("设置新密码")
+            Text("auth_set_password")
                 .font(.headline)
                 .foregroundColor(ApocalypseTheme.textPrimary)
 
             secureInputField(
                 icon: "lock.fill",
-                placeholder: "请输入新密码（至少6位）",
+                placeholder: String(localized: "auth_password_placeholder"),
                 text: $resetPassword
             )
 
             secureInputField(
                 icon: "lock.fill",
-                placeholder: "请确认新密码",
+                placeholder: String(localized: "auth_confirm_password"),
                 text: $resetConfirmPassword
             )
 
             if !resetConfirmPassword.isEmpty && resetPassword != resetConfirmPassword {
                 HStack {
                     Image(systemName: "exclamationmark.circle.fill")
-                    Text("两次输入的密码不一致")
+                    Text("auth_password_mismatch")
                 }
                 .font(.caption)
                 .foregroundColor(ApocalypseTheme.danger)
@@ -561,7 +563,7 @@ struct AuthView: View {
             }
 
             primaryButton(
-                title: authManager.isLoading ? "提交中..." : "重置密码",
+                title: authManager.isLoading ? String(localized: "common_loading") : String(localized: "common_confirm"),
                 isEnabled: resetPassword.count >= 6 && resetPassword == resetConfirmPassword && !authManager.isLoading
             ) {
                 Task {
@@ -581,7 +583,7 @@ struct AuthView: View {
                 .fill(ApocalypseTheme.textMuted.opacity(0.3))
                 .frame(height: 1)
 
-            Text("或者使用以下方式登录")
+            Text("auth_or_sign_in_with")
                 .font(.caption)
                 .foregroundColor(ApocalypseTheme.textMuted)
                 .padding(.horizontal, 12)
@@ -605,7 +607,7 @@ struct AuthView: View {
                     HStack(spacing: 8) {
                         Image(systemName: "apple.logo")
                             .font(.system(size: 18, weight: .semibold))
-                        Text("通过 Apple 登录")
+                        Text("auth_sign_in_apple")
                             .font(.system(size: 17, weight: .semibold))
                     }
                     .frame(maxWidth: .infinity)
@@ -632,7 +634,7 @@ struct AuthView: View {
                         // Google "G" Logo
                         googleLogo
                             .frame(width: 18, height: 18)
-                        Text("通过 Google 登录")
+                        Text("auth_sign_in_google")
                             .font(.system(size: 17, weight: .medium))
                     }
                     .frame(maxWidth: .infinity)
@@ -823,7 +825,7 @@ struct AuthView: View {
 
             TextField("", text: text)
                 .placeholder(when: text.wrappedValue.isEmpty) {
-                    Text("请输入6位验证码")
+                    Text("auth_code_placeholder")
                         .foregroundColor(ApocalypseTheme.textMuted)
                 }
                 .keyboardType(.numberPad)
@@ -883,11 +885,11 @@ struct AuthView: View {
     private func resendButton(countdown: Int, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             if countdown > 0 {
-                Text("\(countdown)秒后可重新发送")
+                Text("auth_resend_countdown \(countdown)")
                     .font(.subheadline)
                     .foregroundColor(ApocalypseTheme.textMuted)
             } else {
-                Text("重新发送验证码")
+                Text("auth_resend_code")
                     .font(.subheadline)
                     .foregroundColor(ApocalypseTheme.primary)
             }
@@ -900,7 +902,7 @@ struct AuthView: View {
         Button(action: action) {
             HStack {
                 Image(systemName: "chevron.left")
-                Text("返回上一步")
+                Text("auth_back")
             }
             .font(.subheadline)
             .foregroundColor(ApocalypseTheme.textSecondary)
