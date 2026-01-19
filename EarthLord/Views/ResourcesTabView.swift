@@ -113,7 +113,7 @@ struct ResourcesTabView: View {
             placeholderView(title: "POI列表".localized, icon: "mappin.circle.fill")
 
         case .backpack:
-            placeholderView(title: "背包".localized, icon: "bag.fill")
+            BackpackView()
 
         case .purchased:
             placeholderView(title: "已购".localized, icon: "cart.fill")
