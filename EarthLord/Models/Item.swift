@@ -4,11 +4,11 @@ import SwiftUI
 // MARK: - 物品品质（影响物品状态/耐久度）
 
 enum ItemQuality: String, Codable, CaseIterable {
-    case pristine = "完美"
-    case good = "良好"
-    case worn = "陈旧"
-    case damaged = "破损"
-    case ruined = "报废"
+    case pristine = "pristine"
+    case good = "good"
+    case worn = "worn"
+    case damaged = "damaged"
+    case ruined = "ruined"
 
     /// 本地化显示名称
     var displayName: String {
@@ -84,13 +84,13 @@ enum ItemRarity: String, Codable, CaseIterable {
 // MARK: - 物品分类
 
 enum ItemCategory: String, Codable, CaseIterable {
-    case water = "水"
-    case food = "食物"
-    case medical = "药品"
-    case material = "材料"
-    case tool = "工具"
-    case weapon = "武器"
-    case other = "其他"
+    case water = "water"
+    case food = "food"
+    case medical = "medical"
+    case material = "material"
+    case tool = "tool"
+    case weapon = "weapon"
+    case other = "other"
 
     /// 本地化显示名称
     var displayName: String {
