@@ -137,12 +137,22 @@ final class ExplorationManager: NSObject, ObservableObject {
 
     /// 开始探索
     func startExploration() {
-        guard canStartExploration() else {
-            print("🔍 [探索] ❌ 无法开始探索")
-            return
-        }
+            guard canStartExploration() else {
+                print("🔍 [探索] ❌ 无法开始探索")
+                return
+            }
 
-        print("🔍 [探索] ✅ 开始探索")
+            print("🔍 [探索] ✅ 开始探索")
+            
+            // 🔥🔥🔥 加上这几行，它才会动！🔥🔥🔥
+            
+            // 1. 修改状态 (让按钮文字变成 "停止探索")
+            state = .exploring
+            
+            // 2. 开始干活 (调用我们昨天写的搜索逻辑)
+            Task {
+                await searchAndSetupPOIs()
+            }
 
         // 重置状态
         resetExplorationData()

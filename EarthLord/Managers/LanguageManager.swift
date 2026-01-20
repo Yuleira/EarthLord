@@ -21,7 +21,7 @@ enum AppLanguage: String, CaseIterable, Identifiable {
     var displayName: String {
         switch self {
         case .system:
-            return "language_follow_system"
+            return NSLocalizedString("language_follow_system", comment: "Follow System")
         case .zhHans:
             return "简体中文"
         case .en:

@@ -553,7 +553,6 @@ struct MapTabView: View {
                 return NSLocalizedString("map_calculating", comment: "Calculating results")
                 
             default:
-                // 告诉系统：去翻译 "map_explore"
                 return NSLocalizedString("map_explore", comment: "Start exploration")
             }
         }

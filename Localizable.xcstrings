@@ -2526,8 +2526,7 @@
       "extractionState" : "manual"
     },
     "language_follow_system" : {
-      "comment" : "Follow system language option",
-      "extractionState" : "stale",
+      "comment" : "Follow System",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4681,6 +4680,12 @@
             "state" : "translated",
             "value" : "Other"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "其他"
+          }
         }
       }
     },
@@ -4708,6 +4713,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Water Purifier"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "净水器"
           }
         }
       }
@@ -4788,6 +4799,12 @@
             "state" : "translated",
             "value" : "Too many email requests, please try again later"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "发送邮件过于频繁，请稍后再试"
+          }
         }
       }
     },
@@ -4815,6 +4832,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Renewable energy source"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "可再生能源"
           }
         }
       }
@@ -4877,6 +4900,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Store"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "商店"
           }
         }
       }
@@ -5338,6 +5367,12 @@
             "state" : "translated",
             "value" : "Reset Password"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "找回密码"
+          }
         }
       }
     },
@@ -5365,6 +5400,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ruined"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "报废"
           }
         }
       }
@@ -5411,6 +5452,12 @@
             "state" : "translated",
             "value" : "A refreshing and energizing drink"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "提神醒脑的饮品"
+          }
         }
       }
     },
@@ -5422,6 +5469,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Search items..."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "搜索物品..."
           }
         }
       }
@@ -5451,6 +5504,12 @@
             "state" : "translated",
             "value" : "Too many requests, please try again later"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "操作过于频繁，请稍后再试"
+          }
         }
       }
     },
@@ -5479,6 +5538,12 @@
             "state" : "translated",
             "value" : "Unable to get Apple Sign-In credentials"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法获取 Apple 登录凭证"
+          }
         }
       }
     },
@@ -5489,6 +5554,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Unable to get Google ID Token"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法获取 Google ID Token"
           }
         }
       }
@@ -5501,6 +5572,12 @@
             "state" : "translated",
             "value" : "Unable to get location, please try again later"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法获取位置，请稍后重试"
+          }
         }
       }
     },
@@ -5511,6 +5588,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Unable to get root view controller"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法获取根视图控制器"
           }
         }
       }
@@ -5632,6 +5715,12 @@
             "state" : "translated",
             "value" : "Weapon"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "武器"
+          }
         }
       }
     },
@@ -5642,6 +5731,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Water"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "水"
           }
         }
       }
@@ -5687,6 +5782,12 @@
             "state" : "translated",
             "value" : "Test Edge Function & Fallback"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "测试 Edge Function 和降级方案"
+          }
         }
       }
     },
@@ -5696,6 +5797,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Testing..."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "测试中..."
           }
         }
       }
@@ -5710,6 +5817,12 @@
             "state" : "translated",
             "value" : "Test Results"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "测试结果"
+          }
         }
       }
     },
@@ -5719,6 +5832,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Test Connection"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "测试连接"
           }
         }
       }
@@ -5769,6 +5888,12 @@
             "state" : "translated",
             "value" : "Point check: %d points ✓"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "点数检查: %d个点 ✓"
+          }
         }
       }
     },
@@ -5779,6 +5904,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Point check: %d points ✗"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "点数检查: %d个点 ✗"
           }
         }
       }
@@ -5791,6 +5922,12 @@
             "state" : "translated",
             "value" : "Precious medicine"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "珍贵的药物"
+          }
         }
       }
     },
@@ -5802,6 +5939,12 @@
             "state" : "translated",
             "value" : "Precious source of protein"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "珍贵的蛋白质来源"
+          }
         }
       }
     },
@@ -5811,6 +5954,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Generated Items"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "生成的物品"
           }
         }
       }
@@ -5840,6 +5989,12 @@
             "state" : "translated",
             "value" : "User canceled the operation"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "用户取消了操作"
+          }
         }
       }
     },
@@ -5850,6 +6005,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "User canceled sign-in"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "用户取消了登录"
           }
         }
       }
@@ -5878,6 +6039,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Power source for devices"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "电子设备的能源"
           }
         }
       }
@@ -5941,6 +6108,12 @@
             "state" : "translated",
             "value" : "Rare"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "稀有"
+          }
         }
       }
     },
@@ -5951,6 +6124,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Simple tool for stopping bleeding"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "简单的止血工具"
           }
         }
       }
@@ -5963,6 +6142,12 @@
             "state" : "translated",
             "value" : "Purified Water"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "纯净水"
+          }
         }
       }
     },
@@ -5973,6 +6158,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rope"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "绳索"
           }
         }
       }
@@ -6001,6 +6192,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Relieves pain"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "缓解疼痛"
           }
         }
       }
@@ -6116,6 +6313,12 @@
             "state" : "translated",
             "value" : "Self-intersection check: No crossing ✓"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自交检测: 无交叉 ✓"
+          }
         }
       }
     },
@@ -6126,6 +6329,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Self-intersection: segment %d-%d crosses %d-%d"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自交检测: 线段%d-%d 与 线段%d-%d 相交"
           }
         }
       }
@@ -6172,6 +6381,12 @@
             "state" : "translated",
             "value" : "Pharmacy"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "药店"
+          }
         }
       }
     },
@@ -6199,6 +6414,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Walked %@ meters"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "行走 %@ 米"
           }
         }
       }
@@ -6228,6 +6449,12 @@
             "state" : "translated",
             "value" : "A good choice for vitamins"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "补充维生素的好选择"
+          }
         }
       }
     },
@@ -6238,6 +6465,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Recording point %d, %.1fm from last"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "记录第 %d 个点，距上点 %.1fm"
           }
         }
       }
@@ -6613,6 +6846,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "This is the branch universe test page"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "这里是分支宇宙的测试页"
           }
         }
       }
@@ -7160,6 +7399,11 @@
             "value" : "黑暗中的光明"
           }
         }
+      }
+    }
+  },
+  "version" : "1.1"
+}
       }
     }
   },
