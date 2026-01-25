@@ -218,7 +218,7 @@ final class ExplorationManager: NSObject, ObservableObject {
 
         // 计算奖励等级
         let tier = RewardTier.from(distance: currentDistance)
-        print("🔍 [探索] 奖励等级: \(tier.displayName)")
+        print("🔍 [探索] 奖励等级: \(LanguageManager.shared.translate(tier.localizedName))")
 
         // 生成奖励物品
         var collectedItems: [CollectedItem] = []
@@ -257,7 +257,7 @@ final class ExplorationManager: NSObject, ObservableObject {
             totalDistance: currentDistance,
             duration: duration,
             pointsVerified: trackPoints.count,
-            distanceRank: tier.displayName
+            distanceRank: LanguageManager.shared.translate(tier.localizedName)
         )
 
         let result = ExplorationResult(
@@ -274,7 +274,7 @@ final class ExplorationManager: NSObject, ObservableObject {
         latestResult = result
         state = .completed
 
-        print("🔍 [探索] ✅ 探索完成 - 距离: \(String(format: "%.1f", currentDistance))m，等级: \(tier.displayName)，物品: \(collectedItems.count)个，经验: \(result.experienceGained)")
+        print("🔍 [探索] ✅ 探索完成 - 距离: \(String(format: "%.1f", currentDistance))m，等级: \(LanguageManager.shared.translate(tier.localizedName))，物品: \(collectedItems.count)个，经验: \(result.experienceGained)")
 
         return result
     }

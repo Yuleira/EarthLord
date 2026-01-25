@@ -80,7 +80,7 @@ struct ScavengeResultView: View {
             }
 
             // 标题
-            Text("scavenge_success_title")
+            Text(LocalizedString.scavengeSuccessTitle)
                 .font(.system(size: 24, weight: .bold))
                 .foregroundColor(ApocalypseTheme.textPrimary)
 
@@ -125,7 +125,7 @@ struct ScavengeResultView: View {
         VStack(alignment: .leading, spacing: 12) {
             // 标题
             HStack {
-                Text("scavenge_items_obtained")
+                Text(LocalizedString.scavengeItemsObtained)
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundColor(ApocalypseTheme.textSecondary)
 
@@ -136,7 +136,7 @@ struct ScavengeResultView: View {
                     HStack(spacing: 4) {
                         Image(systemName: "sparkles")
                             .font(.system(size: 10))
-                        Text("scavenge_ai_generated")
+                        Text(LocalizedString.scavengeAiGenerated)
                             .font(.system(size: 11, weight: .medium))
                     }
                     .foregroundColor(.purple)
@@ -197,7 +197,7 @@ struct ScavengeResultView: View {
                             .lineLimit(1)
 
                         // 稀有度标签
-                        Text(item.definition.rarity.displayName)
+                        Text(item.definition.rarity.localizedName)
                             .font(.system(size: 10, weight: .bold))
                             .foregroundColor(.white)
                             .padding(.horizontal, 6)
@@ -210,14 +210,14 @@ struct ScavengeResultView: View {
 
                     // 品质和分类
                     HStack(spacing: 8) {
-                        Text(item.quality.displayName)
+                        Text(item.quality.localizedName)
                             .font(.system(size: 12))
                             .foregroundColor(item.quality.color)
 
                         Text("·")
                             .foregroundColor(ApocalypseTheme.textMuted)
 
-                        Text(item.definition.category.displayName)
+                        Text(item.definition.category.localizedName)
                             .font(.system(size: 12))
                             .foregroundColor(ApocalypseTheme.textMuted)
 
@@ -298,7 +298,7 @@ struct ScavengeResultView: View {
             HStack(spacing: 8) {
                 Image(systemName: "checkmark")
                     .font(.system(size: 14, weight: .semibold))
-                Text("common_confirm")
+                Text(LocalizedString.commonConfirm)
                     .font(.system(size: 16, weight: .semibold))
             }
             .foregroundColor(.white)

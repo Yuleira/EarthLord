@@ -66,7 +66,7 @@ struct TerritoryTestView: View {
                 Spacer()
 
                 // 日志条数
-                Text("\(logger.logs.count) 条日志")
+                Text(String(format: String(localized: "territory_logs_count_format"), logger.logs.count))
                     .font(.system(size: 12))
                     .foregroundColor(ApocalypseTheme.textSecondary)
             }

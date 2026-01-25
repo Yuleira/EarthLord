@@ -83,7 +83,7 @@ struct SupabaseTestView: View {
                         .progressViewStyle(CircularProgressViewStyle(tint: .white))
                         .padding(.trailing, 8)
                 }
-                Text(isTesting ? "测试中..." : "测试连接")
+                Text(isTesting ? String(localized: "test_supabase_testing") : String(localized: "test_supabase_connect"))
                     .fontWeight(.semibold)
             }
             .frame(maxWidth: .infinity)
@@ -104,7 +104,7 @@ struct SupabaseTestView: View {
                         .progressViewStyle(CircularProgressViewStyle(tint: .white))
                         .padding(.trailing, 8)
                 }
-                Text(isTesting ? "验证中..." : "验证数据表")
+                Text(isTesting ? String(localized: "test_supabase_verifying") : String(localized: "test_supabase_verify_tables"))
                     .fontWeight(.semibold)
             }
             .frame(maxWidth: .infinity)

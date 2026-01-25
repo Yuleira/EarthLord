@@ -10,14 +10,14 @@ enum ItemQuality: String, Codable, CaseIterable {
     case damaged = "damaged"
     case ruined = "ruined"
 
-    /// 本地化显示名称
-    var displayName: String {
+    /// 本地化显示名称 (Late-Binding: evaluated at render time)
+    var localizedName: LocalizedStringResource {
         switch self {
-        case .pristine: return String(localized: "quality_pristine")
-        case .good: return String(localized: "quality_good")
-        case .worn: return String(localized: "quality_worn")
-        case .damaged: return String(localized: "quality_damaged")
-        case .ruined: return String(localized: "quality_ruined")
+        case .pristine: return "quality_pristine"
+        case .good: return "quality_good"
+        case .worn: return "quality_worn"
+        case .damaged: return "quality_damaged"
+        case .ruined: return "quality_ruined"
         }
     }
 
@@ -47,14 +47,14 @@ enum ItemRarity: String, Codable, CaseIterable {
     case epic = "epic"
     case legendary = "legendary"
 
-    /// 本地化显示名称
-    var displayName: String {
+    /// 本地化显示名称 (Late-Binding: evaluated at render time)
+    var localizedName: LocalizedStringResource {
         switch self {
-        case .common: return String(localized: "rarity_common")
-        case .uncommon: return String(localized: "rarity_uncommon")
-        case .rare: return String(localized: "rarity_rare")
-        case .epic: return String(localized: "rarity_epic")
-        case .legendary: return String(localized: "rarity_legendary")
+        case .common: return "rarity_common"
+        case .uncommon: return "rarity_uncommon"
+        case .rare: return "rarity_rare"
+        case .epic: return "rarity_epic"
+        case .legendary: return "rarity_legendary"
         }
     }
 
@@ -92,16 +92,16 @@ enum ItemCategory: String, Codable, CaseIterable {
     case weapon = "weapon"
     case other = "other"
 
-    /// 本地化显示名称
-    var displayName: String {
+    /// 本地化显示名称 (Late-Binding: evaluated at render time)
+    var localizedName: LocalizedStringResource {
         switch self {
-        case .water: return String(localized: "category_water")
-        case .food: return String(localized: "category_food")
-        case .medical: return String(localized: "category_medical")
-        case .material: return String(localized: "category_material")
-        case .tool: return String(localized: "category_tool")
-        case .weapon: return String(localized: "category_weapon")
-        case .other: return String(localized: "category_other")
+        case .water: return "category_water"
+        case .food: return "category_food"
+        case .medical: return "category_medical"
+        case .material: return "category_material"
+        case .tool: return "category_tool"
+        case .weapon: return "category_weapon"
+        case .other: return "category_other"
         }
     }
 }
@@ -124,6 +124,28 @@ struct ItemDefinition: Identifiable, Codable {
         self.category = category
         self.icon = icon
         self.rarity = rarity
+    }
+
+    // MARK: - Localization Support (Late-Binding)
+
+    /// 本地化名称（Late-Binding: 在渲染时使用String Catalog解析）
+    var localizedName: LocalizedStringResource {
+        LocalizedStringResource(String.LocalizationValue(name))
+    }
+
+    /// 本地化描述（Late-Binding）
+    var localizedDescription: LocalizedStringResource {
+        LocalizedStringResource(String.LocalizationValue(description))
+    }
+
+    /// 已解析的本地化名称（用于字符串插值和数据库操作）
+    var resolvedLocalizedName: String {
+        String(localized: String.LocalizationValue(name))
+    }
+
+    /// 已解析的本地化描述（用于字符串插值）
+    var resolvedLocalizedDescription: String {
+        String(localized: String.LocalizationValue(description))
     }
 }
 

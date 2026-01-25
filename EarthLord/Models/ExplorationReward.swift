@@ -18,14 +18,14 @@ enum RewardTier: String, Codable, CaseIterable {
     case gold = "gold"          // 金级 (1000-2000m)
     case diamond = "diamond"    // 钻石级 (> 2000m)
 
-    /// 本地化显示名称
-    var displayName: String {
+    /// 本地化显示名称 (Late-Binding: evaluated at render time)
+    var localizedName: LocalizedStringResource {
         switch self {
-        case .none: return String(localized: "reward_tier_none")
-        case .bronze: return String(localized: "reward_tier_bronze")
-        case .silver: return String(localized: "reward_tier_silver")
-        case .gold: return String(localized: "reward_tier_gold")
-        case .diamond: return String(localized: "reward_tier_diamond")
+        case .none: return "reward_tier_none"
+        case .bronze: return "reward_tier_bronze"
+        case .silver: return "reward_tier_silver"
+        case .gold: return "reward_tier_gold"
+        case .diamond: return "reward_tier_diamond"
         }
     }
 

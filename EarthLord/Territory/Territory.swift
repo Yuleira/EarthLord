@@ -8,6 +8,7 @@
 //  用于解析数据库返回的领地数据
 
 import Foundation
+import SwiftUI
 import CoreLocation
 
 /// 领地数据模型
@@ -56,15 +57,18 @@ struct Territory: Codable, Identifiable {
     }
 
     /// 显示名称（如果没有名称则显示默认值）
-    var displayName: String {
+    var displayName: LocalizedStringResource {
         if let custom = customName, !custom.isEmpty {
-            return custom
+            // ✅ 修复：将 String 变量包装成资源类型
+            return LocalizedStringResource(stringLiteral: custom)
         }
-        if let name = name, !name.isEmpty {
-            return name
+        // 如果名字是数据库默认的英文，或者为空，强制拦截并返回本地化钥匙
+            if name == "Unnamed Territory" || name == nil || name?.isEmpty == true {
+                return LocalizedString.unnamedTerritory
+            }
+            // 否则显示原始名称
+            return LocalizedStringResource(stringLiteral: name ?? "")
         }
-        return String(localized: "territory_unnamed")
-    }
 
     /// 格式化完成时间
     var formattedCompletedAt: String? {

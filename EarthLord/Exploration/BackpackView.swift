@@ -76,7 +76,7 @@ struct BackpackView: View {
                 contentView
             }
         }
-        .navigationTitle("backpack_title")
+        .navigationTitle(LocalizedString.backpackTitle)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             loadBackpackItems()
@@ -90,7 +90,7 @@ struct BackpackView: View {
             Image(systemName: "magnifyingglass")
                 .foregroundColor(ApocalypseTheme.textMuted)
 
-            TextField("backpack_search_placeholder", text: $searchText)
+            TextField(LocalizedString.backpackSearchPlaceholder, text: $searchText)
                 .foregroundColor(ApocalypseTheme.textPrimary)
 
             if !searchText.isEmpty {
@@ -111,17 +111,17 @@ struct BackpackView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 12) {
                 // 全部按钮
-                categoryButton(category: nil, title: String(localized: "filter_all"))
+                categoryButton(category: nil, title: LocalizedString.filterAll)
 
                 // 各分类按钮
                 ForEach(ItemCategory.allCases, id: \.self) { category in
-                    categoryButton(category: category, title: category.displayName)
+                    categoryButton(category: category, title: category.localizedName)
                 }
             }
         }
     }
 
-    private func categoryButton(category: ItemCategory?, title: String) -> some View {
+    private func categoryButton(category: ItemCategory?, title: LocalizedStringResource) -> some View {
         Button(action: {
             selectedCategory = category
         }) {
@@ -231,7 +231,7 @@ struct ItemRowView: View {
                         .foregroundColor(ApocalypseTheme.textPrimary)
 
                     // 稀有度标签
-                    Text(item.definition.rarity.displayName)
+                    Text(item.definition.rarity.localizedName)
                         .font(.system(size: 10, weight: .medium))
                         .foregroundColor(item.definition.rarity.color)
                         .padding(.horizontal, 6)
@@ -240,7 +240,7 @@ struct ItemRowView: View {
                         .cornerRadius(4)
 
                     // 品质标签
-                    Text(item.quality.displayName)
+                    Text(item.quality.localizedName)
                         .font(.system(size: 10, weight: .medium))
                         .foregroundColor(item.quality.color)
                         .padding(.horizontal, 6)
@@ -249,7 +249,7 @@ struct ItemRowView: View {
                         .cornerRadius(4)
                 }
 
-                Text(item.definition.category.displayName)
+                Text(item.definition.category.localizedName)
                     .font(.system(size: 13))
                     .foregroundColor(ApocalypseTheme.textSecondary)
             }

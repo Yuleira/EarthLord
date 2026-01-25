@@ -23,23 +23,19 @@ struct ResourceRow: View {
         InventoryManager.shared.resourceIconName(for: resourceId)
     }
     
-    /// 资源显示名称（本地化）
-    private var resourceName: String {
-        InventoryManager.shared.resourceDisplayName(for: resourceId)
-    }
-    
     var body: some View {
         HStack(spacing: 12) {
-            // 资源图标
             Image(systemName: resourceIcon)
                 .font(.system(size: 20))
-                .foregroundColor(isSufficient ? ApocalypseTheme.success : ApocalypseTheme.danger)
+                .symbolRenderingMode(.hierarchical)
+                .foregroundColor(ApocalypseTheme.primary)
                 .frame(width: 24, height: 24)
             
-            // 资源名称
-            Text(resourceName)
+            Text(LocalizedStringKey("item_\(resourceId.lowercased())"))
                 .font(.system(size: 15, weight: .medium))
                 .foregroundColor(ApocalypseTheme.textPrimary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
             
             Spacer()
             

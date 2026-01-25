@@ -364,13 +364,8 @@ struct MapTabView: View {
                     .font(.system(size: 20, weight: .semibold))
 
                 // 文字
-                if locationManager.isTracking {
-                    Text(String(localized: "map_stop_claiming"))
-                        .font(.system(size: 12, weight: .semibold))
-                } else {
-                    Text(String(localized: "map_start_claiming"))
-                        .font(.system(size: 12, weight: .semibold))
-                }
+                Text(claimingButtonTitle)
+                    .font(.system(size: 12, weight: .semibold))
             }
             .foregroundColor(.white)
             .frame(maxWidth: .infinity)
@@ -427,7 +422,7 @@ struct MapTabView: View {
                 Image(systemName: "checkmark.circle.fill")
                     .font(.body)
 
-                Text("map_territory_registered")
+                Text(LocalizedString.mapTerritoryRegistered)
                     .font(.subheadline)
                     .fontWeight(.medium)
             }
@@ -479,7 +474,7 @@ struct MapTabView: View {
                     .font(.system(size: 20, weight: .semibold))
                     .foregroundColor(.white)
 
-                Text(String(localized: "map_locate"))
+                Text(LocalizedString.mapLocate)
                     .font(.system(size: 12, weight: .semibold))
                     .foregroundColor(.white)
             }
@@ -512,7 +507,7 @@ struct MapTabView: View {
                         .font(.system(size: 20, weight: .semibold))
                 }
 
-                Text(LocalizedStringKey(explorationButtonTitle))
+                Text(explorationButtonTitle)
                     .font(.system(size: 12, weight: .semibold))
             }
             .foregroundColor(.white)
@@ -540,22 +535,22 @@ struct MapTabView: View {
         }
     }
 
-    /// 探索按钮标题
-        private var explorationButtonTitle: String {
-            switch explorationManager.state {
-            case .exploring:
-                // 告诉系统：去翻译 "map_stop_explore"
-                return String(localized: "map_stop_explore")
-                
-            case .processing:
-                // 告诉系统：去翻译 "map_calculating"
-                return String(localized: "map_calculating")
-                
-            default:
-                // 确保这里的 Key 名在 xcstrings 翻译表里能找到
-                return String(localized: "map_explore")
-            }
+    /// 探索按钮标题 (Late-Binding: evaluated at render time)
+    private var explorationButtonTitle: LocalizedStringResource {
+        switch explorationManager.state {
+        case .exploring:
+            return "map_stop_explore"
+        case .processing:
+            return "map_calculating"
+        default:
+            return "map_explore"
         }
+    }
+    
+    /// 领地圈占按钮标题 (Late-Binding: evaluated at render time)
+    private var claimingButtonTitle: LocalizedStringResource {
+        locationManager.isTracking ? "map_stop_claiming" : "map_start_claiming"
+    }
 
     /// 处理探索按钮点击
     private func handleExplorationButtonTap() {
@@ -630,7 +625,7 @@ struct MapTabView: View {
                 Image(systemName: tier.iconName)
                     .font(.system(size: 24))
                     .foregroundColor(tier.color)
-                Text(tier.displayName)
+                Text(tier.localizedName)
                     .font(.system(size: 12))
                     .foregroundColor(.white.opacity(0.7))
             }

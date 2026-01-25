@@ -67,7 +67,7 @@ final class RewardGenerator {
             )
 
             items.append(item)
-            print("🎁 [奖励] 生成物品: \(definition.name) [\(rarity.displayName)] [\(quality.rawValue)]")
+            print("🎁 [奖励] 生成物品: \(definition.name) [\(LanguageManager.shared.translate(rarity.localizedName))] [\(quality.rawValue)]")
         }
 
         print("🎁 [奖励] 共生成 \(items.count) 个物品")
@@ -155,7 +155,7 @@ final class RewardGenerator {
     private func selectRandomItem(rarity: ItemRarity) -> DBItemDefinition? {
         guard let items = itemDefinitionsCache[rarity], !items.isEmpty else {
             // 降级到普通物品
-            print("🎁 [奖励] 稀有度 \(rarity.displayName) 无可用物品，降级到普通")
+            print("🎁 [奖励] 稀有度 \(LanguageManager.shared.translate(rarity.localizedName)) 无可用物品，降级到普通")
             return itemDefinitionsCache[.common]?.randomElement()
         }
         return items.randomElement()

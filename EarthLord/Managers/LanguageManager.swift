@@ -4,12 +4,15 @@
 //
 //  Created by Yu Lei on 31/12/2025.
 //
+//  Late-Binding Localization Strategy
 //  Thin wrapper for language management using Apple's native String Catalog
 //
 
 import Foundation
 import SwiftUI
 import Combine
+
+// MARK: - Supported Languages
 
 /// 支持的语言选项
 enum AppLanguage: String, CaseIterable, Identifiable {
@@ -19,7 +22,7 @@ enum AppLanguage: String, CaseIterable, Identifiable {
 
     var id: String { rawValue }
 
-    /// 显示名称
+    /// 显示名称 (native language names - not localized)
     var displayName: String {
         switch self {
         case .system:
@@ -31,101 +34,103 @@ enum AppLanguage: String, CaseIterable, Identifiable {
         }
     }
 
-    /// 语言代码
+    /// 语言代码 (nil for system = use device preference)
     var languageCode: String? {
         switch self {
-        case .system:
-            return nil
-        case .zhHans:
-            return "zh-Hans"
-        case .en:
-            return "en"
+        case .system: return nil
+        case .zhHans: return "zh-Hans"
+        case .en: return "en"
         }
     }
 }
 
-/// 语言管理器
-/// Thin wrapper for UserDefaults and Locale environment injection
-/// All translations now use Apple's native String Catalog (Localizable.xcstrings)
+// MARK: - Language Manager
+
+/// 语言管理器 - Late-Binding Localization Strategy
+/// - Stores only the selected language preference
+/// - Provides currentLocale for SwiftUI environment injection
+/// - All translations use Apple's native String Catalog (Localizable.xcstrings)
 final class LanguageManager: ObservableObject {
     
-    // MARK: - 单例
+    // MARK: - Singleton
     static let shared = LanguageManager()
     
-    // MARK: - 存储键
-    private let languageKey = "app_language"
+    // MARK: - Storage Key
+    private let storageKey = "selected_language"
     
-    // MARK: - 发布属性
-    @Published var currentLanguage: AppLanguage = .system
+    // MARK: - Published Properties
+    
+    /// The user's selected language preference
+    @Published var selectedLanguage: AppLanguage = .system
+    
+    /// Unique ID for forcing view refresh on language change
     @Published var refreshID = UUID()
     
-    // MARK: - 初始化
+    // MARK: - Computed Properties
     
-    private init() {
-            if let savedLanguage = UserDefaults.standard.string(forKey: languageKey),
-               let language = AppLanguage(rawValue: savedLanguage) {
-                self.currentLanguage = language
-            } else {
-                self.currentLanguage = .system
-            }
-        }
-    
-    // MARK: - 公共方法
-    
-    /// 切换语言
-    func setLanguage(_ language: AppLanguage) {
-            guard language != currentLanguage else { return }
-            currentLanguage = language
-            saveLanguage()
-            // 🚀 核心：切换时改变 UUID，强制所有 View 重绘并重新查表
-            refreshID = UUID()
-        }
-    
-    /// 获取实际使用的语言代码
+    /// The effective language code (resolves "system" to actual device language)
     var effectiveLanguageCode: String {
-        if let code = currentLanguage.languageCode {
+        if let code = selectedLanguage.languageCode {
             return code
         }
-        // 跟随系统时，获取系统首选语言
+        // Resolve system preference to supported language
         let preferred = Locale.preferredLanguages.first ?? "en"
-                return (preferred.hasPrefix("zh-Hans") || preferred.hasPrefix("zh-CN") || preferred.hasPrefix("zh")) ? "zh-Hans" : "en"
+        if preferred.hasPrefix("zh-Hans") || preferred.hasPrefix("zh-CN") || preferred.hasPrefix("zh") {
+            return "zh-Hans"
         }
+        return "en"
+    }
     
-    /// 获取当前的 Locale 对象（用于注入SwiftUI环境）
+    /// The current Locale for SwiftUI environment injection
+    /// This Locale identifier must match xcstrings column names exactly
     var currentLocale: Locale {
-        // 核心：这里的 Locale 必须与 xcstrings 的列名完全对应
-                return Locale(identifier: effectiveLanguageCode)
-            }
-            
-            private func saveLanguage() {
-                UserDefaults.standard.set(currentLanguage.rawValue, forKey: languageKey)
-            }
-        }
+        Locale(identifier: effectiveLanguageCode)
+    }
     
-    // MARK: - String 扩展 (大师级修复版)
+    // MARK: - Initialization
     
-    extension String {
-
-        /// 🚀 修复后的本地化计算属性
-            var localized: String {
-                // 不要返回 self！要调用系统查表逻辑。
-                // 使用这个初始化方法，它能识别我们在 ContentView 注入的 .environment(\.locale)
-                return String(localized: LocalizationValue(self))
-            }
-            
-            /// 🚀 修复后的带参数本地化
-            func localized(_ arguments: CVarArg...) -> String {
-                let format = String(localized: LocalizationValue(self))
-                return String(format: format, arguments: arguments)
-            }
-        }
-    
-    // MARK: - View 扩展
-    
-    extension View {
-        /// 监听语言变化并刷新视图
-        func onLanguageChange() -> some View {
-            self.id(LanguageManager.shared.refreshID)
+    private init() {
+        if let saved = UserDefaults.standard.string(forKey: storageKey),
+           let language = AppLanguage(rawValue: saved) {
+            self.selectedLanguage = language
+        } else {
+            self.selectedLanguage = .system
         }
     }
+    
+    // MARK: - Public Methods
+    
+    /// Set the app language
+    func setLanguage(_ language: AppLanguage) {
+        guard language != selectedLanguage else { return }
+        selectedLanguage = language
+        UserDefaults.standard.set(language.rawValue, forKey: storageKey)
+        // Force all views to re-render and re-query String Catalog
+        refreshID = UUID()
+    }
+    
+    /// Translate a LocalizedStringResource using the current locale
+    /// Use this for programmatic translations outside of SwiftUI views
+    func translate(_ resource: LocalizedStringResource) -> String {
+        String(localized: resource)
+    }
+    
+    /// Translate a key string using the current locale
+    func translate(_ key: String) -> String {
+        String(localized: String.LocalizationValue(key), locale: currentLocale)
+    }
+}
+
+// MARK: - View Extension
+
+extension View {
+    /// Apply language environment and refresh binding
+    /// Use this at the root of your view hierarchy
+    func withLanguageEnvironment() -> some View {
+        let manager = LanguageManager.shared
+        return self
+            .environment(\.locale, manager.currentLocale)
+            .id(manager.refreshID)
+    }
+}
 

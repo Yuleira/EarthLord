@@ -21,7 +21,7 @@ struct TerritoryToolbarView: View {
                 HStack(spacing: 6) {
                     Image(systemName: "chevron.left")
                         .font(.system(size: 16, weight: .semibold))
-                    Text(String(localized: "common_back"))
+                    Text(LocalizedString.commonBack)
                         .font(.system(size: 15, weight: .medium))
                 }
                 .foregroundColor(ApocalypseTheme.textPrimary)
@@ -55,7 +55,7 @@ struct TerritoryToolbarView: View {
                 HStack(spacing: 6) {
                     Image(systemName: "hammer.fill")
                         .font(.system(size: 14))
-                    Text(String(localized: "building_start_construction"))
+                    Text(LocalizedString.startBuilding)
                         .font(.system(size: 15, weight: .medium))
                 }
                 .foregroundColor(.white)

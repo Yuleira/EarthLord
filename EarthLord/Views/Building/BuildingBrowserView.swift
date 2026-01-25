@@ -58,7 +58,7 @@ struct BuildingBrowserView: View {
                     }
                 }
             }
-            .navigationTitle(String(localized: "building_browser_title"))
+            .navigationTitle(LocalizedString.buildingBrowserTitle)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -111,15 +111,19 @@ struct BuildingBrowserView: View {
                 spacing: 12
             ) {
                 ForEach(filteredTemplates) { template in
+                    let currentCount = buildingManager.getBuildingCount(
+                        templateId: template.templateId,
+                        territoryId: territoryId
+                    )
                     let availability = availabilityInfo(for: template)
-                    let countText = builtCountText(for: template)
                     
                     BuildingCard(
                         template: template,
                         isLocked: false,
                         isDisabled: !availability.isAvailable,
-                        statusText: availability.statusText,
-                        countText: countText,
+                        statusResource: availability.statusResource,
+                        builtCurrent: currentCount,
+                        builtMax: template.maxPerTerritory,
                         onTap: {
                             handleBuildingSelection(template)
                         }
@@ -143,7 +147,7 @@ struct BuildingBrowserView: View {
                 .font(.system(size: 60))
                 .foregroundColor(ApocalypseTheme.textMuted)
             
-            Text(String(localized: "building_browser_empty_title"))
+            Text(LocalizedString.buildingBrowserEmptyTitle)
                 .font(.system(size: 18, weight: .semibold))
                 .foregroundColor(ApocalypseTheme.textSecondary)
         }
@@ -162,7 +166,7 @@ struct BuildingBrowserView: View {
             VStack {
                 Image(systemName: "hammer.fill")
                     .font(.title)
-                Text(String(localized: "Debug: Add Materials"))
+                Text("Debug: Add Materials")
                     .font(.caption)
             }
             .frame(maxWidth: .infinity)
@@ -183,12 +187,7 @@ struct BuildingBrowserView: View {
         }
     }
     
-    private func availabilityInfo(for template: BuildingTemplate) -> (isAvailable: Bool, statusText: String?) {
-        let currentCount = buildingManager.getBuildingCount(
-            templateId: template.templateId,
-            territoryId: territoryId
-        )
-        
+    private func availabilityInfo(for template: BuildingTemplate) -> (isAvailable: Bool, statusResource: LocalizedStringResource?) {
         let validation = buildingManager.canBuild(
             template: template,
             territoryId: territoryId,
@@ -205,20 +204,12 @@ struct BuildingBrowserView: View {
         
         switch error {
         case .insufficientResources:
-            return (false, String(localized: "building_resources_insufficient"))
+            return (false, LocalizedString.insufficientResources)
         case .maxBuildingsReached:
-            return (false, String(localized: "building_max_reached"))
+            return (false, LocalizedString.maxBuildingsReached)
         default:
-            return (false, "Error")
+            return (false, LocalizedString.commonError)
         }
-    }
-    
-    private func builtCountText(for template: BuildingTemplate) -> String? {
-        let currentCount = buildingManager.getBuildingCount(
-            templateId: template.templateId,
-            territoryId: territoryId
-        )
-        return String(format: String(localized: "building_built_count %lld/%lld"), currentCount, template.maxPerTerritory)
     }
 }
 

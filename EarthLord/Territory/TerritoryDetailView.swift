@@ -57,9 +57,11 @@ struct TerritoryDetailView: View {
     init(territory: Territory, onDelete: (() -> Void)? = nil) {
         self.territory = territory
         self.onDelete = onDelete
-        _currentDisplayName = State(initialValue: territory.displayName)
-    }
-
+        // ✅ 修复：使用我们之前在 LanguageManager 里定义的 translate 助手方法
+            // 把高级钥匙 (Resource) 转换成普通字符串 (String) 存入 State
+            let resolvedName = LanguageManager.shared.translate(territory.displayName)
+            self._currentDisplayName = State(initialValue: resolvedName)
+        }
     // MARK: - Computed Properties
 
     /// 领地坐标
@@ -92,7 +94,7 @@ struct TerritoryDetailView: View {
             // 顶部浮动工具栏
             VStack {
                 TerritoryToolbarView(
-                    territoryName: currentDisplayName,
+                    territoryName: currentDisplayName == "Unnamed Territory" ? String(localized: LocalizedString.unnamedTerritory) : currentDisplayName,
                     onBack: {
                         dismiss()
                     },
@@ -139,11 +141,11 @@ struct TerritoryDetailView: View {
         .sheet(isPresented: $showSettingsMenu) {
             settingsSheet
         }
-        .alert(String(localized: "building_demolish_confirm"), isPresented: $showDeleteAlert) {
-            Button(String(localized: "common_cancel"), role: .cancel) {
+        .alert(LocalizedString.buildingDemolishConfirm, isPresented: $showDeleteAlert) {
+            Button(LocalizedString.commonCancel, role: .cancel) {
                 buildingToDelete = nil
             }
-            Button(String(localized: "building_demolish"), role: .destructive) {
+            Button(LocalizedString.buildingDemolish, role: .destructive) {
                 if let building = buildingToDelete {
                     Task {
                         await demolishBuilding(building)
@@ -152,7 +154,7 @@ struct TerritoryDetailView: View {
             }
         } message: {
             if let building = buildingToDelete {
-                Text(String(localized: "building_demolish_message \(building.buildingName)"))
+                Text(String(format: String(localized: "building_demolish_message %@"), building.buildingName))
             }
         }
     }
@@ -177,11 +179,11 @@ struct TerritoryDetailView: View {
             // 标题栏
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(String(localized: "territory_buildings"))
+                    Text(LocalizedString.territoryBuildings)
                         .font(.system(size: 18, weight: .bold))
                         .foregroundColor(ApocalypseTheme.textPrimary)
                     
-                    Text(String(localized: "building_count_format \(territoryBuildings.count)"))
+                    Text(String(format: String(localized: "building_count_format %lld"), territoryBuildings.count))
                         .font(.system(size: 13))
                         .foregroundColor(ApocalypseTheme.textSecondary)
                 }
@@ -196,7 +198,7 @@ struct TerritoryDetailView: View {
                         HStack(spacing: 6) {
                             Image(systemName: "hammer.fill")
                                 .font(.system(size: 12, weight: .semibold))
-                            Text(String(localized: "building_build"))
+                            Text(LocalizedString.buildingBuild)
                                 .font(.system(size: 12, weight: .semibold))
                         }
                         .foregroundColor(.white)
@@ -286,12 +288,12 @@ struct TerritoryDetailView: View {
             Image(systemName: "building.2.crop.circle")
                 .font(.system(size: 50))
                 .foregroundColor(ApocalypseTheme.textMuted)
-            
-            Text(String(localized: "territory_no_buildings"))
+
+            Text(LocalizedString.territoryNoBuildings)
                 .font(.system(size: 16, weight: .medium))
                 .foregroundColor(ApocalypseTheme.textSecondary)
-            
-            Text(String(localized: "territory_build_hint"))
+
+            Text(LocalizedString.territoryBuildHint)
                 .font(.system(size: 13))
                 .foregroundColor(ApocalypseTheme.textMuted)
                 .multilineTextAlignment(.center)
@@ -310,7 +312,7 @@ struct TerritoryDetailView: View {
                     renameErrorMessage = nil
                     showRenameDialog = true
                 } label: {
-                    Label(String(localized: "territory_rename"), systemImage: "pencil")
+                    Label("territory_rename", systemImage: "pencil")
                 }
                 
                 // 删除领地

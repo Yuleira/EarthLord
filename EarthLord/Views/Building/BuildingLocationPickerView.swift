@@ -41,7 +41,7 @@ struct BuildingLocationPickerView: View {
                     Button {
                         dismiss()
                     } label: {
-                        Text(String(localized: "common_cancel"))
+                        Text(LocalizedString.commonCancel)
                             .font(.system(size: 15, weight: .medium))
                             .foregroundColor(ApocalypseTheme.textPrimary)
                             .padding(.horizontal, 16)
@@ -56,7 +56,7 @@ struct BuildingLocationPickerView: View {
                     Spacer()
                     
                     // 提示文字
-                    Text(String(localized: "building_tap_to_place"))
+                    Text(LocalizedString.buildingTapToPlace)
                         .font(.system(size: 15, weight: .medium))
                         .foregroundColor(ApocalypseTheme.textPrimary)
                         .padding(.horizontal, 16)
@@ -89,7 +89,7 @@ struct BuildingLocationPickerView: View {
                             dismiss()
                         }
                     } label: {
-                        Text(String(localized: "building_confirm_location"))
+                        Text(LocalizedString.buildingConfirmLocation)
                             .font(.system(size: 17, weight: .semibold))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
@@ -106,8 +106,8 @@ struct BuildingLocationPickerView: View {
                 .transition(.move(edge: .bottom).combined(with: .opacity))
             }
         }
-        .alert(String(localized: "building_location_invalid"), isPresented: $showValidationError) {
-            Button(String(localized: "common_confirm"), role: .cancel) {}
+        .alert(LocalizedString.buildingLocationInvalid, isPresented: $showValidationError) {
+            Button(LocalizedString.commonConfirm, role: .cancel) {}
         } message: {
             Text(validationErrorMessage)
         }

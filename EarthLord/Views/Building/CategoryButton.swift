@@ -15,16 +15,17 @@ struct CategoryButton: View {
     
     var body: some View {
         Button(action: action) {
-            VStack(spacing: 6) {
-                // 图标
+            VStack(spacing: 12) {
                 Image(systemName: category.iconName)
                     .font(.system(size: 24, weight: .semibold))
+                    .symbolRenderingMode(.hierarchical)
                     .foregroundColor(isSelected ? .white : ApocalypseTheme.textSecondary)
                 
-                // 分类名称
-                Text(category.displayName)
+                Text(category.localizedName)
                     .font(.system(size: 12, weight: .medium))
                     .foregroundColor(isSelected ? .white : ApocalypseTheme.textSecondary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
             }
             .frame(maxWidth: .infinity)
             .frame(height: 80)

@@ -22,7 +22,7 @@ struct TestMenuView: View {
                     SupabaseTestView()
                 } label: {
                     Label {
-                        Text("Supabase 连接测试")
+                        Text(String(localized: "test_supabase_connection"))
                     } icon: {
                         Image(systemName: "network")
                             .foregroundColor(ApocalypseTheme.info)
@@ -46,7 +46,7 @@ struct TestMenuView: View {
                     AIDebugView()
                 } label: {
                     Label {
-                        Text("AI 物品生成测试")
+                        Text(String(localized: "test_ai_generator_debug"))
                     } icon: {
                         Image(systemName: "cpu.fill")
                             .foregroundColor(.blue)

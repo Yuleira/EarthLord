@@ -113,16 +113,31 @@ final class BuildingManager: ObservableObject {
         playerResources: [String: Int]
     ) -> (canBuild: Bool, error: BuildingError?) {
         
-        // 1. 检查资源是否足够
+        // 1. 检查资源是否足够：使用与 getResourceSummary 一致的归一化 ID（小写，如 "wood"/"stone"）查找库存
         var missingResources: [String: Int] = [:]
-        
+
+        #if DEBUG
+        print("🏗️ [DEBUG] Resource validation for \(template.name):")
+        print("  Player resources: \(playerResources)")
+        #endif
+
         for (resourceId, required) in template.requiredResources {
-            let available = playerResources[resourceId] ?? 0
-            
+            let normalizedId = resourceId.lowercased()
+            let available = playerResources[normalizedId] ?? 0
+
+            #if DEBUG
+            print("  - Required: \(resourceId) (normalized: \(normalizedId)) x\(required)")
+            print("    Available: \(available)")
+            #endif
+
             if available < required {
                 let shortage = required - available
                 missingResources[resourceId] = shortage
-                print("🏗️ [建筑] 资源不足: \(resourceId)，需要 \(required)，拥有 \(available)，缺少 \(shortage)")
+                print("🏗️ [建筑] ❌ 资源不足: \(resourceId)，需要 \(required)，拥有 \(available)，缺少 \(shortage)")
+            } else {
+                #if DEBUG
+                print("    ✅ Sufficient")
+                #endif
             }
         }
         
@@ -176,10 +191,10 @@ final class BuildingManager: ObservableObject {
             return .failure(validation.error!)
         }
         
-        // 4. 消耗资源（原子操作）
+        // 4. 消耗资源（原子操作）；definitionId 使用归一化 ID 与 item_definition_id 对齐
         for (resourceId, amount) in template.requiredResources {
             let success = await InventoryManager.shared.removeItemsByDefinition(
-                definitionId: resourceId,
+                definitionId: resourceId.lowercased(),
                 quantity: amount
             )
             
@@ -209,7 +224,7 @@ final class BuildingManager: ObservableObject {
             "user_id": .string(userId.uuidString),
             "territory_id": .string(territoryId),
             "template_id": .string(templateId),
-            "building_name": .string(template.localizedName),
+            "building_name": .string(template.resolvedLocalizedName),
             "status": .string(BuildingStatus.constructing.rawValue),
             "level": .integer(1),
             "location_lat": location.map { .double($0.latitude) } ?? .null,

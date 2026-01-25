@@ -12,8 +12,11 @@ struct BuildingCard: View {
     let template: BuildingTemplate
     let isLocked: Bool
     let isDisabled: Bool
-    let statusText: String?
-    let countText: String?
+    /// Status pill (Insufficient Resources, Build Limit Reached, etc.); uses LocalizedString.insufficientResources when applicable.
+    let statusResource: LocalizedStringResource?
+    /// Built count: current built, max allowed. When both provided, shows Built current/max.
+    let builtCurrent: Int?
+    let builtMax: Int?
     let onTap: () -> Void
     
     /// 资源成本摘要（显示前3个资源）
@@ -25,138 +28,142 @@ struct BuildingCard: View {
     
     var body: some View {
         Button(action: onTap) {
-            VStack(alignment: .leading, spacing: 10) {
-                // 顶部：图标 + 等级标签
-                HStack {
-                    // 建筑图标
-                    ZStack {
-                        Circle()
-                            .fill(template.category.accentColor.opacity(0.2))
-                            .frame(width: 50, height: 50)
-                        
-                        Image(systemName: template.icon)
-                            .font(.system(size: 24))
-                            .foregroundColor(isLocked ? ApocalypseTheme.textMuted : template.category.accentColor)
-                    }
-                    
-                    Spacer()
-                    
-                    // 等级标签
-                    Text(String(format: String(localized: "building_tier_format"), template.tier))
-                        .font(.system(size: 11, weight: .semibold))
-                        .foregroundColor(isLocked ? ApocalypseTheme.textMuted : ApocalypseTheme.textSecondary)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .background(
-                            Capsule()
-                                .fill(ApocalypseTheme.cardBackground)
-                        )
-                }
-                
-                // 建筑名称
-                    Text(template.localizedName)
-                    .font(.system(size: 16, weight: .bold))
-                    .foregroundColor(isLocked ? ApocalypseTheme.textMuted : ApocalypseTheme.textPrimary)
-                    .lineLimit(1)
-                
-                // 描述
-                Text(template.localizedDescription)
-                    .font(.system(size: 12))
-                    .foregroundColor(isLocked ? ApocalypseTheme.textMuted : ApocalypseTheme.textSecondary)
-                    .lineLimit(2)
-                    .fixedSize(horizontal: false, vertical: true)
-                
-            // 构建计数
-            if let countText {
-                Text(countText)
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundColor(ApocalypseTheme.textSecondary)
-            }
-
-            // 资源成本摘要
-                HStack(spacing: 4) {
-                    Image(systemName: "hammer.fill")
-                        .font(.system(size: 10))
-                        .foregroundColor(ApocalypseTheme.textMuted)
-                    
-                    Text(resourceSummary)
-                        .font(.system(size: 11))
-                        .foregroundColor(ApocalypseTheme.textMuted)
-                        .lineLimit(1)
-                }
-                
-                // 底部：建造时间 + 上限
-                HStack {
-                    // 建造时间
-                    Label {
-                        Text("\(template.buildTimeSeconds)s")
-                            .font(.system(size: 11, weight: .medium))
-                    } icon: {
-                        Image(systemName: "clock.fill")
-                            .font(.system(size: 10))
-                    }
-                    .foregroundColor(ApocalypseTheme.textSecondary)
-                    
-                    Spacer()
-                    
-                    // 领地上限
-                    Label {
-                        Text(String(format: String(localized: "building_max_limit_format"), template.maxPerTerritory))
-                            .font(.system(size: 11, weight: .medium))
-                    } icon: {
-                        Image(systemName: "number.circle.fill")
-                            .font(.system(size: 10))
-                    }
-                    .foregroundColor(ApocalypseTheme.textSecondary)
-                }
-            }
-            .padding(14)
-            .background(
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(ApocalypseTheme.cardBackground)
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(
-                        isLocked ? ApocalypseTheme.textMuted.opacity(0.2) : template.category.accentColor.opacity(0.3),
-                        lineWidth: 1
-                    )
-            )
-            .opacity((isLocked || isDisabled) ? 0.6 : 1.0)
-            .overlay(
-                // 锁定遮罩
-                Group {
-                    if isLocked {
+            VStack(alignment: .leading, spacing: 12) {
+                // 卡片主体
+                VStack(alignment: .leading, spacing: 12) {
+                    // 顶部：图标 + 等级标签
+                    HStack {
                         ZStack {
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(Color.black.opacity(0.4))
+                            Circle()
+                                .fill(template.category.accentColor.opacity(0.2))
+                                .frame(width: 50, height: 50)
                             
-                            VStack(spacing: 4) {
-                                Image(systemName: "lock.fill")
-                                    .font(.system(size: 24))
-                                    .foregroundColor(.white)
-                                
-                                Text(String(localized: "common_locked"))
-                                    .font(.system(size: 12, weight: .semibold))
-                                    .foregroundColor(.white)
+                            Image(systemName: template.icon)
+                                .font(.system(size: 24))
+                                .symbolRenderingMode(.hierarchical)
+                                .foregroundColor(isLocked ? ApocalypseTheme.textMuted : ApocalypseTheme.primary)
+                        }
+                        
+                        Spacer()
+                        
+                        Text(String(format: String(localized: LocalizedString.buildingTierFormat), template.tier))
+                            .font(.system(size: 11, weight: .semibold))
+                            .foregroundColor(isLocked ? ApocalypseTheme.textMuted : ApocalypseTheme.textSecondary)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(Capsule().fill(ApocalypseTheme.cardBackground))
+                    }
+                    
+                    Text(template.localizedName)
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(isLocked ? ApocalypseTheme.textMuted : ApocalypseTheme.textPrimary)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
+                    
+                    Text(template.localizedDescription)
+                        .font(.system(size: 12))
+                        .foregroundColor(isLocked ? ApocalypseTheme.textMuted : ApocalypseTheme.textSecondary)
+                        .lineLimit(2)
+                        .fixedSize(horizontal: false, vertical: true)
+                    
+                    if let cur = builtCurrent, let max = builtMax {
+                        Text(String(format: String(localized: LocalizedString.builtFormat), cur, max))
+                            .font(.system(size: 12, weight: .medium))
+                            .foregroundColor(ApocalypseTheme.textSecondary)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
+                    }
+
+                    HStack(spacing: 4) {
+                        Image(systemName: "hammer.fill")
+                            .font(.system(size: 10))
+                            .symbolRenderingMode(.hierarchical)
+                            .foregroundColor(ApocalypseTheme.primary)
+                        
+                        Text(resourceSummary)
+                            .font(.system(size: 11))
+                            .foregroundColor(ApocalypseTheme.textMuted)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
+                    }
+                    
+                    HStack {
+                        Label {
+                            Text("\(template.buildTimeSeconds)s")
+                                .font(.system(size: 11, weight: .medium))
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.5)
+                        } icon: {
+                            Image(systemName: "clock.fill")
+                                .font(.system(size: 10))
+                                .symbolRenderingMode(.hierarchical)
+                                .foregroundColor(ApocalypseTheme.primary)
+                        }
+                        .foregroundColor(ApocalypseTheme.textSecondary)
+                        
+                        Spacer()
+                        
+                        Label {
+                            Text(String(format: String(localized: LocalizedString.buildingMaxLimitFormat), template.maxPerTerritory))
+                                .font(.system(size: 11, weight: .medium))
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.5)
+                        } icon: {
+                            Image(systemName: "number.circle.fill")
+                                .font(.system(size: 10))
+                                .symbolRenderingMode(.hierarchical)
+                                .foregroundColor(ApocalypseTheme.primary)
+                        }
+                        .foregroundColor(ApocalypseTheme.textSecondary)
+                    }
+                }
+                .padding(14)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(RoundedRectangle(cornerRadius: 12).fill(ApocalypseTheme.cardBackground))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(
+                            isLocked ? ApocalypseTheme.textMuted.opacity(0.2) : template.category.accentColor.opacity(0.3),
+                            lineWidth: 1
+                        )
+                )
+                .opacity((isLocked || isDisabled) ? 0.6 : 1.0)
+                .overlay(
+                    Group {
+                        if isLocked {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(Color.black.opacity(0.4))
+                                VStack(spacing: 4) {
+                                    Image(systemName: "lock.fill")
+                                        .font(.system(size: 24))
+                                        .symbolRenderingMode(.hierarchical)
+                                        .foregroundColor(.white)
+                                    Text(LocalizedString.commonLocked)
+                                        .font(.system(size: 12, weight: .semibold))
+                                        .foregroundColor(.white)
+                                }
                             }
                         }
                     }
+                )
+                
+                // 状态徽章（资源不足 / 已达上限）：使用 LocalizedString.insufficientResources 等
+                if let res = statusResource {
+                    HStack {
+                        Spacer()
+                        Text(res)
+                            .font(.system(size: 11, weight: .semibold))
+                            .foregroundColor(.white)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(Capsule().fill(isDisabled ? ApocalypseTheme.danger : ApocalypseTheme.success))
+                    }
                 }
-            )
-            if let statusText {
-                HStack {
-                    Text(statusText)
-                        .font(.system(size: 11, weight: .semibold))
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 4)
-                        .background(
-                            Capsule()
-                                .fill(isDisabled ? ApocalypseTheme.danger : ApocalypseTheme.success)
-                        )
-                }
-                .frame(maxWidth: .infinity, alignment: .trailing)
             }
         }
         .buttonStyle(.plain)
@@ -186,8 +193,9 @@ struct BuildingCard: View {
             template: sampleTemplate,
             isLocked: false,
             isDisabled: false,
-            statusText: nil,
-            countText: nil,
+            statusResource: nil,
+            builtCurrent: 1,
+            builtMax: 3,
             onTap: {}
         )
         
@@ -195,8 +203,9 @@ struct BuildingCard: View {
             template: sampleTemplate,
             isLocked: true,
             isDisabled: true,
-            statusText: String(localized: "common_locked"),
-            countText: nil,
+            statusResource: "common_locked",
+            builtCurrent: nil,
+            builtMax: nil,
             onTap: {}
         )
     }

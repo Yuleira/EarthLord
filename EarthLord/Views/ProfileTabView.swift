@@ -45,35 +45,35 @@ struct ProfileTabView: View {
                 // }
 
                 // MARK: - 设置选项
-                Section("profile_settings") {
+                Section(LocalizedString.profileSettings) {
                     NavigationLink {
-                        Text("profile_account_security_dev")
+                        Text(LocalizedString.profileAccountSecurityDev)
                     } label: {
-                        Label("profile_account_security", systemImage: "shield.fill")
+                        Label(LocalizedString.profileAccountSecurity, systemImage: "shield.fill")
                     }
 
                     NavigationLink {
-                        Text("profile_notifications_dev")
+                        Text(LocalizedString.profileNotificationsDev)
                     } label: {
-                        Label("profile_notifications", systemImage: "bell.fill")
+                        Label(LocalizedString.profileNotifications, systemImage: "bell.fill")
                     }
 
                     NavigationLink {
-                        Text("profile_about_dev")
+                        Text(LocalizedString.profileAboutDev)
                     } label: {
-                        Label("profile_about", systemImage: "info.circle.fill")
+                        Label(LocalizedString.profileAbout, systemImage: "info.circle.fill")
                     }
                 }
 
                 // MARK: - App 设置
-                Section("profile_app_settings") {
+                Section(LocalizedString.profileAppSettings) {
                     NavigationLink {
                         LanguageSettingsView()
                     } label: {
                         HStack {
-                            Label("profile_language", systemImage: "globe")
+                            Label(LocalizedString.profileLanguage, systemImage: "globe")
                             Spacer()
-                            Text(languageManager.currentLanguage.displayName)
+                            Text(languageManager.selectedLanguage.displayName)
                                 .foregroundColor(.secondary)
                         }
                     }
@@ -85,7 +85,7 @@ struct ProfileTabView: View {
                         showLogoutAlert = true
                     } label: {
                         HStack {
-                            Label("profile_logout", systemImage: "rectangle.portrait.and.arrow.right")
+                            Label(LocalizedString.profileLogout, systemImage: "rectangle.portrait.and.arrow.right")
                             Spacer()
                             if isLoggingOut {
                                 ProgressView()
@@ -102,24 +102,24 @@ struct ProfileTabView: View {
                     } label: {
                         HStack {
                             Spacer()
-                            Text("profile_delete_account")
+                            Text(LocalizedString.profileDeleteAccount)
                             Spacer()
                         }
                     }
                 } footer: {
-                    Text("profile_delete_account_warning")
+                    Text(LocalizedString.profileDeleteAccountWarning)
                         .foregroundColor(.secondary)
                 }
             }
-            .navigationTitle("tab_profile")
+            .navigationTitle(LocalizedString.tabProfile)
             .id(languageManager.refreshID)
-            .alert("profile_logout_confirm_title", isPresented: $showLogoutAlert) {
-                Button("common_cancel", role: .cancel) { }
-                Button("profile_logout_action", role: .destructive) {
+            .alert(LocalizedString.profileLogoutConfirmTitle, isPresented: $showLogoutAlert) {
+                Button(LocalizedString.commonCancel, role: .cancel) { }
+                Button(LocalizedString.profileLogoutAction, role: .destructive) {
                     performLogout()
                 }
             } message: {
-                Text("profile_logout_confirm_message")
+                Text(LocalizedString.profileLogoutConfirmMessage)
             }
             .sheet(isPresented: $showDeleteAccountSheet) {
                 DeleteAccountConfirmView(
@@ -130,8 +130,8 @@ struct ProfileTabView: View {
                     }
                 )
             }
-            .alert("profile_delete_failed", isPresented: $showDeleteError) {
-                Button("common_ok", role: .cancel) { }
+            .alert(LocalizedString.profileDeleteFailed, isPresented: $showDeleteError) {
+                Button(LocalizedString.commonOk, role: .cancel) { }
             } message: {
                 Text(deleteErrorMessage)
             }
@@ -250,7 +250,7 @@ struct DeleteAccountConfirmView: View {
     @State private var confirmText = ""
     @FocusState private var isTextFieldFocused: Bool
 
-    private let requiredText = "删除"
+    private var requiredText: String { String(localized: "profile_delete_confirm_required_text") }
 
     private var canDelete: Bool {
         confirmText == requiredText
@@ -264,22 +264,22 @@ struct DeleteAccountConfirmView: View {
                     .foregroundColor(.red)
                     .padding(.top, 40)
 
-                Text("profile_confirm_delete_account")
+                Text(LocalizedString.profileConfirmDeleteAccount)
                     .font(.title2)
                     .fontWeight(.bold)
 
                 VStack(spacing: 12) {
-                    Text("profile_delete_irreversible")
+                    Text(LocalizedString.profileDeleteIrreversible)
                         .fontWeight(.semibold)
                         .foregroundColor(.red)
 
-                    Text("profile_delete_data_warning")
+                    Text(LocalizedString.profileDeleteDataWarning)
                         .foregroundColor(.secondary)
 
                     VStack(alignment: .leading, spacing: 8) {
-                        Label("profile_delete_item_profile", systemImage: "person.crop.circle")
-                        Label("profile_delete_item_progress", systemImage: "gamecontroller")
-                        Label("profile_delete_item_auth", systemImage: "key")
+                        Label(LocalizedString.profileDeleteItemProfile, systemImage: "person.crop.circle")
+                        Label(LocalizedString.profileDeleteItemProgress, systemImage: "gamecontroller")
+                        Label(LocalizedString.profileDeleteItemAuth, systemImage: "key")
                     }
                     .font(.subheadline)
                     .foregroundColor(.secondary)
@@ -287,11 +287,11 @@ struct DeleteAccountConfirmView: View {
                 .padding(.horizontal)
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("profile_delete_confirm_prompt \(requiredText)")
+                    Text(String(format: String(localized: "profile_delete_confirm_prompt %@"), requiredText))
                         .font(.subheadline)
                         .foregroundColor(.secondary)
 
-                    TextField(String(localized: "profile_delete_confirm_placeholder \(requiredText)"), text: $confirmText)
+                    TextField(String(format: String(localized: "profile_delete_confirm_placeholder %@"), requiredText), text: $confirmText)
                         .textFieldStyle(.roundedBorder)
                         .focused($isTextFieldFocused)
                         .autocorrectionDisabled()
@@ -319,7 +319,7 @@ struct DeleteAccountConfirmView: View {
                                     .progressViewStyle(CircularProgressViewStyle(tint: .white))
                                     .padding(.trailing, 8)
                             }
-                            Text("profile_confirm_delete")
+                            Text(LocalizedString.profileConfirmDelete)
                         }
                         .frame(maxWidth: .infinity)
                         .padding()
@@ -332,7 +332,7 @@ struct DeleteAccountConfirmView: View {
                     Button {
                         isPresented = false
                     } label: {
-                        Text("common_cancel")
+                        Text(LocalizedString.commonCancel)
                             .frame(maxWidth: .infinity)
                             .padding()
                             .background(Color(.systemGray6))
@@ -379,7 +379,7 @@ struct LanguageSettingsView: View {
                             Text(language.displayName)
                                 .foregroundColor(.primary)
                             Spacer()
-                            if languageManager.currentLanguage == language {
+                            if languageManager.selectedLanguage == language {
                                 Image(systemName: "checkmark")
                                     .foregroundColor(.blue)
                             }
@@ -387,11 +387,11 @@ struct LanguageSettingsView: View {
                     }
                 }
             } footer: {
-                Text("profile_language_update_note")
+                Text(LocalizedString.profileLanguageUpdateNote)
                     .foregroundColor(.secondary)
             }
         }
-        .navigationTitle("profile_language_settings")
+        .navigationTitle(LocalizedString.profileLanguageSettings)
         .navigationBarTitleDisplayMode(.inline)
         .id(languageManager.refreshID)
     }

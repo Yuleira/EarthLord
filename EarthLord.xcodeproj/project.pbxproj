@@ -49,6 +49,7 @@
 		E6E50DBD2F12898D0096D2BB /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50DA22F12898D0096D2BB /* TestView.swift */; };
 		E6E50DBE2F12898D0096D2BB /* ApocalypseTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50DA42F12898D0096D2BB /* ApocalypseTheme.swift */; };
 		E6E50DC02F12898D0096D2BB /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50D8E2F12898D0096D2BB /* LanguageManager.swift */; };
+		E6E50E012F12898D0096D2BB /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50E002F12898D0096D2BB /* LocalizedString.swift */; };
 		E6E50DC12F12898D0096D2BB /* TerritoryTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50D9E2F12898D0096D2BB /* TerritoryTestView.swift */; };
 		E6E50DC22F12898D0096D2BB /* TerritoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50D9B2F12898D0096D2BB /* TerritoryDetailView.swift */; };
 		E6E50DC32F12898D0096D2BB /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50D892F12898D0096D2BB /* AppConfig.swift */; };
@@ -107,6 +108,7 @@
 		E6E50D892F12898D0096D2BB /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		E6E50D8D2F12898D0096D2BB /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		E6E50D8E2F12898D0096D2BB /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
+		E6E50E002F12898D0096D2BB /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
 		E6E50D8F2F12898D0096D2BB /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		E6E50D902F12898D0096D2BB /* TerritoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerritoryManager.swift; sourceTree = "<group>"; };
 		E6E50D922F12898D0096D2BB /* CoordinateConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateConverter.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				E62484F82F152D4D001B6ABC /* ExplorationManager.swift */,
 				E6E50D8D2F12898D0096D2BB /* AuthManager.swift */,
 				E6E50D8E2F12898D0096D2BB /* LanguageManager.swift */,
+				E6E50E002F12898D0096D2BB /* LocalizedString.swift */,
 				E6E50D8F2F12898D0096D2BB /* LocationManager.swift */,
 				E6E50D902F12898D0096D2BB /* TerritoryManager.swift */,
 				A4DD4FD11BCB70FADC5ED58B /* AIItemGenerator.swift */,
@@ -452,6 +455,7 @@
 				E69FA43A2F1CEBB900E53528 /* ScavengeResultView.swift in Sources */,
 				E6AFAD6E2F22ACAC0058275D /* BuildingModels.swift in Sources */,
 				E6E50DC02F12898D0096D2BB /* LanguageManager.swift in Sources */,
+				E6E50E012F12898D0096D2BB /* LocalizedString.swift in Sources */,
 				E6E50DDC2F1299070096D2BB /* MockExplorationData.swift in Sources */,
 				E6E50DC12F12898D0096D2BB /* TerritoryTestView.swift in Sources */,
 				E62484F92F152D4D001B6ABC /* ExplorationManager.swift in Sources */,

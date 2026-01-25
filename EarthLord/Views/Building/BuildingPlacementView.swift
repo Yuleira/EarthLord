@@ -40,10 +40,10 @@ struct BuildingPlacementView: View {
         Dictionary(uniqueKeysWithValues: buildingManager.buildingTemplates.map { ($0.templateId, $0) })
     }
     
-    /// 是否所有资源都足够
+    /// 是否所有资源都足够（使用归一化 ID 与 getResourceSummary 的 key 对齐）
     private var hasAllResources: Bool {
         for (resourceId, required) in template.requiredResources {
-            let available = playerResources[resourceId] ?? 0
+            let available = playerResources[resourceId.lowercased()] ?? 0
             if available < required {
                 return false
             }
@@ -66,25 +66,17 @@ struct BuildingPlacementView: View {
                     .ignoresSafeArea()
                 
                 ScrollView {
-                    VStack(spacing: 20) {
-                        // 建筑信息卡片
+                    VStack(spacing: 16) {
                         buildingInfoCard
-                        
-                        // 资源需求
                         resourceRequirementsCard
-                        
-                        // 位置选择
                         locationSelectionCard
-                        
-                        // 建造按钮
                         constructButton
-                        
                         Spacer(minLength: 20)
                     }
-                    .padding()
+                    .padding(16)
                 }
             }
-            .navigationTitle(String(localized: "building_place_title"))
+            .navigationTitle(LocalizedString.buildingPlaceTitle)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -113,15 +105,15 @@ struct BuildingPlacementView: View {
                 }
             )
         }
-        .alert(String(localized: "building_construction_success"), isPresented: $showSuccessAlert) {
-            Button(String(localized: "common_confirm")) {
+        .alert("building_construction_success", isPresented: $showSuccessAlert) {
+            Button(LocalizedString.commonConfirm) {
                 dismiss()
             }
         } message: {
-            Text(String(format: String(localized: "building_construction_started_format"), template.localizedName))
+            Text(String(format: String(localized: "building_construction_started_format %@"), template.resolvedLocalizedName))
         }
-        .alert(String(localized: "building_construction_failed"), isPresented: $showErrorAlert) {
-            Button(String(localized: "common_confirm"), role: .cancel) {}
+        .alert("building_construction_failed", isPresented: $showErrorAlert) {
+            Button(LocalizedString.commonConfirm, role: .cancel) {}
         } message: {
             Text(errorMessage)
         }
@@ -131,10 +123,8 @@ struct BuildingPlacementView: View {
     
     /// 建筑信息卡片
     private var buildingInfoCard: some View {
-        VStack(spacing: 16) {
-            // 图标 + 名称
+        VStack(alignment: .leading, spacing: 16) {
             HStack(spacing: 16) {
-                // 图标
                 ZStack {
                     Circle()
                         .fill(template.category.accentColor.opacity(0.2))
@@ -142,70 +132,78 @@ struct BuildingPlacementView: View {
                     
                     Image(systemName: template.icon)
                         .font(.system(size: 28))
-                        .foregroundColor(template.category.accentColor)
+                        .symbolRenderingMode(.hierarchical)
+                        .foregroundColor(ApocalypseTheme.primary)
                 }
                 
-                // 信息
-                VStack(alignment: .leading, spacing: 6) {
+                VStack(alignment: .leading, spacing: 12) {
                     Text(template.localizedName)
                         .font(.system(size: 20, weight: .bold))
                         .foregroundColor(ApocalypseTheme.textPrimary)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
                     
                     HStack(spacing: 8) {
-                        // 分类
-                        Text(template.category.displayName)
+                        Text(template.category.localizedName)
                             .font(.system(size: 13))
                             .foregroundColor(template.category.accentColor)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
                         
                         Text("•")
                             .foregroundColor(ApocalypseTheme.textMuted)
                         
-                        // 等级
-                        Text(String(format: String(localized: "building_tier_format"), template.tier))
+                        Text(String(format: String(localized: "building_tier_format %lld"), template.tier))
                             .font(.system(size: 13))
                             .foregroundColor(ApocalypseTheme.textSecondary)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
                     }
                 }
                 
                 Spacer()
             }
             
-            // 描述
             Text(template.localizedDescription)
                 .font(.system(size: 14))
                 .foregroundColor(ApocalypseTheme.textSecondary)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            // 属性
             HStack(spacing: 16) {
-                // 建造时间
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(String(localized: "building_build_time"))
+                    Text(LocalizedString.buildingBuildTime)
                         .font(.system(size: 11))
                         .foregroundColor(ApocalypseTheme.textMuted)
                     
                     HStack(spacing: 4) {
                         Image(systemName: "clock.fill")
                             .font(.system(size: 12))
+                            .symbolRenderingMode(.hierarchical)
+                            .foregroundColor(ApocalypseTheme.primary)
                         Text("\(template.buildTimeSeconds)s")
                             .font(.system(size: 14, weight: .medium))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
                     }
                     .foregroundColor(ApocalypseTheme.textPrimary)
                 }
                 
                 Spacer()
                 
-                // 领地上限
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(String(localized: "building_max_per_territory"))
+                    Text(LocalizedString.buildingMaxPerTerritory)
                         .font(.system(size: 11))
                         .foregroundColor(ApocalypseTheme.textMuted)
                     
                     HStack(spacing: 4) {
                         Image(systemName: "number.circle.fill")
                             .font(.system(size: 12))
+                            .symbolRenderingMode(.hierarchical)
+                            .foregroundColor(ApocalypseTheme.primary)
                         Text("\(template.maxPerTerritory)")
                             .font(.system(size: 14, weight: .medium))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
                     }
                     .foregroundColor(ApocalypseTheme.textPrimary)
                 }
@@ -214,53 +212,65 @@ struct BuildingPlacementView: View {
             }
         }
         .padding(16)
-        .background(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(ApocalypseTheme.cardBackground)
-        )
+        .background(RoundedRectangle(cornerRadius: 12).fill(ApocalypseTheme.cardBackground))
     }
     
     /// 资源需求卡片
     private var resourceRequirementsCard: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            // 标题
-            HStack {
+        VStack(alignment: .leading, spacing: 16) {
+            // 标题行（仅图标 + 文案，不与状态徽章挤在一起）
+            HStack(spacing: 8) {
                 Image(systemName: "cube.box.fill")
                     .font(.system(size: 16))
+                    .symbolRenderingMode(.hierarchical)
                     .foregroundColor(ApocalypseTheme.primary)
                 
-                Text(String(localized: "inventory_resources"))
+                Text(LocalizedString.inventoryResources)
                     .font(.system(size: 16, weight: .semibold))
                     .foregroundColor(ApocalypseTheme.textPrimary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
                 
                 Spacer()
-                
-                // 资源状态指示器
+            }
+            
+            // 资源状态：单独一行，与标题、列表分离，避免与图标重叠
+            HStack {
+                Spacer()
                 if hasAllResources {
                     HStack(spacing: 4) {
                         Image(systemName: "checkmark.circle.fill")
                             .font(.system(size: 14))
-                        Text(String(localized: "building_resources_sufficient"))
+                            .symbolRenderingMode(.hierarchical)
+                            .foregroundColor(ApocalypseTheme.success)
+                        Text(LocalizedString.buildingResourcesSufficient)
                             .font(.system(size: 12, weight: .medium))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
                     }
                     .foregroundColor(ApocalypseTheme.success)
                 } else {
-                    HStack(spacing: 4) {
-                        Image(systemName: "exclamationmark.circle.fill")
+                    HStack(spacing: 6) {
+                        Image(systemName: "exclamationmark.triangle.fill")
                             .font(.system(size: 14))
-                        Text(String(localized: "building_resources_insufficient"))
+                            .symbolRenderingMode(.hierarchical)
+                        Text(LocalizedString.insufficientResources)
                             .font(.system(size: 12, weight: .medium))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
                     }
-                    .foregroundColor(ApocalypseTheme.danger)
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 8)
+                    .background(RoundedRectangle(cornerRadius: 8).fill(ApocalypseTheme.danger))
                 }
             }
             
             // 资源列表
-            VStack(spacing: 8) {
+            VStack(spacing: 12) {
                 ForEach(Array(template.requiredResources.keys.sorted()), id: \.self) { resourceId in
                     let required = template.requiredResources[resourceId] ?? 0
-                    let available = playerResources[resourceId] ?? 0
-                    
+                    let available = playerResources[resourceId.lowercased()] ?? 0
                     ResourceRow(
                         resourceId: resourceId,
                         requiredAmount: required,
@@ -270,57 +280,60 @@ struct BuildingPlacementView: View {
             }
         }
         .padding(16)
-        .background(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(ApocalypseTheme.cardBackground)
-        )
+        .background(RoundedRectangle(cornerRadius: 12).fill(ApocalypseTheme.cardBackground))
     }
     
     /// 位置选择卡片
     private var locationSelectionCard: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            // 标题
+        VStack(alignment: .leading, spacing: 16) {
             HStack {
                 Image(systemName: "mappin.circle.fill")
                     .font(.system(size: 16))
+                    .symbolRenderingMode(.hierarchical)
                     .foregroundColor(ApocalypseTheme.primary)
                 
-                Text(String(localized: "building_select_location"))
+                Text(LocalizedString.buildingSelectLocation)
                     .font(.system(size: 16, weight: .semibold))
                     .foregroundColor(ApocalypseTheme.textPrimary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
                 
                 Spacer()
                 
-                // 位置状态
                 if selectedLocation != nil {
                     HStack(spacing: 4) {
                         Image(systemName: "checkmark.circle.fill")
                             .font(.system(size: 14))
-                        Text(String(localized: "building_location_selected"))
+                            .symbolRenderingMode(.hierarchical)
+                            .foregroundColor(ApocalypseTheme.success)
+                        Text(LocalizedString.buildingLocationSelected)
                             .font(.system(size: 12, weight: .medium))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
                     }
                     .foregroundColor(ApocalypseTheme.success)
                 }
             }
             
-            // 选择按钮
             Button {
                 showLocationPicker = true
             } label: {
-                HStack {
+                HStack(spacing: 12) {
                     Image(systemName: "map.fill")
                         .font(.system(size: 16))
+                        .symbolRenderingMode(.hierarchical)
+                        .foregroundColor(ApocalypseTheme.primary)
                     
                     if let location = selectedLocation {
                         VStack(alignment: .leading, spacing: 2) {
-                            Text(String(localized: "building_location_coordinates"))
+                            Text(LocalizedString.buildingLocationCoordinates)
                                 .font(.system(size: 13, weight: .medium))
                             Text(String(format: "%.6f, %.6f", location.latitude, location.longitude))
                                 .font(.system(size: 11))
                                 .foregroundColor(ApocalypseTheme.textSecondary)
                         }
                     } else {
-                        Text(String(localized: "building_tap_to_select_location"))
+                        Text(LocalizedString.buildingTapToSelectLocation)
                             .font(.system(size: 15, weight: .medium))
                     }
                     
@@ -328,21 +341,16 @@ struct BuildingPlacementView: View {
                     
                     Image(systemName: "chevron.right")
                         .font(.system(size: 14))
+                        .symbolRenderingMode(.hierarchical)
                         .foregroundColor(ApocalypseTheme.textMuted)
                 }
                 .foregroundColor(ApocalypseTheme.textPrimary)
                 .padding(14)
-                .background(
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(ApocalypseTheme.cardBackground.opacity(0.5))
-                )
+                .background(RoundedRectangle(cornerRadius: 10).fill(ApocalypseTheme.cardBackground.opacity(0.5)))
             }
         }
         .padding(16)
-        .background(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(ApocalypseTheme.cardBackground)
-        )
+        .background(RoundedRectangle(cornerRadius: 12).fill(ApocalypseTheme.cardBackground))
     }
     
     /// 建造按钮
@@ -359,17 +367,17 @@ struct BuildingPlacementView: View {
                 } else {
                     Image(systemName: "hammer.fill")
                         .font(.system(size: 16))
-                    Text(String(localized: "building_confirm_construction"))
+                        .symbolRenderingMode(.hierarchical)
+                    Text(LocalizedString.buildingConfirmConstruction)
                         .font(.system(size: 17, weight: .semibold))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
                 }
             }
             .foregroundColor(.white)
             .frame(maxWidth: .infinity)
             .padding(.vertical, 16)
-            .background(
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(canConstruct ? ApocalypseTheme.primary : ApocalypseTheme.textMuted)
-            )
+            .background(RoundedRectangle(cornerRadius: 12).fill(canConstruct ? ApocalypseTheme.primary : ApocalypseTheme.textMuted))
         }
         .disabled(!canConstruct || isConstructing)
         .opacity(canConstruct && !isConstructing ? 1.0 : 0.6)

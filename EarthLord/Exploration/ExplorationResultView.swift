@@ -54,7 +54,7 @@ struct ExplorationResultView: View {
 
                 // 关闭按钮
                 Button(action: onDismiss) {
-                    Text("common_done")
+                    Text(LocalizedString.commonDone)
                         .font(.system(size: 17, weight: .semibold))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
@@ -93,7 +93,7 @@ struct ExplorationResultView: View {
             }
 
             // 等级名称
-            Text(tier.displayName)
+            Text(tier.localizedName)
                 .font(.system(size: 28, weight: .bold))
                 .foregroundColor(tier.color)
 
@@ -134,7 +134,7 @@ struct ExplorationResultView: View {
 
     private var statsSection: some View {
         VStack(spacing: 16) {
-            Text("exploration_stats")
+            Text(LocalizedString.explorationStats)
                 .font(.system(size: 18, weight: .semibold))
                 .foregroundColor(ApocalypseTheme.textPrimary)
 
@@ -181,7 +181,7 @@ struct ExplorationResultView: View {
 
     private var collectedItemsSection: some View {
         VStack(spacing: 16) {
-            Text("exploration_collected_items")
+            Text(LocalizedString.explorationCollectedItems)
                 .font(.system(size: 18, weight: .semibold))
                 .foregroundColor(ApocalypseTheme.textPrimary)
 
@@ -201,7 +201,7 @@ struct ExplorationResultView: View {
                 .font(.system(size: 24))
                 .foregroundColor(.yellow)
 
-            Text("exploration_experience_gained")
+            Text(LocalizedString.explorationExperienceGained)
                 .font(.system(size: 16))
                 .foregroundColor(ApocalypseTheme.textSecondary)
 

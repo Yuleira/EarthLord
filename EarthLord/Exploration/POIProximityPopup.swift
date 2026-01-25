@@ -51,7 +51,7 @@ struct POIProximityPopup: View {
 
                     // 信息
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("poi_discovery_title")
+                        Text(LocalizedString.poiDiscoveryTitle)
                             .font(.system(size: 13))
                             .foregroundColor(ApocalypseTheme.textSecondary)
 
@@ -95,7 +95,7 @@ struct POIProximityPopup: View {
                     Spacer()
 
                     // 提示文字
-                    Text("poi_scavenge_available")
+                    Text(LocalizedString.poiScavengeAvailable)
                         .font(.system(size: 12))
                         .foregroundColor(ApocalypseTheme.textSecondary)
                 }
@@ -105,7 +105,7 @@ struct POIProximityPopup: View {
                 HStack(spacing: 12) {
                     // 稍后再说按钮
                     Button(action: onDismiss) {
-                        Text("common_later")
+                        Text(LocalizedString.commonLater)
                             .font(.system(size: 15, weight: .semibold))
                             .foregroundColor(ApocalypseTheme.textSecondary)
                             .frame(maxWidth: .infinity)
@@ -121,7 +121,7 @@ struct POIProximityPopup: View {
                         HStack(spacing: 8) {
                             Image(systemName: "hand.point.up.left.fill")
                                 .font(.system(size: 14))
-                            Text("poi_scavenge_now")
+                            Text(LocalizedString.poiScavengeNow)
                                 .font(.system(size: 15, weight: .semibold))
                         }
                         .foregroundColor(.white)

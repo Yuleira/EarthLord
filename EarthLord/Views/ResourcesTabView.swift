@@ -64,7 +64,7 @@ struct ResourcesTabView: View {
                     contentView
                 }
             }
-            .navigationTitle("tab_resources")
+            .navigationTitle(LocalizedString.tabResources)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -92,7 +92,7 @@ struct ResourcesTabView: View {
     /// 交易开关
     private var tradeToggle: some View {
         HStack(spacing: 6) {
-            Text("segment_trade")
+            Text(LocalizedString.segmentTrade)
                 .font(.system(size: 13))
                 .foregroundColor(ApocalypseTheme.textSecondary)
 
@@ -139,7 +139,7 @@ struct ResourcesTabView: View {
                 .font(.system(size: 18, weight: .semibold))
                 .foregroundColor(ApocalypseTheme.textSecondary)
 
-            Text("feature_in_development")
+            Text(LocalizedString.featureInDevelopment)
                 .font(.system(size: 14))
                 .foregroundColor(ApocalypseTheme.textMuted)
 

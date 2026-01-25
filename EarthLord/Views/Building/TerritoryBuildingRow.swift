@@ -23,15 +23,21 @@ struct TerritoryBuildingRow: View {
             
             // 中间：建筑信息
             VStack(alignment: .leading, spacing: 4) {
-                // 建筑名称
-                Text(template?.localizedName ?? building.buildingName)
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundColor(ApocalypseTheme.textPrimary)
+                // 建筑名称 (LocalizedStringResource 或 fallback)
+                Group {
+                    if let t = template {
+                        Text(t.localizedName)
+                    } else {
+                        Text(building.buildingName)
+                    }
+                }
+                .font(.system(size: 16, weight: .semibold))
+                .foregroundColor(ApocalypseTheme.textPrimary)
                 
                 // 状态或倒计时
                 if building.status == .constructing {
                     HStack(spacing: 4) {
-                        Text(building.status.displayName)
+                        Text(building.status.localizedName)
                             .font(.system(size: 13))
                             .foregroundColor(building.status.accentColor)
                         
@@ -44,14 +50,14 @@ struct TerritoryBuildingRow: View {
                     }
                 } else {
                     HStack(spacing: 4) {
-                        Text(building.status.displayName)
+                        Text(building.status.localizedName)
                             .font(.system(size: 13))
                             .foregroundColor(building.status.accentColor)
                         
                         Text("•")
                             .foregroundColor(ApocalypseTheme.textMuted)
                         
-                        Text(String(format: String(localized: "building_level_format"), building.level))
+                        Text(String(format: String(localized: "building_level_format %lld"), building.level))
                             .font(.system(size: 13))
                             .foregroundColor(ApocalypseTheme.textSecondary)
                     }
@@ -68,7 +74,7 @@ struct TerritoryBuildingRow: View {
                         Button {
                             onUpgrade()
                         } label: {
-                            Label(String(localized: "building_upgrade"), systemImage: "arrow.up.circle")
+                            Label("building_upgrade", systemImage: "arrow.up.circle")
                         }
                     }
                     
@@ -76,7 +82,7 @@ struct TerritoryBuildingRow: View {
                     Button(role: .destructive) {
                         onDemolish()
                     } label: {
-                        Label(String(localized: "building_demolish"), systemImage: "trash")
+                        Label("building_demolish", systemImage: "trash")
                     }
                 } label: {
                     Image(systemName: "ellipsis.circle")

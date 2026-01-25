@@ -19,17 +19,13 @@ enum BuildingCategory: String, Codable, CaseIterable {
     case production
     case energy
 
-    /// 本地化显示名称
-    var displayName: String {
+    /// 本地化显示名称 (Late-Binding: evaluated at render time)
+    var localizedName: LocalizedStringResource {
         switch self {
-        case .survival:
-            return String(localized: "category_survival")
-        case .storage:
-            return String(localized: "category_storage")
-        case .production:
-            return String(localized: "category_production")
-        case .energy:
-            return String(localized: "category_energy")
+        case .survival: return LocalizedString.categorySurvival
+        case .storage: return LocalizedString.categoryStorage
+        case .production: return LocalizedString.categoryProduction
+        case .energy: return LocalizedString.categoryEnergy
         }
     }
 
@@ -66,13 +62,11 @@ enum BuildingStatus: String, Codable {
     case constructing
     case active
 
-    /// 本地化显示名称
-    var displayName: String {
+    /// 本地化显示名称 (Late-Binding: evaluated at render time)
+    var localizedName: LocalizedStringResource {
         switch self {
-        case .constructing:
-            return String(localized: "status_constructing")
-        case .active:
-            return String(localized: "status_active")
+        case .constructing: return "status_constructing"
+        case .active: return "status_active"
         }
     }
 
@@ -129,12 +123,25 @@ struct BuildingTemplate: Identifiable, Codable {
         self.maxLevel = maxLevel
     }
 
-    var localizedName: String {
-        NSLocalizedString(name, comment: "")
+    /// 本地化名称 (Late-Binding)：使用 JSON 的 name 作为 Key 查表，如 building_name_campfire → 篝火
+    var localizedName: LocalizedStringResource {
+        // ✅ 修复：使用 LocalizationValue 包装动态变量
+        LocalizedStringResource(String.LocalizationValue(name))
     }
 
-    var localizedDescription: String {
-        NSLocalizedString(description, comment: "")
+    /// 本地化描述 (Late-Binding)：使用 JSON 的 description 作为 Key 查表
+    var localizedDescription: LocalizedStringResource {
+        LocalizedStringResource(String.LocalizationValue(description))
+    }
+
+    /// 已解析的本地化名称（用于 DB、插值等需要 String 的场景）
+    var resolvedLocalizedName: String {
+        String(localized: String.LocalizationValue(name))
+    }
+
+    /// 已解析的本地化描述（用于需要 String 的场景）
+    var resolvedLocalizedDescription: String {
+        String(localized: String.LocalizationValue(description))
     }
 
     /// CodingKeys 映射：兼容 snake_case / camelCase
@@ -343,14 +350,14 @@ class BuildingAnnotation: NSObject, MKAnnotation {
     let template: BuildingTemplate?
     
     var title: String? {
-        template?.localizedName ?? building.buildingName
+        template.map { $0.resolvedLocalizedName } ?? building.buildingName
     }
     
     var subtitle: String? {
         if building.status == .constructing {
             return String(localized: "status_constructing")
         } else {
-            return String(localized: "building_level_format \(building.level)")
+            return String(format: String(localized: "building_level_format %lld"), building.level)
         }
     }
     

@@ -10,18 +10,22 @@ import GoogleSignIn
 
 @main
 struct EarthLordApp: App {
+    
+    /// Language manager for locale injection at root level
+    @StateObject private var languageManager = LanguageManager.shared
 
     init() {
-        // Step 1A：清空历史语言缓存
-        UserDefaults.standard.removeObject(forKey: "app_language")
-        // 验证配置（仅在 DEBUG 模式下输出）
+        // Validate configuration (DEBUG only)
         AppConfig.validateConfiguration()
     }
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                // Google Sign-In URL 回调处理
+                // Late-Binding Localization: inject locale at the very root
+                .environment(\.locale, languageManager.currentLocale)
+                .id(languageManager.refreshID)
+                // Google Sign-In URL callback
                 .onOpenURL { url in
                     GIDSignIn.sharedInstance.handle(url)
                 }
@@ -29,31 +33,26 @@ struct EarthLordApp: App {
     }
 }
 
-/// 应用根容器视图 - 认证状态驱动的导航
+/// Root container view - authentication-driven navigation
 struct ContentView: View {
-    /// 认证管理器 - 观察认证状态变化
+    /// Authentication manager - observe auth state changes
     @ObservedObject private var authManager = AuthManager.shared
-    
-    /// 语言管理器 - 支持语言切换
-    @StateObject private var languageManager = LanguageManager.shared
     
     var body: some View {
         Group {
             if authManager.isAuthenticated {
-                // 已认证：显示主应用界面
+                // Authenticated: show main app
                 MainTabView()
             } else {
-                // 未认证：显示登录界面
+                // Not authenticated: show login
                 AuthView()
             }
         }
-    // --- 🚀 重新加回来的关键代码 ---
-            .environment(\.locale, languageManager.currentLocale) // 1. 注入语言环境，让 String(localized:) 生效
-            .id(languageManager.refreshID) // 2. 切换语言时强制刷新整个视图树
-            // ----------------------------
-            .animation(.easeInOut(duration: 0.3), value: authManager.isAuthenticated)
-            .onAppear {
-                print("🏠 [ContentView] Current Locale: \(languageManager.currentLocale.identifier)")
+        .animation(.easeInOut(duration: 0.3), value: authManager.isAuthenticated)
+        #if DEBUG
+        .onAppear {
+            print("🏠 [ContentView] Locale: \(LanguageManager.shared.currentLocale.identifier)")
         }
+        #endif
     }
 }
