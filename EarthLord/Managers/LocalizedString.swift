@@ -531,6 +531,116 @@ enum LocalizedString {
     /// 传奇 (rarity_legendary)
     static let rarityLegendary: LocalizedStringResource = "rarity_legendary"
 
+    // MARK: - Trade System (38 keys)
+
+    /// 交易市场标题 (trade_market_title)
+    static let tradeMarketTitle: LocalizedStringResource = "trade_market_title"
+
+    /// 我的挂单 (trade_my_offers)
+    static let tradeMyOffers: LocalizedStringResource = "trade_my_offers"
+
+    /// 交易历史 (trade_history)
+    static let tradeHistory: LocalizedStringResource = "trade_history"
+
+    /// 创建挂单 (trade_create_offer)
+    static let tradeCreateOffer: LocalizedStringResource = "trade_create_offer"
+
+    /// 接受交易 (trade_accept)
+    static let tradeAccept: LocalizedStringResource = "trade_accept"
+
+    /// 取消挂单 (trade_cancel)
+    static let tradeCancel: LocalizedStringResource = "trade_cancel"
+
+    /// 评价交易 (trade_rate)
+    static let tradeRate: LocalizedStringResource = "trade_rate"
+
+    /// 提供物品 (trade_offering)
+    static let tradeOffering: LocalizedStringResource = "trade_offering"
+
+    /// 需要物品 (trade_requesting)
+    static let tradeRequesting: LocalizedStringResource = "trade_requesting"
+
+    /// 留言 (trade_message)
+    static let tradeMessage: LocalizedStringResource = "trade_message"
+
+    /// 有效期 (trade_validity)
+    static let tradeValidity: LocalizedStringResource = "trade_validity"
+
+    /// 过期时间 (trade_expires_at)
+    static let tradeExpiresAt: LocalizedStringResource = "trade_expires_at"
+
+    /// 发布者 (trade_owner)
+    static let tradeOwner: LocalizedStringResource = "trade_owner"
+
+    /// 接受者 (trade_accepter)
+    static let tradeAccepter: LocalizedStringResource = "trade_accepter"
+
+    /// 评分 (trade_rating)
+    static let tradeRating: LocalizedStringResource = "trade_rating"
+
+    /// 评语 (trade_comment)
+    static let tradeComment: LocalizedStringResource = "trade_comment"
+
+    /// 空挂单提示 (trade_empty_offers)
+    static let tradeEmptyOffers: LocalizedStringResource = "trade_empty_offers"
+
+    /// 空历史提示 (trade_empty_history)
+    static let tradeEmptyHistory: LocalizedStringResource = "trade_empty_history"
+
+    /// 确认接受 (trade_confirm_accept)
+    static let tradeConfirmAccept: LocalizedStringResource = "trade_confirm_accept"
+
+    /// 确认取消 (trade_confirm_cancel)
+    static let tradeConfirmCancel: LocalizedStringResource = "trade_confirm_cancel"
+
+    /// 交易成功 (trade_success)
+    static let tradeSuccess: LocalizedStringResource = "trade_success"
+
+    /// 已发布 (trade_published)
+    static let tradePublished: LocalizedStringResource = "trade_published"
+
+    /// 已过期标签 (trade_expired_label)
+    static let tradeExpiredLabel: LocalizedStringResource = "trade_expired_label"
+
+    // 交易状态
+    /// 等待中 (trade_status_active)
+    static let tradeStatusActive: LocalizedStringResource = "trade_status_active"
+
+    /// 已完成 (trade_status_completed)
+    static let tradeStatusCompleted: LocalizedStringResource = "trade_status_completed"
+
+    /// 已取消 (trade_status_cancelled)
+    static let tradeStatusCancelled: LocalizedStringResource = "trade_status_cancelled"
+
+    /// 已过期 (trade_status_expired)
+    static let tradeStatusExpired: LocalizedStringResource = "trade_status_expired"
+
+    // 交易错误信息
+    /// 物品不足错误 (trade_error_insufficient_items)
+    /// 用法: String(format: String(localized: LocalizedString.tradeErrorInsufficientItems), itemId, needed, available)
+    static let tradeErrorInsufficientItems: LocalizedStringResource = "trade_error_insufficient_items"
+
+    /// 挂单不存在 (trade_error_offer_not_found)
+    static let tradeErrorOfferNotFound: LocalizedStringResource = "trade_error_offer_not_found"
+
+    /// 挂单未激活 (trade_error_offer_not_active)
+    static let tradeErrorOfferNotActive: LocalizedStringResource = "trade_error_offer_not_active"
+
+    /// 挂单已过期 (trade_error_offer_expired)
+    static let tradeErrorOfferExpired: LocalizedStringResource = "trade_error_offer_expired"
+
+    /// 不能接受自己的挂单 (trade_error_cannot_accept_own_offer)
+    static let tradeErrorCannotAcceptOwnOffer: LocalizedStringResource = "trade_error_cannot_accept_own_offer"
+
+    /// 不是挂单所有者 (trade_error_not_offer_owner)
+    static let tradeErrorNotOfferOwner: LocalizedStringResource = "trade_error_not_offer_owner"
+
+    /// 已经评价过 (trade_error_already_rated)
+    static let tradeErrorAlreadyRated: LocalizedStringResource = "trade_error_already_rated"
+
+    /// 参数无效 (trade_error_invalid_parameters)
+    static let tradeErrorInvalidParameters: LocalizedStringResource = "trade_error_invalid_parameters"
+
     // MARK: - Key Strings (for statusKey parameters)
 
     /// 仅需 key 字符串（如 statusKey）时使用

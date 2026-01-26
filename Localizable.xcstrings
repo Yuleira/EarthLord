@@ -8435,6 +8435,111 @@
         }
       }
     },
+    "trade_accept" : {
+
+    },
+    "trade_accepter" : {
+
+    },
+    "trade_cancel" : {
+
+    },
+    "trade_comment" : {
+
+    },
+    "trade_confirm_accept" : {
+
+    },
+    "trade_confirm_cancel" : {
+
+    },
+    "trade_create_offer" : {
+
+    },
+    "trade_empty_history" : {
+
+    },
+    "trade_empty_offers" : {
+
+    },
+    "trade_error_already_rated" : {
+
+    },
+    "trade_error_cannot_accept_own_offer" : {
+
+    },
+    "trade_error_insufficient_items" : {
+
+    },
+    "trade_error_invalid_parameters" : {
+
+    },
+    "trade_error_not_offer_owner" : {
+
+    },
+    "trade_error_offer_expired" : {
+
+    },
+    "trade_error_offer_not_active" : {
+
+    },
+    "trade_error_offer_not_found" : {
+
+    },
+    "trade_expired_label" : {
+
+    },
+    "trade_expires_at" : {
+
+    },
+    "trade_history" : {
+
+    },
+    "trade_market_title" : {
+
+    },
+    "trade_message" : {
+
+    },
+    "trade_my_offers" : {
+
+    },
+    "trade_offering" : {
+
+    },
+    "trade_owner" : {
+
+    },
+    "trade_published" : {
+
+    },
+    "trade_rate" : {
+
+    },
+    "trade_rating" : {
+
+    },
+    "trade_requesting" : {
+
+    },
+    "trade_status_active" : {
+
+    },
+    "trade_status_cancelled" : {
+
+    },
+    "trade_status_completed" : {
+
+    },
+    "trade_status_expired" : {
+
+    },
+    "trade_success" : {
+
+    },
+    "trade_validity" : {
+
+    },
     "unit_meter" : {
       "comment" : "Unit meter",
       "localizations" : {
