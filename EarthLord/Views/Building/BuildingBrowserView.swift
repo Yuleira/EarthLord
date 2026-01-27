@@ -166,7 +166,7 @@ struct BuildingBrowserView: View {
             VStack {
                 Image(systemName: "hammer.fill")
                     .font(.title)
-                Text("Debug: Add Materials")
+                Text(LocalizedString.debugAddMaterials)
                     .font(.caption)
             }
             .frame(maxWidth: .infinity)

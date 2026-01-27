@@ -179,7 +179,7 @@ struct ProfileTabView: View {
 
                 // 用户ID（可选显示）
                 if let userId = authManager.currentUser?.id {
-                    Text("ID: \(userId.uuidString.prefix(8))...")
+                    Text(String(format: String(localized: LocalizedString.idDisplayFormat), String(userId.uuidString.prefix(8))))
                         .font(.caption2)
                         .foregroundColor(ApocalypseTheme.textMuted)
                 }

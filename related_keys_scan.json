@@ -1,0 +1,571 @@
+{
+  "keys": [
+    "device_base_station",
+    "device_management",
+    "device_not_unlocked",
+    "device_radio",
+    "device_satellite",
+    "device_walkie_talkie",
+    "item_ai_generated",
+    "item_antibiotics",
+    "item_antibiotics_desc",
+    "item_bandage",
+    "item_bandage_desc",
+    "item_batteries_desc",
+    "item_battery",
+    "item_battery_story",
+    "item_binoculars",
+    "item_binoculars_story",
+    "item_bottled_water",
+    "item_bottled_water_story",
+    "item_candle",
+    "item_candle_story",
+    "item_canned_beans",
+    "item_canned_beans_desc",
+    "item_canned_food",
+    "item_canned_food_story",
+    "item_canned_fruit",
+    "item_canned_fruit_desc",
+    "item_canned_meat",
+    "item_canned_meat_desc",
+    "item_circuit",
+    "item_cloth_desc",
+    "item_concrete",
+    "item_duct_tape",
+    "item_duct_tape_desc",
+    "item_duct_tape_story",
+    "item_energy_bar",
+    "item_energy_bar_story",
+    "item_energy_drink",
+    "item_energy_drink_desc",
+    "item_fabric",
+    "item_fabric_story",
+    "item_fever_medicine",
+    "item_fever_medicine_story",
+    "item_first_aid_bandage",
+    "item_first_aid_bandage_story",
+    "item_first_aid_kit",
+    "item_first_aid_kit_desc",
+    "item_flashlight",
+    "item_flashlight_desc",
+    "item_flashlight_story",
+    "item_glass",
+    "item_hardtack",
+    "item_hardtack_story",
+    "item_hazmat_suit",
+    "item_hazmat_suit_desc",
+    "item_instant_coffee",
+    "item_instant_coffee_story",
+    "item_keychain",
+    "item_keychain_story",
+    "item_lighter",
+    "item_lighter_story",
+    "item_matches",
+    "item_matches_desc",
+    "item_med_kit_small_desc",
+    "item_medical_gauze",
+    "item_medical_gauze_story",
+    "item_metal",
+    "item_military_ration",
+    "item_military_ration_desc",
+    "item_multi_tool",
+    "item_multi_tool_desc",
+    "item_night_vision",
+    "item_night_vision_desc",
+    "item_notebook",
+    "item_notebook_story",
+    "item_old_magazine",
+    "item_old_magazine_story",
+    "item_painkillers",
+    "item_painkillers_desc",
+    "item_painkillers_story",
+    "item_plastic_bag",
+    "item_plastic_bag_story",
+    "item_pure_water",
+    "item_pure_water_desc",
+    "item_radio",
+    "item_radio_desc",
+    "item_rope",
+    "item_rope_desc",
+    "item_rope_story",
+    "item_rubbing_alcohol",
+    "item_rubbing_alcohol_story",
+    "item_scrap_metal",
+    "item_scrap_metal_desc",
+    "item_scrap_metal_story",
+    "item_screws",
+    "item_screws_story",
+    "item_small_first_aid_kit",
+    "item_small_first_aid_kit_desc",
+    "item_solar_charger",
+    "item_solar_charger_desc",
+    "item_stone",
+    "item_surgical_kit",
+    "item_surgical_kit_desc",
+    "item_swiss_army_knife",
+    "item_swiss_army_knife_story",
+    "item_water_purifier",
+    "item_water_purifier_desc",
+    "item_wood",
+    "profile_delete_item_auth",
+    "profile_delete_item_profile",
+    "profile_delete_item_progress",
+    "scavenge_item_count_format",
+    "test_ai_item_generation",
+    "unlock_require_base_station"
+  ],
+  "details": {
+    "device_base_station": {
+      "en": "Base Station",
+      "zh": "营地电台"
+    },
+    "device_management": {
+      "en": "Device Management",
+      "zh": "设备管理"
+    },
+    "device_not_unlocked": {
+      "en": "Device Not Unlocked",
+      "zh": "设备未解锁"
+    },
+    "device_radio": {
+      "en": "Radio",
+      "zh": "收音机"
+    },
+    "device_satellite": {
+      "en": "Satellite",
+      "zh": "卫星通讯"
+    },
+    "device_walkie_talkie": {
+      "en": "Walkie-Talkie",
+      "zh": "对讲机"
+    },
+    "item_ai_generated": {
+      "en": "AI Generated",
+      "zh": "AI 生成"
+    },
+    "item_antibiotics": {
+      "en": "Antibiotics",
+      "zh": "抗生素"
+    },
+    "item_antibiotics_desc": {
+      "en": "Precious medicine",
+      "zh": "珍贵的药物"
+    },
+    "item_bandage": {
+      "en": "Bandage",
+      "zh": "绷带"
+    },
+    "item_bandage_desc": {
+      "en": "Simple wound dressing",
+      "zh": "简单的止血工具"
+    },
+    "item_batteries_desc": {
+      "en": "Energy for electronics",
+      "zh": "电子设备的能源"
+    },
+    "item_battery": {
+      "en": "Battery",
+      "zh": "电池"
+    },
+    "item_battery_story": {
+      "en": "A battery that still has charge - hard currency in this world.",
+      "zh": "还有电的电池，在这个世界里是硬通货。"
+    },
+    "item_binoculars": {
+      "en": "Binoculars",
+      "zh": "望远镜"
+    },
+    "item_binoculars_story": {
+      "en": "Helps you spot danger early, or find the next shelter.",
+      "zh": "能让你提前发现危险，或者找到下一个避难所。"
+    },
+    "item_bottled_water": {
+      "en": "Bottled Water",
+      "zh": "矿泉水"
+    },
+    "item_bottled_water_story": {
+      "en": "Clean drinking water - probably the luckiest find today.",
+      "zh": "干净的饮用水，这可能是你今天最幸运的发现。"
+    },
+    "item_candle": {
+      "en": "Candle",
+      "zh": "蜡烛"
+    },
+    "item_candle_story": {
+      "en": "The only light source on nights without electricity.",
+      "zh": "在没有电的夜晚，这是唯一的光源。"
+    },
+    "item_canned_beans": {
+      "en": "Canned Beans",
+      "zh": "罐头豆子"
+    },
+    "item_canned_beans_desc": {
+      "en": "High protein food",
+      "zh": "高蛋白食物"
+    },
+    "item_canned_food": {
+      "en": "Canned Food",
+      "zh": "罐头食品"
+    },
+    "item_canned_food_story": {
+      "en": "The label has long fallen off, but it smells edible.",
+      "zh": "铁皮罐头上的标签早已脱落，但闻起来应该还能吃。"
+    },
+    "item_canned_fruit": {
+      "en": "Canned Fruit",
+      "zh": "水果罐头"
+    },
+    "item_canned_fruit_desc": {
+      "en": "Good source of vitamins",
+      "zh": "补充维生素的好选择"
+    },
+    "item_canned_meat": {
+      "en": "Canned Meat",
+      "zh": "肉罐头"
+    },
+    "item_canned_meat_desc": {
+      "en": "Precious source of protein",
+      "zh": "珍贵的蛋白质来源"
+    },
+    "item_circuit": {
+      "en": "Circuit",
+      "zh": "电路"
+    },
+    "item_cloth_desc": {
+      "en": "Can mend clothes",
+      "zh": "可以缝补衣物"
+    },
+    "item_concrete": {
+      "en": "Concrete",
+      "zh": "混凝土"
+    },
+    "item_duct_tape": {
+      "en": "Duct Tape",
+      "zh": "胶带"
+    },
+    "item_duct_tape_desc": {
+      "en": "Repairs everything",
+      "zh": "修复一切的神器"
+    },
+    "item_duct_tape_story": {
+      "en": "All-purpose tape - solves half the problems in the apocalypse.",
+      "zh": "万能胶带，在末日里能解决一半的问题。"
+    },
+    "item_energy_bar": {
+      "en": "Energy Bar",
+      "zh": "能量棒"
+    },
+    "item_energy_bar_story": {
+      "en": "Expired, but nobody cares about expiration dates in the apocalypse.",
+      "zh": "虽然过期了，但在末日里没人会在意保质期。"
+    },
+    "item_energy_drink": {
+      "en": "Energy Drink",
+      "zh": "能量饮料"
+    },
+    "item_energy_drink_desc": {
+      "en": "Refreshing beverage",
+      "zh": "提神醒脑的饮品"
+    },
+    "item_fabric": {
+      "en": "Fabric",
+      "zh": "布料"
+    },
+    "item_fabric_story": {
+      "en": "Can be used to patch clothes or make bandages.",
+      "zh": "可以用来缝补衣服或制作绷带。"
+    },
+    "item_fever_medicine": {
+      "en": "Fever Medicine",
+      "zh": "退烧药"
+    },
+    "item_fever_medicine_story": {
+      "en": "A fever in the apocalypse could mean death - these are precious.",
+      "zh": "发烧在末日里可能意味着死亡，这些药很珍贵。"
+    },
+    "item_first_aid_bandage": {
+      "en": "First Aid Bandage",
+      "zh": "急救绷带"
+    },
+    "item_first_aid_bandage_story": {
+      "en": "A fairly clean roll of bandage with some bloodstains.",
+      "zh": "一卷还算干净的绷带，上面沾着些许血迹。"
+    },
+    "item_first_aid_kit": {
+      "en": "First Aid Kit",
+      "zh": "急救包"
+    },
+    "item_first_aid_kit_desc": {
+      "en": "Contains various medical supplies",
+      "zh": "包含多种医疗用品"
+    },
+    "item_flashlight": {
+      "en": "Flashlight",
+      "zh": "手电筒"
+    },
+    "item_flashlight_desc": {
+      "en": "Light in the darkness",
+      "zh": "黑暗中的光明"
+    },
+    "item_flashlight_story": {
+      "en": "The battery still works - this is hope in the darkness.",
+      "zh": "电池还有电，在黑暗中这就是希望。"
+    },
+    "item_glass": {
+      "en": "Glass",
+      "zh": "玻璃"
+    },
+    "item_hardtack": {
+      "en": "Hardtack",
+      "zh": "压缩饼干"
+    },
+    "item_hardtack_story": {
+      "en": "Military-grade hardtack - enough calories to last a day.",
+      "zh": "军用压缩饼干，能提供足够的热量撑过一天。"
+    },
+    "item_hazmat_suit": {
+      "en": "Hazmat Suit",
+      "zh": "防护服"
+    },
+    "item_hazmat_suit_desc": {
+      "en": "Full body protection",
+      "zh": "全身防护装备"
+    },
+    "item_instant_coffee": {
+      "en": "Instant Coffee",
+      "zh": "速溶咖啡"
+    },
+    "item_instant_coffee_story": {
+      "en": "A small packet of instant coffee to keep you awake through long nights.",
+      "zh": "一小包速溶咖啡，能让你在漫长的夜里保持清醒。"
+    },
+    "item_keychain": {
+      "en": "Keychain",
+      "zh": "钥匙串"
+    },
+    "item_keychain_story": {
+      "en": "No idea what it opens, but maybe useful someday.",
+      "zh": "不知道能开什么锁，但也许有一天会用到。"
+    },
+    "item_lighter": {
+      "en": "Lighter",
+      "zh": "打火机"
+    },
+    "item_lighter_story": {
+      "en": "A working lighter - fire has never been more important.",
+      "zh": "一个还能用的打火机，生火从未如此重要。"
+    },
+    "item_matches": {
+      "en": "Matches",
+      "zh": "火柴"
+    },
+    "item_matches_desc": {
+      "en": "Essential for fire",
+      "zh": "生火必备"
+    },
+    "item_med_kit_small_desc": {
+      "en": "Basic medical supplies",
+      "zh": "基本的医疗用品"
+    },
+    "item_medical_gauze": {
+      "en": "Medical Gauze",
+      "zh": "医用纱布"
+    },
+    "item_medical_gauze_story": {
+      "en": "Sterile-packaged gauze - a survivor's essential.",
+      "zh": "无菌包装的纱布，是幸存者的必需品。"
+    },
+    "item_metal": {
+      "en": "Metal",
+      "zh": "金属"
+    },
+    "item_military_ration": {
+      "en": "Military Ration",
+      "zh": "军用口粮"
+    },
+    "item_military_ration_desc": {
+      "en": "High-calorie emergency food",
+      "zh": "高热量应急食品"
+    },
+    "item_multi_tool": {
+      "en": "Multi-tool",
+      "zh": "多功能工具"
+    },
+    "item_multi_tool_desc": {
+      "en": "Portable device with multiple tools",
+      "zh": "集成多种工具的便携装置"
+    },
+    "item_night_vision": {
+      "en": "Night Vision Goggles",
+      "zh": "夜视仪"
+    },
+    "item_night_vision_desc": {
+      "en": "See everything in darkness",
+      "zh": "在黑暗中看清一切"
+    },
+    "item_notebook": {
+      "en": "Notebook",
+      "zh": "笔记本"
+    },
+    "item_notebook_story": {
+      "en": "A blank notebook - perhaps to document this difficult journey.",
+      "zh": "空白的笔记本，也许可以记录这段艰难的旅程。"
+    },
+    "item_old_magazine": {
+      "en": "Old Magazine",
+      "zh": "旧杂志"
+    },
+    "item_old_magazine_story": {
+      "en": "Records the world before the apocalypse - now only good for kindling.",
+      "zh": "记录着末日前的世界，现在只能用来生火。"
+    },
+    "item_painkillers": {
+      "en": "Painkillers",
+      "zh": "止痛药片"
+    },
+    "item_painkillers_desc": {
+      "en": "Relieves pain",
+      "zh": "缓解疼痛"
+    },
+    "item_painkillers_story": {
+      "en": "The label is faded, but the pills inside look usable.",
+      "zh": "瓶子上的标签已经模糊，但里面的药片看起来还能用。"
+    },
+    "item_plastic_bag": {
+      "en": "Plastic Bag",
+      "zh": "塑料袋"
+    },
+    "item_plastic_bag_story": {
+      "en": "Waterproof and lightweight - useful for collecting supplies.",
+      "zh": "防水又轻便，收集物资时很有用。"
+    },
+    "item_pure_water": {
+      "en": "Pure Water",
+      "zh": "纯净水"
+    },
+    "item_pure_water_desc": {
+      "en": "A bottle of fairly clean water",
+      "zh": "一瓶还算干净的水"
+    },
+    "item_radio": {
+      "en": "Radio",
+      "zh": "收音机"
+    },
+    "item_radio_desc": {
+      "en": "Long-range communication device",
+      "zh": "远距离通讯设备"
+    },
+    "item_rope": {
+      "en": "Rope",
+      "zh": "绳索"
+    },
+    "item_rope_desc": {
+      "en": "Versatile survival tool",
+      "zh": "多用途生存工具"
+    },
+    "item_rope_story": {
+      "en": "A sturdy nylon rope - endless uses.",
+      "zh": "一卷结实的尼龙绳，用途无穷。"
+    },
+    "item_rubbing_alcohol": {
+      "en": "Rubbing Alcohol",
+      "zh": "消毒酒精"
+    },
+    "item_rubbing_alcohol_story": {
+      "en": "Half a bottle of rubbing alcohol - priceless in this world.",
+      "zh": "半瓶医用酒精，在这个世界里价值连城。"
+    },
+    "item_scrap_metal": {
+      "en": "Scrap Metal",
+      "zh": "废金属"
+    },
+    "item_scrap_metal_desc": {
+      "en": "Useful for crafting and repairs",
+      "zh": "可用于制作和修理"
+    },
+    "item_scrap_metal_story": {
+      "en": "Can be used to reinforce defenses or craft makeshift weapons.",
+      "zh": "可以用来加固防御或制作简易武器。"
+    },
+    "item_screws": {
+      "en": "Screws",
+      "zh": "螺丝钉"
+    },
+    "item_screws_story": {
+      "en": "Assorted screws - very useful for repairs.",
+      "zh": "一把各种规格的螺丝钉，修理东西时很有用。"
+    },
+    "item_small_first_aid_kit": {
+      "en": "Small First Aid Kit",
+      "zh": "小型急救包"
+    },
+    "item_small_first_aid_kit_desc": {
+      "en": "A small kit containing basic medical supplies",
+      "zh": "包含基本医疗用品的小型急救包"
+    },
+    "item_solar_charger": {
+      "en": "Solar Charger",
+      "zh": "太阳能充电器"
+    },
+    "item_solar_charger_desc": {
+      "en": "Renewable energy",
+      "zh": "可再生能源"
+    },
+    "item_stone": {
+      "en": "Stone",
+      "zh": "石头"
+    },
+    "item_surgical_kit": {
+      "en": "Surgical Kit",
+      "zh": "手术套件"
+    },
+    "item_surgical_kit_desc": {
+      "en": "Professional medical equipment",
+      "zh": "专业医疗设备"
+    },
+    "item_swiss_army_knife": {
+      "en": "Swiss Army Knife",
+      "zh": "瑞士军刀"
+    },
+    "item_swiss_army_knife_story": {
+      "en": "A multi-tool - indispensable for apocalypse survival.",
+      "zh": "多功能工具，在末日生存中不可或缺。"
+    },
+    "item_water_purifier": {
+      "en": "Water Purifier",
+      "zh": "净水器"
+    },
+    "item_water_purifier_desc": {
+      "en": "Turn any water into drinking water",
+      "zh": "将任何水变成饮用水"
+    },
+    "item_wood": {
+      "en": "Wood",
+      "zh": "木材"
+    },
+    "profile_delete_item_auth": {
+      "en": "Login credentials and authentication info",
+      "zh": "登录凭证和认证信息"
+    },
+    "profile_delete_item_profile": {
+      "en": "Your profile information",
+      "zh": "您的个人资料信息"
+    },
+    "profile_delete_item_progress": {
+      "en": "All game progress and data",
+      "zh": "所有游戏进度和数据"
+    },
+    "scavenge_item_count_format": {
+      "en": "%d types",
+      "zh": "%d 种"
+    },
+    "test_ai_item_generation": {
+      "en": "AI Item Generation Test",
+      "zh": "AI 物品生成测试"
+    },
+    "unlock_require_base_station": {
+      "en": "Requires building \"Base Station\"",
+      "zh": "需建造「营地电台」建筑"
+    }
+  }
+}

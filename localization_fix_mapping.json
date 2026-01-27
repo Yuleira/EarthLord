@@ -1,0 +1,218 @@
+{
+  "entries_to_fix": [
+    {
+      "key": "",
+      "current_en": "(empty)",
+      "current_zh": "(empty)",
+      "new_en": "",
+      "new_zh": "",
+      "comment": ""
+    },
+    {
+      "key": "·",
+      "current_en": "(empty)",
+      "current_zh": "(empty)",
+      "new_en": "·",
+      "new_zh": "·",
+      "comment": "A separator text between quality and category."
+    },
+    {
+      "key": "\"%@\"",
+      "current_en": "(empty)",
+      "current_zh": "(empty)",
+      "new_en": "\"%@\"",
+      "new_zh": "\"%@\"",
+      "comment": "A quoted comment from a user, displayed in italic font within a VStack. The text inside the quotation marks is automatically escaped for display as plain text."
+    },
+    {
+      "key": "/",
+      "current_en": "(empty)",
+      "current_zh": "(empty)",
+      "new_en": "/",
+      "new_zh": "/",
+      "comment": "A separator between the owned and required quantities of a resource."
+    },
+    {
+      "key": "#%lld",
+      "current_en": "(empty)",
+      "current_zh": "(empty)",
+      "new_en": "#%lld",
+      "new_zh": "#%lld",
+      "comment": "A badge displaying the index of an item in a list. The argument is the index as a string."
+    },
+    {
+      "key": "%lld",
+      "current_en": "(empty)",
+      "current_zh": "(empty)",
+      "new_en": "%lld",
+      "new_zh": "%lld",
+      "comment": "A label displaying the number of territories the user currently owns. The argument is the count of territories the user owns."
+    },
+    {
+      "key": "%llds",
+      "current_en": "(empty)",
+      "current_zh": "(empty)",
+      "new_en": "%llds",
+      "new_zh": "%lld秒",
+      "comment": "A label displaying the time required to build a building. The argument is the number of seconds needed to build the building."
+    },
+    {
+      "key": "•",
+      "current_en": "(empty)",
+      "current_zh": "(empty)",
+      "new_en": "•",
+      "new_zh": "•",
+      "comment": "A bullet point symbol."
+    },
+    {
+      "key": "+%lld EXP",
+      "current_en": "+%lld EXP",
+      "current_zh": "+%lld 经验",
+      "new_en": "+%lld EXP",
+      "new_zh": "+%lld 经验",
+      "comment": ""
+    },
+    {
+      "key": "×%lld",
+      "current_en": "(empty)",
+      "current_zh": "(empty)",
+      "new_en": "×%lld",
+      "new_zh": "×%lld",
+      "comment": "A label displaying the quantity of a specific item in the user's cart. The argument is the quantity of the item in the cart."
+    },
+    {
+      "key": "auth_code_sent_to",
+      "current_en": "(empty)",
+      "current_zh": "(empty)",
+      "new_en": "Verification code sent to %@",
+      "new_zh": "验证码已发送至 %@",
+      "comment": "Text shown when a verification code has been sent to the user's registered email address."
+    },
+    {
+      "key": "auth_resend_countdown",
+      "current_en": "(empty)",
+      "current_zh": "(empty)",
+      "new_en": "Resend in %llds",
+      "new_zh": "%lld秒后重发",
+      "comment": "Text shown in the \"Resend code\" button, indicating the countdown timer."
+    },
+    {
+      "key": "building_construction_started_format",
+      "current_en": "(empty)",
+      "current_zh": "(empty)",
+      "new_en": "Construction started: %@",
+      "new_zh": "建造已开始：%@",
+      "comment": "Format string for displaying the time remaining until a building is fully constructed."
+    },
+    {
+      "key": "English",
+      "current_en": "(empty)",
+      "current_zh": "(empty)",
+      "new_en": "English",
+      "new_zh": "English",
+      "comment": "Language name for English."
+    },
+    {
+      "key": "error_database_format",
+      "current_en": "(empty)",
+      "current_zh": "(empty)",
+      "new_en": "Database error: %@",
+      "new_zh": "数据库错误：%@",
+      "comment": "A description of a database error that might occur when trading. The argument is a message from the database that describes the error."
+    },
+    {
+      "key": "ID: %@...",
+      "current_en": "(empty)",
+      "current_zh": "(empty)",
+      "new_en": "ID: %@...",
+      "new_zh": "ID：%@...",
+      "comment": "A small label below the user's name that shows their user ID in a shortened form."
+    },
+    {
+      "key": "profile_delete_confirm_placeholder",
+      "current_en": "(empty)",
+      "current_zh": "(empty)",
+      "new_en": "Type here to confirm",
+      "new_zh": "在此处输入以确认",
+      "comment": "Placeholder text for the text field in the \"Delete Account\" confirmation screen."
+    },
+    {
+      "key": "profile_delete_confirm_prompt",
+      "current_en": "(empty)",
+      "current_zh": "(empty)",
+      "new_en": "Are you sure you want to delete your profile?",
+      "new_zh": "您确定要删除个人资料吗？",
+      "comment": "Prompt displayed in an alert when confirming the deletion of a user account."
+    },
+    {
+      "key": "trade_debug_current_config",
+      "current_en": "(empty)",
+      "current_zh": "(empty)",
+      "new_en": "Current Config (Debug)",
+      "new_zh": "当前配置（调试）",
+      "comment": "Label for a button that, when tapped, displays the current configuration of the app."
+    },
+    {
+      "key": "trade_debug_fill_inventory",
+      "current_en": "(empty)",
+      "current_zh": "(empty)",
+      "new_en": "Fill Inventory (Debug)",
+      "new_zh": "填充库存（调试）",
+      "comment": "Label for a debug action in the trade screen that fills the user's entire inventory with a specific item."
+    },
+    {
+      "key": "trade_debug_inventory_count",
+      "current_en": "(empty)",
+      "current_zh": "(empty)",
+      "new_en": "Inventory: %lld items",
+      "new_zh": "库存：%lld 个物品",
+      "comment": "Label for the count of items in the user's inventory in the debug tools."
+    },
+    {
+      "key": "trade_debug_test_database",
+      "current_en": "(empty)",
+      "current_zh": "(empty)",
+      "new_en": "Test Database (Debug)",
+      "new_zh": "测试数据库（调试）",
+      "comment": "Label for a button that triggers a test to populate the in-memory database with sample data."
+    },
+    {
+      "key": "trade_debug_tools",
+      "current_en": "(empty)",
+      "current_zh": "(empty)",
+      "new_en": "Debug Tools",
+      "new_zh": "调试工具",
+      "comment": "Title of the debug tools section in the trade view."
+    },
+    {
+      "key": "trade_test_complete",
+      "current_en": "(empty)",
+      "current_zh": "(empty)",
+      "new_en": "Test Complete",
+      "new_zh": "测试完成",
+      "comment": ""
+    },
+    {
+      "key": "x%lld",
+      "current_en": "(empty)",
+      "current_zh": "(empty)",
+      "new_en": "×%lld",
+      "new_zh": "×%lld",
+      "comment": "A label displaying the quantity of a specific item in the scavenge result. The argument is the quantity of the item."
+    }
+  ],
+  "invalid_key_mapping": {
+    "ID: %@...": {
+      "old_key": "ID: %@...",
+      "new_key": "id_display_format",
+      "en": "ID: %@...",
+      "zh": "ID：%@..."
+    },
+    "Debug: Add Materials": {
+      "old_key": "Debug: Add Materials",
+      "new_key": "debug_add_materials",
+      "en": "Add Materials (Debug)",
+      "zh": "添加材料（调试）"
+    }
+  }
+}

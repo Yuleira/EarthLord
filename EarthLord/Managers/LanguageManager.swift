@@ -29,7 +29,7 @@ enum AppLanguage: String, CaseIterable, Identifiable {
         case .system:
             return "language_follow_system"
         case .zhHans:
-            return "简体中文"
+            return LocalizedString.simplifiedChinese
         case .en:
             return "English"
         }

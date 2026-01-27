@@ -729,6 +729,149 @@ enum LocalizedString {
     static let tradeDebugCurrentConfig: LocalizedStringResource = "trade_debug_current_config"
     static let tradeDebugInventoryCount: LocalizedStringResource = "trade_debug_inventory_count"
 
+    // MARK: - Communication (24 keys)
+
+    /// Day 33 实现 (day_33_implementation)
+    static let day33Implementation: LocalizedStringResource = "day_33_implementation"
+
+    /// Day 34 实现 (day_34_implementation)
+    static let day34Implementation: LocalizedStringResource = "day_34_implementation"
+
+    /// Day 36 实现 (day_36_implementation)
+    static let day36Implementation: LocalizedStringResource = "day_36_implementation"
+
+    /// 仅接收 (receive_only)
+    static let receiveOnly: LocalizedStringResource = "receive_only"
+
+    /// 切换 (switch)
+    static let switchDevice: LocalizedStringResource = "switch"
+
+    /// 创建频道 (create_channel)
+    static let createChannel: LocalizedStringResource = "create_channel"
+
+    /// 可发送 (can_send)
+    static let canSend: LocalizedStringResource = "can_send"
+
+    /// 呼叫中心 (call_center)
+    static let callCenter: LocalizedStringResource = "call_center"
+
+    /// 官方频道 (official_channel)
+    static let officialChannel: LocalizedStringResource = "official_channel"
+
+    /// 当前 (current)
+    static let current: LocalizedStringResource = "current"
+
+    /// 所有设备 (all_devices)
+    static let allDevices: LocalizedStringResource = "all_devices"
+
+    /// 消息中心 (message_center)
+    static let messageCenter: LocalizedStringResource = "message_center"
+
+    /// 确定 (confirm) - 注意：已有 commonConfirm，但为了兼容性保留
+    static let confirm: LocalizedStringResource = "confirm"
+
+    /// 简体中文 (simplified_chinese)
+    static let simplifiedChinese: LocalizedStringResource = "simplified_chinese"
+
+    /// 聊天界面 (chat_interface)
+    static let chatInterface: LocalizedStringResource = "chat_interface"
+
+    /// 覆盖范围: %@ (coverage_format)
+    static let coverageFormat: LocalizedStringResource = "coverage_format"
+
+    /// 设备未解锁 (device_not_unlocked)
+    static let deviceNotUnlocked: LocalizedStringResource = "device_not_unlocked"
+
+    /// 设备管理 (device_management)
+    static let deviceManagement: LocalizedStringResource = "device_management"
+
+    /// 选择通讯设备，不同设备有不同覆盖范围 (select_communication_device)
+    static let selectCommunicationDevice: LocalizedStringResource = "select_communication_device"
+
+    /// 通讯 (communication) - Tab 标签，显示为 "Comms"
+    static let communication: LocalizedStringResource = "communication"
+
+    /// 通讯中心 (communication_center)
+    static let communicationCenter: LocalizedStringResource = "communication_center"
+
+    // MARK: - Communication Navigation (4 keys)
+
+    /// 消息导航标签 (nav_messages)
+    static let navMessages: LocalizedStringResource = "nav_messages"
+
+    /// 频道导航标签 (nav_channels)
+    static let navChannels: LocalizedStringResource = "nav_channels"
+
+    /// 呼叫导航标签 (nav_calls)
+    static let navCalls: LocalizedStringResource = "nav_calls"
+
+    /// 设备导航标签 (nav_devices)
+    static let navDevices: LocalizedStringResource = "nav_devices"
+
+    // MARK: - Communication Devices (4 keys)
+
+    /// 对讲机 (device_walkie_talkie)
+    static let deviceWalkieTalkie: LocalizedStringResource = "device_walkie_talkie"
+
+    /// 收音机 (device_radio)
+    static let deviceRadio: LocalizedStringResource = "device_radio"
+
+    /// 营地电台 (device_base_station)
+    static let deviceBaseStation: LocalizedStringResource = "device_base_station"
+
+    /// 卫星通讯 (device_satellite)
+    static let deviceSatellite: LocalizedStringResource = "device_satellite"
+
+    // MARK: - Communication Device Descriptions (4 keys)
+
+    /// 只能接收信号，无法发送消息 (desc_receive_only)
+    static let descReceiveOnly: LocalizedStringResource = "desc_receive_only"
+
+    /// 可在 %lld 公里范围内通讯 (desc_comm_range_format)
+    static let descCommRangeFormat: LocalizedStringResource = "desc_comm_range_format"
+
+    /// 可在 %lld 公里范围内广播 (desc_broadcast_range_format)
+    static let descBroadcastRangeFormat: LocalizedStringResource = "desc_broadcast_range_format"
+
+    /// 可在 %lld+ 公里范围内联络 (desc_contact_range_format)
+    static let descContactRangeFormat: LocalizedStringResource = "desc_contact_range_format"
+
+    // MARK: - Communication Range (2 keys)
+
+    /// 无限制（仅接收）(range_unlimited_receive_only)
+    static let rangeUnlimitedReceiveOnly: LocalizedStringResource = "range_unlimited_receive_only"
+
+    /// 覆盖范围：%lld 公里 (range_format)
+    static let rangeFormat: LocalizedStringResource = "range_format"
+
+    // MARK: - Communication Unlock Requirements (3 keys)
+
+    /// 默认拥有 (unlock_default_owned)
+    static let unlockDefaultOwned: LocalizedStringResource = "unlock_default_owned"
+
+    /// 需建造「营地电台」建筑 (unlock_require_base_station)
+    static let unlockRequireBaseStation: LocalizedStringResource = "unlock_require_base_station"
+
+    /// 需建造「通讯塔」建筑 (unlock_require_comm_tower)
+    static let unlockRequireCommTower: LocalizedStringResource = "unlock_require_comm_tower"
+
+    /// 频道中心 (channel_center)
+    static let channelCenter: LocalizedStringResource = "channel_center"
+
+    /// 频道列表 (channel_list)
+    static let channelList: LocalizedStringResource = "channel_list"
+
+    /// 频道详情 (channel_details)
+    static let channelDetails: LocalizedStringResource = "channel_details"
+
+    // MARK: - Display Format (2 keys)
+
+    /// ID 显示格式 (id_display_format)
+    static let idDisplayFormat: LocalizedStringResource = "id_display_format"
+
+    /// 添加材料（调试）(debug_add_materials)
+    static let debugAddMaterials: LocalizedStringResource = "debug_add_materials"
+
     // MARK: - Key Strings (for statusKey parameters)
 
     /// 仅需 key 字符串（如 statusKey）时使用

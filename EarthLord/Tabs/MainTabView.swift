@@ -35,12 +35,19 @@ struct MainTabView: View {
                 }
                 .tag(2)
 
+            CommunicationTabView()
+                .tabItem {
+                    Image(systemName: "antenna.radiowaves.left.and.right")
+                    Text(LocalizedString.communication)
+                }
+                .tag(3)
+
             ProfileTabView()
                 .tabItem {
                     Image(systemName: "person.fill")
                     Text(LocalizedString.tabProfile)
                 }
-                .tag(3)
+                .tag(4)
 
         }
         .tint(ApocalypseTheme.primary)
