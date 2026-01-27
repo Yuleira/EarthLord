@@ -20,7 +20,7 @@ struct MarketOfferCard: View {
                 HStack(spacing: 6) {
                     Image(systemName: "person.circle.fill")
                         .foregroundColor(.blue)
-                    Text(offer.ownerUsername ?? LocalizedString.tradeUnknownUser)
+                    Text(offer.ownerUsername ?? String(localized: LocalizedString.tradeUnknownUser))
                         .font(.subheadline)
                         .fontWeight(.medium)
                 }

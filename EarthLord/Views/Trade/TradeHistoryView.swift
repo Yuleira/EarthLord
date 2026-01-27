@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+internal import Auth
 
 struct TradeHistoryView: View {
     @StateObject private var tradeManager = TradeManager.shared
@@ -54,7 +55,7 @@ struct TradeHistoryView: View {
                 ForEach(tradeManager.tradeHistory) { trade in
                     TradeHistoryCard(
                         trade: trade,
-                        currentUserId: authManager.currentUser?.id ?? "",
+                        currentUserId: authManager.currentUser?.id.uuidString ?? "",
                         onRate: {
                             tradeToRate = trade
                             showRatingSheet = true

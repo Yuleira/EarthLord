@@ -18,7 +18,7 @@ struct TradeItemRow: View {
         HStack(spacing: 12) {
             // 物品图标
             Image(systemName: inventoryManager.resourceIconName(for: item.itemId))
-                .foregroundColor(.blue)
+                .foregroundColor(ApocalypseTheme.info)
                 .frame(width: 30)
                 .font(.title3)
 
@@ -26,10 +26,11 @@ struct TradeItemRow: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(inventoryManager.resourceDisplayName(for: item.itemId))
                     .font(.body)
+                    .foregroundColor(ApocalypseTheme.textPrimary)
 
                 Text("×\(item.quantity)")
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(ApocalypseTheme.textSecondary)
             }
 
             Spacer()
@@ -39,11 +40,12 @@ struct TradeItemRow: View {
                 onDelete()
             } label: {
                 Image(systemName: "trash")
-                    .foregroundColor(.red)
+                    .foregroundColor(ApocalypseTheme.danger)
                     .font(.body)
             }
         }
-        .padding(.vertical, 4)
+        .padding(.vertical, 8)
+        .padding(.horizontal, 4)
     }
 }
 

@@ -7,10 +7,12 @@
 //
 
 import SwiftUI
+import Supabase
 
 struct CreateTradeOfferView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var tradeManager = TradeManager.shared
+    @StateObject private var inventoryManager = InventoryManager.shared
 
     // 表单状态
     @State private var offeringItems: [TradeItem] = []
@@ -31,6 +33,50 @@ struct CreateTradeOfferView: View {
     var body: some View {
         NavigationView {
             Form {
+                #if DEBUG
+                // 调试工具：填充库存
+                Section {
+                    Button {
+                        Task {
+                            await fillInventoryForTesting()
+                        }
+                    } label: {
+                        Label(String(localized: LocalizedString.tradeDebugFillInventory), systemImage: "bag.fill.badge.plus")
+                            .foregroundColor(.orange)
+                    }
+
+                    Button {
+                        Task {
+                            await testDatabaseConnection()
+                        }
+                    } label: {
+                        Label(String(localized: LocalizedString.tradeDebugTestDatabase), systemImage: "antenna.radiowaves.left.and.right")
+                            .foregroundColor(.purple)
+                    }
+
+                    // 显示当前使用的 URL
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(String(localized: LocalizedString.tradeDebugCurrentConfig))
+                            .font(.caption2)
+                            .foregroundColor(.secondary)
+                        Text(AppConfig.Supabase.projectURL)
+                            .font(.caption2)
+                            .foregroundColor(.orange)
+                            .lineLimit(1)
+                            .truncationMode(.middle)
+                    }
+
+                    if !inventoryManager.items.isEmpty {
+                        Text(String(format: String(localized: LocalizedString.tradeDebugInventoryCount), inventoryManager.items.count))
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                } header: {
+                    Text(LocalizedString.tradeDebugTools)
+                        .foregroundColor(.orange)
+                }
+                #endif
+
                 // 我要出的物品
                 Section {
                     if offeringItems.isEmpty {
@@ -199,6 +245,107 @@ struct CreateTradeOfferView: View {
             showError = true
         }
     }
+
+    #if DEBUG
+    /// 调试方法：填充库存以便测试交易系统
+    private func fillInventoryForTesting() async {
+        print("🔧 [DEBUG] Filling inventory for trade testing...")
+        await inventoryManager.addBuildingTestResources()
+        print("✅ [DEBUG] Inventory filled: \(inventoryManager.items.count) items")
+    }
+
+    /// 调试方法：测试数据库连接和 RPC 函数
+    private func testDatabaseConnection() async {
+        print("\n" + String(repeating: "=", count: 60))
+        print("🔍 [DEBUG] Database Connection Test")
+        print(String(repeating: "=", count: 60))
+
+        // 1. 测试 Supabase 配置
+        print("\n1️⃣ Supabase Configuration:")
+        let url = AppConfig.Supabase.projectURL
+        let key = AppConfig.Supabase.publishableKey
+        let keyPreview = String(key.prefix(20)) + "..."
+        print("   URL: \(url)")
+        print("   Key: \(keyPreview)")
+
+        // 手动验证配置
+        let isValid = url.hasPrefix("https://") && url.contains(".supabase.co") &&
+                     !url.contains("YOUR_PROJECT_ID") &&
+                     key.count > 100 && key.hasPrefix("eyJ")
+        print("   Valid: \(isValid ? "✅ YES" : "❌ NO")")
+
+        // 2. 测试认证状态
+        print("\n2️⃣ Authentication Status:")
+        let authManager = AuthManager.shared
+        print("   Authenticated: \(authManager.isAuthenticated ? "✅ YES" : "❌ NO")")
+        if let userId = authManager.currentUser?.id {
+            print("   User ID: \(userId)")
+        }
+
+        // 3. 测试简单的数据库查询（trade_offers 表）
+        print("\n3️⃣ Testing Database Table Access:")
+        do {
+            let supabase = SupabaseService.shared.client
+            let response = try await supabase
+                .from("trade_offers")
+                .select()
+                .limit(1)
+                .execute()
+
+            print("   ✅ trade_offers table accessible")
+            print("   Response size: \(response.data.count) bytes")
+        } catch let error as PostgrestError {
+            print("   ❌ trade_offers table error:")
+            print("      Code: \(error.code ?? "unknown")")
+            print("      Message: \(error.message)")
+            if error.message.contains("relation") && error.message.contains("does not exist") {
+                print("      ⚠️ Table 'trade_offers' does not exist!")
+                print("      👉 Run migration: 007_trade_system.sql")
+            }
+        } catch {
+            print("   ❌ Unexpected error: \(error)")
+        }
+
+        // 4. 测试 RPC 函数存在性
+        print("\n4️⃣ Testing RPC Function:")
+        do {
+            let supabase = SupabaseService.shared.client
+
+            // 使用一个简单的查询函数
+            let response = try await supabase.rpc(
+                "get_my_trade_offers"
+            ).execute()
+
+            print("   ✅ get_my_trade_offers() function exists")
+            print("   Response size: \(response.data.count) bytes")
+
+            // 测试主要的创建函数（预期会失败，因为参数不对，但能验证函数存在）
+            print("\n   Testing create_trade_offer() existence...")
+            // 不实际调用，只测试函数签名
+            print("   ℹ️ Function signature check skipped (would need valid params)")
+
+        } catch let error as PostgrestError {
+            print("   ❌ RPC function error:")
+            print("      Code: \(error.code ?? "unknown")")
+            print("      Message: \(error.message)")
+            if error.message.contains("function") && error.message.contains("does not exist") {
+                print("      ⚠️ RPC functions do not exist!")
+                print("      👉 Run migrations:")
+                print("         1. 007_trade_system.sql")
+                print("         2. 008_inventory_helper_functions.sql")
+            }
+        } catch {
+            print("   ❌ Unexpected error: \(error)")
+        }
+
+        print("\n" + String(repeating: "=", count: 60))
+        print("✅ Database test complete. Check Xcode console for details.")
+        print(String(repeating: "=", count: 60) + "\n")
+
+        // 显示用户友好的成功消息
+        showSuccess = true
+    }
+    #endif
 }
 
 #Preview {

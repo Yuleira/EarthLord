@@ -8,6 +8,7 @@
 
 import Foundation
 import Supabase
+import Combine
 
 /// 交易错误类型
 enum TradeError: LocalizedError {
@@ -21,6 +22,8 @@ enum TradeError: LocalizedError {
     case alreadyRated
     case invalidParameters
     case databaseError(String)
+    case networkError
+    case supabaseNotConfigured
 
     var errorDescription: String? {
         switch self {
@@ -44,11 +47,17 @@ enum TradeError: LocalizedError {
             return String(localized: "trade_error_invalid_parameters")
         case .databaseError(let message):
             return String(format: String(localized: "error_database_format"), message)
+        case .networkError:
+            return "网络连接失败。请检查网络设置或稍后重试。\nNetwork connection failed. Please check your network settings or try again later."
+        case .supabaseNotConfigured:
+            return "❌ Supabase 配置错误\n\n请在 AppConfig.swift 中设置正确的：\n• 项目 URL (以 https:// 开头)\n• API Key (JWT 格式，以 eyJ 开头)\n\n获取方式：https://supabase.com/dashboard → 你的项目 → Settings → API"
         }
     }
 }
 
-/// 交易系统管理器
+// MARK: - RPC Parameter Structs
+
+  /// 交易系统管理器
 @MainActor
 class TradeManager: ObservableObject {
 
@@ -75,7 +84,7 @@ class TradeManager: ObservableObject {
 
     // MARK: - Dependencies
 
-    private let supabase = SupabaseClient.shared.client
+    private let supabase = SupabaseService.shared.client
     private let authManager = AuthManager.shared
     private let inventoryManager = InventoryManager.shared
 
@@ -113,25 +122,24 @@ class TradeManager: ObservableObject {
         }
 
         // 3. 构建参数
-        let offeringJson = try JSONEncoder().encode(offeringItems)
-        let requestingJson = try JSONEncoder().encode(requestingItems)
-
-        guard let offeringData = try? JSONSerialization.jsonObject(with: offeringJson) as? [[String: Any]],
-              let requestingData = try? JSONSerialization.jsonObject(with: requestingJson) as? [[String: Any]] else {
-            throw TradeError.invalidParameters
-        }
+        let params = CreateTradeOfferParams(
+            p_offering_items: offeringItems,
+            p_requesting_items: requestingItems,
+            p_validity_hours: validityHours,
+            p_message: message
+        )
 
         do {
             // 4. 调用数据库函数创建挂单
+            print("🔧 [TradeManager] Calling RPC: create_trade_offer")
+            print("   Parameters: offering=\(offeringItems.count) items, requesting=\(requestingItems.count) items")
+
             let response = try await supabase.rpc(
                 "create_trade_offer",
-                params: [
-                    "p_offering_items": offeringData,
-                    "p_requesting_items": requestingData,
-                    "p_validity_hours": validityHours,
-                    "p_message": message ?? NSNull()
-                ]
+                params: params
             ).execute()
+
+            print("✅ [TradeManager] RPC call succeeded")
 
             // 5. 解析返回的挂单ID
             guard let offerId = String(data: response.data, encoding: .utf8)?.trimmingCharacters(in: .whitespacesAndNewlines.union(CharacterSet(charactersIn: "\""))) else {
@@ -144,23 +152,56 @@ class TradeManager: ObservableObject {
             await loadMyOffers()
 
             // 7. 刷新库存（物品已被锁定）
-            await inventoryManager.loadInventory()
+            await inventoryManager.loadItems()
 
             return offerId
 
         } catch let error as PostgrestError {
             // 解析数据库错误
-            if let message = error.message {
-                if message.contains("Insufficient items") {
-                    // 提取物品不足的信息
-                    print("❌ [TradeManager] Insufficient items: \(message)")
-                    throw TradeError.databaseError(message)
-                }
+            print("❌ [TradeManager] PostgrestError caught")
+            print("   Code: \(error.code ?? "unknown")")
+            print("   Message: \(error.message)")
+
+            let message = error.message
+
+            // 检查是否是 RPC 函数不存在的错误
+            if message.contains("function") && message.contains("does not exist") {
+                print("   ⚠️ RPC function 'create_trade_offer' does not exist in database")
+                throw TradeError.databaseError("交易系统未初始化。\n请执行数据库迁移：\n1. 运行 007_trade_system.sql\n2. 运行 008_inventory_helper_functions.sql\n\nTrade system not initialized.\nPlease run database migrations:\n1. Execute 007_trade_system.sql\n2. Execute 008_inventory_helper_functions.sql")
             }
-            print("❌ [TradeManager] Database error: \(error)")
-            throw TradeError.databaseError(error.message ?? "Unknown error")
+
+            if message.contains("Insufficient items") {
+                // 提取物品不足的信息
+                print("   ℹ️ User has insufficient items")
+                throw TradeError.databaseError(message)
+            }
+
+            throw TradeError.databaseError(error.message)
+
+        } catch let error as URLError {
+            // 网络错误
+            print("❌ [TradeManager] URLError caught")
+            print("   Error code: \(error.code.rawValue)")
+            print("   Description: \(error.localizedDescription)")
+            print("   Failing URL: \(error.failingURL?.absoluteString ?? "unknown")")
+
+            throw TradeError.networkError
+
         } catch {
-            print("❌ [TradeManager] Error creating trade offer: \(error)")
+            // 其他未知错误
+            print("❌ [TradeManager] Unknown error caught")
+            print("   Type: \(type(of: error))")
+            print("   Description: \(error.localizedDescription)")
+            print("   Debug: \(error)")
+
+            // 如果错误描述包含网络相关关键词，归类为网络错误
+            let errorDesc = error.localizedDescription.lowercased()
+            if errorDesc.contains("network") || errorDesc.contains("connection") ||
+               errorDesc.contains("hostname") || errorDesc.contains("internet") ||
+               errorDesc.contains("could not connect") || errorDesc.contains("timed out") {
+                throw TradeError.networkError
+            }
+
             throw error
         }
     }
@@ -178,9 +219,10 @@ class TradeManager: ObservableObject {
 
         do {
             // 2. 调用数据库函数接受挂单
+            let params = AcceptTradeOfferParams(p_offer_id: offerId)
             let response = try await supabase.rpc(
                 "accept_trade_offer",
-                params: ["p_offer_id": offerId]
+                params: params
             ).execute()
 
             // 3. 解析返回结果
@@ -208,27 +250,26 @@ class TradeManager: ObservableObject {
             // 4. 刷新相关数据
             await loadAvailableOffers()
             await loadTradeHistory()
-            await inventoryManager.loadInventory()
+            await inventoryManager.loadItems()
 
             return (result.historyId, result.offeredItems, result.receivedItems)
 
         } catch let error as PostgrestError {
             // 解析具体错误
-            if let message = error.message {
-                if message.contains("not found") {
-                    throw TradeError.offerNotFound
-                } else if message.contains("not active") {
-                    throw TradeError.offerNotActive
-                } else if message.contains("expired") {
-                    throw TradeError.offerExpired
-                } else if message.contains("your own") {
-                    throw TradeError.cannotAcceptOwnOffer
-                } else if message.contains("Insufficient items") {
-                    throw TradeError.databaseError(message)
-                }
+            let message = error.message
+            if message.contains("not found") {
+                throw TradeError.offerNotFound
+            } else if message.contains("not active") {
+                throw TradeError.offerNotActive
+            } else if message.contains("expired") {
+                throw TradeError.offerExpired
+            } else if message.contains("your own") {
+                throw TradeError.cannotAcceptOwnOffer
+            } else if message.contains("Insufficient items") {
+                throw TradeError.databaseError(message)
             }
             print("❌ [TradeManager] Database error: \(error)")
-            throw TradeError.databaseError(error.message ?? "Unknown error")
+            throw TradeError.databaseError(error.message)
         } catch {
             print("❌ [TradeManager] Error accepting trade offer: \(error)")
             throw error
@@ -247,30 +288,30 @@ class TradeManager: ObservableObject {
 
         do {
             // 2. 调用数据库函数取消挂单
+            let params = CancelTradeOfferParams(p_offer_id: offerId)
             let _ = try await supabase.rpc(
                 "cancel_trade_offer",
-                params: ["p_offer_id": offerId]
+                params: params
             ).execute()
 
             print("✅ [TradeManager] Trade offer cancelled successfully")
 
             // 3. 刷新相关数据
             await loadMyOffers()
-            await inventoryManager.loadInventory() // 物品已退回
+            await inventoryManager.loadItems() // 物品已退回
 
         } catch let error as PostgrestError {
             // 解析具体错误
-            if let message = error.message {
-                if message.contains("not found") {
-                    throw TradeError.offerNotFound
-                } else if message.contains("only cancel your own") {
-                    throw TradeError.notOfferOwner
-                } else if message.contains("only cancel active") {
-                    throw TradeError.offerNotActive
-                }
+            let message = error.message
+            if message.contains("not found") {
+                throw TradeError.offerNotFound
+            } else if message.contains("only cancel your own") {
+                throw TradeError.notOfferOwner
+            } else if message.contains("only cancel active") {
+                throw TradeError.offerNotActive
             }
             print("❌ [TradeManager] Database error: \(error)")
-            throw TradeError.databaseError(error.message ?? "Unknown error")
+            throw TradeError.databaseError(error.message)
         } catch {
             print("❌ [TradeManager] Error cancelling trade offer: \(error)")
             throw error
@@ -291,14 +332,14 @@ class TradeManager: ObservableObject {
         defer { isLoading = false }
 
         do {
+            let params = GetMyTradeOffersParams(p_status: status?.rawValue)
             let response = try await supabase.rpc(
                 "get_my_trade_offers",
-                params: ["p_status": status?.rawValue ?? NSNull()]
+                params: params
             ).execute()
 
             let offers = try JSONDecoder().decode([TradeOffer].self, from: response.data)
             self.myOffers = offers
-
             print("✅ [TradeManager] Loaded \(offers.count) my offers")
 
         } catch {
@@ -323,12 +364,13 @@ class TradeManager: ObservableObject {
         defer { isLoading = false }
 
         do {
+            let params = GetAvailableTradeOffersParams(
+                p_limit: limit,
+                p_offset: offset
+            )
             let response = try await supabase.rpc(
                 "get_available_trade_offers",
-                params: [
-                    "p_limit": limit,
-                    "p_offset": offset
-                ]
+                params: params
             ).execute()
 
             let offers = try JSONDecoder().decode([TradeOffer].self, from: response.data)
@@ -388,33 +430,38 @@ class TradeManager: ObservableObject {
 
         do {
             // 3. 调用数据库函数评价交易
+            // Convert the tradeHistoryId string to UUID
+            guard let tradeUUID = UUID(uuidString: tradeHistoryId) else {
+                throw TradeError.invalidParameters
+            }
+            
+            // Create properly typed Encodable params
+            let params = RateTradeParams(
+                p_trade_id: tradeUUID,
+                p_rating: validRating,
+                p_comment: comment
+            )
+
             let _ = try await supabase.rpc(
                 "rate_trade",
-                params: [
-                    "p_trade_history_id": tradeHistoryId,
-                    "p_rating": validRating,
-                    "p_comment": comment ?? NSNull()
-                ]
+                params: params
             ).execute()
-
             print("✅ [TradeManager] Trade rated successfully")
-
             // 4. 刷新交易历史
             await loadTradeHistory()
 
         } catch let error as PostgrestError {
             // 解析具体错误
-            if let message = error.message {
-                if message.contains("not found") {
-                    throw TradeError.offerNotFound
-                } else if message.contains("already rated") {
-                    throw TradeError.alreadyRated
-                } else if message.contains("not a participant") {
-                    throw TradeError.notOfferOwner
-                }
+            let message = error.message
+            if message.contains("not found") {
+                throw TradeError.offerNotFound
+            } else if message.contains("already rated") {
+                throw TradeError.alreadyRated
+            } else if message.contains("not a participant") {
+                throw TradeError.notOfferOwner
             }
             print("❌ [TradeManager] Database error: \(error)")
-            throw TradeError.databaseError(error.message ?? "Unknown error")
+            throw TradeError.databaseError(error.message)
         } catch {
             print("❌ [TradeManager] Error rating trade: \(error)")
             throw error
@@ -440,7 +487,7 @@ class TradeManager: ObservableObject {
 
                 // 刷新我的挂单列表
                 await loadMyOffers()
-                await inventoryManager.loadInventory()
+                await inventoryManager.loadItems()
 
                 return count
             }

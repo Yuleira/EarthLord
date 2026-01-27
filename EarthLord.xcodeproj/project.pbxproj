@@ -39,6 +39,22 @@
 		E6AFAD872F22BD100058275D /* BuildingBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AFAD7B2F22BD100058275D /* BuildingBrowserView.swift */; };
 		E6AFAD882F22BD100058275D /* BuildingPlacementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AFAD7E2F22BD100058275D /* BuildingPlacementView.swift */; };
 		E6AFAD892F22BD100058275D /* BuildingLocationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AFAD7D2F22BD100058275D /* BuildingLocationPickerView.swift */; };
+		E6C00BC42F28CDE200C6AB01 /* TradeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C00BC32F28CDE200C6AB01 /* TradeModels.swift */; };
+		E6C00BC62F28CE3D00C6AB01 /* TradeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C00BC52F28CE3D00C6AB01 /* TradeManager.swift */; };
+		E6C00BD42F28CE7F00C6AB01 /* TradeMarketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C00BD02F28CE7F00C6AB01 /* TradeMarketView.swift */; };
+		E6C00BD52F28CE7F00C6AB01 /* MyOfferCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C00BCA2F28CE7F00C6AB01 /* MyOfferCard.swift */; };
+		E6C00BD62F28CE7F00C6AB01 /* CreateTradeOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C00BC72F28CE7F00C6AB01 /* CreateTradeOfferView.swift */; };
+		E6C00BD72F28CE7F00C6AB01 /* TradeItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C00BCF2F28CE7F00C6AB01 /* TradeItemRow.swift */; };
+		E6C00BD82F28CE7F00C6AB01 /* MyOffersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C00BCB2F28CE7F00C6AB01 /* MyOffersView.swift */; };
+		E6C00BD92F28CE7F00C6AB01 /* RateTradeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C00BCC2F28CE7F00C6AB01 /* RateTradeSheet.swift */; };
+		E6C00BDA2F28CE7F00C6AB01 /* ItemPickerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C00BC82F28CE7F00C6AB01 /* ItemPickerSheet.swift */; };
+		E6C00BDB2F28CE7F00C6AB01 /* TradeHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C00BCE2F28CE7F00C6AB01 /* TradeHistoryView.swift */; };
+		E6C00BDC2F28CE7F00C6AB01 /* TradeTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C00BD22F28CE7F00C6AB01 /* TradeTabView.swift */; };
+		E6C00BDD2F28CE7F00C6AB01 /* MarketOfferCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C00BC92F28CE7F00C6AB01 /* MarketOfferCard.swift */; };
+		E6C00BDE2F28CE7F00C6AB01 /* TradeHistoryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C00BCD2F28CE7F00C6AB01 /* TradeHistoryCard.swift */; };
+		E6C00BDF2F28CE7F00C6AB01 /* TradeOfferDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C00BD12F28CE7F00C6AB01 /* TradeOfferDetailView.swift */; };
+		E6C00C0F2F28D1C000C6AB01 /* SupabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C00C0E2F28D1C000C6AB01 /* SupabaseService.swift */; };
+		E6C00C332F28E10F00C6AB01 /* TradeRPCParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C00C322F28E10F00C6AB01 /* TradeRPCParams.swift */; };
 		E6C38A9F2F12E046001005E9 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C38A9E2F12E046001005E9 /* EmptyStateView.swift */; };
 		E6E50DB52F12898D0096D2BB /* ProfileTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50DAB2F12898D0096D2BB /* ProfileTabView.swift */; };
 		E6E50DB62F12898D0096D2BB /* TerritoryLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E50D9C2F12898D0096D2BB /* TerritoryLogger.swift */; };
@@ -103,6 +119,22 @@
 		E6AFAD7F2F22BD100058275D /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
 		E6AFAD802F22BD100058275D /* ResourceRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceRow.swift; sourceTree = "<group>"; };
 		E6AFAD812F22BD100058275D /* TerritoryBuildingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerritoryBuildingRow.swift; sourceTree = "<group>"; };
+		E6C00BC32F28CDE200C6AB01 /* TradeModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeModels.swift; sourceTree = "<group>"; };
+		E6C00BC52F28CE3D00C6AB01 /* TradeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeManager.swift; sourceTree = "<group>"; };
+		E6C00BC72F28CE7F00C6AB01 /* CreateTradeOfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTradeOfferView.swift; sourceTree = "<group>"; };
+		E6C00BC82F28CE7F00C6AB01 /* ItemPickerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPickerSheet.swift; sourceTree = "<group>"; };
+		E6C00BC92F28CE7F00C6AB01 /* MarketOfferCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketOfferCard.swift; sourceTree = "<group>"; };
+		E6C00BCA2F28CE7F00C6AB01 /* MyOfferCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOfferCard.swift; sourceTree = "<group>"; };
+		E6C00BCB2F28CE7F00C6AB01 /* MyOffersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOffersView.swift; sourceTree = "<group>"; };
+		E6C00BCC2F28CE7F00C6AB01 /* RateTradeSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateTradeSheet.swift; sourceTree = "<group>"; };
+		E6C00BCD2F28CE7F00C6AB01 /* TradeHistoryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeHistoryCard.swift; sourceTree = "<group>"; };
+		E6C00BCE2F28CE7F00C6AB01 /* TradeHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeHistoryView.swift; sourceTree = "<group>"; };
+		E6C00BCF2F28CE7F00C6AB01 /* TradeItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeItemRow.swift; sourceTree = "<group>"; };
+		E6C00BD02F28CE7F00C6AB01 /* TradeMarketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeMarketView.swift; sourceTree = "<group>"; };
+		E6C00BD12F28CE7F00C6AB01 /* TradeOfferDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeOfferDetailView.swift; sourceTree = "<group>"; };
+		E6C00BD22F28CE7F00C6AB01 /* TradeTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeTabView.swift; sourceTree = "<group>"; };
+		E6C00C0E2F28D1C000C6AB01 /* SupabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseService.swift; sourceTree = "<group>"; };
+		E6C00C322F28E10F00C6AB01 /* TradeRPCParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeRPCParams.swift; sourceTree = "<group>"; };
 		E6C38A9E2F12E046001005E9 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		E6E50D862F12898D0096D2BB /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		E6E50D892F12898D0096D2BB /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
@@ -192,6 +224,25 @@
 			path = Building;
 			sourceTree = "<group>";
 		};
+		E6C00BD32F28CE7F00C6AB01 /* Trade */ = {
+			isa = PBXGroup;
+			children = (
+				E6C00BC72F28CE7F00C6AB01 /* CreateTradeOfferView.swift */,
+				E6C00BC82F28CE7F00C6AB01 /* ItemPickerSheet.swift */,
+				E6C00BC92F28CE7F00C6AB01 /* MarketOfferCard.swift */,
+				E6C00BCA2F28CE7F00C6AB01 /* MyOfferCard.swift */,
+				E6C00BCB2F28CE7F00C6AB01 /* MyOffersView.swift */,
+				E6C00BCC2F28CE7F00C6AB01 /* RateTradeSheet.swift */,
+				E6C00BCD2F28CE7F00C6AB01 /* TradeHistoryCard.swift */,
+				E6C00BCE2F28CE7F00C6AB01 /* TradeHistoryView.swift */,
+				E6C00BCF2F28CE7F00C6AB01 /* TradeItemRow.swift */,
+				E6C00BD02F28CE7F00C6AB01 /* TradeMarketView.swift */,
+				E6C00BD12F28CE7F00C6AB01 /* TradeOfferDetailView.swift */,
+				E6C00BD22F28CE7F00C6AB01 /* TradeTabView.swift */,
+			);
+			path = Trade;
+			sourceTree = "<group>";
+		};
 		E6E50D872F12898D0096D2BB /* Auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +274,7 @@
 		E6E50D912F12898D0096D2BB /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				E6C00BC52F28CE3D00C6AB01 /* TradeManager.swift */,
 				E6AFAD6F2F22ACF50058275D /* BuildingManager.swift */,
 				E62484FA2F152D59001B6ABC /* InventoryManager.swift */,
 				E62484FC2F152D66001B6ABC /* RewardGenerator.swift */,
@@ -235,6 +287,7 @@
 				A4DD4FD11BCB70FADC5ED58B /* AIItemGenerator.swift */,
 				00D07D29FC143CD40F1E2317 /* POISearchManager.swift */,
 				0A45F63841D2AB4E5A2838C5 /* PlayerPresenceManager.swift */,
+				E6C00C0E2F28D1C000C6AB01 /* SupabaseService.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -293,6 +346,7 @@
 		E6E50DAD2F12898D0096D2BB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E6C00BD32F28CE7F00C6AB01 /* Trade */,
 				E6AFAD822F22BD100058275D /* Building */,
 				E6AFAD752F22B31B0058275D /* RootView.swift */,
 				E6C38A9E2F12E046001005E9 /* EmptyStateView.swift */,
@@ -330,6 +384,7 @@
 		E6E50DD62F1298520096D2BB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E6C00BC32F28CDE200C6AB01 /* TradeModels.swift */,
 				E6AFAD6D2F22ACAC0058275D /* BuildingModels.swift */,
 				EBA4B57D86AA4709948D4FF9 /* DensityLevel.swift */,
 				E62484F62F152D3B001B6ABC /* InventoryItem.swift */,
@@ -338,6 +393,7 @@
 				E6E50DD92F1298D60096D2BB /* ExplorationModels.swift */,
 				E6E50DDB2F1299070096D2BB /* MockExplorationData.swift */,
 				5C987D042E72C465043FA761 /* AIGeneratedItem.swift */,
+				E6C00C322F28E10F00C6AB01 /* TradeRPCParams.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -430,6 +486,19 @@
 				B3AF75D4EBA04AC381C94C25 /* DensityLevel.swift in Sources */,
 				E6E50DB52F12898D0096D2BB /* ProfileTabView.swift in Sources */,
 				E6E50DB62F12898D0096D2BB /* TerritoryLogger.swift in Sources */,
+				E6C00BD42F28CE7F00C6AB01 /* TradeMarketView.swift in Sources */,
+				E6C00BD52F28CE7F00C6AB01 /* MyOfferCard.swift in Sources */,
+				E6C00BD62F28CE7F00C6AB01 /* CreateTradeOfferView.swift in Sources */,
+				E6C00BD72F28CE7F00C6AB01 /* TradeItemRow.swift in Sources */,
+				E6C00BD82F28CE7F00C6AB01 /* MyOffersView.swift in Sources */,
+				E6C00BD92F28CE7F00C6AB01 /* RateTradeSheet.swift in Sources */,
+				E6C00BDA2F28CE7F00C6AB01 /* ItemPickerSheet.swift in Sources */,
+				E6C00BDB2F28CE7F00C6AB01 /* TradeHistoryView.swift in Sources */,
+				E6C00BDC2F28CE7F00C6AB01 /* TradeTabView.swift in Sources */,
+				E6C00BDD2F28CE7F00C6AB01 /* MarketOfferCard.swift in Sources */,
+				E6C00C0F2F28D1C000C6AB01 /* SupabaseService.swift in Sources */,
+				E6C00BDE2F28CE7F00C6AB01 /* TradeHistoryCard.swift in Sources */,
+				E6C00BDF2F28CE7F00C6AB01 /* TradeOfferDetailView.swift in Sources */,
 				E6E50DB72F12898D0096D2BB /* PlaceholderView.swift in Sources */,
 				E6E50DB82F12898D0096D2BB /* Territory.swift in Sources */,
 				E6AFAD702F22ACF50058275D /* BuildingManager.swift in Sources */,
@@ -448,9 +517,11 @@
 				E62484F72F152D3B001B6ABC /* InventoryItem.swift in Sources */,
 				E62484FB2F152D59001B6ABC /* InventoryManager.swift in Sources */,
 				E6E50DD82F1298930096D2BB /* Item.swift in Sources */,
+				E6C00BC62F28CE3D00C6AB01 /* TradeManager.swift in Sources */,
 				E69FA4362F1CEBB900E53528 /* BackpackView.swift in Sources */,
 				E69FA4372F1CEBB900E53528 /* ExplorationResultView.swift in Sources */,
 				E69FA4382F1CEBB900E53528 /* POIListView.swift in Sources */,
+				E6C00C332F28E10F00C6AB01 /* TradeRPCParams.swift in Sources */,
 				E69FA4392F1CEBB900E53528 /* POIProximityPopup.swift in Sources */,
 				E69FA43A2F1CEBB900E53528 /* ScavengeResultView.swift in Sources */,
 				E6AFAD6E2F22ACAC0058275D /* BuildingModels.swift in Sources */,
@@ -473,6 +544,7 @@
 				E6C38A9F2F12E046001005E9 /* EmptyStateView.swift in Sources */,
 				E6E50DCC2F12898D0096D2BB /* TerritoryManager.swift in Sources */,
 				E6E50DCE2F12898D0096D2BB /* LocationManager.swift in Sources */,
+				E6C00BC42F28CDE200C6AB01 /* TradeModels.swift in Sources */,
 				E6AFAD722F22B2870058275D /* TerritoryMapView.swift in Sources */,
 				E6AFAD762F22B31B0058275D /* RootView.swift in Sources */,
 				E6E50DCF2F12898D0096D2BB /* TerritoryTabView.swift in Sources */,

@@ -35,7 +35,7 @@ enum TradeOfferStatus: String, Codable {
 // MARK: - 交易物品
 
 /// 交易物品（用于 JSON 存储）
-struct TradeItem: Codable, Identifiable {
+struct TradeItem: Codable, Identifiable, Sendable {
     let itemId: String      // 物品定义ID（item_definition_id）
     let quantity: Int       // 数量
 
@@ -55,7 +55,7 @@ struct TradeItem: Codable, Identifiable {
 // MARK: - 交易挂单
 
 /// 交易挂单模型
-struct TradeOffer: Codable, Identifiable {
+struct TradeOffer: Codable, Identifiable, Sendable {
     let id: String                      // 挂单ID
     let ownerId: String                 // 发布者用户ID
     let ownerUsername: String?          // 发布者用户名（冗余，方便显示）
@@ -126,7 +126,7 @@ struct TradeOffer: Codable, Identifiable {
 // MARK: - 交易历史
 
 /// 交易历史记录
-struct TradeHistory: Codable, Identifiable {
+struct TradeHistory: Codable, Identifiable, Sendable {
     let id: String                      // 历史记录ID
     let offerId: String?                // 关联的挂单ID（可选）
     let sellerId: String                // 卖家（发布者）ID
@@ -172,7 +172,7 @@ struct TradeHistory: Codable, Identifiable {
 // MARK: - 交换物品详情
 
 /// 交换的物品详情（用于交易历史）
-struct ItemsExchanged: Codable {
+struct ItemsExchanged: Codable, Sendable {
     let offered: [TradeItem]    // 卖家提供的物品
     let requested: [TradeItem]  // 买家提供的物品
 }

@@ -20,7 +20,7 @@ struct TradeHistoryCard: View {
     }
 
     private var partnerUsername: String {
-        isSeller ? (trade.buyerUsername ?? LocalizedString.tradeUnknownUser) : (trade.sellerUsername ?? LocalizedString.tradeUnknownUser)
+        isSeller ? (trade.buyerUsername ?? String(localized: LocalizedString.tradeUnknownUser)) : (trade.sellerUsername ?? String(localized: LocalizedString.tradeUnknownUser))
     }
 
     private var myRating: Int? {

@@ -122,7 +122,7 @@ struct ResourcesTabView: View {
             placeholderView(title: "segment_territory_resources", icon: "flag.fill")
 
         case .trade:
-            placeholderView(title: "segment_trade_market", icon: "arrow.left.arrow.right")
+            TradeTabView()
         }
     }
 

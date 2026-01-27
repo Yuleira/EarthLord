@@ -722,6 +722,12 @@ enum LocalizedString {
     // 其他
     static let tradeUnknownUser: LocalizedStringResource = "trade_unknown_user"
     static let tradeWithUserFormat: LocalizedStringResource = "trade_with_user_format"
+    static let tradeDebugTools: LocalizedStringResource = "trade_debug_tools"
+    static let tradeTestComplete: LocalizedStringResource = "trade_test_complete"
+    static let tradeDebugFillInventory: LocalizedStringResource = "trade_debug_fill_inventory"
+    static let tradeDebugTestDatabase: LocalizedStringResource = "trade_debug_test_database"
+    static let tradeDebugCurrentConfig: LocalizedStringResource = "trade_debug_current_config"
+    static let tradeDebugInventoryCount: LocalizedStringResource = "trade_debug_inventory_count"
 
     // MARK: - Key Strings (for statusKey parameters)
 

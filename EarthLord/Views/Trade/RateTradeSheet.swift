@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+internal import Auth
 
 struct RateTradeSheet: View {
     @Environment(\.dismiss) private var dismiss
@@ -22,8 +23,9 @@ struct RateTradeSheet: View {
     @State private var errorMessage: String?
 
     private var partnerUsername: String {
-        let isSeller = trade.sellerId == (authManager.currentUser?.id ?? "")
-        return isSeller ? (trade.buyerUsername ?? LocalizedString.tradeUnknownUser) : (trade.sellerUsername ?? LocalizedString.tradeUnknownUser)
+        let isSeller = trade.sellerId == authManager.currentUser?.id.uuidString
+        let username = isSeller ? trade.buyerUsername : trade.sellerUsername
+        return username ?? String(localized: LocalizedString.tradeUnknownUser)
     }
 
     var body: some View {

@@ -67,13 +67,29 @@ import Foundation
 enum AppConfig {
 
     // MARK: - ==================== Supabase 配置 ====================
+    //
+    // ⚠️ 重要：请替换为你自己的 Supabase 项目凭证
+    // 获取方式：https://supabase.com/dashboard
+    // 1. 登录 Supabase Dashboard
+    // 2. 选择你的项目（或创建新项目）
+    // 3. 点击左侧 Settings → API
+    // 4. 复制 "Project URL" 和 "anon public" key
+    //
+    // 格式要求：
+    // - Project URL: 必须以 https:// 开头，以 .supabase.co 结尾
+    // - API Key: JWT 格式，以 eyJ 开头，长度 > 100
+    //
 
     enum Supabase {
         /// Supabase 项目 URL
+        /// ⚠️ 当前值无效，请替换为你的项目 URL
+        /// 示例: "https://abcdefghijk.supabase.co"
         static let projectURL = "https://zkcjvhdhartrrekzjtjg.supabase.co"
 
-        /// Supabase 公开 API Key（可安全暴露在客户端）
-        static let publishableKey = "sb_publishable_uVzbdyBvBhzQi9WV3uOlBA_GWGGrR07"
+        /// Supabase 公开 API Key（anon key，可安全暴露在客户端）
+        /// ⚠️ 当前值无效，请替换为你的 anon/public key
+        /// 示例: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOi..."
+        static let publishableKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InprY2p2aGRoYXJ0cnJla3pqdGpnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY3NDYyMDksImV4cCI6MjA4MjMyMjIwOX0.MN4GjMaD3Ti8rgsYhCX07t68XHa7QW6TjixGPFdbZjk"
     }
 
     // MARK: - ==================== Apple 登录配置 ====================

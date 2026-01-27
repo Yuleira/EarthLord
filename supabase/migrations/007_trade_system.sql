@@ -39,8 +39,7 @@ CREATE TABLE IF NOT EXISTS trade_offers (
         jsonb_array_length(requesting_items) > 0
     ),
     CONSTRAINT valid_expires_at CHECK (expires_at > created_at)
-);
-
+)
 -- =============================================
 -- 2. 创建交易历史表（trade_history）
 -- =============================================
@@ -71,85 +70,73 @@ CREATE TABLE IF NOT EXISTS trade_history (
 
     -- 约束
     CONSTRAINT different_users CHECK (seller_id != buyer_id)
-);
-
+)
 -- =============================================
 -- 3. 创建索引（提升查询性能）
 -- =============================================
 
 -- trade_offers 表索引
-CREATE INDEX IF NOT EXISTS idx_trade_offers_owner ON trade_offers(owner_id);
-CREATE INDEX IF NOT EXISTS idx_trade_offers_status ON trade_offers(status);
-CREATE INDEX IF NOT EXISTS idx_trade_offers_expires_at ON trade_offers(expires_at);
-CREATE INDEX IF NOT EXISTS idx_trade_offers_created_at ON trade_offers(created_at DESC);
-
+CREATE INDEX IF NOT EXISTS idx_trade_offers_owner ON trade_offers(owner_id)
+CREATE INDEX IF NOT EXISTS idx_trade_offers_status ON trade_offers(status)
+CREATE INDEX IF NOT EXISTS idx_trade_offers_expires_at ON trade_offers(expires_at)
+CREATE INDEX IF NOT EXISTS idx_trade_offers_created_at ON trade_offers(created_at DESC)
 -- 复合索引：查询活跃且未过期的挂单
 CREATE INDEX IF NOT EXISTS idx_trade_offers_active_not_expired
 ON trade_offers(status, expires_at)
-WHERE status = 'active';
-
+WHERE status = 'active'
 -- trade_history 表索引
-CREATE INDEX IF NOT EXISTS idx_trade_history_seller ON trade_history(seller_id);
-CREATE INDEX IF NOT EXISTS idx_trade_history_buyer ON trade_history(buyer_id);
-CREATE INDEX IF NOT EXISTS idx_trade_history_offer ON trade_history(offer_id);
-CREATE INDEX IF NOT EXISTS idx_trade_history_completed_at ON trade_history(completed_at DESC);
-
+CREATE INDEX IF NOT EXISTS idx_trade_history_seller ON trade_history(seller_id)
+CREATE INDEX IF NOT EXISTS idx_trade_history_buyer ON trade_history(buyer_id)
+CREATE INDEX IF NOT EXISTS idx_trade_history_offer ON trade_history(offer_id)
+CREATE INDEX IF NOT EXISTS idx_trade_history_completed_at ON trade_history(completed_at DESC)
 -- =============================================
 -- 4. 行级安全策略（RLS）
 -- =============================================
 
 -- 启用 RLS
-ALTER TABLE trade_offers ENABLE ROW LEVEL SECURITY;
-ALTER TABLE trade_history ENABLE ROW LEVEL SECURITY;
-
+ALTER TABLE trade_offers ENABLE ROW LEVEL SECURITY
+ALTER TABLE trade_history ENABLE ROW LEVEL SECURITY
 -- trade_offers 策略
 
 -- 所有已登录用户可以查看活跃的挂单
 CREATE POLICY "Anyone can view active offers"
 ON trade_offers FOR SELECT
 TO authenticated
-USING (status = 'active' OR owner_id = auth.uid());
-
+USING (status = 'active' OR owner_id = auth.uid())
 -- 只有发布者可以查看自己的所有挂单
 CREATE POLICY "Users can view their own offers"
 ON trade_offers FOR SELECT
 TO authenticated
-USING (owner_id = auth.uid());
-
+USING (owner_id = auth.uid())
 -- 用户可以创建自己的挂单
 CREATE POLICY "Users can create their own offers"
 ON trade_offers FOR INSERT
 TO authenticated
-WITH CHECK (owner_id = auth.uid());
-
+WITH CHECK (owner_id = auth.uid())
 -- 用户可以更新自己的挂单（仅限取消）
 CREATE POLICY "Users can update their own offers"
 ON trade_offers FOR UPDATE
 TO authenticated
 USING (owner_id = auth.uid())
-WITH CHECK (owner_id = auth.uid());
-
+WITH CHECK (owner_id = auth.uid())
 -- trade_history 策略
 
 -- 用户只能查看自己参与的交易历史
 CREATE POLICY "Users can view their own trade history"
 ON trade_history FOR SELECT
 TO authenticated
-USING (seller_id = auth.uid() OR buyer_id = auth.uid());
-
+USING (seller_id = auth.uid() OR buyer_id = auth.uid())
 -- 系统可以创建交易历史记录（通过函数调用）
 CREATE POLICY "System can create trade history"
 ON trade_history FOR INSERT
 TO authenticated
-WITH CHECK (true);
-
+WITH CHECK (true)
 -- 用户可以更新自己参与的交易评价
 CREATE POLICY "Users can update their trade ratings"
 ON trade_history FOR UPDATE
 TO authenticated
 USING (seller_id = auth.uid() OR buyer_id = auth.uid())
-WITH CHECK (seller_id = auth.uid() OR buyer_id = auth.uid());
-
+WITH CHECK (seller_id = auth.uid() OR buyer_id = auth.uid())
 -- =============================================
 -- 5. 核心函数：创建交易挂单
 -- =============================================
@@ -230,8 +217,7 @@ BEGIN
 
     RETURN v_offer_id;
 END;
-$$;
-
+$$
 -- =============================================
 -- 6. 核心函数：接受交易挂单
 -- =============================================
@@ -368,8 +354,7 @@ BEGIN
         'received_items', v_offer.requesting_items
     );
 END;
-$$;
-
+$$
 -- =============================================
 -- 7. 核心函数：取消交易挂单
 -- =============================================
@@ -427,8 +412,7 @@ BEGIN
 
     RETURN TRUE;
 END;
-$$;
-
+$$
 -- =============================================
 -- 8. 辅助函数：处理过期挂单
 -- =============================================
@@ -469,8 +453,7 @@ BEGIN
 
     RETURN v_count;
 END;
-$$;
-
+$$
 -- =============================================
 -- 9. 评价交易函数
 -- =============================================
@@ -532,8 +515,7 @@ BEGIN
 
     RETURN TRUE;
 END;
-$$;
-
+$$
 -- =============================================
 -- 10. 查询函数（辅助）
 -- =============================================
@@ -556,8 +538,7 @@ AS $$
     ORDER BY created_at DESC
     LIMIT p_limit
     OFFSET p_offset;
-$$;
-
+$$
 -- 获取我的挂单
 CREATE OR REPLACE FUNCTION get_my_trade_offers(
     p_status TEXT DEFAULT NULL
@@ -572,8 +553,7 @@ AS $$
     WHERE owner_id = auth.uid()
       AND (p_status IS NULL OR status = p_status)
     ORDER BY created_at DESC;
-$$;
-
+$$
 -- 获取交易历史
 CREATE OR REPLACE FUNCTION get_my_trade_history()
 RETURNS SETOF trade_history
@@ -586,16 +566,15 @@ AS $$
     WHERE seller_id = auth.uid()
        OR buyer_id = auth.uid()
     ORDER BY completed_at DESC;
-$$;
-
+$$
 -- =============================================
 -- 完成迁移
 -- =============================================
 
-COMMENT ON TABLE trade_offers IS '交易挂单表：存储玩家发布的交易请求';
-COMMENT ON TABLE trade_history IS '交易历史表：记录已完成的交易';
-COMMENT ON FUNCTION create_trade_offer IS '创建交易挂单，自动锁定物品';
-COMMENT ON FUNCTION accept_trade_offer IS '接受交易挂单，执行物品交换';
-COMMENT ON FUNCTION cancel_trade_offer IS '取消交易挂单，退还物品';
-COMMENT ON FUNCTION process_expired_offers IS '处理过期挂单，定时任务调用';
-COMMENT ON FUNCTION rate_trade IS '评价交易';
+COMMENT ON TABLE trade_offers IS '交易挂单表：存储玩家发布的交易请求'
+COMMENT ON TABLE trade_history IS '交易历史表：记录已完成的交易'
+COMMENT ON FUNCTION create_trade_offer IS '创建交易挂单，自动锁定物品'
+COMMENT ON FUNCTION accept_trade_offer IS '接受交易挂单，执行物品交换'
+COMMENT ON FUNCTION cancel_trade_offer IS '取消交易挂单，退还物品'
+COMMENT ON FUNCTION process_expired_offers IS '处理过期挂单，定时任务调用'
+COMMENT ON FUNCTION rate_trade IS '评价交易'

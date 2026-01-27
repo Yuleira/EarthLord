@@ -30,9 +30,11 @@ struct ItemPickerSheet: View {
 
         switch mode {
         case .fromInventory:
-            // 从库存中获取物品
+            // 从库存中获取物品，确保ID规范化（小写）以支持UUID和字符串ID
             items = inventoryManager.items.map { item in
-                (item.definition.id, item.quantity)
+                // 使用小写ID以确保与building资源ID（如"wood"）兼容
+                let normalizedId = item.definition.id.lowercased()
+                return (normalizedId, item.quantity)
             }
         case .anyItem:
             // 获取所有可能的物品定义（这里使用建筑资源作为示例）
@@ -48,9 +50,10 @@ struct ItemPickerSheet: View {
             ]
         }
 
-        // 过滤掉已选择的物品
+        // 过滤掉已选择的物品（规范化比较）
         return items.filter { itemId, _ in
-            !selectedItems.contains { $0.itemId == itemId }
+            let normalizedId = itemId.lowercased()
+            return !selectedItems.contains { $0.itemId.lowercased() == normalizedId }
         }
     }
 
@@ -90,9 +93,15 @@ struct ItemPickerSheet: View {
                     }
                 }
             }
+            .task {
+                // 确保库存已加载
+                if inventoryManager.items.isEmpty {
+                    await inventoryManager.loadItems()
+                }
+            }
             .sheet(isPresented: $showQuantityPicker) {
                 if let itemId = selectedItemId,
-                   let maxQuantity = availableItems.first(where: { $0.0 == itemId })?.1 {
+                   let maxQuantity = availableItems.first(where: { $0.0.lowercased() == itemId.lowercased() })?.1 {
                     QuantityPickerSheet(
                         itemId: itemId,
                         maxQuantity: maxQuantity,
@@ -260,9 +269,9 @@ struct QuantityPickerSheet: View {
                     // 快速选择按钮（仅在库存模式）
                     if mode == .fromInventory && maxQuantity > 10 {
                         HStack(spacing: 12) {
-                            quickSelectButton(value: maxQuantity / 4, label: "1/4")
-                            quickSelectButton(value: maxQuantity / 2, label: "1/2")
-                            quickSelectButton(value: maxQuantity, label: LocalizedString.tradeSelectAll)
+                            quickSelectButton(value: maxQuantity / 4, labelText: "1/4")
+                            quickSelectButton(value: maxQuantity / 2, labelText: "1/2")
+                            quickSelectButton(value: maxQuantity, labelText: String(localized: LocalizedString.tradeSelectAll))
                         }
                     }
                 }
@@ -296,11 +305,11 @@ struct QuantityPickerSheet: View {
         }
     }
 
-    private func quickSelectButton(value: Int, label: LocalizedStringResource) -> some View {
+    private func quickSelectButton(value: Int, labelText: String) -> some View {
         Button {
             quantity = value
         } label: {
-            Text(label)
+            Text(labelText)
                 .font(.caption)
                 .padding(.horizontal, 12)
                 .padding(.vertical, 6)

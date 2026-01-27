@@ -106,7 +106,7 @@ struct TradeOfferDetailView: View {
                     .font(.title2)
                     .foregroundColor(.blue)
 
-                Text(offer.ownerUsername ?? LocalizedString.tradeUnknownUser)
+                Text(offer.ownerUsername ?? String(localized: LocalizedString.tradeUnknownUser))
                     .font(.headline)
             }
 
