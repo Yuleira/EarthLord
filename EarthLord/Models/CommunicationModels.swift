@@ -31,7 +31,7 @@ enum DeviceType: String, Codable, CaseIterable {
     var iconName: String {
         switch self {
         case .radio: return "radio"
-        case .walkieTalkie: return "walkie.talkie.radio"
+        case .walkieTalkie: return "flipphone"
         case .campRadio: return "antenna.radiowaves.left.and.right"
         case .satellite: return "antenna.radiowaves.left.and.right.circle"
         }
@@ -163,7 +163,7 @@ enum ChannelType: String, Codable, CaseIterable {
         switch self {
         case .official: return "megaphone.fill"
         case .publicChannel: return "globe"
-        case .walkie: return "walkie.talkie.radio"
+        case .walkie: return "flipphone"
         case .camp: return "tent.fill"
         case .satellite: return "antenna.radiowaves.left.and.right.circle"
         }
