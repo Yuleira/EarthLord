@@ -10,8 +10,8 @@ import SwiftUI
 import Supabase
 
 struct DeviceManagementView: View {
-    @ObservedObject private var communicationManager = CommunicationManager.shared
-    @ObservedObject private var authManager = AuthManager.shared
+    @ObservedObject var authManager: AuthManager
+    @ObservedObject var communicationManager: CommunicationManager
     @State private var showUnlockAlert = false
     @State private var selectedDeviceForUnlock: DeviceType?
 
@@ -126,5 +126,5 @@ struct DeviceManagementView: View {
 }
 
 #Preview {
-    DeviceManagementView()
+    DeviceManagementView(authManager: AuthManager.shared, communicationManager: CommunicationManager.shared)
 }

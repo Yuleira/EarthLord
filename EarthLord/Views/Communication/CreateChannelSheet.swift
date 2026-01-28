@@ -10,13 +10,14 @@ import Supabase
 
 struct CreateChannelSheet: View {
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var authManager: AuthManager
-    @ObservedObject private var communicationManager = CommunicationManager.shared
+    @ObservedObject var authManager: AuthManager
+    @ObservedObject var communicationManager: CommunicationManager
 
     @State private var selectedType: ChannelType = .publicChannel
     @State private var channelName = ""
     @State private var channelDescription = ""
     @State private var isCreating = false
+    @State private var showErrorAlert = false
 
     var body: some View {
         NavigationView {
@@ -46,6 +47,18 @@ struct CreateChannelSheet: View {
                             .foregroundColor(ApocalypseTheme.textSecondary)
                     }
                 }
+            }
+        }
+        .onAppear {
+            communicationManager.errorMessage = nil
+        }
+        .alert(String(localized: LocalizedString.commonError), isPresented: $showErrorAlert) {
+            Button(String(localized: LocalizedString.commonOk), role: .cancel) {
+                communicationManager.errorMessage = nil
+            }
+        } message: {
+            if let msg = communicationManager.errorMessage {
+                Text(msg)
             }
         }
     }
@@ -191,12 +204,13 @@ struct CreateChannelSheet: View {
         guard let userId = authManager.currentUser?.id else { return }
 
         isCreating = true
+        communicationManager.errorMessage = nil
 
         Task {
             let trimmedName = channelName.trimmingCharacters(in: .whitespaces)
             let trimmedDesc = channelDescription.trimmingCharacters(in: .whitespaces)
 
-            let _ = await communicationManager.createChannel(
+            let channelId = await communicationManager.createChannel(
                 userId: userId,
                 type: selectedType,
                 name: trimmedName,
@@ -205,8 +219,10 @@ struct CreateChannelSheet: View {
 
             await MainActor.run {
                 isCreating = false
-                if communicationManager.errorMessage == nil {
+                if let _ = channelId {
                     dismiss()
+                } else if communicationManager.errorMessage != nil {
+                    showErrorAlert = true
                 }
             }
         }
@@ -263,6 +279,5 @@ struct ChannelTypeCard: View {
 }
 
 #Preview {
-    CreateChannelSheet()
-        .environmentObject(AuthManager.shared)
+    CreateChannelSheet(authManager: AuthManager.shared, communicationManager: CommunicationManager.shared)
 }

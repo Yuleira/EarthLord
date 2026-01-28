@@ -81,7 +81,7 @@ struct TerritoryDetailView: View {
     
     /// 获取建筑的本地化名称
     private func getLocalizedBuildingName(for building: PlayerBuilding) -> String {
-        let locale = LanguageManager.shared.currentLocale
+        _ = LanguageManager.shared.currentLocale
         // 优先使用 template 的本地化名称，否则使用 buildingName
         if let template = templateDict[building.templateId] {
             return template.resolvedLocalizedName

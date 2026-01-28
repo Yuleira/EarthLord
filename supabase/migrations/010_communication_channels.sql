@@ -137,6 +137,8 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
+GRANT EXECUTE ON FUNCTION generate_channel_code(TEXT) TO authenticated;
+
 -- =====================================================
 -- 8. RPC 函数 - 创建频道并自动订阅
 -- =====================================================
@@ -169,6 +171,8 @@ BEGIN
     RETURN v_channel_id;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
+
+GRANT EXECUTE ON FUNCTION create_channel_with_subscription(UUID, TEXT, TEXT, TEXT) TO authenticated;
 
 -- =====================================================
 -- 9. RPC 函数 - 订阅频道
@@ -203,6 +207,8 @@ BEGIN
     RETURN true;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
+
+GRANT EXECUTE ON FUNCTION subscribe_to_channel(UUID) TO authenticated;
 
 -- =====================================================
 -- 10. RPC 函数 - 取消订阅频道
@@ -242,6 +248,8 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
+GRANT EXECUTE ON FUNCTION unsubscribe_from_channel(UUID) TO authenticated;
+
 -- =====================================================
 -- 11. RPC 函数 - 删除频道
 -- =====================================================
@@ -271,3 +279,5 @@ BEGIN
     RETURN true;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
+
+GRANT EXECUTE ON FUNCTION delete_channel(UUID) TO authenticated;

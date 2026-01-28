@@ -12,8 +12,8 @@ struct ChannelDetailView: View {
     let channel: CommunicationChannel
 
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var authManager: AuthManager
-    @ObservedObject private var communicationManager = CommunicationManager.shared
+    @ObservedObject var authManager: AuthManager
+    @ObservedObject var communicationManager: CommunicationManager
 
     @State private var showDeleteConfirm = false
     @State private var isProcessing = false
@@ -366,17 +366,20 @@ struct ChannelDetailView: View {
 }
 
 #Preview {
-    ChannelDetailView(channel: CommunicationChannel(
-        id: UUID(),
-        creatorId: UUID(),
-        channelType: .publicChannel,
-        channelCode: "PUB-ABC123",
-        name: "Test Channel",
-        description: "This is a test channel for preview purposes.",
-        isActive: true,
-        memberCount: 42,
-        createdAt: Date(),
-        updatedAt: Date()
-    ))
-    .environmentObject(AuthManager.shared)
+    ChannelDetailView(
+        channel: CommunicationChannel(
+            id: UUID(),
+            creatorId: UUID(),
+            channelType: .publicChannel,
+            channelCode: "PUB-ABC123",
+            name: "Test Channel",
+            description: "This is a test channel for preview purposes.",
+            isActive: true,
+            memberCount: 42,
+            createdAt: Date(),
+            updatedAt: Date()
+        ),
+        authManager: AuthManager.shared,
+        communicationManager: CommunicationManager.shared
+    )
 }

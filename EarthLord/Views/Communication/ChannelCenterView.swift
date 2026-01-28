@@ -9,8 +9,8 @@ import SwiftUI
 import Supabase
 
 struct ChannelCenterView: View {
-    @EnvironmentObject var authManager: AuthManager
-    @ObservedObject private var communicationManager = CommunicationManager.shared
+    @ObservedObject var authManager: AuthManager
+    @ObservedObject var communicationManager: CommunicationManager
 
     @State private var selectedTab = 0  // 0 = 我的频道, 1 = 发现频道
     @State private var showCreateSheet = false
@@ -38,12 +38,10 @@ struct ChannelCenterView: View {
             await loadData()
         }
         .sheet(isPresented: $showCreateSheet) {
-            CreateChannelSheet()
-                .environmentObject(authManager)
+            CreateChannelSheet(authManager: authManager, communicationManager: communicationManager)
         }
         .sheet(item: $selectedChannel) { channel in
-            ChannelDetailView(channel: channel)
-                .environmentObject(authManager)
+            ChannelDetailView(channel: channel, authManager: authManager, communicationManager: communicationManager)
         }
     }
 
@@ -360,6 +358,5 @@ struct ChannelRowView: View {
 }
 
 #Preview {
-    ChannelCenterView()
-        .environmentObject(AuthManager.shared)
+    ChannelCenterView(authManager: AuthManager.shared, communicationManager: CommunicationManager.shared)
 }

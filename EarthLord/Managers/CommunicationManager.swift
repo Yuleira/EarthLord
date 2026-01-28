@@ -232,26 +232,25 @@ final class CommunicationManager: ObservableObject {
 
             let response = try await client.rpc("create_channel_with_subscription", params: params).execute()
 
-            // 解析返回的 UUID
-            if let data = response.data as? Data,
-               let uuidString = try? JSONDecoder().decode(String.self, from: data),
-               let channelId = UUID(uuidString: uuidString) {
-                // 刷新订阅列表
+            // 解析返回的 UUID（与 TradeManager 一致：先按 UTF-8 字符串再 trim 引号）
+            let rawString = String(data: response.data, encoding: .utf8)?
+                .trimmingCharacters(in: .whitespacesAndNewlines.union(CharacterSet(charactersIn: "\"")))
+
+            if let uuidString = rawString, let channelId = UUID(uuidString: uuidString) {
                 await loadSubscribedChannels(userId: userId)
                 isLoading = false
                 return channelId
             }
 
-            // 尝试直接解析
-            if let data = response.data as? Data {
-                let decoder = JSONDecoder()
-                if let uuid = try? decoder.decode(UUID.self, from: data) {
-                    await loadSubscribedChannels(userId: userId)
-                    isLoading = false
-                    return uuid
-                }
+            // 备选：按 JSON 单值解码 UUID
+            if let uuid = try? JSONDecoder().decode(UUID.self, from: response.data) {
+                await loadSubscribedChannels(userId: userId)
+                isLoading = false
+                return uuid
             }
 
+            // 解析失败：服务器返回格式异常
+            errorMessage = "创建频道失败：无法解析服务器返回"
             await loadSubscribedChannels(userId: userId)
             isLoading = false
             return nil
@@ -273,7 +272,7 @@ final class CommunicationManager: ObservableObject {
 
             // 更新本地频道列表中的成员数
             if let index = channels.firstIndex(where: { $0.id == channelId }) {
-                var updatedChannel = channels[index]
+                _ = channels[index]
                 // 由于 CommunicationChannel 是 let，我们需要重新加载
                 await loadPublicChannels()
             }

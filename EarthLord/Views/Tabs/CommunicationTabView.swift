@@ -11,8 +11,8 @@ import Supabase
 
 struct CommunicationTabView: View {
     @State private var selectedSection: CommunicationSection = .messages
-    @ObservedObject private var communicationManager = CommunicationManager.shared
-    @ObservedObject private var authManager = AuthManager.shared
+    @StateObject private var communicationManager = CommunicationManager.shared
+    @StateObject private var authManager = AuthManager.shared
 
     var body: some View {
         ZStack {
@@ -66,9 +66,9 @@ struct CommunicationTabView: View {
                 // 内容区域
                 switch selectedSection {
                 case .messages: MessageCenterView()
-                case .channels: ChannelCenterView()
+                case .channels: ChannelCenterView(authManager: authManager, communicationManager: communicationManager)
                 case .call: PTTCallView()
-                case .devices: DeviceManagementView()
+                case .devices: DeviceManagementView(authManager: authManager, communicationManager: communicationManager)
                 }
             }
         }
