@@ -136,3 +136,129 @@ enum CommunicationSection: String, CaseIterable {
         }
     }
 }
+
+// MARK: - 频道类型
+
+/// 通讯频道类型
+enum ChannelType: String, Codable, CaseIterable {
+    case official = "official"
+    case publicChannel = "public"
+    case walkie = "walkie"
+    case camp = "camp"
+    case satellite = "satellite"
+
+    /// 显示名称（本地化）
+    var displayName: String {
+        switch self {
+        case .official: return String(localized: LocalizedString.channelTypeOfficial)
+        case .publicChannel: return String(localized: LocalizedString.channelTypePublic)
+        case .walkie: return String(localized: LocalizedString.channelTypeWalkie)
+        case .camp: return String(localized: LocalizedString.channelTypeCamp)
+        case .satellite: return String(localized: LocalizedString.channelTypeSatellite)
+        }
+    }
+
+    /// SF Symbol 图标名称
+    var iconName: String {
+        switch self {
+        case .official: return "megaphone.fill"
+        case .publicChannel: return "globe"
+        case .walkie: return "walkie.talkie.radio"
+        case .camp: return "tent.fill"
+        case .satellite: return "antenna.radiowaves.left.and.right.circle"
+        }
+    }
+
+    /// 频道类型描述（本地化）
+    var description: String {
+        switch self {
+        case .official: return String(localized: LocalizedString.channelDescOfficial)
+        case .publicChannel: return String(localized: LocalizedString.channelDescPublic)
+        case .walkie: return String(localized: LocalizedString.channelDescWalkie)
+        case .camp: return String(localized: LocalizedString.channelDescCamp)
+        case .satellite: return String(localized: LocalizedString.channelDescSatellite)
+        }
+    }
+
+    /// 频道码前缀
+    var codePrefix: String {
+        switch self {
+        case .official: return "OFF-"
+        case .publicChannel: return "PUB-"
+        case .walkie: return "438."
+        case .camp: return "CAMP-"
+        case .satellite: return "SAT-"
+        }
+    }
+
+    /// 用户是否可以创建此类型频道
+    var isUserCreatable: Bool {
+        switch self {
+        case .official: return false
+        case .publicChannel, .walkie, .camp, .satellite: return true
+        }
+    }
+
+    /// 用户可创建的频道类型
+    static var userCreatableTypes: [ChannelType] {
+        allCases.filter { $0.isUserCreatable }
+    }
+}
+
+// MARK: - 频道模型
+
+/// 通讯频道数据模型
+struct CommunicationChannel: Codable, Identifiable {
+    let id: UUID
+    let creatorId: UUID
+    let channelType: ChannelType
+    let channelCode: String
+    let name: String
+    let description: String?
+    let isActive: Bool
+    let memberCount: Int
+    let createdAt: Date
+    let updatedAt: Date
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case creatorId = "creator_id"
+        case channelType = "channel_type"
+        case channelCode = "channel_code"
+        case name
+        case description
+        case isActive = "is_active"
+        case memberCount = "member_count"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+    }
+}
+
+// MARK: - 频道订阅模型
+
+/// 频道订阅数据模型
+struct ChannelSubscription: Codable, Identifiable {
+    let id: UUID
+    let userId: UUID
+    let channelId: UUID
+    let isMuted: Bool
+    let joinedAt: Date
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case userId = "user_id"
+        case channelId = "channel_id"
+        case isMuted = "is_muted"
+        case joinedAt = "joined_at"
+    }
+}
+
+// MARK: - 已订阅频道组合模型
+
+/// 已订阅频道（组合频道与订阅信息）
+struct SubscribedChannel: Identifiable {
+    let channel: CommunicationChannel
+    let subscription: ChannelSubscription
+
+    var id: UUID { channel.id }
+}

@@ -864,6 +864,125 @@ enum LocalizedString {
     /// 频道详情 (channel_details)
     static let channelDetails: LocalizedStringResource = "channel_details"
 
+    // MARK: - Channel Types (5 keys)
+
+    /// 官方频道类型 (channel_type_official)
+    static let channelTypeOfficial: LocalizedStringResource = "channel_type_official"
+
+    /// 公共频道类型 (channel_type_public)
+    static let channelTypePublic: LocalizedStringResource = "channel_type_public"
+
+    /// 对讲机频道类型 (channel_type_walkie)
+    static let channelTypeWalkie: LocalizedStringResource = "channel_type_walkie"
+
+    /// 营地频道类型 (channel_type_camp)
+    static let channelTypeCamp: LocalizedStringResource = "channel_type_camp"
+
+    /// 卫星频道类型 (channel_type_satellite)
+    static let channelTypeSatellite: LocalizedStringResource = "channel_type_satellite"
+
+    // MARK: - Channel Type Descriptions (5 keys)
+
+    /// 官方频道描述 (channel_desc_official)
+    static let channelDescOfficial: LocalizedStringResource = "channel_desc_official"
+
+    /// 公共频道描述 (channel_desc_public)
+    static let channelDescPublic: LocalizedStringResource = "channel_desc_public"
+
+    /// 对讲机频道描述 (channel_desc_walkie)
+    static let channelDescWalkie: LocalizedStringResource = "channel_desc_walkie"
+
+    /// 营地频道描述 (channel_desc_camp)
+    static let channelDescCamp: LocalizedStringResource = "channel_desc_camp"
+
+    /// 卫星频道描述 (channel_desc_satellite)
+    static let channelDescSatellite: LocalizedStringResource = "channel_desc_satellite"
+
+    // MARK: - Channel Operations (12 keys)
+
+    /// 我的频道 (my_channels)
+    static let myChannels: LocalizedStringResource = "my_channels"
+
+    /// 发现频道 (discover_channels)
+    static let discoverChannels: LocalizedStringResource = "discover_channels"
+
+    /// 订阅 (subscribe)
+    static let subscribe: LocalizedStringResource = "subscribe"
+
+    /// 取消订阅 (unsubscribe)
+    static let unsubscribe: LocalizedStringResource = "unsubscribe"
+
+    /// 删除频道 (delete_channel)
+    static let deleteChannel: LocalizedStringResource = "delete_channel"
+
+    /// 确认删除 (confirm_delete)
+    static let confirmDelete: LocalizedStringResource = "confirm_delete"
+
+    /// 频道名称 (channel_name)
+    static let channelName: LocalizedStringResource = "channel_name"
+
+    /// 频道描述 (channel_description)
+    static let channelDescription: LocalizedStringResource = "channel_description"
+
+    /// 选择频道类型 (select_channel_type)
+    static let selectChannelType: LocalizedStringResource = "select_channel_type"
+
+    /// 成员数量 (member_count)
+    static let memberCount: LocalizedStringResource = "member_count"
+
+    /// 已订阅 (subscribed)
+    static let subscribed: LocalizedStringResource = "subscribed"
+
+    /// 频道码 (channel_code)
+    static let channelCode: LocalizedStringResource = "channel_code"
+
+    // MARK: - Channel UI (15 keys)
+
+    /// 创建频道中 (creating_channel)
+    static let creatingChannel: LocalizedStringResource = "creating_channel"
+
+    /// 搜索频道 (search_channels)
+    static let searchChannels: LocalizedStringResource = "search_channels"
+
+    /// 频道信息 (channel_info)
+    static let channelInfo: LocalizedStringResource = "channel_info"
+
+    /// 频道类型 (channel_type)
+    static let channelType: LocalizedStringResource = "channel_type"
+
+    /// 创建时间 (created_at)
+    static let createdAt: LocalizedStringResource = "created_at"
+
+    /// 暂无频道 (no_channels)
+    static let noChannels: LocalizedStringResource = "no_channels"
+
+    /// 暂无订阅频道 (no_subscribed_channels)
+    static let noSubscribedChannels: LocalizedStringResource = "no_subscribed_channels"
+
+    /// 开始创建你的第一个频道 (create_first_channel_hint)
+    static let createFirstChannelHint: LocalizedStringResource = "create_first_channel_hint"
+
+    /// 订阅频道以获取更新 (subscribe_channels_hint)
+    static let subscribeChannelsHint: LocalizedStringResource = "subscribe_channels_hint"
+
+    /// 删除频道确认消息 (delete_channel_confirm_message)
+    static let deleteChannelConfirmMessage: LocalizedStringResource = "delete_channel_confirm_message"
+
+    /// 名称长度提示 (channel_name_length_hint)
+    static let channelNameLengthHint: LocalizedStringResource = "channel_name_length_hint"
+
+    /// 名称过短 (channel_name_too_short)
+    static let channelNameTooShort: LocalizedStringResource = "channel_name_too_short"
+
+    /// 名称过长 (channel_name_too_long)
+    static let channelNameTooLong: LocalizedStringResource = "channel_name_too_long"
+
+    /// 成员数量格式 (member_count_format)
+    static let memberCountFormat: LocalizedStringResource = "member_count_format"
+
+    /// 频道创建者 (channel_creator)
+    static let channelCreator: LocalizedStringResource = "channel_creator"
+
     // MARK: - Display Format (2 keys)
 
     /// ID 显示格式 (id_display_format)
