@@ -121,13 +121,17 @@ struct TerritoryDetailView: View {
                     onBack: {
                         dismiss()
                     },
-                    onBuild: {
-                        showBuildingBrowser = true
-                    },
                     onInfo: {
                         showSettingsMenu = true
                     }
                 )
+                
+                // 放置模式提示横幅（仅在选中模板时显示）
+                if selectedTemplateForConstruction != nil {
+                    placementModeBanner
+                        .transition(.move(edge: .top).combined(with: .opacity))
+                        .animation(.spring(response: 0.3, dampingFraction: 0.7), value: selectedTemplateForConstruction != nil)
+                }
                 
                 Spacer()
             }
@@ -182,6 +186,29 @@ struct TerritoryDetailView: View {
 
     // MARK: - Subviews
 
+    /// 放置模式提示横幅
+    private var placementModeBanner: some View {
+        HStack {
+            Image(systemName: "mappin.circle.fill")
+                .font(.system(size: 14))
+                .foregroundColor(.white)
+            
+            Text(LocalizedString.buildingSelectLocation)
+                .font(.system(size: 14, weight: .medium))
+                .foregroundColor(.white)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 10)
+        .background(
+            RoundedRectangle(cornerRadius: 12)
+                .fill(.black.opacity(0.7))
+        )
+        .padding(.horizontal, 16)
+        .padding(.top, 8)
+    }
+
     /// 建筑列表面板（底部可折叠）
     private var buildingListPanel: some View {
         VStack(spacing: 0) {
@@ -203,10 +230,14 @@ struct TerritoryDetailView: View {
                     Text(LocalizedString.territoryBuildings)
                         .font(.system(size: 18, weight: .bold))
                         .foregroundColor(ApocalypseTheme.textPrimary)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
                     
                     Text(String(format: String(localized: "building_count_format %lld", locale: LanguageManager.shared.currentLocale), territoryBuildings.count))
                         .font(.system(size: 13))
                         .foregroundColor(ApocalypseTheme.textSecondary)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
                 }
                 
                 Spacer()
@@ -221,6 +252,8 @@ struct TerritoryDetailView: View {
                                 .font(.system(size: 12, weight: .semibold))
                             Text(LocalizedString.buildingBuild)
                                 .font(.system(size: 12, weight: .semibold))
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.5)
                         }
                         .foregroundColor(.white)
                         .padding(.horizontal, 10)
@@ -297,7 +330,7 @@ struct TerritoryDetailView: View {
         .padding(.bottom, isPanelExpanded ? 0 : 16)
         .background(
             RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .fill(ApocalypseTheme.background.opacity(0.95))
+                .fill(.ultraThinMaterial)
                 .shadow(color: .black.opacity(0.3), radius: 10, x: 0, y: -5)
         )
         .frame(height: isPanelExpanded ? nil : 120)
@@ -313,11 +346,15 @@ struct TerritoryDetailView: View {
             Text(LocalizedString.territoryNoBuildings)
                 .font(.system(size: 16, weight: .medium))
                 .foregroundColor(ApocalypseTheme.textSecondary)
+                .lineLimit(2)
+                .minimumScaleFactor(0.5)
 
             Text(LocalizedString.territoryBuildHint)
                 .font(.system(size: 13))
                 .foregroundColor(ApocalypseTheme.textMuted)
                 .multilineTextAlignment(.center)
+                .lineLimit(3)
+                .minimumScaleFactor(0.5)
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 40)
