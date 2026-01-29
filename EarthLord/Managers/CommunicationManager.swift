@@ -9,6 +9,7 @@
 import Foundation
 import Combine
 import Supabase
+import Realtime
 
 @MainActor
 final class CommunicationManager: ObservableObject {
@@ -145,6 +146,16 @@ final class CommunicationManager: ObservableObject {
     @Published private(set) var channels: [CommunicationChannel] = []
     @Published private(set) var subscribedChannels: [SubscribedChannel] = []
     @Published private(set) var mySubscriptions: [ChannelSubscription] = []
+
+    // MARK: - Message Properties (Day 34)
+
+    @Published var channelMessages: [UUID: [ChannelMessage]] = [:]
+    @Published var isSendingMessage = false
+
+    // MARK: - Realtime Properties
+    private var realtimeChannel: RealtimeChannelV2?
+    private var messageSubscriptionTask: Task<Void, Never>?
+    @Published var subscribedMessageChannelIds: Set<UUID> = []
 
     // MARK: - Channel Methods
 
@@ -328,6 +339,171 @@ final class CommunicationManager: ObservableObject {
     /// 检查是否已订阅某频道
     func isSubscribed(channelId: UUID) -> Bool {
         mySubscriptions.contains { $0.channelId == channelId }
+    }
+
+    // MARK: - Message Methods (Day 34)
+
+    /// Load channel history messages
+    func loadChannelMessages(channelId: UUID) async {
+        do {
+            let messages: [ChannelMessage] = try await client
+                .from("channel_messages")
+                .select()
+                .eq("channel_id", value: channelId.uuidString)
+                .order("created_at", ascending: true)
+                .limit(50)
+                .execute()
+                .value
+
+            await MainActor.run {
+                channelMessages[channelId] = messages
+            }
+        } catch {
+            await MainActor.run {
+                errorMessage = "Failed to load messages: \(error.localizedDescription)"
+            }
+        }
+    }
+
+    /// Send channel message
+    func sendChannelMessage(
+        channelId: UUID,
+        content: String,
+        latitude: Double? = nil,
+        longitude: Double? = nil,
+        deviceType: String? = nil
+    ) async -> Bool {
+        guard !content.trimmingCharacters(in: .whitespaces).isEmpty else {
+            await MainActor.run {
+                errorMessage = "Message content cannot be empty"
+            }
+            return false
+        }
+
+        await MainActor.run {
+            isSendingMessage = true
+        }
+
+        do {
+            let params: [String: AnyJSON] = [
+                "p_channel_id": .string(channelId.uuidString),
+                "p_content": .string(content),
+                "p_latitude": latitude.map { .double($0) } ?? .null,
+                "p_longitude": longitude.map { .double($0) } ?? .null,
+                "p_device_type": deviceType.map { .string($0) } ?? .null
+            ]
+
+            let _: UUID = try await client
+                .rpc("send_channel_message", params: params)
+                .execute()
+                .value
+
+            await MainActor.run {
+                isSendingMessage = false
+            }
+            return true
+        } catch {
+            await MainActor.run {
+                errorMessage = "Send failed: \(error.localizedDescription)"
+                isSendingMessage = false
+            }
+            return false
+        }
+    }
+
+    /// Get messages for a channel
+    func getMessages(for channelId: UUID) -> [ChannelMessage] {
+        channelMessages[channelId] ?? []
+    }
+
+    // MARK: - Realtime Subscription (Day 34)
+
+    /// Start Realtime message subscription
+    func startRealtimeSubscription() async {
+        await stopRealtimeSubscription()
+
+        realtimeChannel = client.realtimeV2.channel("channel_messages_realtime")
+
+        guard let channel = realtimeChannel else { return }
+
+        let insertions = channel.postgresChange(
+            InsertAction.self,
+            table: "channel_messages"
+        )
+
+        messageSubscriptionTask = Task { @MainActor [weak self] in
+            for await insertion in insertions {
+                await self?.handleNewMessage(insertion: insertion)
+            }
+        }
+
+        do {
+            try await channel.subscribeWithError()
+            print("[Realtime] Message subscription started")
+        } catch {
+            print("[Realtime] Subscription error: \(error)")
+        }
+    }
+
+    /// Stop Realtime subscription
+    func stopRealtimeSubscription() async {
+        messageSubscriptionTask?.cancel()
+        messageSubscriptionTask = nil
+
+        if let channel = realtimeChannel {
+            await channel.unsubscribe()
+            realtimeChannel = nil
+        }
+
+        print("[Realtime] Message subscription stopped")
+    }
+
+    /// Handle new message from Realtime
+    private func handleNewMessage(insertion: InsertAction) async {
+        do {
+            let decoder = JSONDecoder()
+            let message = try insertion.decodeRecord(as: ChannelMessage.self, decoder: decoder)
+
+            guard subscribedMessageChannelIds.contains(message.channelId) else {
+                print("[Realtime] Ignoring message from non-subscribed channel: \(message.channelId)")
+                return
+            }
+
+            await MainActor.run {
+                if channelMessages[message.channelId] != nil {
+                    channelMessages[message.channelId]?.append(message)
+                } else {
+                    channelMessages[message.channelId] = [message]
+                }
+            }
+
+            print("[Realtime] Received new message: \(message.content.prefix(20))...")
+        } catch {
+            print("[Realtime] Failed to parse message: \(error)")
+        }
+    }
+
+    /// Subscribe to channel messages
+    func subscribeToChannelMessages(channelId: UUID) {
+        subscribedMessageChannelIds.insert(channelId)
+
+        if realtimeChannel == nil {
+            Task {
+                await startRealtimeSubscription()
+            }
+        }
+    }
+
+    /// Unsubscribe from channel messages
+    func unsubscribeFromChannelMessages(channelId: UUID) {
+        subscribedMessageChannelIds.remove(channelId)
+        channelMessages.removeValue(forKey: channelId)
+
+        if subscribedMessageChannelIds.isEmpty {
+            Task {
+                await stopRealtimeSubscription()
+            }
+        }
     }
 }
 

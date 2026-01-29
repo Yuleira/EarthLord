@@ -66,7 +66,10 @@ struct CommunicationTabView: View {
                 // 内容区域
                 switch selectedSection {
                 case .messages: MessageCenterView()
-                case .channels: ChannelCenterView(authManager: authManager, communicationManager: communicationManager)
+                case .channels:
+                    NavigationStack {
+                        ChannelCenterView(authManager: authManager, communicationManager: communicationManager)
+                    }
                 case .call: PTTCallView()
                 case .devices: DeviceManagementView(authManager: authManager, communicationManager: communicationManager)
                 }

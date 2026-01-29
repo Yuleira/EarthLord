@@ -156,12 +156,22 @@ struct ChannelCenterView: View {
                 ScrollView {
                     LazyVStack(spacing: 12) {
                         ForEach(communicationManager.subscribedChannels) { subscribedChannel in
-                            ChannelRowView(
-                                channel: subscribedChannel.channel,
-                                isSubscribed: true
-                            ) {
-                                selectedChannel = subscribedChannel.channel
+                            NavigationLink {
+                                ChannelChatView(
+                                    channel: subscribedChannel.channel,
+                                    authManager: authManager,
+                                    communicationManager: communicationManager
+                                )
+                            } label: {
+                                ChannelRowView(
+                                    channel: subscribedChannel.channel,
+                                    isSubscribed: true,
+                                    showEnterChat: true
+                                ) {
+                                    // Tap action handled by NavigationLink
+                                }
                             }
+                            .buttonStyle(PlainButtonStyle())
                         }
                     }
                     .padding()
@@ -284,6 +294,7 @@ struct ChannelCenterView: View {
 struct ChannelRowView: View {
     let channel: CommunicationChannel
     let isSubscribed: Bool
+    var showEnterChat: Bool = false
     let onTap: () -> Void
 
     var body: some View {
@@ -338,12 +349,23 @@ struct ChannelRowView: View {
 
                 Spacer()
 
-                // 频道码
-                Text(channel.channelCode)
-                    .font(.caption)
-                    .foregroundColor(ApocalypseTheme.textSecondary)
-                    .minimumScaleFactor(0.5)
-                    .lineLimit(1)
+                // Enter chat button or channel code
+                if showEnterChat {
+                    Text(LocalizedString.enterChat)
+                        .font(.caption)
+                        .fontWeight(.medium)
+                        .foregroundColor(ApocalypseTheme.primary)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 5)
+                        .background(ApocalypseTheme.primary.opacity(0.15))
+                        .cornerRadius(8)
+                } else {
+                    Text(channel.channelCode)
+                        .font(.caption)
+                        .foregroundColor(ApocalypseTheme.textSecondary)
+                        .minimumScaleFactor(0.5)
+                        .lineLimit(1)
+                }
 
                 Image(systemName: "chevron.right")
                     .font(.caption)

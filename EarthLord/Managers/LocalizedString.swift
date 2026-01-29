@@ -983,6 +983,41 @@ enum LocalizedString {
     /// 频道创建者 (channel_creator)
     static let channelCreator: LocalizedStringResource = "channel_creator"
 
+    // MARK: - Message System (Day 34, 11 keys)
+
+    /// Send button (message_send)
+    static let messageSend: LocalizedStringResource = "message_send"
+
+    /// Type a message placeholder (message_placeholder)
+    static let messagePlaceholder: LocalizedStringResource = "message_placeholder"
+
+    /// Messages title (messages_title)
+    static let messagesTitle: LocalizedStringResource = "messages_title"
+
+    /// Just now (message_just_now)
+    static let messageJustNow: LocalizedStringResource = "message_just_now"
+
+    /// X minutes ago format (message_minutes_ago_format)
+    static let messageMinutesAgoFormat: LocalizedStringResource = "message_minutes_ago_format"
+
+    /// X hours ago format (message_hours_ago_format)
+    static let messageHoursAgoFormat: LocalizedStringResource = "message_hours_ago_format"
+
+    /// No messages yet (message_empty)
+    static let messageEmpty: LocalizedStringResource = "message_empty"
+
+    /// Start the conversation (message_empty_hint)
+    static let messageEmptyHint: LocalizedStringResource = "message_empty_hint"
+
+    /// Radio mode hint (message_radio_mode_hint)
+    static let messageRadioModeHint: LocalizedStringResource = "message_radio_mode_hint"
+
+    /// Sending (message_sending)
+    static let messageSending: LocalizedStringResource = "message_sending"
+
+    /// Enter chat (enter_chat)
+    static let enterChat: LocalizedStringResource = "enter_chat"
+
     // MARK: - Display Format (2 keys)
 
     /// ID 显示格式 (id_display_format)
