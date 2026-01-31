@@ -403,20 +403,41 @@ final class CommunicationManager: ObservableObject {
         do {
             print("📤 [SendMessage] Preparing to send - lat: \(latitude ?? -999), lon: \(longitude ?? -999), device: \(deviceType ?? "nil")")
 
-            let params: [String: AnyJSON] = [
-                "p_channel_id": .string(channelId.uuidString),
-                "p_content": .string(content),
-                "p_latitude": latitude.map { .double($0) } ?? .null,
-                "p_longitude": longitude.map { .double($0) } ?? .null,
-                "p_device_type": deviceType.map { .string($0) } ?? .null
-            ]
+            // Extract values on main actor to simple Sendable types
+            let channelIdStr = channelId.uuidString
+            let contentStr = content
+            let latValue = latitude
+            let lonValue = longitude
+            let deviceValue = deviceType
 
-            print("📤 [SendMessage] RPC params: \(params)")
+            print("📤 [SendMessage] RPC params: channelId=\(channelIdStr), content=\(contentStr.prefix(20))...")
 
-            let _: UUID = try await client
-                .rpc("send_channel_message", params: params)
-                .execute()
-                .value
+            // Build params dictionary with Sendable values only
+            // Use nonisolated closure to avoid actor isolation issues
+            let response = try await Task.detached {
+                var params: [String: AnyJSON] = [
+                    "p_channel_id": .string(channelIdStr),
+                    "p_content": .string(contentStr)
+                ]
+                if let lat = latValue {
+                    params["p_latitude"] = .double(lat)
+                }
+                if let lon = lonValue {
+                    params["p_longitude"] = .double(lon)
+                }
+                if let device = deviceValue {
+                    params["p_device_type"] = .string(device)
+                }
+                
+                return try await SupabaseService.shared.client
+                    .rpc("send_channel_message", params: params)
+                    .execute()
+            }.value
+
+            // Log the raw response for debugging
+            if let rawString = String(data: response.data, encoding: .utf8) {
+                print("📤 [SendMessage] Raw response: \(rawString)")
+            }
 
             print("📤 [SendMessage] Message sent successfully!")
 

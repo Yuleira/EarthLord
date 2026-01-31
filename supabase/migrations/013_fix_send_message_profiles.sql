@@ -1,23 +1,9 @@
 -- ═══════════════════════════════════════════════════════════════════════════
--- Migration: Numerical Coordinates Protocol
--- Day 35-C: Bypass PostGIS hex parsing by providing direct lat/lon in payload
+-- Migration: Fix send_channel_message to use correct table name
+-- Day 35-D: Fix player_profiles -> profiles table reference
 -- ═══════════════════════════════════════════════════════════════════════════
 
--- STEP 1: Add numerical coordinate columns to channel_messages
-ALTER TABLE channel_messages
-ADD COLUMN IF NOT EXISTS sender_latitude DOUBLE PRECISION,
-ADD COLUMN IF NOT EXISTS sender_longitude DOUBLE PRECISION;
-
--- STEP 2: Backfill existing messages with coordinates from PostGIS
-UPDATE channel_messages
-SET
-    sender_latitude = ST_Y(sender_location::geometry),
-    sender_longitude = ST_X(sender_location::geometry)
-WHERE sender_location IS NOT NULL
-  AND sender_latitude IS NULL;
-
--- STEP 3: Update RPC to INSERT numerical coordinates DIRECTLY
--- This ensures Realtime payload contains numerical values immediately
+-- Replace the function with corrected table reference
 CREATE OR REPLACE FUNCTION send_channel_message(
     p_channel_id UUID,
     p_content TEXT,
@@ -41,10 +27,21 @@ BEGIN
         RAISE EXCEPTION 'Not authenticated';
     END IF;
 
-    -- Get user callsign
-    SELECT callsign INTO v_callsign
-    FROM player_profiles
-    WHERE user_id = v_user_id;
+    -- Get user callsign from profiles (using username field)
+    -- FIX: Changed from player_profiles to profiles
+    BEGIN
+        SELECT COALESCE(username, 'Anonymous')
+        INTO v_callsign
+        FROM public.profiles
+        WHERE id = v_user_id;
+    EXCEPTION
+        WHEN undefined_table THEN
+            v_callsign := 'Anonymous';
+    END;
+
+    IF v_callsign IS NULL THEN
+        v_callsign := 'Anonymous';
+    END IF;
 
     -- Build PostGIS point (optional, for server-side queries)
     IF p_latitude IS NOT NULL AND p_longitude IS NOT NULL THEN
@@ -82,5 +79,5 @@ BEGIN
 END;
 $$;
 
--- STEP 4: Grant execute permission
+-- Re-grant execute permission
 GRANT EXECUTE ON FUNCTION send_channel_message(UUID, TEXT, DOUBLE PRECISION, DOUBLE PRECISION, TEXT) TO authenticated;

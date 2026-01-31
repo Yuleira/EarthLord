@@ -232,6 +232,8 @@ struct ChannelChatView: View {
         print("📡 [SENDER] Sending message - device=\(deviceType), hasLocation=\(latitude != nil)")
 
         Task {
+            print("🚀 [ChannelChatView] Sending message to channel: \(channel.id)")
+            
             let success = await communicationManager.sendChannelMessage(
                 channelId: channel.id,
                 content: content,
@@ -241,9 +243,14 @@ struct ChannelChatView: View {
             )
 
             if success {
+                print("✅ [ChannelChatView] Message sent successfully!")
                 await MainActor.run {
                     messageText = ""
                 }
+            } else {
+                // Log RPC failure for debugging
+                let errorMsg = communicationManager.errorMessage ?? "Unknown error"
+                print("❌ [ChannelChatView] SEND FAILED: \(errorMsg)")
             }
         }
     }
