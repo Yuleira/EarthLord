@@ -12,6 +12,25 @@ import Supabase
 import Realtime
 import CoreLocation
 
+// 🚀 终极修复：使用 nonisolated 彻底切断与主线程的联系
+// 这样它的 Encodable 协议实现就是“非隔离”的，完美符合 Sendable 要求
+nonisolated struct ChannelSendMessageParams: Encodable, Sendable {
+    let p_channel_id: String
+    let p_content: String
+    let p_latitude: Double?
+    let p_longitude: Double?
+    let p_device_type: String?
+    
+    // 明确告诉编译器这个 init 也是非隔离的
+    nonisolated init(p_channel_id: String, p_content: String, p_latitude: Double?, p_longitude: Double?, p_device_type: String?) {
+        self.p_channel_id = p_channel_id
+        self.p_content = p_content
+        self.p_latitude = p_latitude
+        self.p_longitude = p_longitude
+        self.p_device_type = p_device_type
+    }
+}
+///
 @MainActor
 final class CommunicationManager: ObservableObject {
     static let shared = CommunicationManager()
@@ -381,78 +400,51 @@ final class CommunicationManager: ObservableObject {
         }
     }
 
-    /// Send channel message
-    func sendChannelMessage(
-        channelId: UUID,
-        content: String,
-        latitude: Double? = nil,
-        longitude: Double? = nil,
-        deviceType: String? = nil
-    ) async -> Bool {
-        guard !content.trimmingCharacters(in: .whitespaces).isEmpty else {
-            await MainActor.run {
-                errorMessage = "Message content cannot be empty"
-            }
-            return false
-        }
+    /// 发送频道消息 (终极修复版：杜绝崩溃与并发报错)
+        func sendChannelMessage(
+            channelId: UUID,
+            content: String,
+            latitude: Double? = nil,
+            longitude: Double? = nil,
+            deviceType: String? = nil
+        ) async -> Bool {
+            // 1. 基础检查
+                    guard !content.trimmingCharacters(in: .whitespaces).isEmpty else {
+                        await MainActor.run { errorMessage = "消息内容不能为空" }
+                        return false
+                    }
 
-        await MainActor.run {
-            isSendingMessage = true
-        }
+                    await MainActor.run { isSendingMessage = true }
 
-        do {
-            print("📤 [SendMessage] Preparing to send - lat: \(latitude ?? -999), lon: \(longitude ?? -999), device: \(deviceType ?? "nil")")
+            do {
+            // 🚀 2. 使用刚才在类外面定义的高级结构体
+                   let params = ChannelSendMessageParams(
+                       p_channel_id: channelId.uuidString,
+                       p_content: content,
+                       p_latitude: latitude,
+                       p_longitude: longitude,
+                       p_device_type: deviceType
+                   )
 
-            // Extract values on main actor to simple Sendable types
-            let channelIdStr = channelId.uuidString
-            let contentStr = content
-            let latValue = latitude
-            let lonValue = longitude
-            let deviceValue = deviceType
-
-            print("📤 [SendMessage] RPC params: channelId=\(channelIdStr), content=\(contentStr.prefix(20))...")
-
-            // Build params dictionary with Sendable values only
-            // Use nonisolated closure to avoid actor isolation issues
-            let response = try await Task.detached {
-                var params: [String: AnyJSON] = [
-                    "p_channel_id": .string(channelIdStr),
-                    "p_content": .string(contentStr)
-                ]
-                if let lat = latValue {
-                    params["p_latitude"] = .double(lat)
-                }
-                if let lon = lonValue {
-                    params["p_longitude"] = .double(lon)
-                }
-                if let device = deviceValue {
-                    params["p_device_type"] = .string(device)
-                }
-                
-                return try await SupabaseService.shared.client
+                print("📤 [SendMessage] RPC 发送中...")
+                // 🚀 3. 直接发送 params，此时它是 Sendable 的，编译器会愉快放行
+                try await client
                     .rpc("send_channel_message", params: params)
                     .execute()
-            }.value
 
-            // Log the raw response for debugging
-            if let rawString = String(data: response.data, encoding: .utf8) {
-                print("📤 [SendMessage] Raw response: \(rawString)")
+                await MainActor.run { isSendingMessage = false }
+                print("✅ [SendMessage] 发送成功！")
+                return true
+                
+            } catch {
+                print("❌ [SendMessage] 发送失败: \(error)")
+                await MainActor.run {
+                    errorMessage = "发送失败: \(error.localizedDescription)"
+                    isSendingMessage = false
+                }
+                return false
             }
-
-            print("📤 [SendMessage] Message sent successfully!")
-
-            await MainActor.run {
-                isSendingMessage = false
-            }
-            return true
-        } catch {
-            await MainActor.run {
-                errorMessage = "Send failed: \(error.localizedDescription)"
-                isSendingMessage = false
-            }
-            return false
         }
-    }
 
     /// Get messages for a channel
     func getMessages(for channelId: UUID) -> [ChannelMessage] {
@@ -535,15 +527,6 @@ final class CommunicationManager: ObservableObject {
     /// Handle new message from Realtime
     private func handleNewMessage(insertion: InsertAction) async {
         do {
-            // DEBUG: Print raw payload to verify numerical coordinates
-            if let rawData = try? JSONSerialization.data(withJSONObject: insertion.record, options: .prettyPrinted),
-               let rawString = String(data: rawData, encoding: .utf8) {
-                print("═══════════════════════════════════════════════════════════════")
-                print("[Realtime] RAW PAYLOAD:")
-                print(rawString)
-                print("═══════════════════════════════════════════════════════════════")
-            }
-
             let decoder = JSONDecoder()
             let message = try insertion.decodeRecord(as: ChannelMessage.self, decoder: decoder)
 
