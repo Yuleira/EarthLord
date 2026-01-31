@@ -343,13 +343,7 @@ struct ChannelRowView: View {
                         .minimumScaleFactor(0.5)
                         .lineLimit(1)
 
-                    Text("\(channel.memberCount)")
-                        .font(.caption)
-                        .foregroundColor(ApocalypseTheme.textSecondary)
-                    +
-                    Text(" ")
-                    +
-                    Text(LocalizedString.memberCount)
+                    Text("\(channel.memberCount) \(LocalizedString.memberCount)")
                         .font(.caption)
                         .foregroundColor(ApocalypseTheme.textSecondary)
                 }

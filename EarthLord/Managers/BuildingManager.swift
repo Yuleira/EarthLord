@@ -50,14 +50,12 @@ final class BuildingManager: ObservableObject {
     }
     
     deinit {
-        // 获取定时器的引用
-            let timerToInvalidate = self.progressTimer
-        // 使用传统的异步主线程派发，避开 Task 的 Sendable 检查
-            DispatchQueue.main.async {
-                timerToInvalidate?.invalidate()
-            }
-            print("🏗️ [建筑] BuildingManager 已销毁")
-        }
+        let timerToInvalidate = self.progressTimer
+        // Use MainActor.assumeIsolated if you're certain deinit runs on main thread
+        // Or simply invalidate directly if your class is @MainActor
+        timerToInvalidate?.invalidate()
+        print("🏗️ [建筑] BuildingManager 已销毁")
+    }
 
     // MARK: - 模板加载
 
