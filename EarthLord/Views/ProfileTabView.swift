@@ -8,206 +8,444 @@
 import SwiftUI
 import Supabase
 
-/// 个人页面
-/// 显示用户信息、统计数据和账号操作
+/// 个人页面 — Survivor Command Center
+/// 数据丰富的仪表盘：身份卡、操作按钮、统计面板
 struct ProfileTabView: View {
-    /// 认证管理器（使用 @ObservedObject 确保状态响应）
+
+    // MARK: - Enums
+
+    enum DashboardTab: String, CaseIterable {
+        case statistics, leaderboard, achievements, vitals
+
+        var localizedName: LocalizedStringResource {
+            switch self {
+            case .statistics: return LocalizedString.profileStatistics
+            case .leaderboard: return LocalizedString.profileLeaderboard
+            case .achievements: return LocalizedString.profileAchievements
+            case .vitals: return LocalizedString.profileVitals
+            }
+        }
+    }
+
+    enum TimePeriod: String, CaseIterable {
+        case today, thisWeek, thisMonth, allTime
+
+        var localizedName: LocalizedStringResource {
+            switch self {
+            case .today: return LocalizedString.profileToday
+            case .thisWeek: return LocalizedString.profileThisWeek
+            case .thisMonth: return LocalizedString.profileThisMonth
+            case .allTime: return LocalizedString.profileAllTime
+            }
+        }
+    }
+
+    // MARK: - State & Observers
+
     @ObservedObject private var authManager = AuthManager.shared
-
-    /// 语言管理器（用于显示当前语言）
     @StateObject private var languageManager = LanguageManager.shared
+    @ObservedObject private var territoryManager = TerritoryManager.shared
+    @ObservedObject private var buildingManager = BuildingManager.shared
+    @ObservedObject private var storeKitManager = StoreKitManager.shared
+    @ObservedObject private var inventoryManager = InventoryManager.shared
 
-    /// 是否显示退出确认弹窗
-    @State private var showLogoutAlert = false
+    @State private var selectedDashboardTab: DashboardTab = .statistics
+    @State private var selectedTimePeriod: TimePeriod = .thisWeek
 
-    /// 是否正在退出
-    @State private var isLoggingOut = false
-
-    /// 删除账户弹窗控制
-    @State private var showDeleteAccountSheet = false
-    @State private var showDeleteError = false
-    @State private var deleteErrorMessage = ""
+    // MARK: - Body
 
     var body: some View {
         NavigationStack {
-            List {
-                // MARK: - 用户信息区域
-                Section {
-                    userInfoCard
-                }
-
-                // MARK: - 统计数据（待实现数据获取后显示）
-                // TODO: 从数据库获取用户统计数据后取消注释
-                // Section("我的数据") {
-                //     Label("领地数量: \(territoryCount)", systemImage: "flag.fill")
-                //     Label("总面积: \(totalArea) m²", systemImage: "square.dashed")
-                //     Label("发现 POI: \(poiCount)", systemImage: "mappin.circle.fill")
-                // }
-
-                // MARK: - 设置选项
-                Section(LocalizedString.profileSettings) {
-                    NavigationLink {
-                        Text(LocalizedString.profileAccountSecurityDev)
-                    } label: {
-                        Label(LocalizedString.profileAccountSecurity, systemImage: "shield.fill")
-                    }
-
-                    NavigationLink {
-                        Text(LocalizedString.profileNotificationsDev)
-                    } label: {
-                        Label(LocalizedString.profileNotifications, systemImage: "bell.fill")
-                    }
-
-                    NavigationLink {
-                        Text(LocalizedString.profileAboutDev)
-                    } label: {
-                        Label(LocalizedString.profileAbout, systemImage: "info.circle.fill")
-                    }
-                }
-
-                // MARK: - App 设置
-                Section(LocalizedString.profileAppSettings) {
-                    NavigationLink {
-                        LanguageSettingsView()
-                    } label: {
-                        HStack {
-                            Label(LocalizedString.profileLanguage, systemImage: "globe")
-                            Spacer()
-                            Text(languageManager.selectedLanguage.displayName)
-                                .foregroundColor(.secondary)
-                        }
-                    }
-                }
-
-                // MARK: - 退出登录
-                Section {
-                    Button(role: .destructive) {
-                        showLogoutAlert = true
-                    } label: {
-                        HStack {
-                            Label(LocalizedString.profileLogout, systemImage: "rectangle.portrait.and.arrow.right")
-                            Spacer()
-                            if isLoggingOut {
-                                ProgressView()
-                                    .progressViewStyle(CircularProgressViewStyle())
-                            }
-                        }
-                    }
-                    .disabled(isLoggingOut)
-                }
-
-                Section {
-                    Button(role: .destructive) {
-                        showDeleteAccountSheet = true
-                    } label: {
-                        HStack {
-                            Spacer()
-                            Text(LocalizedString.profileDeleteAccount)
-                            Spacer()
-                        }
-                    }
-                } footer: {
-                    Text(LocalizedString.profileDeleteAccountWarning)
-                        .foregroundColor(.secondary)
+            ScrollView {
+                VStack(spacing: 0) {
+                    identityCard
+                    dataDashboard
                 }
             }
-            .navigationTitle(LocalizedString.tabProfile)
+            .background(ApocalypseTheme.background.ignoresSafeArea())
+            .navigationTitle(Text(LocalizedString.profileSurvivorTitle))
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbarColorScheme(.dark, for: .navigationBar)
             .id(languageManager.refreshID)
-            .alert(LocalizedString.profileLogoutConfirmTitle, isPresented: $showLogoutAlert) {
-                Button(LocalizedString.commonCancel, role: .cancel) { }
-                Button(LocalizedString.profileLogoutAction, role: .destructive) {
-                    performLogout()
-                }
-            } message: {
-                Text(LocalizedString.profileLogoutConfirmMessage)
-            }
-            .sheet(isPresented: $showDeleteAccountSheet) {
-                DeleteAccountConfirmView(
-                    isPresented: $showDeleteAccountSheet,
-                    onError: { error in
-                        deleteErrorMessage = error
-                        showDeleteError = true
-                    }
-                )
-            }
-            .alert(LocalizedString.profileDeleteFailed, isPresented: $showDeleteError) {
-                Button(LocalizedString.commonOk, role: .cancel) { }
-            } message: {
-                Text(deleteErrorMessage)
+            .task {
+                let _ = try? await territoryManager.loadMyTerritories()
+                await buildingManager.fetchPlayerBuildings()
+                await inventoryManager.loadItems()
             }
         }
     }
 
-    // MARK: - 用户信息卡片
-    private var userInfoCard: some View {
-        HStack(spacing: 16) {
-            // 头像
+    // MARK: - Identity Card
+
+    private var identityCard: some View {
+        VStack(spacing: 16) {
+            // Avatar
             ZStack {
                 Circle()
-                    .fill(
-                        LinearGradient(
-                            colors: [ApocalypseTheme.primary, ApocalypseTheme.primaryDark],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
-                    .frame(width: 70, height: 70)
+                    .stroke(ApocalypseTheme.primary, lineWidth: 3)
+                    .frame(width: 126, height: 126)
 
-                if let avatarUrl = avatarUrl, !avatarUrl.isEmpty {
-                    // TODO: 加载网络头像
-                    Image(systemName: "person.fill")
-                        .font(.system(size: 30))
-                        .foregroundColor(.white)
-                } else {
-                    Image(systemName: "person.fill")
-                        .font(.system(size: 30))
-                        .foregroundColor(.white)
-                }
+                Circle()
+                    .fill(ApocalypseTheme.primary.opacity(0.8))
+                    .frame(width: 120, height: 120)
+
+                Image(systemName: "person.fill")
+                    .font(.system(size: 50))
+                    .foregroundColor(.white)
+            }
+            .padding(.top, 20)
+
+            // Username
+            Text(username)
+                .font(.title2)
+                .fontWeight(.bold)
+                .foregroundColor(ApocalypseTheme.textPrimary)
+
+            // Membership Badge
+            Text(storeKitManager.currentMembershipTier.displayName)
+                .font(.caption)
+                .fontWeight(.semibold)
+                .foregroundColor(.white)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 4)
+                .background(
+                    Capsule()
+                        .fill(tierColor(for: storeKitManager.currentMembershipTier))
+                )
+
+            // Summary Stats Row
+            summaryStatsRow
+
+            // Action Buttons Grid
+            actionButtonsGrid
+        }
+        .padding(20)
+        .background(ApocalypseTheme.cardBackground)
+        .cornerRadius(20)
+        .padding(.horizontal, 16)
+        .padding(.top, 8)
+    }
+
+    // MARK: - Summary Stats Row
+
+    private var summaryStatsRow: some View {
+        HStack(spacing: 0) {
+            summaryStatColumn(
+                icon: "calendar",
+                value: "\(daysSurvived)",
+                label: LocalizedString.profileDaysSurvival
+            )
+
+            // Divider
+            Rectangle()
+                .fill(ApocalypseTheme.textMuted.opacity(0.3))
+                .frame(width: 1, height: 50)
+
+            summaryStatColumn(
+                icon: "shield.fill",
+                value: "\(territoryCount)",
+                label: LocalizedString.profileStatTerritories
+            )
+
+            // Divider
+            Rectangle()
+                .fill(ApocalypseTheme.textMuted.opacity(0.3))
+                .frame(width: 1, height: 50)
+
+            summaryStatColumn(
+                icon: "building.2.fill",
+                value: "\(buildingCount)",
+                label: LocalizedString.profileStatBuildingsCount
+            )
+        }
+        .padding(.vertical, 12)
+    }
+
+    private func summaryStatColumn(icon: String, value: String, label: LocalizedStringResource) -> some View {
+        VStack(spacing: 6) {
+            Image(systemName: icon)
+                .font(.caption)
+                .foregroundColor(ApocalypseTheme.textSecondary)
+
+            Text(value)
+                .font(.title3)
+                .fontWeight(.bold)
+                .foregroundColor(ApocalypseTheme.textPrimary)
+
+            Text(label)
+                .font(.caption2)
+                .foregroundColor(ApocalypseTheme.textSecondary)
+        }
+        .frame(maxWidth: .infinity)
+    }
+
+    // MARK: - Action Buttons Grid
+
+    private var actionButtonsGrid: some View {
+        LazyVGrid(columns: [
+            GridItem(.flexible(), spacing: 10),
+            GridItem(.flexible(), spacing: 10)
+        ], spacing: 10) {
+            // Edit Profile
+            Button { } label: {
+                actionButtonLabel(
+                    icon: "pencil",
+                    title: LocalizedString.profileEditProfile,
+                    background: AnyShapeStyle(ApocalypseTheme.cardBackground)
+                )
             }
 
-            VStack(alignment: .leading, spacing: 6) {
-                // 用户名
-                Text(username)
-                    .font(.title2)
+            // Settings
+            NavigationLink {
+                ProfileSettingsView()
+            } label: {
+                actionButtonLabel(
+                    icon: "gearshape",
+                    title: LocalizedString.profileSettings,
+                    background: AnyShapeStyle(ApocalypseTheme.cardBackground)
+                )
+            }
+
+            // View Subscription
+            NavigationLink {
+                StoreView()
+            } label: {
+                actionButtonLabel(
+                    icon: "star.fill",
+                    title: LocalizedString.profileViewSubscription,
+                    background: AnyShapeStyle(LinearGradient(
+                        colors: [.orange, .yellow],
+                        startPoint: .leading,
+                        endPoint: .trailing
+                    ))
+                )
+            }
+
+            // Buy Resource Pack
+            NavigationLink {
+                StoreView()
+            } label: {
+                actionButtonLabel(
+                    icon: "cart.fill",
+                    title: LocalizedString.profileBuyResourcePack,
+                    background: AnyShapeStyle(LinearGradient(
+                        colors: [.green, .cyan],
+                        startPoint: .leading,
+                        endPoint: .trailing
+                    ))
+                )
+            }
+        }
+    }
+
+    private func actionButtonLabel(icon: String, title: LocalizedStringResource, background: AnyShapeStyle) -> some View {
+        HStack(spacing: 6) {
+            Image(systemName: icon)
+            Text(title)
+                .lineLimit(1)
+        }
+        .font(.subheadline.bold())
+        .foregroundColor(.white)
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 12)
+        .background(background)
+        .cornerRadius(12)
+    }
+
+    // MARK: - Data Dashboard
+
+    private var dataDashboard: some View {
+        VStack(spacing: 16) {
+            // Dashboard Tab Picker
+            dashboardTabPicker
+
+            // Content based on selected tab
+            if selectedDashboardTab == .statistics {
+                statisticsContent
+            } else {
+                comingSoonPlaceholder
+            }
+        }
+        .padding(16)
+    }
+
+    // MARK: - Dashboard Tab Picker
+
+    private var dashboardTabPicker: some View {
+        HStack(spacing: 4) {
+            ForEach(DashboardTab.allCases, id: \.self) { tab in
+                Button {
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        selectedDashboardTab = tab
+                    }
+                } label: {
+                    Text(tab.localizedName)
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                        .foregroundColor(selectedDashboardTab == tab ? .white : ApocalypseTheme.textSecondary)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 8)
+                        .background(
+                            selectedDashboardTab == tab
+                                ? Capsule().fill(ApocalypseTheme.primary)
+                                : Capsule().fill(Color.clear)
+                        )
+                }
+            }
+        }
+        .padding(4)
+        .background(
+            Capsule()
+                .fill(ApocalypseTheme.cardBackground)
+        )
+    }
+
+    // MARK: - Statistics Content
+
+    private var statisticsContent: some View {
+        VStack(spacing: 16) {
+            // Section Title
+            VStack(spacing: 4) {
+                Text(LocalizedString.profileStatistics)
+                    .font(.title3)
                     .fontWeight(.bold)
                     .foregroundColor(ApocalypseTheme.textPrimary)
 
-                // 邮箱
-                Text(email)
+                Text(LocalizedString.profileDataDriven)
                     .font(.caption)
                     .foregroundColor(ApocalypseTheme.textSecondary)
-
-                // 用户ID（可选显示）
-                if let userId = authManager.currentUser?.id {
-                    Text(String(format: String(localized: LocalizedString.idDisplayFormat), String(userId.uuidString.prefix(8))))
-                        .font(.caption2)
-                        .foregroundColor(ApocalypseTheme.textMuted)
-                }
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
 
-            Spacer()
+            // Time Period Picker
+            timePeriodPicker
 
-            // 编辑按钮
-            Button {
-                // TODO: 打开编辑资料页面
-            } label: {
-                Image(systemName: "pencil.circle.fill")
-                    .font(.title2)
-                    .foregroundColor(ApocalypseTheme.primary)
-            }
+            // Stat Cards Grid
+            statCardsGrid
         }
-        .padding(.vertical, 8)
     }
 
-    // MARK: - 计算属性
+    // MARK: - Time Period Picker
 
-    /// 用户名
+    private var timePeriodPicker: some View {
+        HStack(spacing: 4) {
+            ForEach(TimePeriod.allCases, id: \.self) { period in
+                Button {
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        selectedTimePeriod = period
+                    }
+                } label: {
+                    Text(period.localizedName)
+                        .font(.caption2)
+                        .fontWeight(.medium)
+                        .foregroundColor(selectedTimePeriod == period ? .white : ApocalypseTheme.textSecondary)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 6)
+                        .background(
+                            selectedTimePeriod == period
+                                ? Capsule().fill(ApocalypseTheme.primary)
+                                : Capsule().fill(Color.clear)
+                        )
+                }
+            }
+        }
+        .padding(3)
+        .background(
+            Capsule()
+                .fill(ApocalypseTheme.cardBackground)
+        )
+    }
+
+    // MARK: - Stat Cards Grid
+
+    private var statCardsGrid: some View {
+        LazyVGrid(columns: [
+            GridItem(.flexible(), spacing: 12),
+            GridItem(.flexible(), spacing: 12)
+        ], spacing: 12) {
+            statCard(
+                icon: "figure.walk",
+                iconColor: .blue,
+                value: "0 m",
+                label: LocalizedString.profileStatDistance
+            )
+
+            statCard(
+                icon: "map",
+                iconColor: .green,
+                value: formattedArea,
+                label: LocalizedString.profileStatArea
+            )
+
+            statCard(
+                icon: "flame",
+                iconColor: .orange,
+                value: "\(resourceCount)",
+                label: LocalizedString.profileStatResources
+            )
+
+            statCard(
+                icon: "building.2",
+                iconColor: .purple,
+                value: "\(buildingCount)",
+                label: LocalizedString.profileStatBuildingsCount
+            )
+        }
+    }
+
+    private func statCard(icon: String, iconColor: Color, value: String, label: LocalizedStringResource) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            // Icon in colored rounded square
+            Image(systemName: icon)
+                .font(.callout)
+                .foregroundColor(iconColor)
+                .padding(8)
+                .background(
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(iconColor.opacity(0.2))
+                )
+
+            // Value
+            Text(value)
+                .font(.title2)
+                .fontWeight(.bold)
+                .foregroundColor(ApocalypseTheme.textPrimary)
+
+            // Label
+            Text(label)
+                .font(.caption)
+                .foregroundColor(ApocalypseTheme.textSecondary)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(16)
+        .background(ApocalypseTheme.cardBackground)
+        .cornerRadius(16)
+    }
+
+    // MARK: - Coming Soon Placeholder
+
+    private var comingSoonPlaceholder: some View {
+        VStack(spacing: 12) {
+            Image(systemName: "clock.badge.questionmark")
+                .font(.system(size: 40))
+                .foregroundColor(ApocalypseTheme.textMuted)
+
+            Text(LocalizedString.profileComingSoon)
+                .font(.headline)
+                .foregroundColor(ApocalypseTheme.textSecondary)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 60)
+        .background(ApocalypseTheme.cardBackground)
+        .cornerRadius(16)
+    }
+
+    // MARK: - Computed Properties
+
     private var username: String {
-        // 优先从 userMetadata 获取用户名
         if let name = authManager.currentUser?.userMetadata["username"]?.stringValue, !name.isEmpty {
             return name
         }
-        // 其次使用邮箱前缀
         if let email = authManager.currentUser?.email,
            let prefix = email.split(separator: "@").first {
             return String(prefix)
@@ -215,28 +453,40 @@ struct ProfileTabView: View {
         return String(localized: "profile_default_username")
     }
 
-    /// 邮箱
     private var email: String {
         authManager.currentUser?.email ?? String(localized: "profile_no_email")
     }
 
-    /// 头像URL
     private var avatarUrl: String? {
         authManager.currentUser?.userMetadata["avatar_url"]?.stringValue
     }
 
-    // MARK: - 方法
+    private var daysSurvived: Int {
+        guard let created = authManager.currentUser?.createdAt else { return 0 }
+        return max(1, Calendar.current.dateComponents([.day], from: created, to: Date()).day ?? 0)
+    }
 
-    /// 执行退出登录
-    private func performLogout() {
-        isLoggingOut = true
-        Task {
-            await authManager.signOut()
-            // signOut 完成后，authManager.isAuthenticated 会变为 false
-            // RootView 会自动切换到登录页面
-            await MainActor.run {
-                isLoggingOut = false
-            }
+    private var territoryCount: Int { territoryManager.territories.count }
+
+    private var buildingCount: Int { buildingManager.playerBuildings.count }
+
+    private var totalArea: Double { territoryManager.territories.reduce(0) { $0 + $1.area } }
+
+    private var resourceCount: Int { inventoryManager.items.count }
+
+    private var formattedArea: String {
+        if totalArea >= 1_000_000 { return String(format: "%.2f km²", totalArea / 1_000_000) }
+        return String(format: "%.0f m²", totalArea)
+    }
+
+    // MARK: - Helpers
+
+    private func tierColor(for tier: MembershipTier) -> Color {
+        switch tier {
+        case .free: return ApocalypseTheme.textSecondary
+        case .scavenger: return Color.brown
+        case .pioneer: return Color.gray
+        case .archon: return Color.yellow
         }
     }
 }
@@ -396,6 +646,7 @@ struct LanguageSettingsView: View {
         .id(languageManager.refreshID)
     }
 }
+
 #Preview {
     ProfileTabView()
 }

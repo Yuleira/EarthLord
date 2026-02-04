@@ -392,6 +392,88 @@ enum LocalizedString {
     /// 删除错误 (profile_delete_error)
     static let profileDeleteError: LocalizedStringResource = "profile_delete_error"
 
+    // MARK: - Profile Dashboard (7 keys)
+
+    /// 幸存者档案标题 (profile_survivor_title)
+    static let profileSurvivorTitle: LocalizedStringResource = "profile_survivor_title"
+
+    /// 统计：领地 (profile_stat_territory)
+    static let profileStatTerritory: LocalizedStringResource = "profile_stat_territory"
+
+    /// 统计：资源点 (profile_stat_resource_points)
+    static let profileStatResourcePoints: LocalizedStringResource = "profile_stat_resource_points"
+
+    /// 统计：探索距离 (profile_stat_exploration_distance)
+    static let profileStatExplorationDistance: LocalizedStringResource = "profile_stat_exploration_distance"
+
+    /// 物资商城 (profile_material_store)
+    static let profileMaterialStore: LocalizedStringResource = "profile_material_store"
+
+    /// 技术支持 (profile_tech_support)
+    static let profileTechSupport: LocalizedStringResource = "profile_tech_support"
+
+    /// 隐私政策 (profile_privacy_policy)
+    static let profilePrivacyPolicy: LocalizedStringResource = "profile_privacy_policy"
+
+    // MARK: - Profile Command Center (19 keys)
+
+    /// 生存天数 (profile_days_survival)
+    static let profileDaysSurvival: LocalizedStringResource = "profile_days_survival"
+
+    /// 领地统计 (profile_stat_territories)
+    static let profileStatTerritories: LocalizedStringResource = "profile_stat_territories"
+
+    /// 建筑统计 (profile_stat_buildings_count)
+    static let profileStatBuildingsCount: LocalizedStringResource = "profile_stat_buildings_count"
+
+    /// 编辑档案 (profile_edit_profile)
+    static let profileEditProfile: LocalizedStringResource = "profile_edit_profile"
+
+    /// 查看订阅 (profile_view_subscription)
+    static let profileViewSubscription: LocalizedStringResource = "profile_view_subscription"
+
+    /// 购买资源包 (profile_buy_resource_pack)
+    static let profileBuyResourcePack: LocalizedStringResource = "profile_buy_resource_pack"
+
+    /// 统计 (profile_statistics)
+    static let profileStatistics: LocalizedStringResource = "profile_statistics"
+
+    /// 排行榜 (profile_leaderboard)
+    static let profileLeaderboard: LocalizedStringResource = "profile_leaderboard"
+
+    /// 成就 (profile_achievements)
+    static let profileAchievements: LocalizedStringResource = "profile_achievements"
+
+    /// 状态 (profile_vitals)
+    static let profileVitals: LocalizedStringResource = "profile_vitals"
+
+    /// 数据驱动进度 (profile_data_driven)
+    static let profileDataDriven: LocalizedStringResource = "profile_data_driven"
+
+    /// 今天 (profile_today)
+    static let profileToday: LocalizedStringResource = "profile_today"
+
+    /// 本周 (profile_this_week)
+    static let profileThisWeek: LocalizedStringResource = "profile_this_week"
+
+    /// 本月 (profile_this_month)
+    static let profileThisMonth: LocalizedStringResource = "profile_this_month"
+
+    /// 全部 (profile_all_time)
+    static let profileAllTime: LocalizedStringResource = "profile_all_time"
+
+    /// 距离 (profile_stat_distance)
+    static let profileStatDistance: LocalizedStringResource = "profile_stat_distance"
+
+    /// 面积 (profile_stat_area)
+    static let profileStatArea: LocalizedStringResource = "profile_stat_area"
+
+    /// 资源 (profile_stat_resources)
+    static let profileStatResources: LocalizedStringResource = "profile_stat_resources"
+
+    /// 敬请期待 (profile_coming_soon)
+    static let profileComingSoon: LocalizedStringResource = "profile_coming_soon"
+
     // MARK: - Map (3 keys)
 
     /// 领地已注册 (map_territory_registered)
