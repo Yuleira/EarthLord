@@ -35,27 +35,56 @@ struct EarthLordApp: App {
     }
 }
 
-/// Root container view - authentication-driven navigation
-struct ContentView: View {
-    /// Authentication manager - observe auth state changes
-    @ObservedObject private var authManager = AuthManager.shared
+/// App launch phase state machine
+private enum LaunchPhase {
+    case splash      // Playing cinematic video
+    case mainApp     // Auth / Main tab visible
+}
 
+/// Root container view — splash → auth/main → onboarding (first-run)
+struct ContentView: View {
+    @ObservedObject private var authManager = AuthManager.shared
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
+
+    @State private var launchPhase: LaunchPhase = .splash
     @State private var showOnboarding = false
 
     var body: some View {
+        ZStack {
+            // Main app layer (always mounted so auth state listener runs)
+            mainAppView
+                .opacity(launchPhase == .mainApp ? 1 : 0)
+
+            // Splash layer (on top, removed after fade)
+            if launchPhase == .splash {
+                SplashVideoView {
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        launchPhase = .mainApp
+                    }
+                    // Trigger onboarding after splash if authenticated + first run
+                    if authManager.isAuthenticated && !hasCompletedOnboarding {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                            showOnboarding = true
+                        }
+                    }
+                }
+                .transition(.opacity)
+            }
+        }
+    }
+
+    private var mainAppView: some View {
         Group {
             if authManager.isAuthenticated {
-                // Authenticated: show main app
                 MainTabView()
             } else {
-                // Not authenticated: show login
                 AuthView()
             }
         }
         .animation(.easeInOut(duration: 0.3), value: authManager.isAuthenticated)
         .onChange(of: authManager.isAuthenticated) { _, isAuth in
-            if isAuth && !hasCompletedOnboarding {
+            // Post-splash: if user logs in for the first time, show onboarding
+            if isAuth && !hasCompletedOnboarding && launchPhase == .mainApp {
                 showOnboarding = true
             }
         }

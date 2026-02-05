@@ -1400,6 +1400,11 @@ enum LocalizedString {
     /// Shards balance format (shards_balance_format)
     static let shardsBalanceFormat: LocalizedStringResource = "shards_balance_format"
 
+    // MARK: - Splash & Actions
+
+    /// Skip action button (action_skip)
+    static let actionSkip: LocalizedStringResource = "action_skip"
+
     // MARK: - Onboarding (14 keys)
 
     /// Onboarding slide 1 title: Protocol (onboarding_title_protocol)
