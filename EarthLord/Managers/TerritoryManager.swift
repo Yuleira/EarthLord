@@ -273,40 +273,61 @@ final class TerritoryManager: ObservableObject {
     /// - Returns: 是否成功
     func updateTerritoryName(territoryId: String, newName: String) async -> Bool {
         print("✏️ [领地更新] 开始重命名领地: \(territoryId) -> \(newName)")
-        
+
         guard !newName.isEmpty else {
             print("✏️ [领地更新] ❌ 名称不能为空")
             return false
         }
-        
+
+        // 尝试 name 列（主列），失败后 fallback 到 custom_name
         do {
             try await supabase
                 .from("territories")
-                .update(["custom_name": newName])
+                .update(["name": AnyJSON.string(newName)])
                 .eq("id", value: territoryId)
                 .execute()
-            
+
             // 更新本地缓存
             if let index = territories.firstIndex(where: { $0.id == territoryId }) {
                 var updatedTerritory = territories[index]
                 updatedTerritory.customName = newName
                 territories[index] = updatedTerritory
             }
-            
-            print("✏️ [领地更新] ✅ 重命名成功")
+
+            print("✏️ [领地更新] ✅ 重命名成功 (name 列)")
             TerritoryLogger.shared.log(String(localized: "territory_rename_success"), type: .success)
-            
+
             // 发送通知，让 TerritoryTabView 刷新列表
             NotificationCenter.default.post(name: .territoryUpdated, object: territoryId)
-            
+
             return true
-            
+
+        } catch {
+            print("✏️ [领地更新] ⚠️ name 列更新失败: \(error.localizedDescription)，尝试 custom_name 列...")
+        }
+
+        // Fallback: 尝试 custom_name 列
+        do {
+            try await supabase
+                .from("territories")
+                .update(["custom_name": AnyJSON.string(newName)])
+                .eq("id", value: territoryId)
+                .execute()
+
+            if let index = territories.firstIndex(where: { $0.id == territoryId }) {
+                var updatedTerritory = territories[index]
+                updatedTerritory.customName = newName
+                territories[index] = updatedTerritory
+            }
+
+            print("✏️ [领地更新] ✅ 重命名成功 (custom_name 列)")
+            TerritoryLogger.shared.log(String(localized: "territory_rename_success"), type: .success)
+            NotificationCenter.default.post(name: .territoryUpdated, object: territoryId)
+
+            return true
+
         } catch {
             print("✏️ [领地更新] ❌ 重命名失败: \(error.localizedDescription)")
-            TerritoryLogger.shared.log(
-                String(format: String(localized: "territory_rename_failed"), error.localizedDescription),
-                type: .error
-            )
             return false
         }
     }

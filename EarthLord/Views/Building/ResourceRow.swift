@@ -38,33 +38,29 @@ struct ResourceRow: View {
             Image(systemName: resourceIcon)
                 .font(.system(size: 20))
                 .symbolRenderingMode(.hierarchical)
-                .foregroundColor(ApocalypseTheme.primary)
+                .foregroundColor(ApocalypseTheme.tacticalOrange)
                 .frame(width: 24, height: 24)
 
-            // ✅ 使用本地化字符串显示资源名称
             Text(localizedResourceName)
                 .font(.system(size: 15, weight: .medium))
                 .foregroundColor(ApocalypseTheme.textPrimary)
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
-            
+
             Spacer()
-            
-            // 数量对比
+
+            // 数量对比 — Monospaced terminal
             HStack(spacing: 4) {
-                // 拥有数量
                 Text("\(availableAmount)")
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundColor(isSufficient ? ApocalypseTheme.success : ApocalypseTheme.danger)
-                
-                // 分隔符
+                    .font(.system(size: 15, weight: .semibold, design: .monospaced))
+                    .foregroundColor(isSufficient ? ApocalypseTheme.neonGreen : ApocalypseTheme.warningRed)
+
                 Text("/")
-                    .font(.system(size: 15))
+                    .font(.system(size: 15, design: .monospaced))
                     .foregroundColor(ApocalypseTheme.textMuted)
-                
-                // 需求数量
+
                 Text("\(requiredAmount)")
-                    .font(.system(size: 15, weight: .medium))
+                    .font(.system(size: 15, weight: .medium, design: .monospaced))
                     .foregroundColor(ApocalypseTheme.textSecondary)
             }
         }
@@ -72,7 +68,11 @@ struct ResourceRow: View {
         .padding(.horizontal, 12)
         .background(
             RoundedRectangle(cornerRadius: 8)
-                .fill(ApocalypseTheme.cardBackground.opacity(0.5))
+                .fill(.ultraThinMaterial)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(isSufficient ? ApocalypseTheme.neonGreen.opacity(0.1) : ApocalypseTheme.warningRed.opacity(0.15), lineWidth: 1)
         )
     }
 }

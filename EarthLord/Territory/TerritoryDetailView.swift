@@ -45,8 +45,11 @@ struct TerritoryDetailView: View {
     /// 待删除的建筑
     @State private var buildingToDelete: PlayerBuilding?
 
-    /// 显示设置菜单
-    @State private var showSettingsMenu = false
+    /// 显示位置选择器（位置优先流程）
+    @State private var showLocationPicker = false
+
+    /// 预选位置（位置优先流程：先选位置，再选建筑）
+    @State private var preSelectedLocation: CLLocationCoordinate2D?
 
     /// 领地重命名对话框
     @State private var showRenameDialog = false
@@ -115,14 +118,14 @@ struct TerritoryDetailView: View {
             // 顶部浮动工具栏
             VStack {
                 TerritoryToolbarView(
-                    // 🚀 这里的改动是救命稻草！
-                    // 不再传递死字符串 currentDisplayName，直接传活资源 displayName
-                    territoryName: territory.displayName,
+                    territoryName: currentDisplayName,
                     onBack: {
                         dismiss()
                     },
-                    onInfo: {
-                        showSettingsMenu = true
+                    onTitleTap: {
+                        newTerritoryName = currentDisplayName
+                        renameErrorMessage = nil
+                        showRenameDialog = true
                     }
                 )
                 
@@ -159,14 +162,27 @@ struct TerritoryDetailView: View {
                 template: template,
                 territoryId: territory.id,
                 territoryCoordinates: coordinates,
-                existingBuildings: territoryBuildings
+                existingBuildings: territoryBuildings,
+                initialLocation: preSelectedLocation
+            )
+        }
+        .sheet(isPresented: $showLocationPicker, onDismiss: {
+            // 位置选择完毕后，自动打开建筑浏览器让用户选择要建造的建筑
+            if preSelectedLocation != nil {
+                showBuildingBrowser = true
+            }
+        }) {
+            BuildingLocationPickerView(
+                territoryCoordinates: coordinates,
+                existingBuildings: territoryBuildings,
+                buildingTemplates: templateDict,
+                onLocationSelected: { location in
+                    preSelectedLocation = location
+                }
             )
         }
         .sheet(isPresented: $showRenameDialog) {
             renameSheet
-        }
-        .sheet(isPresented: $showSettingsMenu) {
-            settingsSheet
         }
         .alert(LocalizedString.buildingDemolishConfirm, isPresented: $showDeleteAlert) {
             Button(LocalizedString.commonCancel, role: .cancel) {
@@ -186,13 +202,13 @@ struct TerritoryDetailView: View {
 
     // MARK: - Subviews
 
-    /// 放置模式提示横幅
+    /// 放置模式提示横幅 — Tactical Aurora
     private var placementModeBanner: some View {
         HStack {
             Image(systemName: "mappin.circle.fill")
                 .font(.system(size: 14))
-                .foregroundColor(.white)
-            
+                .foregroundColor(ApocalypseTheme.neonGreen)
+
             Text(LocalizedString.buildingSelectLocation)
                 .font(.system(size: 14, weight: .medium))
                 .foregroundColor(.white)
@@ -203,7 +219,11 @@ struct TerritoryDetailView: View {
         .padding(.vertical, 10)
         .background(
             RoundedRectangle(cornerRadius: 12)
-                .fill(.black.opacity(0.7))
+                .fill(.ultraThinMaterial)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(ApocalypseTheme.neonGreen.opacity(0.3), lineWidth: 1)
         )
         .padding(.horizontal, 16)
         .padding(.top, 8)
@@ -244,7 +264,9 @@ struct TerritoryDetailView: View {
 
                 // 建造入口 + 调试按钮 + 展开/收起
                 HStack(spacing: 8) {
+                    // Build 按钮（模板优先流程）
                     Button {
+                        preSelectedLocation = nil
                         showBuildingBrowser = true
                     } label: {
                         HStack(spacing: 6) {
@@ -256,31 +278,29 @@ struct TerritoryDetailView: View {
                                 .minimumScaleFactor(0.5)
                         }
                         .foregroundColor(.white)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 6)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 7)
                         .background(
                             Capsule()
                                 .fill(ApocalypseTheme.primary)
                         )
                     }
 
-                    #if DEBUG
+                    // 建造位置按钮 — 先选位置，再选建筑
                     Button {
-                        Task {
-                            await InventoryManager.shared.addTestResources()
-                        }
+                        showLocationPicker = true
                     } label: {
-                        Image(systemName: "wrench.fill")
-                            .font(.system(size: 13, weight: .semibold))
+                        Image(systemName: "mappin.circle.fill")
+                            .font(.system(size: 15, weight: .semibold))
                             .foregroundColor(ApocalypseTheme.textSecondary)
-                            .frame(width: 30, height: 30)
+                            .frame(width: 32, height: 32)
                             .background(
                                 Circle()
                                     .fill(ApocalypseTheme.cardBackground)
                             )
                     }
-                    #endif
 
+                    // 展开/收起按钮
                     Button {
                         withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
                             isPanelExpanded.toggle()
@@ -360,48 +380,6 @@ struct TerritoryDetailView: View {
         .padding(.vertical, 40)
     }
     
-    /// 设置面板
-    private var settingsSheet: some View {
-        NavigationView {
-            List {
-                // 重命名
-                Button {
-                    newTerritoryName = currentDisplayName
-                    renameErrorMessage = nil
-                    showRenameDialog = true
-                } label: {
-                    Label("territory_rename", systemImage: "pencil")
-                }
-                
-                // 删除领地
-                Button(role: .destructive) {
-                    // TODO: Show territory delete confirmation
-                } label: {
-                    Label(String(localized: "territory_delete"), systemImage: "trash")
-                }
-#if DEBUG
-                // 添加测试资源（仅开发调试）
-                Button {
-                    Task {
-                        await InventoryManager.shared.addBuildingTestResources()
-                    }
-                } label: {
-                    Label(String(localized: "inventory_add_building_test_resources"), systemImage: "wrench.fill")
-                }
-#endif
-            }
-            .navigationTitle(String(localized: "common_settings"))
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(String(localized: "common_done")) {
-                        showSettingsMenu = false
-                    }
-                }
-            }
-        }
-    }
-
     /// 重命名面板
     private var renameSheet: some View {
         NavigationView {

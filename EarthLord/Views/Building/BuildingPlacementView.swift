@@ -14,6 +14,7 @@ struct BuildingPlacementView: View {
     let territoryId: String
     let territoryCoordinates: [CLLocationCoordinate2D]
     let existingBuildings: [PlayerBuilding]
+    var initialLocation: CLLocationCoordinate2D? = nil
     
     @Environment(\.dismiss) private var dismiss
     @StateObject private var buildingManager = BuildingManager.shared
@@ -91,7 +92,9 @@ struct BuildingPlacementView: View {
             }
         }
         .onAppear {
-            if selectedLocation == nil, let first = territoryCoordinates.first {
+            if let initial = initialLocation {
+                selectedLocation = initial
+            } else if selectedLocation == nil, let first = territoryCoordinates.first {
                 selectedLocation = first
             }
         }

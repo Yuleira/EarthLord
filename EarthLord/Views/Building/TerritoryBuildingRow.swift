@@ -94,35 +94,50 @@ struct TerritoryBuildingRow: View {
         .padding(12)
         .background(
             RoundedRectangle(cornerRadius: 10)
-                .fill(ApocalypseTheme.cardBackground)
+                .fill(.ultraThinMaterial)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(ApocalypseTheme.neonGreen.opacity(0.08), lineWidth: 1)
         )
     }
     
     // MARK: - Subviews
     
-    /// 建筑图标（带进度环）
+    /// 建筑图标（带细进度环）— Tactical Aurora
     private var buildingIcon: some View {
         ZStack {
             // 背景圆
             Circle()
-                .fill(template?.category.accentColor.opacity(0.2) ?? Color.gray.opacity(0.2))
-                .frame(width: 50, height: 50)
-            
-            // 进度环（仅建造中时显示）
+                .fill(template?.category.accentColor.opacity(0.15) ?? Color.gray.opacity(0.15))
+                .frame(width: 48, height: 48)
+
+            // 底层轨道环
+            Circle()
+                .stroke(ApocalypseTheme.textMuted.opacity(0.15), lineWidth: 2)
+                .frame(width: 52, height: 52)
+
+            // 进度环（仅建造中时显示）— 细线风格
             if building.status == .constructing {
                 Circle()
                     .trim(from: 0, to: building.buildProgress)
                     .stroke(
-                        template?.category.accentColor ?? ApocalypseTheme.info,
-                        style: StrokeStyle(lineWidth: 3, lineCap: .round)
+                        ApocalypseTheme.neonGreen,
+                        style: StrokeStyle(lineWidth: 2, lineCap: .round)
                     )
-                    .frame(width: 54, height: 54)
+                    .frame(width: 52, height: 52)
                     .rotationEffect(.degrees(-90))
+            } else if building.status == .active {
+                // Active 建筑满环辉光
+                Circle()
+                    .stroke(ApocalypseTheme.neonGreen.opacity(0.4), lineWidth: 2)
+                    .frame(width: 52, height: 52)
             }
-            
+
             // 图标
             Image(systemName: template?.icon ?? "building.2")
                 .font(.system(size: 22))
+                .symbolRenderingMode(.hierarchical)
                 .foregroundColor(template?.category.accentColor ?? ApocalypseTheme.textSecondary)
         }
     }

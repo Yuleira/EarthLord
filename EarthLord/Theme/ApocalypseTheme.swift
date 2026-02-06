@@ -28,4 +28,10 @@ enum ApocalypseTheme {
     static let warning = Color(red: 1.0, green: 0.8, blue: 0.0)            // 警告/黄色
     static let danger = Color(red: 1.0, green: 0.3, blue: 0.3)             // 危险/红色
     static let info = Color(red: 0.3, green: 0.7, blue: 1.0)               // 信息/蓝色
+
+    // MARK: - Tactical Aurora 色系
+    static let neonGreen = Color(red: 0.0, green: 1.0, blue: 0.4)          // 霓虹绿（领地边界/高亮）
+    static let tacticalOrange = Color(red: 1.0, green: 0.55, blue: 0.0)    // 战术橙（主操作按钮）
+    static let warningRed = Color(red: 0.95, green: 0.2, blue: 0.2)        // 警告红（资源不足）
+    static let auroraGlow = Color(red: 0.0, green: 0.9, blue: 0.5)         // 极光辉光（脉冲动画）
 }

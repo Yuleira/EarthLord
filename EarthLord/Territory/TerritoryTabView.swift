@@ -90,12 +90,12 @@ struct TerritoryTabView: View {
                 TerritoryDetailView(
                     territory: territory,
                     onDelete: {
-                        // 删除后刷新列表
                         Task {
                             await loadTerritories()
                         }
                     }
                 )
+                .transition(.opacity)
             }
         }
     }
@@ -209,14 +209,14 @@ struct TerritoryTabView: View {
         }
     }
 
-    /// 统计信息卡片
+    /// 统计信息卡片 — Tactical Aurora Glassmorphism
     private var statsCard: some View {
         HStack(spacing: 0) {
             // 领地数量
             VStack(spacing: 4) {
                 Text("\(myTerritories.count)")
-                    .font(.system(size: 28, weight: .bold, design: .rounded))
-                    .foregroundColor(ApocalypseTheme.primary)
+                    .font(.system(size: 28, weight: .bold, design: .monospaced))
+                    .foregroundColor(ApocalypseTheme.neonGreen)
 
                 Text(LocalizedString.territoryCountLabel)
                     .font(.caption)
@@ -224,16 +224,16 @@ struct TerritoryTabView: View {
             }
             .frame(maxWidth: .infinity)
 
-            // 分隔线
+            // 分隔线 — 霓虹绿
             Rectangle()
-                .fill(ApocalypseTheme.textMuted.opacity(0.3))
+                .fill(ApocalypseTheme.neonGreen.opacity(0.2))
                 .frame(width: 1, height: 40)
 
             // 总面积
             VStack(spacing: 4) {
                 Text(formattedTotalArea)
-                    .font(.system(size: 28, weight: .bold, design: .rounded))
-                    .foregroundColor(ApocalypseTheme.success)
+                    .font(.system(size: 28, weight: .bold, design: .monospaced))
+                    .foregroundColor(ApocalypseTheme.neonGreen)
 
                 Text(LocalizedString.territoryTotalAreaLabel)
                     .font(.caption)
@@ -244,7 +244,11 @@ struct TerritoryTabView: View {
         .padding(.vertical, 16)
         .background(
             RoundedRectangle(cornerRadius: 12)
-                .fill(ApocalypseTheme.cardBackground)
+                .fill(.ultraThinMaterial)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(ApocalypseTheme.neonGreen.opacity(0.15), lineWidth: 1)
         )
     }
 
@@ -272,61 +276,88 @@ struct TerritoryTabView: View {
 struct TerritoryCard: View {
     let territory: Territory
 
+    /// 辉光脉冲动画
+    @State private var isGlowing = false
+
     var body: some View {
         HStack(spacing: 12) {
-            // 左侧图标
+            // 左侧图标 — 放大 + 辉光脉冲
             ZStack {
+                // 外层辉光环
                 Circle()
-                    .fill(ApocalypseTheme.primary.opacity(0.2))
-                    .frame(width: 50, height: 50)
+                    .fill(ApocalypseTheme.neonGreen.opacity(0.15))
+                    .frame(width: 56, height: 56)
+                    .shadow(color: ApocalypseTheme.auroraGlow.opacity(isGlowing ? 0.5 : 0.1), radius: isGlowing ? 10 : 4)
+
+                Circle()
+                    .fill(ApocalypseTheme.neonGreen.opacity(0.2))
+                    .frame(width: 48, height: 48)
 
                 Image(systemName: "flag.fill")
-                    .font(.system(size: 20))
-                    .foregroundColor(ApocalypseTheme.primary)
+                    .font(.system(size: 24, weight: .semibold))
+                    .foregroundColor(ApocalypseTheme.neonGreen)
             }
 
             // 中间信息
             VStack(alignment: .leading, spacing: 4) {
-                // ✅ 直接使用 territory.displayName (已在 Territory.swift 中处理本地化)
                 Text(territory.displayName)
-                    .font(.headline)
+                    .font(.system(size: 16, weight: .bold))
                     .foregroundColor(ApocalypseTheme.textPrimary)
                     .lineLimit(1)
 
                 HStack(spacing: 12) {
-                    // 面积
-                    Label(territory.formattedArea, systemImage: "square.dashed")
-                        .font(.caption)
-                        .foregroundColor(ApocalypseTheme.textSecondary)
+                    // 面积 — Monospaced terminal
+                    Label {
+                        Text(territory.formattedArea)
+                            .font(.system(size: 12, weight: .medium, design: .monospaced))
+                    } icon: {
+                        Image(systemName: "square.dashed")
+                            .font(.system(size: 10))
+                    }
+                    .foregroundColor(ApocalypseTheme.textSecondary)
 
-                    // 点数
+                    // 点数 — Monospaced terminal
                     if let pointCount = territory.pointCount {
-                        Label(String(format: String(localized: LocalizedString.territoryPointsFormat), pointCount), systemImage: "mappin.circle")
-                            .font(.caption)
-                            .foregroundColor(ApocalypseTheme.textSecondary)
+                        Label {
+                            Text(String(format: String(localized: LocalizedString.territoryPointsFormat), pointCount))
+                                .font(.system(size: 12, weight: .medium, design: .monospaced))
+                        } icon: {
+                            Image(systemName: "mappin.circle")
+                                .font(.system(size: 10))
+                        }
+                        .foregroundColor(ApocalypseTheme.textSecondary)
                     }
                 }
 
                 // 时间
                 if let time = territory.formattedCompletedAt {
                     Text(time)
-                        .font(.caption2)
+                        .font(.system(size: 11, design: .monospaced))
                         .foregroundColor(ApocalypseTheme.textMuted)
                 }
             }
 
             Spacer()
 
-            // 右侧箭头
+            // 右侧箭头 — 霓虹绿
             Image(systemName: "chevron.right")
                 .font(.system(size: 14, weight: .semibold))
-                .foregroundColor(ApocalypseTheme.textMuted)
+                .foregroundColor(ApocalypseTheme.neonGreen.opacity(0.6))
         }
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 12)
-                .fill(ApocalypseTheme.cardBackground)
+                .fill(.ultraThinMaterial)
         )
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(ApocalypseTheme.neonGreen.opacity(0.1), lineWidth: 1)
+        )
+        .onAppear {
+            withAnimation(.easeInOut(duration: 2.0).repeatForever(autoreverses: true)) {
+                isGlowing = true
+            }
+        }
     }
 }
 

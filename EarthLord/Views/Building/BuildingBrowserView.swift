@@ -3,7 +3,7 @@
 //  EarthLord
 //
 //  建筑浏览器
-//  提供分类筛选和网格展示，用户可以选择建筑开始建造
+//  水平胶囊分类筛选 + 居中简洁网格卡片
 //
 
 import SwiftUI
@@ -12,42 +12,44 @@ struct BuildingBrowserView: View {
     @StateObject private var buildingManager = BuildingManager.shared
     @StateObject private var inventoryManager = InventoryManager.shared
     @Environment(\.dismiss) private var dismiss
-    
+
     /// 当前领地 ID
     let territoryId: String
-    
+
     /// 选中的建筑模板，用于触发下一步建造流程
     let onStartConstruction: (BuildingTemplate) -> Void
-    
+
     // MARK: - State
-    
-    /// 当前选中的分类
-    @State private var selectedCategory: BuildingCategory = .survival
-    
+
+    /// 当前选中的分类（nil = 全部）
+    @State private var selectedCategory: BuildingCategory? = nil
+
     /// 筛选后的建筑列表
     private var filteredTemplates: [BuildingTemplate] {
-        buildingManager.buildingTemplates.filter { $0.category == selectedCategory }
+        if let category = selectedCategory {
+            return buildingManager.buildingTemplates.filter { $0.category == category }
+        }
+        return buildingManager.buildingTemplates
     }
-    
+
     /// 当前资源汇总
     private var playerResources: [String: Int] {
         inventoryManager.getResourceSummary()
     }
-    
+
     // MARK: - Body
-    
+
     var body: some View {
         NavigationView {
             ZStack {
                 // 背景
                 ApocalypseTheme.background
                     .ignoresSafeArea()
-                
+
                 VStack(spacing: 0) {
-                    // 1. 分类选择器
+                    // 1. 水平胶囊分类选择器
                     categorySelector
-                        .padding(.horizontal, 16)
-                        .padding(.top, 16)
+                        .padding(.top, 12)
                         .padding(.bottom, 12)
 
                     // 2. 建筑网格
@@ -80,26 +82,41 @@ struct BuildingBrowserView: View {
             }
         }
     }
-    
-    // MARK: - Subviews (这些必须在 body 外部定义)
-    
-    /// 分类选择器
+
+    // MARK: - Subviews
+
+    /// 水平胶囊分类选择器
     private var categorySelector: some View {
-        HStack(spacing: 12) {
-            ForEach(BuildingCategory.allCases, id: \.self) { category in
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                // "全部" 按钮
                 CategoryButton(
-                    category: category,
-                    isSelected: selectedCategory == category,
+                    category: nil,
+                    isSelected: selectedCategory == nil,
                     action: {
                         withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                            selectedCategory = category
+                            selectedCategory = nil
                         }
                     }
                 )
+
+                // 各分类按钮
+                ForEach(BuildingCategory.allCases, id: \.self) { category in
+                    CategoryButton(
+                        category: category,
+                        isSelected: selectedCategory == category,
+                        action: {
+                            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                selectedCategory = category
+                            }
+                        }
+                    )
+                }
             }
+            .padding(.horizontal, 16)
         }
     }
-    
+
     /// 建筑网格
     private var buildingGrid: some View {
         ScrollView {
@@ -116,7 +133,7 @@ struct BuildingBrowserView: View {
                         territoryId: territoryId
                     )
                     let availability = availabilityInfo(for: template)
-                    
+
                     BuildingCard(
                         template: template,
                         isLocked: false,
@@ -129,8 +146,7 @@ struct BuildingBrowserView: View {
                         }
                     )
                 }
-                
-                // 开发者测试按钮：添加资源
+
                 #if DEBUG
                 debugAddResourceCard
                 #endif
@@ -139,21 +155,22 @@ struct BuildingBrowserView: View {
             .padding(.vertical, 12)
         }
     }
-    
+
     /// 空状态视图
     private var emptyStateView: some View {
         VStack(spacing: 16) {
             Image(systemName: "building.2.crop.circle")
                 .font(.system(size: 60))
+                .symbolRenderingMode(.hierarchical)
                 .foregroundColor(ApocalypseTheme.textMuted)
-            
+
             Text(LocalizedString.buildingBrowserEmptyTitle)
                 .font(.system(size: 18, weight: .semibold))
                 .foregroundColor(ApocalypseTheme.textSecondary)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
-    
+
     /// 调试资源按钮
     #if DEBUG
     private var debugAddResourceCard: some View {
@@ -179,29 +196,29 @@ struct BuildingBrowserView: View {
     #endif
 
     // MARK: - Helper Methods
-    
+
     private func handleBuildingSelection(_ template: BuildingTemplate) {
         dismiss()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             onStartConstruction(template)
         }
     }
-    
+
     private func availabilityInfo(for template: BuildingTemplate) -> (isAvailable: Bool, statusResource: LocalizedStringResource?) {
         let validation = buildingManager.canBuild(
             template: template,
             territoryId: territoryId,
             playerResources: playerResources
         )
-        
+
         if validation.canBuild {
             return (true, nil)
         }
-        
+
         guard let error = validation.error else {
             return (false, nil)
         }
-        
+
         switch error {
         case .insufficientResources:
             return (false, LocalizedString.insufficientResources)
